@@ -1,0 +1,41 @@
+---
+title: "Miguel González"
+image: profile.jpg
+about:
+  template: jolla
+  links:
+    - icon: linkedin
+      text: LinkedIn
+      href: http://linkedin.com/in/mgcalvo/
+    - icon: github
+      text: GitHub
+      href: https://github.com/MiguelPuntoEs/
+---
+
+**Data Scientist @ Calidad Pascual** 
+
+## Bio
+
+Professional with 5+ years of experience in Data Science specialized in LLMs and time series, and 7+ years in software development. Constantly learning about AI from new publications and specialized content. Motivated by implementing innovative methodologies and observing their impact. TensorFlow-certified, and MSc. in Signal Theory.
+
+## Education
+
+I hold a BSc. in *Aerospace Engineering* (2016), and a MSc. in *Signal Theory and Communications* (2019) from the Polytechnic University of Madrid (Spain), and a MA. in *Economics* (2024) from Universidad de las Hespérides (Spain).
+
+## Professional Experience
+
+I have worked in international environments in a variety of industries:
+
+**Calidad Pascual** (Madrid, ES): Data Scientist.
+
+**toom Baumarkt** (Cologne, DE): Data Scientist.
+
+**Leica Geosystems** (Heerbrugg, CH): Product Engineer.
+
+**Airbus Defence and Space** (Munich, DE): Software Development Engineer.
+
+**GMV** (Tres Cantos, ES): Aerospace Engineer.
+
+## Contact
+
+Thanks for visiting my personal website! If you want to get in contact with me, please don't hesitate to send me a message over [LinkedIn](http://linkedin.com/in/mgcalvo/).
