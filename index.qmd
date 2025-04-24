@@ -12,7 +12,7 @@ about:
       href: https://github.com/MiguelPuntoEs/
 ---
 
-**Data Scientist @ Calidad Pascual** 
+**Senior LLM Engineer @ A5 Labs** 
 
 ## Bio
 
@@ -26,6 +26,8 @@ I hold a BSc. in *Aerospace Engineering* (2016), and a MSc. in *Signal Theory an
 
 I have worked in international environments in a variety of industries:
 
+**A5 Labs** (California, US – remote): Senior LLM Engineer
+
 **Calidad Pascual** (Madrid, ES): Data Scientist.
 
 **toom Baumarkt** (Cologne, DE): Data Scientist.
@@ -35,6 +37,18 @@ I have worked in international environments in a variety of industries:
 **Airbus Defence and Space** (Munich, DE): Software Development Engineer.
 
 **GMV** (Tres Cantos, ES): Aerospace Engineer.
+
+## Personal resources
+
+[Interesting APIs](resources/apis.qmd)
+
+[Economic information sources](resources/economic-info.qmd)
+
+[LLM resources](resources/llm.qmd)
+
+[Machine learning resources](resources/machine-learning.qmd)
+
+[Python resources](resources/python.qmd)
 
 ## Contact
 

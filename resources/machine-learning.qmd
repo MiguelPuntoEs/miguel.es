@@ -1,0 +1,37 @@
+---
+title: "Machine Learning Resources"
+---
+
+## Resources
+
+- [Causal Inference for the Brave and True](https://matheusfacure.github.io/python-causality-handbook/landing-page.html)
+- [Forecasting: Principles and Practice](https://otexts.com/fpp3/). Rob J Hyndman and George Athanasopoulos
+- Scott Cunningham. [Causal Inference: The Mixtape](https://mixtape.scunning.com/)
+- [Mastering Metrics](https://www.masteringmetrics.com/)
+
+## Courses
+
+- [Machine Learning Specialization](https://www.coursera.org/specializations/machine-learning-introduction). Coursera: Stanford University and DeepLearning.AI
+- [Deep Learning Specialization](https://www.coursera.org/specializations/deep-learning). Coursera: DeepLearning.AI
+
+## Newsletters
+
+- [The Batch](https://www.deeplearning.ai/the-batch/): DeepLearning.AI.
+- OpenAI Dev Digest.
+
+## Books
+
+- Hands-On Machine Learning with Scikit-Learn & TensorFlow.
+- The Master Algorithm.
+- Mathematics for Machine Learning
+- Machine Learning Design Patterns
+- Introduction to Statistical Learning
+- Clean Code
+- The Art of Statistics. David Spiegelhater
+- Effective data storytelling. Brent Dykes
+
+## Econometrics
+
+- Joshua Angrist. [Mostly Harmless Econometrics](https://www.mostlyharmlesseconometrics.com/)
+- Greene. "Econometric Analysis”
+- Wooldridge. "Analysis of Cross Section and Panel Data"
