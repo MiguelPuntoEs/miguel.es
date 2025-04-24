@@ -44,6 +44,8 @@ I have worked in international environments in a variety of industries:
 
 [Economic information sources](resources/economic-info.qmd)
 
+[Statistical errors](resources/errors.qmd)
+
 [LLM resources](resources/llm.qmd)
 
 [Machine learning resources](resources/machine-learning.qmd)
