@@ -1,5 +1,5 @@
 ---
-title: "Miguel González"
+title: "Miguel González Calvo"
 image: profile.jpg
 about:
   template: jolla
@@ -28,15 +28,15 @@ I have worked in international environments in a variety of industries:
 
 **A5 Labs** (California, US – remote): Senior LLM Engineer
 
-**Calidad Pascual** (Madrid, ES): Data Scientist.
+**Calidad Pascual** (Madrid, ES): Data Scientist
 
-**toom Baumarkt** (Cologne, DE): Data Scientist.
+**toom Baumarkt** (Cologne, DE): Data Scientist
 
-**Leica Geosystems** (Heerbrugg, CH): Product Engineer.
+**Leica Geosystems** (Heerbrugg, CH): Product Engineer
 
-**Airbus Defence and Space** (Munich, DE): Software Development Engineer.
+**Airbus Defence and Space** (Munich, DE): Software Development Engineer
 
-**GMV** (Tres Cantos, ES): Aerospace Engineer.
+**GMV** (Tres Cantos, ES): Aerospace Engineer
 
 ## Personal resources
 
