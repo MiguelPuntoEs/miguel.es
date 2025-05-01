@@ -38,6 +38,10 @@ I have worked in international environments in a variety of industries:
 
 **GMV** (Tres Cantos, ES): Aerospace Engineer
 
+## Organized seminars and courses
+
+UFM Madrid, 2025. [Python Workshop](courses/python-ufm-25.qmd)
+
 ## Personal resources
 
 [Interesting APIs](resources/apis.qmd)
@@ -54,4 +58,4 @@ I have worked in international environments in a variety of industries:
 
 ## Contact
 
-Thanks for visiting my personal website! If you want to get in contact with me, please don't hesitate to send me a message over [LinkedIn](http://linkedin.com/in/mgcalvo/).
+I don’t monitor all communications sent through this website. If you need to get in touch, please reach out to me directly on [LinkedIn](http://linkedin.com/in/mgcalvo/). That’s the best way to ensure I see your message.
