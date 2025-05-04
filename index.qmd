@@ -42,6 +42,14 @@ I have worked in international environments in a variety of industries:
 
 UFM Madrid, 2025. [Python Workshop](courses/python-ufm-25.qmd)
 
+## Personal projects
+
+[gnsscalc](https://github.com/MiguelPuntoEs/gnsscalc), available on [gnsscalc.com](https://gnsscalc.com)
+
+[gnss-js](https://github.com/MiguelPuntoEs/gnss-js), NPM package [available](https://www.npmjs.com/package/gnss-js)
+
+For a complete list of open-source projects, visit my [GitHub profile](https://github.com/MiguelPuntoEs/)
+
 ## Personal resources
 
 [Interesting APIs](resources/apis.qmd)
