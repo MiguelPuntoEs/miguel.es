@@ -1,0 +1,8 @@
+@import "tailwindcss";
+@theme {
+  --font-sans: var(--font-inter), "sans-serif";
+  --font-serif: var(--font-playfair), "serif";
+  --color-pets: rgba(55, 95, 144, 0.1);
+  --color-primary: #de6300;
+  --color-dark: #171717;
+}

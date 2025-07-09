@@ -1,0 +1,222 @@
+---
+import Image from "astro/components/Image.astro";
+import LogoA5 from "../assets/companies/a5labs.svg";
+import LogoAemet from "../assets/companies/aemet.svg";
+import LogoAirbus from "../assets/companies/airbus.svg";
+import LogoGmv from "../assets/companies/gmv.svg";
+import LogoLeica from "../assets/companies/leica.svg";
+import LogoPascual from "../assets/companies/pascual.svg";
+import LogoToom from "../assets/companies/toom.svg";
+import profile from "../assets/pictures/profile.jpg";
+import LogoHesperides from "../assets/universities/hesperides.svg";
+import LogoUfm from "../assets/universities/ufm.svg";
+import LogoUpm from "../assets/universities/upm.svg";
+import EducationEntry from "../components/EducationEntry.astro";
+import JobEntry from "../components/JobEntry.astro";
+import TeachingEntry from "../components/TeachingEntry.astro";
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout>
+  <section class="flex flex-col items-center justify-center">
+    <Image
+      src={profile}
+      alt="Profile"
+      class="rounded-full"
+      height={128}
+      width={128}
+    />
+    <p class="text-center my-4">Hi! I'm Miguel González 👋</p>
+
+    <p class="font-semibold text-4xl text-center mb-4">
+      Senior LLM engineer<br />based in Madrid
+    </p>
+    <p class="text-center">
+      I am an AI engineer from Madrid, ES with 8+ years of experience in
+      software development
+    </p>
+    <a
+      href="https://www.linkedin.com/in/mgcalvo/"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="my-4 rounded-full bg-black px-8 py-2 text-sm font-semibold text-white shadow-xs hover:bg-gray-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 inline-block"
+      >Connect with me</a
+    >
+  </section>
+
+  <!-- Bio Callout -->
+  <section class="max-w-4xl mx-auto my-12">
+    <div
+      class="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-xl p-8 shadow-sm"
+    >
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <!-- Bio -->
+        <div>
+          <h3 class="text-xl font-bold text-gray-900 mb-4">About Me</h3>
+          <p class="text-gray-700 leading-relaxed">
+            Professional with 5+ years of experience in Data Science specialized
+            in LLMs and time series, and 7+ years in software development.
+            Constantly learning about AI from new publications and specialized
+            content. Motivated by implementing innovative methodologies and
+            observing their impact. TensorFlow-certified, and MSc. in Signal
+            Theory.
+          </p>
+        </div>
+
+        <!-- Education Summary -->
+        <div>
+          <h3 class="text-xl font-bold text-gray-900 mb-4">Education</h3>
+          <p class="text-gray-700 leading-relaxed">
+            I hold a BSc. in Aerospace Engineering (2016), and a MSc. in Signal
+            Theory and Communications (2019) from the Polytechnic University of
+            Madrid (Spain), and a MA. in Economics (2024) from Universidad de
+            las Hespérides (Spain).
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="max-w-7xl mx-auto">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <!-- Professional Experience Card -->
+      <div class="bg-white shadow-lg rounded-lg p-6">
+        <h2 class="text-2xl font-bold mb-6">Professional experience</h2>
+        <div class="flex flex-col gap-6">
+          <JobEntry
+            logo={LogoA5}
+            jobTitle="Senior LLM Engineer"
+            companyName="A5 Labs"
+            dateRange="Jan 2025 - Present"
+            location="California, US (remote)"
+            logoClass="bg-[#202348] p-2 rounded-lg"
+          />
+          <JobEntry
+            logo={LogoPascual}
+            jobTitle="Data Scientist"
+            companyName="Pascual"
+            dateRange="Aug 2024 - Jan 2025"
+            location="Madrid, ES"
+          />
+          <JobEntry
+            logo={LogoToom}
+            jobTitle="Data Scientist"
+            companyName="toom Baumarkt"
+            dateRange="Jul 2023 - Jul 2024"
+            location="Cologne, DE"
+          />
+          <JobEntry
+            logo={LogoLeica}
+            jobTitle="Product Engineer"
+            companyName="Leica Geosystems"
+            dateRange="Jun 2019 - Jul 202"
+            location="Heerbrugg, CH"
+          />
+          <JobEntry
+            logo={LogoAirbus}
+            jobTitle="Software Engineer"
+            companyName="Airbus Defence and Space"
+            dateRange="May 2018 - May 2019"
+            location="Munich, DE"
+          />
+          <JobEntry
+            logo={LogoGmv}
+            jobTitle="Software Engineer"
+            companyName="GMV"
+            dateRange="Mar 2017 - Jul 2017"
+            location="Tres Cantos, ES"
+          />
+          <JobEntry
+            logo={LogoAemet}
+            jobTitle="Data Scientist"
+            companyName="AEMet"
+            dateRange="Jan 2016 - Jun 2016"
+            location="Madrid, ES"
+          />
+        </div>
+      </div>
+
+      <!-- Education Card -->
+      <div class="bg-white shadow-lg rounded-lg p-6">
+        <h2 class="text-2xl font-bold mb-6">Education</h2>
+        <div class="flex flex-col gap-6">
+          <EducationEntry
+            logo={LogoHesperides}
+            degree="MA Economics"
+            university="Universidad de las Hespérides"
+            dateRange="Oct 2023 - Nov 2024"
+            thesis={{
+              title:
+                "Quantity Theory of Money Around the Globe: Money Growth, Money Velocity and Inflation Subject to Different Monetary Policies",
+              grade:
+                "Honors in: Economics and Institutions, Econometrics, Quantitative Methods for Economics, Game Theory and Information Economics, Monetary and Financial Integration, Experimental Economics",
+            }}
+          />
+
+          <EducationEntry
+            logo={LogoUpm}
+            degree="MSc. in Signal Theory and Communications"
+            university="Universidad Politécnica de Madrid"
+            dateRange="Sep 2017 - Feb 2019"
+            grade="8.5"
+            thesis={{
+              title:
+                "Full-Wave Design of Coaxial to Waveguide Transitions and Waveguide Mode Transducers",
+              grade: "10 out of 10, Distinction",
+            }}
+          />
+
+          <EducationEntry
+            logo={LogoUpm}
+            degree="BSc. in Aerospace Engineering"
+            university="Universidad Politécnica de Madrid"
+            dateRange="Sep 2012 - Sep 2016"
+            grade="7.6"
+            specialization="Air Navigation Systems"
+            thesis={{
+              title: "SIGMET and AIRMET decoding web-based tool",
+              grade: "9.5 out of 10",
+            }}
+          />
+        </div>
+      </div>
+
+      <!-- Teaching Card -->
+      <div class="bg-white shadow-lg rounded-lg p-6">
+        <h2 class="text-2xl font-bold mb-6">Teaching</h2>
+        <div class="flex flex-col gap-6">
+          <TeachingEntry
+            logo={LogoUfm}
+            courseName="Python for Finance"
+            university="Universidad Francisco Marroquín"
+            dateRange="Sep 2025 -"
+          />
+          <TeachingEntry
+            logo={LogoUfm}
+            courseName="Technology A"
+            university="Universidad Francisco Marroquín"
+            dateRange="Sep 2025 -"
+          />
+          <TeachingEntry
+            logo={LogoHesperides}
+            courseName="International Economics and Globalization"
+            university="Universidad de las Hespérides"
+            dateRange="Sep 2025 -"
+          />
+          <TeachingEntry
+            logo={LogoUfm}
+            courseName="Economics I"
+            university="Universidad Francisco Marroquín"
+            dateRange="Jan 2025 - May 2025"
+          />
+          <TeachingEntry
+            logo={LogoUfm}
+            courseName="Python Seminar"
+            university="Universidad Francisco Marroquín"
+            dateRange="Jun 2025"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>

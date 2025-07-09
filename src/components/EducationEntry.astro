@@ -1,0 +1,63 @@
+---
+export interface Props {
+  logo: any;
+  degree: string;
+  university: string;
+  dateRange: string;
+  grade?: string;
+  specialization?: string;
+  thesis?: {
+    title: string;
+    grade: string;
+  };
+  honors?: string[];
+}
+
+const {
+  logo: Logo,
+  degree,
+  university,
+  dateRange,
+  grade = "",
+  specialization = "",
+  thesis,
+  honors = [],
+} = Astro.props;
+---
+
+<div class="flex gap-4">
+  <Logo height={50} width={50} class="bg-gray-100 p-2 rounded-lg" />
+  <div class="flex-1">
+    <p class="font-semibold text-sm">{degree}</p>
+    <p class="text-xs">{university}</p>
+    <p class="text-xs text-gray-500">{dateRange}</p>
+    {grade && <p class="text-xs text-gray-500">Grade: {grade}</p>}
+    {
+      specialization && (
+        <p class="text-xs text-gray-500">Specialization: {specialization}</p>
+      )
+    }
+    {
+      thesis && (
+        <div class="mt-2">
+          <p class="text-xs">
+            <span class="font-medium">Thesis:</span> {thesis.title}{" "}
+            <span class="text-gray-500">- {thesis.grade}</span>
+          </p>
+        </div>
+      )
+    }
+    {
+      honors.length > 0 && (
+        <div class="mt-2">
+          <p class="text-xs font-medium">Honors:</p>
+          <ul class="text-xs text-gray-500 list-disc list-inside space-y-1">
+            {honors.map((honor) => (
+              <li>{honor}</li>
+            ))}
+          </ul>
+        </div>
+      )
+    }
+  </div>
+</div>

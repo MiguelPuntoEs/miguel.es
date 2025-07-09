@@ -1,0 +1,29 @@
+---
+export interface Props {
+  logo: any;
+  jobTitle: string;
+  companyName: string;
+  dateRange: string;
+  location: string;
+  logoClass?: string;
+}
+
+const {
+  logo: Logo,
+  jobTitle,
+  companyName,
+  dateRange,
+  location,
+  logoClass = "bg-gray-100 p-2 rounded-lg",
+} = Astro.props;
+---
+
+<div class="flex gap-4">
+  <Logo height={50} width={50} class={logoClass} />
+  <div class="flex-1">
+    <p class="font-semibold text-sm">{jobTitle}</p>
+    <p class="text-xs">{companyName}</p>
+    <p class="text-xs text-gray-500">{dateRange}</p>
+    <p class="text-xs text-gray-500">{location}</p>
+  </div>
+</div>

@@ -1,0 +1,20 @@
+---
+export interface Props {
+  logo: any;
+  courseName: string;
+  university: string;
+  dateRange: string;
+}
+
+const { logo: Logo, courseName, university, dateRange } = Astro.props;
+---
+
+<div class="flex gap-4">
+  <Logo height={50} width={50} class="bg-gray-100 p-2 rounded-lg" />
+  <div class="flex-1">
+    <p class="font-semibold text-sm">{courseName}</p>
+    <p class="text-xs">{university}</p>
+    <p class="text-xs text-gray-500">{dateRange}</p>
+  </div>
+</div>
+
