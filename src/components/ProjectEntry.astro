@@ -1,0 +1,69 @@
+---
+import GithubLogo from "../logos/github.svg";
+
+export interface Props {
+  projectName: string;
+  description: string;
+  url?: string;
+  npmPackage?: string;
+  githubUrl?: string;
+}
+
+const { projectName, description, url, npmPackage, githubUrl } = Astro.props;
+---
+
+<div class="flex flex-col gap-2">
+  <div class="flex items-center gap-2">
+    {
+      url ? (
+        <a
+          href={url}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="font-semibold text-sm text-slate-800 hover:text-slate-600 transition-colors"
+        >
+          {projectName}
+        </a>
+      ) : (
+        <h3 class="font-semibold text-sm text-slate-800">{projectName}</h3>
+      )
+    }
+    {
+      url && (
+        <a
+          href={url}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-base text-slate-600 hover:text-slate-800 transition-colors"
+        >
+          🛰️
+        </a>
+      )
+    }
+    {
+      npmPackage && (
+        <a
+          href={`https://www.npmjs.com/package/${npmPackage}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-base text-slate-600 hover:text-slate-800 transition-colors"
+        >
+          📦
+        </a>
+      )
+    }
+    {
+      githubUrl && (
+        <a
+          href={githubUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-slate-600 hover:text-slate-800 transition-colors"
+        >
+          <GithubLogo width={16} height={16} />
+        </a>
+      )
+    }
+  </div>
+  <p class="text-xs text-slate-600 leading-relaxed">{description}</p>
+</div>

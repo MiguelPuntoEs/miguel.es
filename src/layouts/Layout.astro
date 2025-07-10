@@ -1,29 +1,16 @@
 ---
 import { Font } from "astro:assets";
+import MainHead from "../components/MainHead.astro";
 import "../styles/global.css";
+const { title, description } = Astro.props;
 ---
 
 <Font cssVariable="--font-playfair" preload />
 <Font cssVariable="--font-inter" preload />
 
 <html lang="es" class="scroll-smooth">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <link rel="sitemap" href="/sitemap-index.xml" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <title>Legado Eterno</title>
-  </head>
+  <MainHead {title} {description} />
   <body>
     <slot />
   </body>
 </html>
-
-<style>
-  html,
-  body {
-    margin: 0;
-    width: 100%;
-    height: 100%;
-  }
-</style>

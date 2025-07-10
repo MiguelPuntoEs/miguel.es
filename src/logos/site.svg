@@ -1,0 +1,14 @@
+<!-- Simple typographic logo for miguel.es -->
+<svg viewBox="0 0 500 120" xmlns="http://www.w3.org/2000/svg">
+  <!-- Import Inter font (600 weight) -->
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@600&display=swap');
+    text {
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      dominant-baseline: middle;
+    }
+  </style>
+  <!-- Main wordmark -->
+  <text x="0" y="60" font-size="72" fill="#141414">miguel<tspan fill="#1A73E8">.</tspan>es</text>
+</svg>
