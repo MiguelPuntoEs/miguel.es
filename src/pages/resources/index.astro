@@ -1,0 +1,42 @@
+---
+import ResourceEntry from "../../components/ResourceEntry.astro";
+import Layout from "../../layouts/Layout.astro";
+---
+
+<Layout title="Miguel González | Resources" description="Personal resources">
+  <section class="max-w-3xl mx-auto px-4">
+    <h1 class="text-xl font-semibold mb-4">Resources</h1>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-6">
+      <ResourceEntry
+        title="Interesting APIs"
+        description="Collection of useful APIs for development and data analysis."
+        url="/resources/apis"
+      />
+      <ResourceEntry
+        title="Economic Information Sources"
+        description="Reliable sources for economic data and financial information."
+        url="/resources/economic-sources"
+      />
+      <ResourceEntry
+        title="Statistical Errors"
+        description="Common statistical errors and how to avoid them."
+        url="/resources/errors"
+      />
+      <ResourceEntry
+        title="LLM Resources"
+        description="Resources for Large Language Models and AI development."
+        url="/resources/llm"
+      />
+      <ResourceEntry
+        title="Machine Learning Resources"
+        description="Tools, libraries, and guides for machine learning."
+        url="/resources/machine-learning"
+      />
+      <ResourceEntry
+        title="Python Resources"
+        description="Python libraries, frameworks, and development tools."
+        url="/resources/python"
+      />
+    </div>
+  </section>
+</Layout>
