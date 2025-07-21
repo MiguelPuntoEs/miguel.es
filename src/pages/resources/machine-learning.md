@@ -2,6 +2,7 @@
 title: "Machine Learning Resources"
 description: "Machine learning resources"
 layout: "../../layouts/MarkdownLayout.astro"
+latex: true
 ---
 
 ## Resources

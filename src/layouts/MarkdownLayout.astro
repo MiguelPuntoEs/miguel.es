@@ -2,8 +2,15 @@
 import "../styles/global.css";
 import Layout from "./Layout.astro";
 const { frontmatter } = Astro.props;
-const { title, description } = frontmatter;
+const { title, description, latex } = frontmatter;
 ---
+{latex && (
+  <link
+    href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css"
+    rel="stylesheet"
+  />
+)}
+
 
 <Layout {title} {description}>
   <main class="prose max-w-3xl mx-auto px-4">

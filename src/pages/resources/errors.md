@@ -2,6 +2,7 @@
 title: "Statistical errors"
 description: "Statistical errors"
 layout: "../../layouts/MarkdownLayout.astro"
+latex: true
 ---
 
 **Mean Absolute Error (MAE)**
