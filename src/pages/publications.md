@@ -4,6 +4,12 @@ description: "Personal publications from Miguel González"
 layout: "../layouts/MarkdownLayout.astro"
 ---
 
+## Press
+
+[**Big Data: el arte de domar las mareas (de información)**](https://emprendedores.es/formacion/big-data-el-arte-de-domar-las-mareas-de-informacion/). Revista Emprendedores España. Septiembre 2025. 
+
+## Academic
+
 **[Quantity Theory of Money Around the Globe: Money Growth, Money Velocity and Inflation Subject to Different Monetary Policies](docs/ea-2024.pdf)**. 2024. _Economics Affairs Applied Reseearch Workshop 2024_. Universidad Francisco Marroquín, Madrid.
 Miguel González-Calvo. [Presentation](/docs/ea-2024-presentation.pdf)
 
