@@ -4,16 +4,20 @@ import Layout from "./Layout.astro";
 const { frontmatter } = Astro.props;
 const { title, description, latex } = frontmatter;
 ---
-{latex && (
-  <link
-    href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css"
-    rel="stylesheet"
-  />
-)}
 
+{
+  latex && (
+    <link
+      href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css"
+      rel="stylesheet"
+    />
+  )
+}
 
 <Layout {title} {description}>
-  <main class="prose max-w-3xl mx-auto px-4">
+  <main
+    class="prose lg:prose-lg prose-a:text-blue-600 prose-a:hover:text-blue-500 max-w-3xl mx-auto px-4"
+  >
     <article class="mt-8">
       <h1>{title}</h1>
       <slot />
