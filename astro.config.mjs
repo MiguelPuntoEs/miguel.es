@@ -4,11 +4,14 @@ import { defineConfig, fontProviders } from "astro/config";
 import rehypeKatex from "rehype-katex";
 import remarkMath from "remark-math";
 
+import react from "@astrojs/react";
+
 // https://astro.build/config
 export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
   },
+
   experimental: {
     fonts: [
       {
@@ -26,9 +29,12 @@ export default defineConfig({
       },
     ],
   },
+
   markdown: {
     syntaxHighlight: "prism",
     remarkPlugins: [remarkMath],
     rehypePlugins: [rehypeKatex],
   },
+
+  integrations: [react()],
 });
