@@ -1,0 +1,28 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Calculator from "../../components/InflationCalculator.jsx";
+---
+
+<Layout
+  title="Inflation Calculator"
+  description="Adjust amounts for inflation based on country-specific rates. Calculate past purchasing power or future values."
+>
+  <main class="min-h-screen px-3 py-10 sm:px-6">
+    <section class="mx-auto max-w-6xl space-y-6">
+      <header class="space-y-2 text-center">
+        <p class="text-xs font-semibold uppercase tracking-[0.2em] text-indigo-600">
+          Tools
+        </p>
+        <h1 class="text-3xl font-semibold tracking-tight text-slate-900">
+          Inflation Calculator
+        </h1>
+        <p class="mx-auto max-w-2xl text-sm text-slate-600">
+          Adjust monetary amounts for inflation using country-specific rates.
+          See how purchasing power changes over time or project future values.
+        </p>
+      </header>
+
+      <Calculator client:only="react" />
+    </section>
+  </main>
+</Layout>
