@@ -1,0 +1,28 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Calculator from "../../components/PPPCalculator.jsx";
+---
+
+<Layout
+  title="PPP Calculator"
+  description="Convert amounts based on Purchasing Power Parity to see equivalent buying power across countries."
+>
+  <main class="min-h-screen px-3 py-10 sm:px-6">
+    <section class="mx-auto max-w-6xl space-y-6">
+      <header class="space-y-2 text-center">
+        <p class="text-xs font-semibold uppercase tracking-[0.2em] text-indigo-600">
+          Tools
+        </p>
+        <h1 class="text-3xl font-semibold tracking-tight text-slate-900">
+          PPP Calculator
+        </h1>
+        <p class="mx-auto max-w-2xl text-sm text-slate-600">
+          Convert amounts based on Purchasing Power Parity to see equivalent
+          buying power across countries. Compare what money can buy in different economies.
+        </p>
+      </header>
+
+      <Calculator client:only="react" />
+    </section>
+  </main>
+</Layout>
