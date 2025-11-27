@@ -6,6 +6,8 @@ layout: "../layouts/MarkdownLayout.astro"
 
 ## Press
 
+[**Sistemas de pensiones comparados: ¿qué puede aprender España de Alemania, Suecia y Chile?**](docs/hesperides/sistemas_pensiones_comparados.pdf). Centro Ruth Richardson, _Universidad de las Hespérides_. Noviembre 2025. 
+
 [**Big Data: el arte de domar las mareas (de información)**](https://emprendedores.es/formacion/big-data-el-arte-de-domar-las-mareas-de-informacion/). Revista Emprendedores España. Septiembre 2025. 
 
 ## Academic
