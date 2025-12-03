@@ -1,8 +1,9 @@
 ---
-title: "Economía I"
-description: "Economía I"
+title: "Economics I"
+description: "Introduction to Economics. Universidad Francisco Marroquín"
 layout: "../../layouts/MarkdownLayout.astro"
 ---
+*Universidad Francisco Marroquín*
 
 ## Bibliografía
 
@@ -11,7 +12,7 @@ layout: "../../layouts/MarkdownLayout.astro"
 - Ludwig von Mises. Economic Calculation in the Socialist Commonwealth.
 - Henry Hazlitt. Economics in One Lesson.
 - Per L. Bylund. How to Think about the Economy: A Primer.
-- Per L. Bylund. [The Genious of Mises's Action Axiom](https://mises.org/mises-wire/genius-misess-action-axiom).
+- Per L. Bylund. [The Genius of Mises's Action Axiom](https://mises.org/mises-wire/genius-misess-action-axiom).
 - Frédéric Bastiat. [The Candlemakers's Petition](https://mises.org/mises-daily/candlemakers-petition).
 - Frédéric Bastiat. [The Broken Window](https://mises.org/mises-daily/broken-window).
 - Eduardo Blasco. [El salario mínimo](https://micajondesastre.substack.com/p/el-salario-minimo).
