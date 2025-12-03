@@ -38,7 +38,7 @@ $$D=C_n-C_0$$
 $D$ descuento o rebaja
 
 ### Descuento racional
-Se usa usando la capitalización simple: $C_n=C_0(1+i \cdot n)$
+Se calcula utilizando la capitalización simple: $C_n=C_0(1+i \cdot n)$
 Por tanto:
 $$D_r=C_n-C_0=\frac{C_n \cdot n \cdot i}{1+n\cdot i}$$
 
@@ -64,7 +64,7 @@ $$D_r=C_n-C_0=C_n\left[1-(1+i)^{-n}\right]$$
 
 ### Descuento comercial
 
-$$D_c=C_n-C_0=C_n\left[1-(1+d)^n\right]$$
+$$D_c=C_n-C_0=C_n\left[1-(1-d)^n\right]$$
 
 ## Rentas
 
@@ -152,7 +152,7 @@ $$A(c;d)_{\infty,i}=\left(C+\frac{d}{i}\right)\frac{1}{i}$$
 
 Unitaria:
 
-$$\ddot{a}_{\infty,i}=(1+i)a_{\infty.i}=\frac{1+i}{i}$$
+$$\ddot{a}_{\infty,i}=(1+i)a_{\infty,i}=\frac{1+i}{i}$$
 
 Geométrica:
 
@@ -183,7 +183,7 @@ $$m_k=A_1 + A_2 + \dots + A_k$$
 
 $$I_k = C_{k-1} i$$
 
-$$C_0 = A_1 + A_2 = \dots + A_n$$
+$$C_0 = A_1 + A_2 + \dots + A_n$$
 
 $$C_k = A_{k+1} + A_{k+2} + \dots + A_n$$
 
@@ -242,9 +242,9 @@ $$P=\sum_{t=1}^n\frac{C_t}{(1+r)^t}+\frac{\text{Valor reembolso}}{(1+r)^n}$$
 - $C_t$ cupón del período t
 - $r$ TIR
 
-### Duración McAulay
+### Duración Macaulay
 
-$$D=\frac{1}{P}\sum_{t=1}^n \frac{F_t t}{1+TIR^t}$$
+$$D=\frac{1}{P}\sum_{t=1}^n \frac{F_t t}{(1+TIR)^t}$$
 
 - $P$ precio del bono
 - $F_t$ Flujo del período t (cupones y principal)
