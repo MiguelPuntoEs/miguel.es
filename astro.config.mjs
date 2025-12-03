@@ -5,9 +5,12 @@ import rehypeKatex from "rehype-katex";
 import remarkMath from "remark-math";
 
 import react from "@astrojs/react";
+import sitemap from "@astrojs/sitemap";
 
 // https://astro.build/config
 export default defineConfig({
+  site: 'https://www.miguel.es',
+  
   vite: {
     plugins: [tailwindcss()],
   },
@@ -36,5 +39,5 @@ export default defineConfig({
     rehypePlugins: [rehypeKatex],
   },
 
-  integrations: [react()],
+  integrations: [react(), sitemap()],
 });

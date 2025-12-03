@@ -1,11 +1,64 @@
 ---
 const { title, description } = Astro.props;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const socialImage = new URL('/og-image.png', Astro.site);
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Miguel González",
+  "jobTitle": "Senior LLM Engineer",
+  "url": Astro.site,
+  "sameAs": [
+    "https://linkedin.com/in/mgcalvo/",
+    "https://github.com/MiguelPuntoEs"
+  ],
+  "alumniOf": [
+    {
+      "@type": "EducationalOrganization",
+      "name": "Universidad Politécnica de Madrid"
+    },
+    {
+      "@type": "EducationalOrganization",
+      "name": "Universidad de las Hespérides"
+    }
+  ],
+  "knowsAbout": [
+    "Machine Learning",
+    "Large Language Models",
+    "Data Science",
+    "Economics",
+    "Python",
+    "Blockchain"
+  ]
+};
 ---
 
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="canonical" href={canonicalURL} />
+  
   <title>{title}</title>
   <meta name="description" content={description} />
+  <meta name="author" content="Miguel González" />
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content={canonicalURL} />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:image" content={socialImage} />
+  <meta property="og:locale" content="es_ES" />
+  
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:url" content={canonicalURL} />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content={socialImage} />
+  
+  <!-- Structured Data -->
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
 </head>
