@@ -121,3 +121,4 @@ Datos para Sepolia:
 - Ariah Klages-Mundt, Dominik Harz, Lewis Gudgeon, Jun-You Liu, Andreea Minca, "Stablecoins 2.0: Economic Foundations and Risk-based Models"
 - Tobian Adrian et al. Understanding Stablecoins (2025). International Monetary Fund, ISBN 9798229024075
 - Antonio Fatás. The economics of Fintech and Digital Currencies (2019). CEPR Press, Paris & London
+- [ERC-20 Token Standard](https://ethereum.org/developers/docs/standards/tokens/erc-20/), de la [EIP-20](https://eips.ethereum.org/EIPS/eip-20)
