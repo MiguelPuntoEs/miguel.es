@@ -60,6 +60,24 @@ Datos:
 - [BlockExplorer](https://www.blockexplorer.com)
 - [Bitcoin Volatility Index](https://bitbo.io/volatility/)
 
+Ethereum:
+- [Etherscan](https://etherscan.io)
+- [Faucet Link](https://faucetlink.to/sepolia)
+- Patrick Collins. Learn Solidity, Blockchain Development, & Smart Contracts | Powered By AI - Full Course: [primera parte](https://www.youtube.com/watch?v=umepbfKp5rI), y [segunda parte](https://www.youtube.com/watch?v=sas02qSFZ74)
+
+Código:
+- [Visual Studio Code](https://code.visualstudio.com)
+- Extensiones:
+  - [solidity](https://marketplace.visualstudio.com/items?itemName=JuanBlanco.solidity)
+- [Remix IDE](https://remix.ethereum.org)
+
+Datos para Sepolia:
+- Network name: `Ethereum Sepolia`
+- New RPC URL: `https://ethereum-sepolia-rpc.publicnode.com`
+- Chain ID: `11155111`
+- Currency Symbol: `ETH`
+- Block explorer URL (optional): `https://sepolia.etherscan.io`
+
 ### Bibliografía básica
 
 - Satoshi Nakamoto. Bitcoin: A Peer-to-Peer Electronic Cash System
