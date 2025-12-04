@@ -105,7 +105,7 @@ Datos para Sepolia:
 - Marcia Stigum, Anthony Crescenzi. Stigum's Money Market
 - Perry Mehrling. Money and Empire: Charles P. Kindleberger and the Dollar System
 
-#### CBDCs
+### CBDCs
 
 - Saroj Bhattarai, Mohammad Davoodalhosseini, Zhenning Zhao. [Central Bank Digital Currency and Transmission of Monetary Policy](https://www.bankofcanada.ca/wp-content/uploads/2024/07/swp2024-27.pdf)
 - Alper Koparan. [Central Bank Digital Currencies: A review of global trends in adoption, financial inclusion, and the role of country characteristics](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5103342)
@@ -114,3 +114,10 @@ Datos para Sepolia:
 - Toni Ahnert, Katrin Assenmacher, Peter Hoffmann, Agnese Leonello, Cyril Monnet, Davide Porcellacchia. [The economics of central bank digital currency](https://www.ecb.europa.eu/pub/pdf/scpwps/ecb.wp2713~91ddff9e7c.en.pdf)
 - Fernando Navarrete [Do we really need a digital euro: A solution to what problem exactly?](https://institutodeanalistas.com/wp-content/uploads/8.-DO-WE-REALLY-NEED-THE-DIGITAL-EURO.-A-SOLUTION-TO-WHAT-PROBLEM-EXACTLY-FERNANDO-NAVARRETE-1.pdf)
 - European Central Bank. [Report on a digital euro](https://www.ecb.europa.eu/pub/pdf/other/Report_on_a_digital_euro~4d7268b458.en.pdf)
+
+### Stablecoins
+
+- Jiageng Liu, Igor Makarov, and Antoinette Schoar, "Anatomy of a Run: The Terra Luna Crash", NBER Working Paper 31160 (2023), https://doi.org/10.3386/w31160.
+- Ariah Klages-Mundt, Dominik Harz, Lewis Gudgeon, Jun-You Liu, Andreea Minca, "Stablecoins 2.0: Economic Foundations and Risk-based Models"
+- Tobian Adrian et al. Understanding Stablecoins (2025). International Monetary Fund, ISBN 9798229024075
+- Antonio Fatás. The economics of Fintech and Digital Currencies (2019). CEPR Press, Paris & London
