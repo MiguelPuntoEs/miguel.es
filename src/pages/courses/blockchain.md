@@ -9,6 +9,56 @@ layout: "../../layouts/MarkdownLayout.astro"
 **Profesor:** Miguel González Calvo  
 **Programa académico:** Grado en Inteligencia Artificial
 
+## Contenidos
+
+1. Fundamentos económicos
+   1. Activo real vs. activo financiero, características del dinero
+   2. Banca central y banca libre
+   3. Agregados monetarios
+   4. Formación de precios
+2. Criptografía y funciones hash
+   1. Criptografía simétrica
+   2. Criptografía asimétrica
+   3. Hashing y salting
+3. Introducción a las criptomonedas y Bitcoin
+   1. Motivación y escenarios
+4. Fundamentos de Blockchain 
+   1. Bloque, transacciones
+   2. *Proof of Work* y minería
+5. Funcionamiento de Bitcoin
+   1. P2PK, P2PKH
+   2. SegWit
+   3. Taproot
+6. Red Lightning
+   1. Introducción
+   2. Canales de pago
+   3. *Pathfinding* y *routing*
+7. Problemas de Bitcoin y alternativas
+   1. Tamaño de bloque: *Blocksize War*
+   2. Bitcoin Cash vs. Lightning
+8. Contratos inteligentes
+   1. Introducción
+   2. Ethereum: *Ethereum Virtual Machine*
+   3. Introducción a organizaciones descentralizadas (DAO)
+   4. Aplicaciones descentralizadas (DApps)
+   5. Tokens digitales: stablecoins, NFTs
+9. Transformación de servicios financieros
+   1. Introducción a SWIFT y T2
+   2. *Decentralized Finance* (DeFi): *decentralized exchanges* (DEX)
+   3. Stablecoins: clasificación
+      - USDT, USDC
+      - Espiral de la muerte
+   4. *Central Bank Digital Currencies* (CBDCs)
+10. Regulación FinTech
+    1. Regulación crypto
+    2. GENIUS Act
+11. Barreras y retos
+    1. Riesgos sistémicos y de mercado
+    2. Uso ilícito y opacidad
+    3. Consumo energético y huella de carbono
+    4. Ataques de seguridad estructural
+    5. Otros riesgos significativos
+
 ## Noticias de interés
 
 - [Donald Trump threatens extra 100% tariff as he retaliates against China](https://www.ft.com/content/328e3195-909a-45fb-b118-9dafbd41262b). Financial Times, 10 oct. 2025
@@ -31,8 +81,8 @@ Recursos:
 - [Repositorio oficial](https://github.com/bitcoin/bitcoin)
 - [Visualizaciones interesantes](https://wickedsmartbitcoin.com)
 - Tipos de interés:
-  -  [Reserva Federal](https://fred.stlouisfed.org/series/FEDFUNDS)
-  -  [Banco Central Europeo](https://www.ecb.europa.eu/stats/policy_and_exchange_rates/key_ecb_interest_rates/html/index.en.html)
+  - [Reserva Federal](https://fred.stlouisfed.org/series/FEDFUNDS)
+  - [Banco Central Europeo](https://www.ecb.europa.eu/stats/policy_and_exchange_rates/key_ecb_interest_rates/html/index.en.html)
 
 Minería: 
 - [Minerstat](https://minerstat.com/coins)
