@@ -132,9 +132,9 @@ Datos para Sepolia:
 
 - Satoshi Nakamoto. Bitcoin: A Peer-to-Peer Electronic Cash System
 - Saifedean Ammous. El patrón Bitcoin: La alternativa descentralizada a los bancos centrales. Deusto.
-- Andreas M. Antonopoulos. Mastering Bitcoin
-- Andreas M. Antonopoulos. Mastering Ethereum
-- Andreas M. Antonopoulos. Mastering the Lightning Network
+- Andreas M. Antonopoulos, David A. Harding. Mastering Bitcoin: Programming the Open Blockchain (2023). 3rd edition. O'Reilly.
+- Andreas M. Antonopoulos, Gavin Wood, Carlo Parisi, Alessandro Mazza, Niccolo Pozzolini. Mastering Ethereum: Implementing Smart Contracts (2025). 2nd edition. O'Reilly.
+- Andreas M. Antonopoulos, Olaoluwa Osuntokun, René Pickhardt. Mastering the Lightning Network: A Second Layer Blockchain Protocol for Instant Bitcoin Payments (2022). 1st edition. O'Reilly.
 - Bertaut, Carol, Bastian von Beschwitz, and Stephanie Curcuru (2025). "The International Role of the U.S. Dollar – 2025 Edition," FEDS Notes. Washington: Board of Governors of the Federal Reserve System, July 18, 2025, https://doi.org/10.17016/2380-7172.3856.
 
 ### Bibliografía complementaria
@@ -142,6 +142,7 @@ Datos para Sepolia:
 - Vitalik Buterin. 2014. Ethereum: A Next-Generation Smart Contract and Decentralized Application Platform
 - Gavin Wood. Ethereum: A Next-Generation Smart Contract and Decentralized Application Platform, [Yellow Paper](https://ethereum.github.io/yellowpaper/paper.pdf)
 - Joseph Poon, Thaddeus Dryja. The Bitcoin Lightning Network: Scalable Off-Chain Instant Payments
+- Lyn Alden. Broken Money: Why Our Financial System is Failing Us and How We Can Make it Better (2023)
 - J. Tucker. Bit by bit: how P2P is freeing the world
 - Slutskiy. Yes, You Should Own Bitcoin
 - Wendy McElroy. The Satoshi Revolution: The Revolution of Rising Expectations
@@ -165,6 +166,7 @@ Datos para Sepolia:
 - Toni Ahnert, Katrin Assenmacher, Peter Hoffmann, Agnese Leonello, Cyril Monnet, Davide Porcellacchia. [The economics of central bank digital currency](https://www.ecb.europa.eu/pub/pdf/scpwps/ecb.wp2713~91ddff9e7c.en.pdf)
 - Fernando Navarrete [Do we really need a digital euro: A solution to what problem exactly?](https://institutodeanalistas.com/wp-content/uploads/8.-DO-WE-REALLY-NEED-THE-DIGITAL-EURO.-A-SOLUTION-TO-WHAT-PROBLEM-EXACTLY-FERNANDO-NAVARRETE-1.pdf)
 - European Central Bank. [Report on a digital euro](https://www.ecb.europa.eu/pub/pdf/other/Report_on_a_digital_euro~4d7268b458.en.pdf)
+- Miguel A. Fernández Ordóñez. Adiós a los bancos: Una visión distinta del dinero y la banca (2020)
 
 ### Stablecoins
 
