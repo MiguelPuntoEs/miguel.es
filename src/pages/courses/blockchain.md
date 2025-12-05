@@ -135,6 +135,7 @@ Datos para Sepolia:
 - Andreas M. Antonopoulos. Mastering Bitcoin
 - Andreas M. Antonopoulos. Mastering Ethereum
 - Andreas M. Antonopoulos. Mastering the Lightning Network
+- Bertaut, Carol, Bastian von Beschwitz, and Stephanie Curcuru (2025). "The International Role of the U.S. Dollar – 2025 Edition," FEDS Notes. Washington: Board of Governors of the Federal Reserve System, July 18, 2025, https://doi.org/10.17016/2380-7172.3856.
 
 ### Bibliografía complementaria
 
