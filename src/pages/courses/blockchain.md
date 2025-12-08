@@ -93,7 +93,7 @@ Vídeos:
 - Saifadean Ammous. [Conferencia en la Fundación Rafael del Pino](https://www.youtube.com/watch?v=Ti3lI-se1DI), 17 de enero de 2025
 
 Finanzas:
-- Perry Mehrling. [Economics of Money and Banking](https://www.coursera.org/learn/money-banking) (curso en Coursera)
+- Perry Mehrling. Economics of Money and Banking. [Coursera](https://www.coursera.org/learn/money-banking)
 
 Datos:
 - [CoinMarketCap](https://coinmarketcap.com)
@@ -128,6 +128,14 @@ Datos para Sepolia:
 - Currency Symbol: `ETH`
 - Block explorer URL (optional): `https://sepolia.etherscan.io`
 
+DeFi:
+- [Aave](https://aave.com)
+- [Compound](https://compound.finance)
+- [Ledn](https://www.ledn.io)
+- [Nexo](https://nexo.com)
+- [Sky](https://sky.money), y [Maker](https://makerdao.com)
+- Coinmarketcap. [A Complete Guide to Making Passive Income With Lending](https://coinmarketcap.com/academy/article/a-complete-guide-to-making-passive-income-with-lending)
+
 ### Bibliografía básica
 
 - Satoshi Nakamoto. Bitcoin: A Peer-to-Peer Electronic Cash System
@@ -139,8 +147,7 @@ Datos para Sepolia:
 
 ### Bibliografía complementaria
 
-- Vitalik Buterin. 2014. Ethereum: A Next-Generation Smart Contract and Decentralized Application Platform
-- Gavin Wood. Ethereum: A Next-Generation Smart Contract and Decentralized Application Platform, [Yellow Paper](https://ethereum.github.io/yellowpaper/paper.pdf)
+- Anthony Lewis. The Basics of Bitcoins and Blockchains (2018)
 - Joseph Poon, Thaddeus Dryja. The Bitcoin Lightning Network: Scalable Off-Chain Instant Payments
 - Lyn Alden. Broken Money: Why Our Financial System is Failing Us and How We Can Make it Better (2023)
 - J. Tucker. Bit by bit: how P2P is freeing the world
@@ -175,3 +182,18 @@ Datos para Sepolia:
 - Tobian Adrian et al. Understanding Stablecoins (2025). International Monetary Fund, ISBN 9798229024075
 - Antonio Fatás. The economics of Fintech and Digital Currencies (2019). CEPR Press, Paris & London
 - [ERC-20 Token Standard](https://ethereum.org/developers/docs/standards/tokens/erc-20/), de la [EIP-20](https://eips.ethereum.org/EIPS/eip-20)
+
+### Decentralized Finance
+
+- CoinGecko. How To DeFi: Beginner
+- CoinGecko. How To DeFi: Advanced
+- Campbell R. Harvey. Decentralized Finance (DeFi): The Future of Finance Specialization. [Coursera](https://www.coursera.org/specializations/decentralized-finance-duke)
+- Campbell R. Harvey, Ashwin Ramachandran, Joey Santoro. DeFi and the Future of Finance (2021). Wiley
+- Shermin Voshmgir. Token Economy (2025). 3rd edition
+
+### Ethereum
+
+- Vitalik Buterin. 2014. Ethereum: A Next-Generation Smart Contract and Decentralized Application Platform
+- Gavin Wood. Ethereum: A Next-Generation Smart Contract and Decentralized Application Platform, [Yellow Paper](https://ethereum.github.io/yellowpaper/paper.pdf)
+- Vitalik Buterin. Proof of Stake: The Making of Ethereum and the Philosophy of Blockchains (2022)
+- Camila Russo. The Infinite Machine (2020)
