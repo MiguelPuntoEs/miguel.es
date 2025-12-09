@@ -7,10 +7,12 @@ const { title, description } = Astro.props;
 ---
 
 <html lang="es" class="scroll-smooth">
-  <Font cssVariable="--font-playfair" preload />
-  <Font cssVariable="--font-inter" preload />
-  
-  <MainHead {title} {description} />
+  <head>
+    <Font cssVariable="--font-playfair" preload />
+    <Font cssVariable="--font-inter" preload />
+    
+    <MainHead {title} {description} />
+  </head>
   
   <body>
     <Navbar />
