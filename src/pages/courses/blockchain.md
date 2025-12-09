@@ -4,8 +4,7 @@ description: "Blockchain technology and applications. Universidad Alfonso X el S
 layout: "../../layouts/MarkdownLayout.astro"
 ---
 
-*Universidad Alfonso X el Sabio*
-
+**Universidad Alfonso X el Sabio**  
 **Profesor:** Miguel González Calvo  
 **Programa académico:** Grado en Inteligencia Artificial
 
@@ -22,7 +21,7 @@ layout: "../../layouts/MarkdownLayout.astro"
    3. Hashing y salting
 3. Introducción a las criptomonedas y Bitcoin
    1. Motivación y escenarios
-4. Fundamentos de Blockchain 
+4. Fundamentos de Blockchain
    1. Bloque, transacciones
    2. *Proof of Work* y minería
 5. Funcionamiento de Bitcoin
@@ -66,7 +65,7 @@ layout: "../../layouts/MarkdownLayout.astro"
 - [Low approval and sticky inflation: a year of Donald Trump in charts](https://www.ft.com/content/266ae6df-89c2-4413-be51-0b3a7c6e8015). Financial Times, 5 nov. 2025
 - [US Congress passes landmark bill to regulate stablecoins](https://www.ft.com/content/4c41e6e8-374c-4b1a-ac7f-88c245fb18c8). Financial Times, 17 jul. 2025
 - [The twilight of the central banking elite](https://www.ft.com/content/3b5a3fde-6110-4e40-88b1-04f71ed5b0f1). Financial Times, 22 ago. 2025
-- [Binance teams up with BBVA to let customers keep assets off exchange](https://www.ft.com/content/b1f596c8-f823-42b9-b634-d0f749a3ccca). Financial Times, 8 ago. 2025 
+- [Binance teams up with BBVA to let customers keep assets off exchange](https://www.ft.com/content/b1f596c8-f823-42b9-b634-d0f749a3ccca). Financial Times, 8 ago. 2025
 - [EU speeds up plans for digital euro after US stablecoin law](https://www.ft.com/content/8ad60169-d1e5-4d2c-b928-d53d668f0ec6). Financial Times, 22 ago. 2025
 - [Stablecoin group Tether holds talks to invest in gold miners](https://www.ft.com/content/135fb3dd-2395-4f04-8cc6-7fb0e87cd092). Financial Times, 5 sep. 2025
 - [Crypto group Tether to launch new stablecoin with eye on US markets](https://www.ft.com/content/f2329769-6bbc-489b-9a98-d9bbf7addf6f). Financial Times, 12 sep. 2025
@@ -74,6 +73,7 @@ layout: "../../layouts/MarkdownLayout.astro"
 ## Recursos
 
 Recursos:
+
 - [Repositorio del curso en GitHub](https://github.com/MiguelPuntoEs/uax-blockchain/)
 - [Learn me a bitcoin](https://learnmeabitcoin.com)
 - [Opcode Explained](https://opcodeexplained.com)
@@ -84,18 +84,23 @@ Recursos:
   - [Reserva Federal](https://fred.stlouisfed.org/series/FEDFUNDS)
   - [Banco Central Europeo](https://www.ecb.europa.eu/stats/policy_and_exchange_rates/key_ecb_interest_rates/html/index.en.html)
 
-Minería: 
+Minería:
+
 - [Minerstat](https://minerstat.com/coins)
 
 Vídeos:
+
 - Juan Ramón Rallo. [Saifedean Ammous: Gold and Bitcoin, the End of the Fiat System?](https://www.youtube.com/watch?v=DZ9IUsnm0Lc)
 - Saifadean Ammous. [Conferencia en Fundación Rafael del Pino](https://www.youtube.com/watch?v=XwVQpU5wnpY), 2 de octubre de 2018
 - Saifadean Ammous. [Conferencia en la Fundación Rafael del Pino](https://www.youtube.com/watch?v=Ti3lI-se1DI), 17 de enero de 2025
+- Saifadean Ammous. [Fiat is war, Bitcoin is peace](https://www.youtube.com/watch?v=6fgFyQEWiK4), 14 de noviembre de 2025
 
 Finanzas:
+
 - Perry Mehrling. Economics of Money and Banking. [Coursera](https://www.coursera.org/learn/money-banking)
 
 Datos:
+
 - [CoinMarketCap](https://coinmarketcap.com)
   - Ver también [API](https://coinmarketcap.com/api/)
 - [CoinGecko](https://www.coingecko.com)
@@ -111,17 +116,20 @@ Datos:
 - [Bitcoin Volatility Index](https://bitbo.io/volatility/)
 
 Ethereum:
+
 - [Etherscan](https://etherscan.io)
 - [Faucet Link](https://faucetlink.to/sepolia)
 - Patrick Collins. Learn Solidity, Blockchain Development, & Smart Contracts | Powered By AI - Full Course: [primera parte](https://www.youtube.com/watch?v=umepbfKp5rI), y [segunda parte](https://www.youtube.com/watch?v=sas02qSFZ74)
 
 Código:
+
 - [Visual Studio Code](https://code.visualstudio.com)
 - Extensiones:
   - [solidity](https://marketplace.visualstudio.com/items?itemName=JuanBlanco.solidity)
 - [Remix IDE](https://remix.ethereum.org)
 
 Datos para Sepolia:
+
 - Network name: `Ethereum Sepolia`
 - New RPC URL: `https://ethereum-sepolia-rpc.publicnode.com`
 - Chain ID: `11155111`
@@ -129,12 +137,25 @@ Datos para Sepolia:
 - Block explorer URL (optional): `https://sepolia.etherscan.io`
 
 DeFi:
+
 - [Aave](https://aave.com)
 - [Compound](https://compound.finance)
 - [Ledn](https://www.ledn.io)
 - [Nexo](https://nexo.com)
-- [Sky](https://sky.money), y [Maker](https://makerdao.com)
+- [Sky](https://sky.money), and [Maker](https://makerdao.com)
 - Coinmarketcap. [A Complete Guide to Making Passive Income With Lending](https://coinmarketcap.com/academy/article/a-complete-guide-to-making-passive-income-with-lending)
+
+Wallets:
+
+- Hot wallets:
+  - [Electrum](https://electrum.org): Bitcoin wallet, good for testing with Testnet
+  - [Phantom](https://phantom.com)
+  - [MetaMask](https://metamask.io): recommended for testing with ETH Sepolia, integration with Remix
+  - [Trust Wallet](https://trustwallet.com/es)
+- Cold wallets:
+  - [Trezor](https://trezor.io): open-source, good history
+  - [Ledger](https://www.ledger.com)
+  - [Tangem](https://tangem.com): card design
 
 ### Bibliografía básica
 
@@ -143,7 +164,7 @@ DeFi:
 - Andreas M. Antonopoulos, David A. Harding. Mastering Bitcoin: Programming the Open Blockchain (2023). 3rd edition. O'Reilly.
 - Andreas M. Antonopoulos, Gavin Wood, Carlo Parisi, Alessandro Mazza, Niccolo Pozzolini. Mastering Ethereum: Implementing Smart Contracts (2025). 2nd edition. O'Reilly.
 - Andreas M. Antonopoulos, Olaoluwa Osuntokun, René Pickhardt. Mastering the Lightning Network: A Second Layer Blockchain Protocol for Instant Bitcoin Payments (2022). 1st edition. O'Reilly.
-- Bertaut, Carol, Bastian von Beschwitz, and Stephanie Curcuru (2025). "The International Role of the U.S. Dollar – 2025 Edition," FEDS Notes. Washington: Board of Governors of the Federal Reserve System, July 18, 2025, https://doi.org/10.17016/2380-7172.3856.
+- Bertaut, Carol, Bastian von Beschwitz, and Stephanie Curcuru (2025). "The International Role of the U.S. Dollar – 2025 Edition," FEDS Notes. Washington: Board of Governors of the Federal Reserve System, July 18, 2025, <https://doi.org/10.17016/2380-7172.3856>.
 
 ### Bibliografía complementaria
 
@@ -177,11 +198,10 @@ DeFi:
 
 ### Stablecoins
 
-- Jiageng Liu, Igor Makarov, and Antoinette Schoar, "Anatomy of a Run: The Terra Luna Crash", NBER Working Paper 31160 (2023), https://doi.org/10.3386/w31160.
+- Jiageng Liu, Igor Makarov, and Antoinette Schoar, "Anatomy of a Run: The Terra Luna Crash", NBER Working Paper 31160 (2023), <https://doi.org/10.3386/w31160>.
 - Ariah Klages-Mundt, Dominik Harz, Lewis Gudgeon, Jun-You Liu, Andreea Minca, "Stablecoins 2.0: Economic Foundations and Risk-based Models"
 - Tobian Adrian et al. Understanding Stablecoins (2025). International Monetary Fund, ISBN 9798229024075
 - Antonio Fatás. The economics of Fintech and Digital Currencies (2019). CEPR Press, Paris & London
-- [ERC-20 Token Standard](https://ethereum.org/developers/docs/standards/tokens/erc-20/), de la [EIP-20](https://eips.ethereum.org/EIPS/eip-20)
 
 ### Decentralized Finance
 
@@ -193,7 +213,25 @@ DeFi:
 
 ### Ethereum
 
+- [Ethereum development documentation](https://ethereum.org/developers/docs/)
 - Vitalik Buterin. 2014. Ethereum: A Next-Generation Smart Contract and Decentralized Application Platform
 - Gavin Wood. Ethereum: A Next-Generation Smart Contract and Decentralized Application Platform, [Yellow Paper](https://ethereum.github.io/yellowpaper/paper.pdf)
 - Vitalik Buterin. Proof of Stake: The Making of Ethereum and the Philosophy of Blockchains (2022)
 - Camila Russo. The Infinite Machine (2020)
+- [ERC-20 Token Standard](https://ethereum.org/developers/docs/standards/tokens/erc-20/), de la [EIP-20](https://eips.ethereum.org/EIPS/eip-20)
+- [ERC-729 Non-Fungible Token Standard](https://ethereum.org/developers/docs/standards/tokens/erc-721/), de la [EIP-721](https://eips.ethereum.org/EIPS/eip-721)
+
+## Acronyms
+
+- **CEX** Centralized Exchange
+- **DEX** Decentralized Exchange
+- **DApp** Decentralized Application
+- **DeFi** Decentralized finance
+- **DAO** Decentralized autonomous organization
+- **KYC** Know YOur Customer
+- **NFT** Non-Fungible Token
+- **PoW** Proof of Work
+- **PoS** Proof of Stake
+- **L1**/2 Layer 1/2
+- **EVM** Ethereum Virtual Machine
+  
