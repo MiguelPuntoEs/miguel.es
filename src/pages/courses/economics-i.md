@@ -3,7 +3,9 @@ title: "Economics I"
 description: "Introduction to Economics. Universidad Francisco Marroquín"
 layout: "../../layouts/MarkdownLayout.astro"
 ---
-*Universidad Francisco Marroquín*
+
+**Universidad Francisco Marroquín**  
+**Programa académico:** Licenciatura en Entrepreneurship, Licenciatura en Administración de Empresas
 
 ## Bibliografía
 

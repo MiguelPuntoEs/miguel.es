@@ -3,12 +3,13 @@ title: "International Economics and Globalization"
 description: "Introduction to international economics. Universidad de las Hespérides"
 layout: "../../layouts/MarkdownLayout.astro"
 ---
-*Universidad de las Hespérides*
 
+**Universidad de las Hespérides**  
 **Profesor:** Miguel González Calvo  
-**Programa académico:** Licenciatura en Entrepreneurship, Licenciatura en Administración de Empresas
+**Programa académico:** Grado en Economía
 
 ## Contenidos
+
 - Globalización: flujos, medición, mitos y slowbalization
 - Ganancias del comercio
 - Modelo ricardiano (i): ventaja comparativa, evidencia y limitaciones
@@ -30,17 +31,18 @@ layout: "../../layouts/MarkdownLayout.astro"
 - Baldwin, Richard. 2016. The Great Convergence: Information Technology and the New Globalization. Cambridge, MA: Harvard University Press. Capítulos 1 y 2.
 
 Flujos comerciales:
+
 - DHL Global Connectedness Tracker. [October 2025: Special Update on Shifts in Global Flows amid Policy Shocks](https://www.dhl.com/content/dam/dhl/global/microsites/dhl-nyu/pdf/dhl-global-connectedness-tracker-oct-2025.pdf)
 - Steven A. Altman and Caroline R. Bastian. [DHL Global Connectedness Report 2024](https://www.dhl.com/content/dam/dhl/global/delivered/documents/pdf/dhl-global-connectedness-report-2024-complete.pdf)
 - FRED. [Taxes on production and imports](https://fred.stlouisfed.org/graph/?g=1JiFw)
 - Our World in Data. [Trade and Globalization](https://ourworldindata.org/trade-and-globalization)
 
 Papel del dólar:
-- Bertaut, Carol, Bastian von Beschwitz, and Stephanie Curcuru (2025). "The International Role of the U.S. Dollar – 2025 Edition," FEDS Notes. Washington: Board of Governors of the Federal Reserve System, July 18, 2025, https://doi.org/10.17016/2380-7172.3856.
+
+- Bertaut, Carol, Bastian von Beschwitz, and Stephanie Curcuru (2025). "The International Role of the U.S. Dollar – 2025 Edition," FEDS Notes. Washington: Board of Governors of the Federal Reserve System, July 18, 2025, <https://doi.org/10.17016/2380-7172.3856>.
 - Emine Boz, Anja Brüggen, Camila Casas, Georgios Georgiadis,
 Gita Gopinath, and Arnaud Mehl (2025). "[Patterns of Invoicing Currency in Global Trade in a Fragmenting World Economy](https://www.imf.org/en/-/media/files/publications/wp/2025/english/wpiea2025178-source-pdf.pdf)" International Monetary Fund, September 2025
 - Patrick McGuire, Goetz von Peter and Sonya Zhu (2024). "[International finance through the lens of BIS statistics: the global reach of currencies](https://www.bis.org/publ/qtrpdf/r_qt2406b.htm)" BIS Quarterly Review
-
 
 ### Recomendada
 

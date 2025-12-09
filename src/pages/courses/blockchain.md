@@ -11,52 +11,52 @@ layout: "../../layouts/MarkdownLayout.astro"
 ## Contenidos
 
 1. Fundamentos económicos
-   1. Activo real vs. activo financiero, características del dinero
-   2. Banca central y banca libre
-   3. Agregados monetarios
-   4. Formación de precios
+   - Activo real vs. activo financiero, características del dinero
+   - Banca central y banca libre
+   - Agregados monetarios
+   - Formación de precios
 2. Criptografía y funciones hash
-   1. Criptografía simétrica
-   2. Criptografía asimétrica
-   3. Hashing y salting
+   - Criptografía simétrica
+   - Criptografía asimétrica
+   - Hashing y salting
 3. Introducción a las criptomonedas y Bitcoin
-   1. Motivación y escenarios
+   - Motivación y escenarios
 4. Fundamentos de Blockchain
-   1. Bloque, transacciones
-   2. *Proof of Work* y minería
+   - Bloque, transacciones
+   - *Proof of Work* y minería
 5. Funcionamiento de Bitcoin
-   1. P2PK, P2PKH
-   2. SegWit
-   3. Taproot
+   - P2PK, P2PKH
+   - SegWit
+   - Taproot
 6. Red Lightning
-   1. Introducción
-   2. Canales de pago
-   3. *Pathfinding* y *routing*
+   - Introducción
+   - Canales de pago
+   - *Pathfinding* y *routing*
 7. Problemas de Bitcoin y alternativas
-   1. Tamaño de bloque: *Blocksize War*
-   2. Bitcoin Cash vs. Lightning
+   - Tamaño de bloque: *Blocksize War*
+   - Bitcoin Cash vs. Lightning
 8. Contratos inteligentes
-   1. Introducción
-   2. Ethereum: *Ethereum Virtual Machine*
-   3. Introducción a organizaciones descentralizadas (DAO)
-   4. Aplicaciones descentralizadas (DApps)
-   5. Tokens digitales: stablecoins, NFTs
+   - Introducción
+   - Ethereum: *Ethereum Virtual Machine*
+   - Introducción a organizaciones descentralizadas (DAO)
+   - Aplicaciones descentralizadas (DApps)
+   - Tokens digitales: stablecoins, NFTs
 9. Transformación de servicios financieros
-   1. Introducción a SWIFT y T2
-   2. *Decentralized Finance* (DeFi): *decentralized exchanges* (DEX)
-   3. Stablecoins: clasificación
+   - Introducción a SWIFT y T2
+   - *Decentralized Finance* (DeFi): *decentralized exchanges* (DEX)
+   - Stablecoins: clasificación
       - USDT, USDC
       - Espiral de la muerte
-   4. *Central Bank Digital Currencies* (CBDCs)
+   - *Central Bank Digital Currencies* (CBDCs)
 10. Regulación FinTech
-    1. Regulación crypto
-    2. GENIUS Act
+    - Regulación crypto
+    - GENIUS Act
 11. Barreras y retos
-    1. Riesgos sistémicos y de mercado
-    2. Uso ilícito y opacidad
-    3. Consumo energético y huella de carbono
-    4. Ataques de seguridad estructural
-    5. Otros riesgos significativos
+    - Riesgos sistémicos y de mercado
+    - Uso ilícito y opacidad
+    - Consumo energético y huella de carbono
+    - Ataques de seguridad estructural
+    - Otros riesgos significativos
 
 ## Noticias de interés
 
@@ -232,6 +232,6 @@ Wallets:
 - **NFT** Non-Fungible Token
 - **PoW** Proof of Work
 - **PoS** Proof of Stake
-- **L1**/2 Layer 1/2
+- **L1/2** Layer 1/2
 - **EVM** Ethereum Virtual Machine
   

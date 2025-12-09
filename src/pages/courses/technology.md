@@ -4,8 +4,7 @@ description: "Emerging technologies and digital transformation. Universidad Fran
 layout: "../../layouts/MarkdownLayout.astro"
 ---
 
-*Universidad Francisco Marroquín*
-
+**Universidad Francisco Marroquín**  
 **Profesor:** Miguel González Calvo  
 **Programa académico:** Licenciatura en Entrepreneurship, Licenciatura en Administración de Empresas  
 
