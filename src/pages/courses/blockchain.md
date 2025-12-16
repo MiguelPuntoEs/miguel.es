@@ -138,12 +138,17 @@ Datos para Sepolia:
 
 DeFi:
 
-- [Aave](https://aave.com)
-- [Compound](https://compound.finance)
-- [Ledn](https://www.ledn.io)
-- [Nexo](https://nexo.com)
-- [Sky](https://sky.money), and [Maker](https://makerdao.com)
-- Coinmarketcap. [A Complete Guide to Making Passive Income With Lending](https://coinmarketcap.com/academy/article/a-complete-guide-to-making-passive-income-with-lending)
+- Lending:
+  - [Aave](https://aave.com)
+  - [Compound](https://compound.finance)
+  - [Sky](https://sky.money), and [Maker](https://makerdao.com)
+  - [Ledn](https://www.ledn.io)
+  - [Nexo](https://nexo.com)
+  - Coinmarketcap. [A Complete Guide to Making Passive Income With Lending](https://coinmarketcap.com/academy/article/a-complete-guide-to-making-passive-income-with-lending)
+- Swaps:
+  - [Kyber](https://kyber.network/)
+  - [Uniswap](https://app.uniswap.org/)
+  - [Curve Finance](https://www.curve.finance)
 
 Wallets:
 
@@ -223,15 +228,21 @@ Wallets:
 
 ## Acronyms
 
+- **AMM** Automated Marked Maker
+- **BIP** Bitcoin Improvement Proposal
 - **CEX** Centralized Exchange
 - **DEX** Decentralized Exchange
 - **DApp** Decentralized Application
-- **DeFi** Decentralized finance
-- **DAO** Decentralized autonomous organization
-- **KYC** Know YOur Customer
+- **DeFi** Decentralized Finance
+- **DAO** Decentralized Autonomous Organization
+- **ECC** Elliptic Curve Cryptography
+- **EOA** Externally Owned Account
+- **EIP** Ethereum Improvement Proposal
+- **ERC** Ethereum Request for Comment
+- **KYC** Know Your Customer
+- **MEV** Miner Extractable Value
 - **NFT** Non-Fungible Token
 - **PoW** Proof of Work
 - **PoS** Proof of Stake
 - **L1/2** Layer 1/2
 - **EVM** Ethereum Virtual Machine
-  
