@@ -269,6 +269,7 @@ printf text | shasum -a 256
 All addresses are for the Sepolia network.
 
 - [Course instructor](https://sepolia.etherscan.io/address/0xa7fbdf3ea11ae808e75c07fb01f7acbed4523ffb): `0xA7FbdF3eA11aE808e75c07fB01f7AcBEd4523Ffb`
+- [Assignment submission contract](https://sepolia.etherscan.io/address/0x27058e33e1bb347de75771b200dc490cf6f0dca6): `0x27058E33E1bb347dE75771B200dc490CF6F0dcA6`
 
 Tokens:
 
