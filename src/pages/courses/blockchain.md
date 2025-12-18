@@ -5,60 +5,60 @@ layout: "../../layouts/MarkdownLayout.astro"
 ---
 
 **Universidad Alfonso X el Sabio**  
-**Profesor:** Miguel González Calvo  
-**Programa académico:** Grado en Inteligencia Artificial
+**Professor:** Miguel González Calvo  
+**Academic Program:** Bachelor's Degree in Artificial Intelligence
 
-## Contenidos
+## Contents
 
-1. Fundamentos económicos
-   - Activo real vs. activo financiero, características del dinero
-   - Banca central y banca libre
-   - Agregados monetarios
-   - Formación de precios
-2. Criptografía y funciones hash
-   - Criptografía simétrica
-   - Criptografía asimétrica
-   - Hashing y salting
-3. Introducción a las criptomonedas y Bitcoin
-   - Motivación y escenarios
-4. Fundamentos de Blockchain
-   - Bloque, transacciones
-   - *Proof of Work* y minería
-5. Funcionamiento de Bitcoin
+1. Economic fundamentals
+   - Real asset vs. financial asset, characteristics of money
+   - Central banking and free banking
+   - Monetary aggregates
+   - Price formation
+2. Cryptography and hash functions
+   - Symmetric cryptography
+   - Asymmetric cryptography
+   - Hashing and salting
+3. Introduction to cryptocurrencies and Bitcoin
+   - Motivation and scenarios
+4. Blockchain fundamentals
+   - Block, transactions
+   - *Proof of Work* and mining
+5. Bitcoin operation
    - P2PK, P2PKH
    - SegWit
    - Taproot
-6. Red Lightning
-   - Introducción
-   - Canales de pago
-   - *Pathfinding* y *routing*
-7. Problemas de Bitcoin y alternativas
-   - Tamaño de bloque: *Blocksize War*
+6. Lightning Network
+   - Introduction
+   - Payment channels
+   - *Pathfinding* and *routing*
+7. Bitcoin problems and alternatives
+   - Block size: *Blocksize War*
    - Bitcoin Cash vs. Lightning
-8. Contratos inteligentes
-   - Introducción
+8. Smart contracts
+   - Introduction
    - Ethereum: *Ethereum Virtual Machine*
-   - Introducción a organizaciones descentralizadas (DAO)
-   - Aplicaciones descentralizadas (DApps)
-   - Tokens digitales: stablecoins, NFTs
-9. Transformación de servicios financieros
-   - Introducción a SWIFT y T2
+   - Introduction to decentralized organizations (DAO)
+   - Decentralized applications (DApps)
+   - Digital tokens: stablecoins, NFTs
+9. Transformation of financial services
+   - Introduction to SWIFT and T2
    - *Decentralized Finance* (DeFi): *decentralized exchanges* (DEX)
-   - Stablecoins: clasificación
+   - Stablecoins: classification
       - USDT, USDC
-      - Espiral de la muerte
+      - Death spiral
    - *Central Bank Digital Currencies* (CBDCs)
-10. Regulación FinTech
-    - Regulación crypto
+10. FinTech regulation
+    - Crypto regulation
     - GENIUS Act
-11. Barreras y retos
-    - Riesgos sistémicos y de mercado
-    - Uso ilícito y opacidad
-    - Consumo energético y huella de carbono
-    - Ataques de seguridad estructural
-    - Otros riesgos significativos
+11. Barriers and challenges
+    - Systemic and market risks
+    - Illicit use and opacity
+    - Energy consumption and carbon footprint
+    - Structural security attacks
+    - Other significant risks
 
-## Noticias de interés
+## News of interest
 
 - [Donald Trump threatens extra 100% tariff as he retaliates against China](https://www.ft.com/content/328e3195-909a-45fb-b118-9dafbd41262b). Financial Times, 10 oct. 2025
 - [The 10 charts that define Donald Trump’s tumultuous first 100 days](https://www.ft.com/content/9d3ebaed-50b6-477a-bf62-3a35a22fc222). Financial Times, 29 apr. 2025
@@ -70,42 +70,43 @@ layout: "../../layouts/MarkdownLayout.astro"
 - [Stablecoin group Tether holds talks to invest in gold miners](https://www.ft.com/content/135fb3dd-2395-4f04-8cc6-7fb0e87cd092). Financial Times, 5 sep. 2025
 - [Crypto group Tether to launch new stablecoin with eye on US markets](https://www.ft.com/content/f2329769-6bbc-489b-9a98-d9bbf7addf6f). Financial Times, 12 sep. 2025
 
-## Recursos
+## Resources
 
-Recursos:
+Resources:
 
-- [Repositorio del curso en GitHub](https://github.com/MiguelPuntoEs/uax-blockchain/)
+- [Course repository on GitHub](https://github.com/MiguelPuntoEs/uax-blockchain/)
 - [Learn me a bitcoin](https://learnmeabitcoin.com)
+- CoinDesk. [The math behind the Bitcoin protocol](https://www.coindesk.com/markets/2014/10/19/the-math-behind-the-bitcoin-protocol)
 - [Opcode Explained](https://opcodeexplained.com)
-- [Ejemplo de transacción](https://www.blockexplorer.com/bitcoin/tx/0627052b6f28912f2703066a912ea577f2ce4da4caa5a5fbd8a57286c345c2f2)
-- [Repositorio oficial](https://github.com/bitcoin/bitcoin)
-- [Visualizaciones interesantes](https://wickedsmartbitcoin.com)
-- Tipos de interés:
-  - [Reserva Federal](https://fred.stlouisfed.org/series/FEDFUNDS)
-  - [Banco Central Europeo](https://www.ecb.europa.eu/stats/policy_and_exchange_rates/key_ecb_interest_rates/html/index.en.html)
+- [Transaction example](https://www.blockexplorer.com/bitcoin/tx/0627052b6f28912f2703066a912ea577f2ce4da4caa5a5fbd8a57286c345c2f2)
+- [Official repository](https://github.com/bitcoin/bitcoin)
+- [Interesting visualizations](https://wickedsmartbitcoin.com)
+- Interest rates:
+  - [Federal Reserve](https://fred.stlouisfed.org/series/FEDFUNDS)
+  - [European Central Bank](https://www.ecb.europa.eu/stats/policy_and_exchange_rates/key_ecb_interest_rates/html/index.en.html)
 
-Minería:
+Mining:
 
 - [Minerstat](https://minerstat.com/coins)
 
-Vídeos:
+Videos:
 
 - Juan Ramón Rallo. [Saifedean Ammous: Gold and Bitcoin, the End of the Fiat System?](https://www.youtube.com/watch?v=DZ9IUsnm0Lc)
-- Saifadean Ammous. [Conferencia en Fundación Rafael del Pino](https://www.youtube.com/watch?v=XwVQpU5wnpY), 2 de octubre de 2018
-- Saifadean Ammous. [Conferencia en la Fundación Rafael del Pino](https://www.youtube.com/watch?v=Ti3lI-se1DI), 17 de enero de 2025
-- Saifadean Ammous. [Fiat is war, Bitcoin is peace](https://www.youtube.com/watch?v=6fgFyQEWiK4), 14 de noviembre de 2025
+- Saifadean Ammous. [Conference at Fundación Rafael del Pino](https://www.youtube.com/watch?v=XwVQpU5wnpY), October 2, 2018
+- Saifadean Ammous. [Conference at Fundación Rafael del Pino](https://www.youtube.com/watch?v=Ti3lI-se1DI), January 17, 2025
+- Saifadean Ammous. [Fiat is war, Bitcoin is peace](https://www.youtube.com/watch?v=6fgFyQEWiK4), November 14, 2025
 
-Finanzas:
+Finance:
 
 - Perry Mehrling. Economics of Money and Banking. [Coursera](https://www.coursera.org/learn/money-banking)
 
-Datos:
+Data:
 
 - [CoinMarketCap](https://coinmarketcap.com)
-  - Ver también [API](https://coinmarketcap.com/api/)
+  - See also [API](https://coinmarketcap.com/api/)
 - [CoinGecko](https://www.coingecko.com)
-  - Ver también [API](https://www.coingecko.com/api)
-- [Blockchain.com](https://www.blockchain.com), especialmente la sección de [Charts](https://www.blockchain.com/explorer/charts) y para explorar bloques específicos
+  - See also [API](https://www.coingecko.com/api)
+- [Blockchain.com](https://www.blockchain.com), especially the [Charts](https://www.blockchain.com/explorer/charts) section and for exploring specific blocks
   - [Blockchain Size (MB)](https://www.blockchain.com/explorer/charts/blocks-size)
   - [Average Block Size (MB)](https://www.blockchain.com/explorer/charts/avg-block-size)
   - [Average Payments per Block](https://www.blockchain.com/explorer/charts/n-payments-per-block)
@@ -114,6 +115,7 @@ Datos:
   - [Average Confirmation Time](https://www.blockchain.com/explorer/charts/avg-confirmation-time)
 - [BlockExplorer](https://www.blockexplorer.com)
 - [Bitcoin Volatility Index](https://bitbo.io/volatility/)
+- Naveen Joshi. [8 blockchain consensus mechanism you should know about](https://www.allerin.com/blog/8-blockchain-consensus-mechanisms-you-should-know-about/)
 
 Ethereum:
 
@@ -121,14 +123,14 @@ Ethereum:
 - [Faucet Link](https://faucetlink.to/sepolia)
 - Patrick Collins. Learn Solidity, Blockchain Development, & Smart Contracts | Powered By AI - Full Course: [primera parte](https://www.youtube.com/watch?v=umepbfKp5rI), y [segunda parte](https://www.youtube.com/watch?v=sas02qSFZ74)
 
-Código:
+Code:
 
 - [Visual Studio Code](https://code.visualstudio.com)
-- Extensiones:
+- Extensions:
   - [solidity](https://marketplace.visualstudio.com/items?itemName=JuanBlanco.solidity)
 - [Remix IDE](https://remix.ethereum.org)
 
-Datos para Sepolia:
+Data for Sepolia:
 
 - Network name: `Ethereum Sepolia`
 - New RPC URL: `https://ethereum-sepolia-rpc.publicnode.com`
@@ -162,7 +164,7 @@ Wallets:
   - [Ledger](https://www.ledger.com)
   - [Tangem](https://tangem.com): card design
 
-### Bibliografía básica
+### Basic bibliography
 
 - Satoshi Nakamoto. Bitcoin: A Peer-to-Peer Electronic Cash System
 - Saifedean Ammous. El patrón Bitcoin: La alternativa descentralizada a los bancos centrales. Deusto.
@@ -171,7 +173,7 @@ Wallets:
 - Andreas M. Antonopoulos, Olaoluwa Osuntokun, René Pickhardt. Mastering the Lightning Network: A Second Layer Blockchain Protocol for Instant Bitcoin Payments (2022). 1st edition. O'Reilly.
 - Bertaut, Carol, Bastian von Beschwitz, and Stephanie Curcuru (2025). "The International Role of the U.S. Dollar – 2025 Edition," FEDS Notes. Washington: Board of Governors of the Federal Reserve System, July 18, 2025, <https://doi.org/10.17016/2380-7172.3856>.
 
-### Bibliografía complementaria
+### Complementary bibliography
 
 - Anthony Lewis. The Basics of Bitcoins and Blockchains (2018)
 - Joseph Poon, Thaddeus Dryja. The Bitcoin Lightning Network: Scalable Off-Chain Instant Payments
@@ -181,11 +183,11 @@ Wallets:
 - Wendy McElroy. The Satoshi Revolution: The Revolution of Rising Expectations
 - Adrián Bernabéu. Bitcoinismo
 - Álvaro D. María. La filosofía de Bitcoin
-- Giacomini y Rossi. Bitcoin: New Financial Order or Libertarian Dystopia? An answer from the Past: Free Banking in Scotland 1727-1845. A Critical Review of Decentralised Systems of Private Money Supply
-- Laura Davidson y Walter Block. Bitcoin, the Regression Theorem, and the Emergence of a New Medium of Exchange
+- Giacomini and Rossi. Bitcoin: New Financial Order or Libertarian Dystopia? An answer from the Past: Free Banking in Scotland 1727-1845. A Critical Review of Decentralised Systems of Private Money Supply
+- Laura Davidson and Walter Block. Bitcoin, the Regression Theorem, and the Emergence of a New Medium of Exchange
 - Konrad Graf. Revisiting Conceptions of Commodity and Scarcity in Light of Bitcoin
 
-### Finanzas
+### Finance
 
 - Marcia Stigum, Anthony Crescenzi. Stigum's Money Market
 - Perry Mehrling. Money and Empire: Charles P. Kindleberger and the Dollar System
@@ -246,3 +248,18 @@ Wallets:
 - **PoS** Proof of Stake
 - **L1/2** Layer 1/2
 - **EVM** Ethereum Virtual Machine
+
+## Hash computation
+
+In order to compute a file SHA-256 hash, it can be done on the terminal directly:
+
+- Windows: `Get-FileHash submission.pdf -Algorithm SHA256`
+- Mac OS or Linux: `shasum -a 256 submission.pdf`
+
+Please note that the smart contract deployed for the submission accepts `bytes32`, which is exactly the output of SHA-256 (256 bits = 32 bytes).
+
+For inline hash computation:
+
+```bash
+printf text | shasum -a 256
+```
