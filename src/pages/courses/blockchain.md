@@ -263,3 +263,16 @@ For inline hash computation:
 ```bash
 printf text | shasum -a 256
 ```
+
+## Important addresses
+
+All addresses are for the Sepolia network.
+
+- [Course instructor](https://sepolia.etherscan.io/address/0xa7fbdf3ea11ae808e75c07fb01f7acbed4523ffb): `0xA7FbdF3eA11aE808e75c07fB01f7AcBEd4523Ffb`
+
+Tokens:
+
+- [UAX](https://sepolia.etherscan.io/token/0x8c732126df807dd2f553b5bd12cabab0284feef7): `0x8C732126Df807Dd2f553b5bD12cABab0284FeEf7`
+- [USDC](https://sepolia.etherscan.io/token/0x1c7d4b196cb0c7b01d743fbc6116a902379c7238): `0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238`
+- [EURC](https://sepolia.etherscan.io/token/0x08210f9170f89ab7658f0b5e3ff39b0e03c594d4): `0x08210f9170f89ab7658f0b5e3ff39b0e03c594d4`
+- [USDT](https://sepolia.etherscan.io/token/0x7169d38820dfd117c3fa1f22a697dba58d90ba06): `0x7169D38820dfd117C3FA1f22a697dBA58d90BA06`
