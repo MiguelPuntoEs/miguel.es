@@ -6,11 +6,14 @@ layout: "../layouts/MarkdownLayout.astro"
 
 ## Press
 
-[**Sistemas de pensiones comparados: ¿qué puede aprender España de Alemania, Suecia y Chile?**](docs/hesperides/sistemas_pensiones_comparados.pdf). Centro Ruth Richardson, _Universidad de las Hespérides_. Noviembre 2025. 
+[**Sistemas de pensiones comparados: ¿qué puede aprender España de Alemania, Suecia y Chile?**](docs/hesperides/sistemas_pensiones_comparados.pdf). Centro Ruth Richardson, _Universidad de las Hespérides_. Noviembre 2025.
 
-[**Big Data: el arte de domar las mareas (de información)**](https://emprendedores.es/formacion/big-data-el-arte-de-domar-las-mareas-de-informacion/). Revista Emprendedores España. Septiembre 2025. 
+[**Big Data: el arte de domar las mareas (de información)**](https://emprendedores.es/formacion/big-data-el-arte-de-domar-las-mareas-de-informacion/). Revista Emprendedores España. Septiembre 2025.
 
 ## Academic
+
+**Revisiting Inflation in the American Civil War: Alternative Explanations Beyond Money Supply Growth**. 2025. _Economics Affairs Applied Reseearch Workshop 2025_. Universidad de las Hespérides, Las Palmas de Gran Canaria.
+Miguel González-Calvo.
 
 **[Quantity Theory of Money Around the Globe: Money Growth, Money Velocity and Inflation Subject to Different Monetary Policies](docs/ea-2024.pdf)**. 2024. _Economics Affairs Applied Reseearch Workshop 2024_. Universidad Francisco Marroquín, Madrid.
 Miguel González-Calvo. [Presentation](/docs/ea-2024-presentation.pdf)
