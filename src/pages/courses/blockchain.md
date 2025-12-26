@@ -151,6 +151,11 @@ DeFi:
   - [Kyber](https://kyber.network/)
   - [Uniswap](https://app.uniswap.org/)
   - [Curve Finance](https://www.curve.finance)
+- Others:
+  - [dYdX](https://www.dydx.xyz/)
+  - [DeFi Rate](https://defirate.com/)
+  - [Chainlink](https://chain.link/)
+  - [Synthetix](https://www.synthetix.io/)
 
 Wallets:
 
@@ -163,6 +168,15 @@ Wallets:
   - [Trezor](https://trezor.io): open-source, good history
   - [Ledger](https://www.ledger.com)
   - [Tangem](https://tangem.com): card design
+
+Other Crypto docs:
+
+- [Solana](https://solana.com/docs)
+- [TRON Developer Hub](https://developers.tron.network/)
+
+Web3:
+
+- [Alchemy University](https://www.alchemy.com/university)
 
 ### Basic bibliography
 
