@@ -60,6 +60,7 @@ layout: "../../layouts/MarkdownLayout.astro"
 
 ## News of interest
 
+- [Trust Wallet users lose $7 million to hacked Chrome extension](https://www.coindesk.com/business/2025/12/26/trust-wallet-users-lose-more-than-usd7-million-to-hacked-chrome-extension). CoinDesk, 26 dec. 2025
 - [Donald Trump threatens extra 100% tariff as he retaliates against China](https://www.ft.com/content/328e3195-909a-45fb-b118-9dafbd41262b). Financial Times, 10 oct. 2025
 - [The 10 charts that define Donald Trump’s tumultuous first 100 days](https://www.ft.com/content/9d3ebaed-50b6-477a-bf62-3a35a22fc222). Financial Times, 29 apr. 2025
 - [Low approval and sticky inflation: a year of Donald Trump in charts](https://www.ft.com/content/266ae6df-89c2-4413-be51-0b3a7c6e8015). Financial Times, 5 nov. 2025
@@ -95,6 +96,8 @@ Videos:
 - Saifadean Ammous. [Conference at Fundación Rafael del Pino](https://www.youtube.com/watch?v=XwVQpU5wnpY), October 2, 2018
 - Saifadean Ammous. [Conference at Fundación Rafael del Pino](https://www.youtube.com/watch?v=Ti3lI-se1DI), January 17, 2025
 - Saifadean Ammous. [Fiat is war, Bitcoin is peace](https://www.youtube.com/watch?v=6fgFyQEWiK4), November 14, 2025
+- Johnny Harris. [Gold Still Matters More Than You Think](https://www.youtube.com/watch?v=JMObz0Dgq7M): entrevistas a Thomas Hogan y Lawrence H. White
+- Lawrence White. [Why restrict stablecoins?](https://www.youtube.com/watch?v=YgIS7LR7AdI), January 8, 2026
 
 Finance:
 
