@@ -109,6 +109,7 @@ Data:
   - See also [API](https://coinmarketcap.com/api/)
 - [CoinGecko](https://www.coingecko.com)
   - See also [API](https://www.coingecko.com/api)
+- [DefiLama](https://defillama.com)
 - [Blockchain.com](https://www.blockchain.com), especially the [Charts](https://www.blockchain.com/explorer/charts) section and for exploring specific blocks
   - [Blockchain Size (MB)](https://www.blockchain.com/explorer/charts/blocks-size)
   - [Average Block Size (MB)](https://www.blockchain.com/explorer/charts/avg-block-size)
@@ -226,6 +227,9 @@ Web3:
 - Ariah Klages-Mundt, Dominik Harz, Lewis Gudgeon, Jun-You Liu, Andreea Minca, "Stablecoins 2.0: Economic Foundations and Risk-based Models"
 - Tobian Adrian et al. Understanding Stablecoins (2025). International Monetary Fund, ISBN 9798229024075
 - Antonio Fatás. The economics of Fintech and Digital Currencies (2019). CEPR Press, Paris & London
+- George Selgin. [The Fable of the Cats](https://www.cato.org/blog/fable-cats)
+- Nic Carter. [Five perspectives on stablecoins](https://medium.com/@nic__carter/five-perspectives-on-stablecoins-5bc20076270a)
+- Gary B. Gorton, jeffrey Y. Zhang. Taming Wildcat Stablecoins (2023). The University of Chicago Law Review
 
 ### Decentralized Finance
 
