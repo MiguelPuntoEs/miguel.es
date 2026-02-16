@@ -8,7 +8,35 @@ import examRubricRaw from './exam.md?raw';
 import AssignmentRubricPrompt from './assignment.md';
 import assignmentRubricRaw from './assignment.md?raw';
 
-## Exámenes
+<img src="/rubrics-corrector.png" alt="Robot corrector evaluando trabajos con una rúbrica" style="max-width: 300px; margin: 1rem auto; display: block; border-radius: 1rem;" />
+
+## Consideraciones y retos
+
+- **Calificación uniforme entre todos los alumnos:** es posible que la calificación otorgada por un LLM pueda variar, por lo que deben explorarse diferentes soluciones:
+	- Calibrar con notas manuales (adjuntar algunos entregables ya corregidos con una muestra significativa de bien/mal/regular): puede introducir introduce sesgos del corrector manual.
+	- Adjuntar entregables los entregables de todos los alumnos: dependiendo del número puede ser inviable. Típicamente 3-5 suele funcionar correctamente.
+- **Privacidad:**
+	- Datos minimizados (GDPR): evitar que el PDF contenga datos personales del alumno.
+    - Redactar datos sensibles con Adobe Acrobat u otra herramienta de edición de PDF.
+    - Misma consideración para los nombres de archivo: i.e. evitar `Miguel González.pdf`, y usar `Alumno01.pdf` en su lugar.
+- **Riesgo de alucinaciones:** riesgo inherente al uso de LLMs pero muy significativo en el uso para corrección.
+- **Contenidos a evaluar:** el LLM no conoce exactamente los contenidos que entran en el examen; si se puede, incluirlos como texto o como archivo adjunto.
+- Reproducibilidad: configurar `temperature=0` (o lo más baja posible) y usar seeds si el modelo lo permite, para reducir la variabilidad entre correcciones.
+- **Formato de entrada:** los PDFs con escritura a mano o imágenes pueden no parsearse bien; mejor texto plano o PDFs con texto seleccionable.
+- **Doble corrección:** corregir dos veces (o con dos modelos distintos) y comparar para detectar inconsistencias.
+- **Transparencia con los alumnos:** informar de que se usa IA como herramienta de apoyo en la corrección.
+- **Revisión humana:** el LLM como primera pasada, con revisión humana posterior (especialmente en casos límite o notas extremas).
+- **Versionado del prompt:** registrar qué versión del prompt se usó para cada convocatoria, para poder auditar.
+
+## Asistentes
+
+Estos asistentes se han desarrollado para la sede de Madrid de la Universidad Francisco Marroquín:
+- [Corrector de exámenes](https://chatgpt.com/g/g-69930613c7408191a9f21e612b3e7f27-corrector-de-examenes)
+- [Corrector de trabajos](https://chatgpt.com/g/g-698e00b97ea08191ab98edb1322381cd-corrector-de-trabajos)
+
+## Rúbricas
+
+### Exámenes
 
 Prompt para corrección de exámenes:
 
@@ -20,7 +48,7 @@ Prompt para corrección de exámenes:
 
 <pre><code>{examRubricRaw}</code></pre>
 
-## Trabajos
+### Trabajos
 
 Prompt para corrección de trabajos:
 
