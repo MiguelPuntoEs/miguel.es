@@ -1,0 +1,33 @@
+---
+title: "Rubrics"
+description: "Correcting rubrics for assignments and exams"
+layout: "../../../layouts/MarkdownLayout.astro"
+---
+import ExamRubricPrompt from './exam.md';
+import examRubricRaw from './exam.md?raw';
+import AssignmentRubricPrompt from './assignment.md';
+import assignmentRubricRaw from './assignment.md?raw';
+
+## Exámenes
+
+Prompt para corrección de exámenes:
+
+<blockquote>
+  <ExamRubricPrompt />
+</blockquote>
+
+### Código fuente
+
+<pre><code>{examRubricRaw}</code></pre>
+
+## Trabajos
+
+Prompt para corrección de trabajos:
+
+<blockquote>
+  <AssignmentRubricPrompt />
+</blockquote>
+
+### Código fuente
+
+<pre><code>{assignmentRubricRaw}</code></pre>

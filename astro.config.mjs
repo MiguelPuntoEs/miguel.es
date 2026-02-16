@@ -4,6 +4,7 @@ import { defineConfig, fontProviders } from "astro/config";
 import rehypeKatex from "rehype-katex";
 import remarkMath from "remark-math";
 
+import mdx from "@astrojs/mdx";
 import react from "@astrojs/react";
 import sitemap from "@astrojs/sitemap";
 
@@ -39,5 +40,5 @@ export default defineConfig({
     rehypePlugins: [rehypeKatex],
   },
 
-  integrations: [react(), sitemap()],
+  integrations: [mdx(), react(), sitemap()],
 });
