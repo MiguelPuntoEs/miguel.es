@@ -1,6 +1,7 @@
 ---
 import { Font } from "astro:assets";
 import MainHead from "../components/MainHead.astro";
+import Footer from "../components/Footer.astro";
 import Navbar from "../components/Navbar.astro";
 import "../styles/global.css";
 const { title, description, lang = "en" } = Astro.props;
@@ -18,5 +19,6 @@ const { title, description, lang = "en" } = Astro.props;
   <body>
     <Navbar />
     <slot />
+    <Footer />
   </body>
 </html>

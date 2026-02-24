@@ -1,0 +1,37 @@
+---
+import Image from "astro/components/Image.astro";
+import LogoGitHub from "../assets/logos/github.svg";
+import LogoLinkedIn from "../assets/logos/linkedin.svg";
+import LogoYouTube from "../assets/logos/youtube.svg";
+---
+
+<footer class="max-w-3xl mx-auto px-4 py-8 mt-8 border-t border-gray-300">
+  <div class="flex flex-col sm:flex-row justify-between gap-6 text-xs text-gray-600 dark:text-gray-400">
+    <div class="flex flex-col gap-3">
+      <span class="font-semibold text-gray-900 dark:text-gray-200">Miguel González Calvo</span>
+      <div class="flex gap-4 items-center">
+        <a href="https://linkedin.com/in/mgcalvo/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-1 hover:text-gray-900 dark:hover:text-gray-200">
+          <Image src={LogoLinkedIn} alt="" class="w-4 h-4" width={16} height={16} />
+          LinkedIn
+        </a>
+        <a href="https://github.com/MiguelPuntoEs" target="_blank" rel="noopener noreferrer" class="flex items-center gap-1 hover:text-gray-900 dark:hover:text-gray-200">
+          <Image src={LogoGitHub} alt="" class="w-4 h-4" width={16} height={16} />
+          GitHub
+        </a>
+        <a href="https://www.youtube.com/@MiguelPuntoEs" target="_blank" rel="noopener noreferrer" class="flex items-center gap-1 hover:text-gray-900 dark:hover:text-gray-200">
+          <Image src={LogoYouTube} alt="" class="w-4 h-4" width={16} height={16} />
+          YouTube
+        </a>
+      </div>
+    </div>
+    <nav class="flex flex-col gap-1.5 sm:text-right">
+      <a href="/" class="hover:text-gray-900 dark:hover:text-gray-200">Home</a>
+      <a href="/publications" class="hover:text-gray-900 dark:hover:text-gray-200">Publications</a>
+      <a href="/resources" class="hover:text-gray-900 dark:hover:text-gray-200">Resources</a>
+      <a href="/resources/llm" class="hover:text-gray-900 dark:hover:text-gray-200">LLM Resources</a>
+      <a href="/resources/machine-learning" class="hover:text-gray-900 dark:hover:text-gray-200">Machine Learning</a>
+      <a href="/resources/python" class="hover:text-gray-900 dark:hover:text-gray-200">Python</a>
+      <a href="/resources/economic-sources" class="hover:text-gray-900 dark:hover:text-gray-200">Economics</a>
+    </nav>
+  </div>
+</footer>
