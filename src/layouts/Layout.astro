@@ -9,8 +9,7 @@ const { title, description, lang = "en", article = false, university } = Astro.p
 
 <html lang={lang} class="scroll-smooth">
   <head>
-    <Font cssVariable="--font-playfair" preload />
-    <Font cssVariable="--font-inter" preload />
+    <Font cssVariable="--font-inter" />
     
     <MainHead {title} {description} {lang} {article} {university} />
     <slot name="head" />
