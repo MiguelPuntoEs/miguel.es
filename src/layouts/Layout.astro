@@ -4,7 +4,7 @@ import MainHead from "../components/MainHead.astro";
 import Footer from "../components/Footer.astro";
 import Navbar from "../components/Navbar.astro";
 import "../styles/global.css";
-const { title, description, lang = "en" } = Astro.props;
+const { title, description, lang = "en", article = false, university } = Astro.props;
 ---
 
 <html lang={lang} class="scroll-smooth">
@@ -12,7 +12,7 @@ const { title, description, lang = "en" } = Astro.props;
     <Font cssVariable="--font-playfair" preload />
     <Font cssVariable="--font-inter" preload />
     
-    <MainHead {title} {description} {lang} />
+    <MainHead {title} {description} {lang} {article} {university} />
     <slot name="head" />
   </head>
   

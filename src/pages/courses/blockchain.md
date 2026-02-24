@@ -2,6 +2,7 @@
 title: "Blockchain"
 description: "Blockchain technology and applications. Universidad Alfonso X el Sabio"
 layout: "../../layouts/MarkdownLayout.astro"
+university: "Universidad Alfonso X el Sabio"
 ---
 
 **Universidad Alfonso X el Sabio**  

@@ -2,10 +2,10 @@
 import "../styles/global.css";
 import Layout from "./Layout.astro";
 const { frontmatter } = Astro.props;
-const { title, description, latex, lang } = frontmatter;
+const { title, description, latex, lang, university } = frontmatter;
 ---
 
-<Layout {title} {description} {lang}>
+<Layout {title} {description} {lang} article {university}>
   {
     latex && (
       <link

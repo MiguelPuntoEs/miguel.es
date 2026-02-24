@@ -1,8 +1,9 @@
 ---
-title: "Financial mathematics"
-description: "Applied financial mathematics. Universidad Francisco Marroquín"
+title: "Financial Mathematics Course"
+description: "Applied financial mathematics course at Universidad Francisco Marroquín. Covers simple and compound interest, annuities, loans, and financial analysis."
 layout: "../../layouts/MarkdownLayout.astro"
 lang: "es"
+university: "Universidad Francisco Marroquín"
 ---
 
 **Universidad Francisco Marroquín**  

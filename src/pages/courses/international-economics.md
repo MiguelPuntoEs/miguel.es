@@ -3,6 +3,7 @@ title: "International Economics and Globalization"
 description: "Introduction to international economics. Universidad de las Hespérides"
 layout: "../../layouts/MarkdownLayout.astro"
 lang: "es"
+university: "Universidad de las Hespérides"
 ---
 
 **Universidad de las Hespérides**  

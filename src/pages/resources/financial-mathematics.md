@@ -1,5 +1,5 @@
 ---
-title: "Financial mathematics"
+title: "Financial Mathematics Formulas"
 subtitle: "Formulario"
 description: "Formulario de matemáticas financieras: interés simple, compuesto, rentas, préstamos y más"
 layout: "../../layouts/MarkdownLayout.astro"

@@ -3,6 +3,7 @@ title: "Technology"
 description: "Emerging technologies and digital transformation. Universidad Francisco Marroquín"
 layout: "../../layouts/MarkdownLayout.astro"
 lang: "es"
+university: "Universidad Francisco Marroquín"
 ---
 
 **Universidad Francisco Marroquín**  

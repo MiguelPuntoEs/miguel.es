@@ -3,6 +3,7 @@ title: "Economics I"
 description: "Introduction to Economics. Universidad Francisco Marroquín"
 layout: "../../layouts/MarkdownLayout.astro"
 lang: "es"
+university: "Universidad Francisco Marroquín"
 ---
 
 **Universidad Francisco Marroquín**  
