@@ -1,6 +1,6 @@
 ---
 title: "Economic information sources"
-description: "Economic information sources"
+description: "Curated sources for economic data: central banks, statistical offices, and research institutions"
 layout: "../../layouts/MarkdownLayout.astro"
 ---
 

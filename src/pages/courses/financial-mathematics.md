@@ -2,6 +2,7 @@
 title: "Financial mathematics"
 description: "Applied financial mathematics. Universidad Francisco Marroquín"
 layout: "../../layouts/MarkdownLayout.astro"
+lang: "es"
 ---
 
 **Universidad Francisco Marroquín**  

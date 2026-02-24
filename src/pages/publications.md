@@ -1,6 +1,6 @@
 ---
 title: "Publications and conferences"
-description: "Personal publications from Miguel González"
+description: "Publications and conferences by Miguel González Calvo on economics, AI, and data science"
 layout: "../layouts/MarkdownLayout.astro"
 ---
 

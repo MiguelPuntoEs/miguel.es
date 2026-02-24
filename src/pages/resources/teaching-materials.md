@@ -1,8 +1,16 @@
 ---
 title: "Teaching materials"
-description: "Teaching materials"
+description: "Plantillas y herramientas para la creación de materiales docentes con Pandoc y LaTeX"
 layout: "../../layouts/MarkdownLayout.astro"
+lang: "es"
 ---
+
+## Herramientas recomendadas
+
+Tests automatizados:
+
+- [Blooket](https://www.blooket.com)
+- [Kahoot](https://kahoot.com/)
 
 ## Plantilla para generación de exámenes con LLMs
 

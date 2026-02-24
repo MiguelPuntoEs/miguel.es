@@ -2,6 +2,7 @@
 title: "Python for Finance"
 description: "Python for financial and economic analysis. Universidad Francisco Marroquín"
 layout: "../../layouts/MarkdownLayout.astro"
+lang: "es"
 ---
 
 **Universidad Francisco Marroquín**  

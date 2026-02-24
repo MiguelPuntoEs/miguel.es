@@ -1,6 +1,6 @@
 ---
 title: "Machine Learning Resources"
-description: "Machine learning resources"
+description: "Curated machine learning resources: courses, books, papers, and tools for ML practitioners"
 layout: "../../layouts/MarkdownLayout.astro"
 latex: true
 ---

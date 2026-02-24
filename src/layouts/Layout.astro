@@ -3,15 +3,15 @@ import { Font } from "astro:assets";
 import MainHead from "../components/MainHead.astro";
 import Navbar from "../components/Navbar.astro";
 import "../styles/global.css";
-const { title, description } = Astro.props;
+const { title, description, lang = "en" } = Astro.props;
 ---
 
-<html lang="es" class="scroll-smooth">
+<html lang={lang} class="scroll-smooth">
   <head>
     <Font cssVariable="--font-playfair" preload />
     <Font cssVariable="--font-inter" preload />
     
-    <MainHead {title} {description} />
+    <MainHead {title} {description} {lang} />
     <slot name="head" />
   </head>
   

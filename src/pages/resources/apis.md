@@ -1,6 +1,6 @@
 ---
 title: "Interesting APIs"
-description: "Interesting APIs"
+description: "Curated list of useful APIs for economic data, finance, and development"
 layout: "../../layouts/MarkdownLayout.astro"
 ---
 

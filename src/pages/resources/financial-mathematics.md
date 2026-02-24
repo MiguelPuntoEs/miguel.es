@@ -1,10 +1,11 @@
 ---
 title: "Financial mathematics"
 subtitle: "Formulario"
-description: "Formulario"
+description: "Formulario de matemáticas financieras: interés simple, compuesto, rentas, préstamos y más"
 layout: "../../layouts/MarkdownLayout.astro"
 latex: true
 toc: true
+lang: "es"
 ---
 
 Documento disponible en [PDF](/docs/financial-mathematics.pdf)

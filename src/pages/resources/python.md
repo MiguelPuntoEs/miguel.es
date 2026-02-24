@@ -1,6 +1,6 @@
 ---
 title: "Python Resources"
-description: "Python resources"
+description: "Curated Python resources: libraries, tools, documentation, and learning references"
 layout: "../../layouts/MarkdownLayout.astro"
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: "LLM Resources"
-description: "LLM resources"
+description: "Curated resources for Large Language Models: libraries, tools, prompting guides, and references"
 layout: "../../layouts/MarkdownLayout.astro"
 ---
 

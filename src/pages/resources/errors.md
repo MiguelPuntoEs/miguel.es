@@ -1,6 +1,6 @@
 ---
 title: "Statistical errors"
-description: "Statistical errors"
+description: "Reference for statistical error metrics: MAE, MSE, RMSE, MAPE, and more with formulas"
 layout: "../../layouts/MarkdownLayout.astro"
 latex: true
 ---
