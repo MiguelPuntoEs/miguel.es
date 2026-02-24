@@ -1,6 +1,6 @@
 // @ts-check
 import tailwindcss from "@tailwindcss/vite";
-import { defineConfig, fontProviders } from "astro/config";
+import { defineConfig } from "astro/config";
 import rehypeKatex from "rehype-katex";
 import remarkMath from "remark-math";
 
@@ -15,18 +15,6 @@ export default defineConfig({
   
   vite: {
     plugins: [tailwindcss()],
-  },
-
-  experimental: {
-    fonts: [
-      {
-        provider: fontProviders.google(),
-        name: "Inter",
-        cssVariable: "--font-inter",
-        weights: ["100 900"],
-        styles: ["normal"],
-      },
-    ],
   },
 
   markdown: {
