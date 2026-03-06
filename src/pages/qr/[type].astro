@@ -1,0 +1,127 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import QRGenerator from "../../components/QRGenerator.jsx";
+import { QR_SUBPAGES } from "../../data/qr-subpages.js";
+
+export function getStaticPaths() {
+  return QR_SUBPAGES.map((p) => ({ params: { type: p.slug }, props: p }));
+}
+
+const { type: qrType, title, description, heading, sub, about, uses, faqs, related, slug } = Astro.props;
+
+const canonicalURL = new URL(`/qr/${slug}`, Astro.site);
+const socialImage = new URL("/og-image.png", Astro.site).href;
+
+const relatedPages = related
+  .map((r) => QR_SUBPAGES.find((p) => p.slug === r))
+  .filter((p) => p !== undefined);
+
+const breadcrumbLd = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": Astro.site },
+    { "@type": "ListItem", "position": 2, "name": "QR Generator", "item": new URL("/qr", Astro.site).href },
+    { "@type": "ListItem", "position": 3, "name": heading, "item": canonicalURL.href },
+  ],
+};
+
+const webAppLd = {
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": heading,
+  "url": canonicalURL.href,
+  "description": description,
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "author": { "@type": "Person", "name": "Miguel González Calvo", "url": Astro.site },
+};
+
+const faqLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqs.map(({ q, a }) => ({
+    "@type": "Question",
+    "name": q,
+    "acceptedAnswer": { "@type": "Answer", "text": a },
+  })),
+};
+---
+
+<Layout {title} {description}>
+  <Fragment slot="head">
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(breadcrumbLd)} />
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(webAppLd)} />
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(faqLd)} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={socialImage} />
+    <meta name="twitter:url" content={canonicalURL} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={socialImage} />
+  </Fragment>
+
+  <main class="min-h-screen px-3 py-10 sm:px-6">
+    <section class="mx-auto max-w-6xl space-y-6">
+      <header class="space-y-2 text-center">
+        <p class="text-xs font-semibold uppercase tracking-[0.2em] text-indigo-600">
+          Free Tool
+        </p>
+        <h1 class="text-3xl font-semibold tracking-tight text-slate-900">{heading}</h1>
+        <p class="mx-auto max-w-2xl text-sm text-slate-600">{sub}</p>
+      </header>
+
+      <QRGenerator client:only="react" defaultType={qrType} showTypeSelector={false} />
+
+      <section class="mx-auto max-w-3xl pt-12 border-t border-slate-200 space-y-10">
+
+        <div>
+          <h2 class="text-xl font-semibold text-slate-900 mb-3">About {heading}</h2>
+          <p class="text-sm text-slate-600 leading-relaxed">{about}</p>
+        </div>
+
+        <div>
+          <h2 class="text-xl font-semibold text-slate-900 mb-3">Common uses</h2>
+          <ul class="space-y-2">
+            {uses.map((use) => (
+              <li class="flex items-start gap-2 text-sm text-slate-600">
+                <span class="mt-1 h-1.5 w-1.5 rounded-full bg-indigo-400 shrink-0"></span>
+                {use}
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div>
+          <h2 class="text-xl font-semibold text-slate-900 mb-4">Frequently asked questions</h2>
+          <dl class="space-y-5">
+            {faqs.map(({ q, a }) => (
+              <div>
+                <dt class="font-medium text-slate-900">{q}</dt>
+                <dd class="mt-1 text-sm text-slate-600">{a}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+
+        <div class="border-t border-slate-200 pt-8">
+          <p class="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-3">Related generators</p>
+          <div class="flex flex-wrap gap-2">
+            {relatedPages.map(({ slug: s, heading: h }) => (
+              <a href={`/qr/${s}`} class="rounded-full border border-slate-200 px-3 py-1.5 text-xs font-medium text-slate-600 hover:border-indigo-300 hover:text-indigo-600 transition-colors">
+                {h}
+              </a>
+            ))}
+            <a href="/qr" class="rounded-full border border-slate-200 px-3 py-1.5 text-xs font-medium text-slate-500 hover:border-indigo-300 hover:text-indigo-600 transition-colors">
+              Browse all types →
+            </a>
+          </div>
+        </div>
+
+      </section>
+    </section>
+  </main>
+</Layout>

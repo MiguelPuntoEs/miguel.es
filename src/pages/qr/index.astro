@@ -1,0 +1,296 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import QRGenerator from "../../components/QRGenerator.jsx";
+
+const canonicalURL = new URL("/qr", Astro.site);
+
+const webAppLd = {
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Free QR Code Generator",
+  "url": canonicalURL.href,
+  "description": "Free online QR code generator. Create QR codes for URLs, WiFi, Bitcoin, vCards, email, SMS, WhatsApp, social media profiles and more. Download as PNG or SVG instantly.",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any",
+  "browserRequirements": "Requires JavaScript",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "featureList": [
+    "URL QR codes",
+    "WiFi network QR codes",
+    "Bitcoin and crypto payment QR codes",
+    "vCard contact QR codes",
+    "Email and SMS QR codes",
+    "Social media profile QR codes",
+    "Custom frame styles and colors",
+    "PNG and SVG download",
+    "No registration required",
+    "Free forever"
+  ],
+  "author": {
+    "@type": "Person",
+    "name": "Miguel González Calvo",
+    "url": Astro.site
+  }
+};
+
+const faqLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is this QR code generator free?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, completely free with no registration required. Generate unlimited QR codes and download them as PNG or SVG."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What types of QR codes can I create?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "You can create QR codes for URLs, plain text, email addresses, phone calls, SMS, WhatsApp messages, vCard contacts, WiFi networks, calendar events, GPS locations, Bitcoin and crypto payments (Bitcoin, Ethereum, Solana, Monero, Litecoin, Bitcoin Cash), PayPal, Venmo, and social media profiles (X/Twitter, Instagram, LinkedIn, GitHub, YouTube, TikTok, Facebook, Threads, Bluesky, Mastodon)."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I customize the QR code design?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. You can change the foreground and background colors, add a frame or label around the QR code, and choose from multiple frame styles including bordered, filled, pill, banner, and badge. Crypto and social QR codes automatically use their brand colors."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I create a WiFi QR code?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Select 'WiFi' from the Tools section, enter your network name (SSID), password, and encryption type (WPA/WEP/None). The QR code will let anyone scan and join your network without typing the password."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I create a Bitcoin payment QR code?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Select 'Bitcoin' from the Payments section, enter your Bitcoin address, and optionally set an amount and label. The generator validates your address format and creates a standard BIP-21 URI QR code compatible with all major wallets."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What file formats can I download?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "You can download QR codes as PNG (raster, ideal for printing and sharing) or SVG (vector, scales to any size without quality loss, ideal for professional use)."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Are the QR codes generated on my device?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. All QR codes are generated directly in your browser. No data is sent to any server, which means your WiFi passwords, crypto addresses, and contact information stay private."
+      }
+    }
+  ]
+};
+---
+
+<Layout
+  title="Free QR Code Generator — URL, WiFi, Bitcoin, vCard & More"
+  description="Create free QR codes for URLs, WiFi, Bitcoin, vCards, email, social profiles and more. No signup. Download as PNG or SVG instantly."
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(webAppLd)} />
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(faqLd)} />
+    <meta name="keywords" content="QR code generator, free QR code, WiFi QR code, Bitcoin QR code, vCard QR code, URL QR code, QR code maker, QR code creator" />
+  </Fragment>
+
+  <main class="min-h-screen px-3 py-10 sm:px-6">
+    <section class="mx-auto max-w-6xl space-y-6">
+      <header class="space-y-2 text-center">
+        <p class="text-xs font-semibold uppercase tracking-[0.2em] text-indigo-600">
+          Free Tool
+        </p>
+        <h1 class="text-3xl font-semibold tracking-tight text-slate-900">
+          QR Code Generator
+        </h1>
+        <p class="mx-auto max-w-2xl text-sm text-slate-600">
+          Create QR codes for links, contacts, WiFi, Bitcoin, social profiles and more.
+          Customize colors and frames. Download as PNG or SVG — free, no signup.
+        </p>
+      </header>
+
+      <QRGenerator client:only="react" />
+
+      <!-- Static content for SEO — Googlebot doesn't run the React app -->
+      <section class="mx-auto max-w-3xl pt-12 border-t border-slate-200 space-y-10">
+
+        <div>
+          <h2 class="text-xl font-semibold text-slate-900 mb-4">What can you generate?</h2>
+          <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 text-sm text-slate-700">
+            {[
+              { label: "URLs & links", desc: "Any website or deep link" },
+              { label: "WiFi networks", desc: "Scan to connect, no typing" },
+              { label: "Bitcoin & crypto", desc: "BTC, ETH, SOL, XMR, LTC, BCH" },
+              { label: "PayPal & Venmo", desc: "Request payments instantly" },
+              { label: "vCard contacts", desc: "Share your contact info" },
+              { label: "Email & SMS", desc: "Pre-filled messages" },
+              { label: "WhatsApp chats", desc: "Open a conversation" },
+              { label: "Calendar events", desc: "Add to calendar on scan" },
+              { label: "GPS locations", desc: "Share exact coordinates" },
+              { label: "Social profiles", desc: "X, Instagram, LinkedIn, GitHub…" },
+              { label: "App Store links", desc: "Apple App Store & Google Play" },
+              { label: "Plain text", desc: "Any text content" },
+            ].map(({ label, desc }) => (
+              <div class="rounded-lg border border-slate-200 p-3">
+                <p class="font-medium text-slate-900">{label}</p>
+                <p class="text-xs text-slate-500 mt-0.5">{desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div>
+          <h2 class="text-xl font-semibold text-slate-900 mb-6">How to use each QR code type</h2>
+          <dl class="space-y-6">
+            {[
+              {
+                term: "URL",
+                desc: "Paste any web address — with or without https://. The generator normalizes it automatically. Use it to link to a website, landing page, product listing, or any online resource. This is the most commonly scanned QR type."
+              },
+              {
+                term: "Text",
+                desc: "Encodes plain text directly into the QR code. Useful for short notes, instructions, coupon codes, or any message you want someone to read without opening a link."
+              },
+              {
+                term: "Email",
+                desc: "Enter a recipient address, subject, and body. When scanned, the phone opens a pre-filled email ready to send. Ideal for feedback forms, contact prompts, or support requests on packaging."
+              },
+              {
+                term: "Call",
+                desc: "Enter a phone number with country code. Scanning opens the dialer ready to call. Great for business cards, flyers, or any print material where you want one-tap calling."
+              },
+              {
+                term: "SMS",
+                desc: "Set a phone number and a pre-filled message body. Scanning opens the messaging app with everything ready. Useful for SMS marketing opt-ins or customer support shortcuts."
+              },
+              {
+                term: "WhatsApp",
+                desc: "Enter a phone number and an optional pre-filled message. Scanning opens a WhatsApp chat with that contact directly, even if they're not in the user's address book. Popular for customer service and sales."
+              },
+              {
+                term: "vCard",
+                desc: "Fill in name, job title, company, phone, email, website, and address. When scanned, the phone prompts the user to save the contact. The most useful QR code for business cards — replace the printed phone number with a scannable vCard."
+              },
+              {
+                term: "WiFi",
+                desc: "Enter your network SSID (name), password, and security type (WPA2 is standard; choose None for open networks). Scanning connects the device automatically — no typing required. Perfect for offices, cafés, Airbnbs, and event spaces."
+              },
+              {
+                term: "Event",
+                desc: "Set a title, location, start date/time, and end date/time. Scanning adds the event directly to the device's calendar. Useful for conference badges, invitations, and posters."
+              },
+              {
+                term: "Location",
+                desc: "Enter latitude and longitude coordinates. Scanning opens the device's default maps app at that exact point. Use it on signs, menus, or brochures to help people find your physical location."
+              },
+              {
+                term: "App Store",
+                desc: "Enter the app ID or package name for Apple App Store or Google Play. Scanning takes the user directly to the app listing. Useful on product packaging, receipts, or any print material promoting your app."
+              },
+              {
+                term: "PayPal",
+                desc: "Enter your PayPal.me username and optionally a fixed amount. Scanning opens a PayPal payment page pre-filled with your details. Great for accepting tips, donations, or one-off payments."
+              },
+              {
+                term: "Venmo",
+                desc: "Enter your Venmo username, optional amount, and note. Scanning opens Venmo with the payment pre-configured. Popular in the US for splitting bills, market stalls, or collecting donations."
+              },
+              {
+                term: "Bitcoin",
+                desc: "Enter a Bitcoin address (P2PKH starting with 1, P2SH starting with 3, or bech32 starting with bc1), optionally set an amount in BTC, a label, and a message. Generates a BIP-21 URI compatible with every major wallet including Coinbase, Trust Wallet, Blue Wallet, and Electrum."
+              },
+              {
+                term: "Lightning",
+                desc: "Paste a Lightning invoice (lnbc…) or LNURL. Lightning QR codes enable near-instant Bitcoin payments with near-zero fees. Widely used by merchants and content creators accepting Bitcoin tips."
+              },
+              {
+                term: "Ethereum",
+                desc: "Enter an Ethereum address (0x… format, 42 characters) and optionally an amount in ETH. Generates an EIP-681 URI. Compatible with MetaMask, Trust Wallet, Coinbase Wallet, and other EVM wallets."
+              },
+              {
+                term: "Solana",
+                desc: "Enter a Solana wallet address (base58, 32–44 characters), optional amount in SOL, and label. Generates a Solana Pay URI. Compatible with Phantom, Solflare, and other Solana wallets."
+              },
+              {
+                term: "Monero",
+                desc: "Enter a Monero address (starts with 4, 95 characters), optional amount in XMR, and a description. Generates a standard Monero URI. Monero is a privacy-focused cryptocurrency; QR codes simplify address sharing without transcription errors."
+              },
+              {
+                term: "Litecoin",
+                desc: "Enter a Litecoin address (legacy starting with L or M, or bech32 starting with ltc1), optional amount in LTC, label, and message. Generates a BIP-21 Litecoin URI compatible with most crypto wallets."
+              },
+              {
+                term: "Bitcoin Cash",
+                desc: "Enter a Bitcoin Cash address in CashAddr format (starting with q or p) or legacy format, optional amount in BCH, label, and message. Generates a standard bitcoincash: URI."
+              },
+              {
+                term: "Social profiles",
+                desc: "Choose from X (Twitter), Instagram, LinkedIn, GitHub, YouTube, TikTok, Facebook, Threads, Bluesky, or Mastodon. Enter your username and the QR code links directly to your profile. The QR code uses the platform's brand color automatically. Ideal for business cards, conference badges, or anywhere you want to grow your following."
+              },
+            ].map(({ term, desc }) => (
+              <div class="grid sm:grid-cols-[10rem_1fr] gap-1 sm:gap-4">
+                <dt class="font-semibold text-slate-800 pt-0.5">{term}</dt>
+                <dd class="text-sm text-slate-600 leading-relaxed">{desc}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+
+        <div>
+          <h2 class="text-xl font-semibold text-slate-900 mb-4">Frequently asked questions</h2>
+          <dl class="space-y-5">
+            {[
+              {
+                q: "Is this QR code generator free?",
+                a: "Yes, completely free with no registration required. Generate unlimited QR codes and download them as PNG or SVG."
+              },
+              {
+                q: "Are QR codes generated on my device?",
+                a: "Yes — everything runs in your browser. No data is sent to any server, so your WiFi passwords, crypto addresses, and contact details stay private."
+              },
+              {
+                q: "Can I customize the QR code design?",
+                a: "Yes. Change the foreground and background colors, add a frame with a label, and choose from multiple frame styles (bordered, filled, pill, banner, badge). Crypto and social QR codes automatically use their brand colors."
+              },
+              {
+                q: "How do I create a WiFi QR code?",
+                a: "Select WiFi from the Tools section, enter your network name (SSID), password, and security type. Anyone who scans it will connect automatically — no typing required."
+              },
+              {
+                q: "How do I create a Bitcoin QR code?",
+                a: "Select Bitcoin under Payments, enter your address, and optionally set an amount. The generator validates the address format and creates a standard BIP-21 URI compatible with all major wallets. Ethereum, Solana, Monero, Litecoin, and Bitcoin Cash are also supported."
+              },
+              {
+                q: "PNG or SVG — which should I download?",
+                a: "PNG is best for sharing online or printing at a fixed size. SVG is a vector format that scales to any size without quality loss — ideal for print materials, business cards, or large signage."
+              },
+            ].map(({ q, a }) => (
+              <div>
+                <dt class="font-medium text-slate-900">{q}</dt>
+                <dd class="mt-1 text-sm text-slate-600">{a}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+
+      </section>
+    </section>
+  </main>
+</Layout>
