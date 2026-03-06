@@ -32,7 +32,7 @@ university: "Universidad Francisco Marroquín"
 
 ### Bibliografía complementaria
 
-- Clayton Christensen. The Innovator's Dillema (1997)
+- Clayton Christensen. The Innovator's Dilemma (1997)
 - Everett M. Rogers. Diffusion of Innovations (1962)
 - Saifedean Ammous. El patrón Bitcoin: La alternativa descentralizada a los bancos centrales
 - Andreas M. Antonopoulos. Mastering Bitcoin

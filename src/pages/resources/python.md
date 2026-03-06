@@ -62,7 +62,6 @@ Other:
 - [mypy](https://mypy-lang.org/): Static typing
 - [nbQA](https://github.com/nbQA-dev/nbQA): quality assurance
 - [Flake8](https://flake8.pycqa.org/en/latest/): style guide enforcement
-- [Poetry](https://python-poetry.org/): dependency management
 - [Joblib](https://joblib.readthedocs.io/en/stable/): running pipelines, memory management
 - [decimal](https://docs.python.org/3/library/decimal.html)
 - Pendulum

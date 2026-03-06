@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import { useState, useMemo } from "react";
 
 // PPP conversion rates relative to USD
 // Source: OECD - PPP detailed results, 2020 onwards
@@ -102,9 +102,9 @@ export default function PPPCalculator() {
       {/* Header */}
       <header className="mb-6 flex flex-col gap-2">
         <div>
-          <h1 className="text-2xl font-semibold tracking-tight text-slate-900">
+          <h2 className="text-2xl font-semibold tracking-tight text-slate-900">
             PPP Calculator
-          </h1>
+          </h2>
           <p className="text-sm text-slate-600">
             Convert amounts based on Purchasing Power Parity to see equivalent buying power across countries.
           </p>

@@ -131,7 +131,7 @@ $$(1+i)^h S_{n,i}$$
 
 ## Perpetua 
 
-### Prepagable
+### Pospagable
 
 Unitaria:
 
@@ -149,7 +149,7 @@ Aritmética:
 
 $$A(c;d)_{\infty,i}=\left(C+\frac{d}{i}\right)\frac{1}{i}$$
 
-### Pospagable
+### Prepagable
 
 Unitaria:
 

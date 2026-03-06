@@ -58,7 +58,7 @@ latex: true
 
 ### Others
 * Pedro Domingos. The Master Algorithm: How the Quest for the Ultimate Learning Machine Will Remake Our World
-* Valliappa Lakshmanan, Sara Robinson & Michael Munn. Machine Learning Design Patterns: Solutions to Common Challenges in Data Preparation, Model Bulding, and MLOps
+* Valliappa Lakshmanan, Sara Robinson & Michael Munn. Machine Learning Design Patterns: Solutions to Common Challenges in Data Preparation, Model Building, and MLOps
 * Robert C. Martin. Clean Code: A Handbook of Agile Software Craftsmanship
 * David Spiegelhalter. The Art of Statistics: Learning from Data
 * Brent Dykes. Effective Data Storytelling: How to Drive Change with Data, Narrative and Visuals
@@ -72,7 +72,7 @@ latex: true
 * **BERT** Bidirectional Encoder Representations from Transformers
 * **NLP** Natural Language Processing
 * **NER** Named Entity Recognition
-* **QA** Question Answerings
+* **QA** Question Answering
 * **GPT** Generative Pre-trained Transformer
 * **GBDT** Gradient-boosted decision trees
 * **XGBoost** eXtreme Gradient Boosting

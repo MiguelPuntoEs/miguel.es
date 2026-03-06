@@ -252,7 +252,7 @@ Web3:
 
 ## Acronyms
 
-- **AMM** Automated Marked Maker
+- **AMM** Automated Market Maker
 - **BIP** Bitcoin Improvement Proposal
 - **CEX** Centralized Exchange
 - **DEX** Decentralized Exchange

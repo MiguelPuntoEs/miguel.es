@@ -111,9 +111,9 @@ export default function CompoundCalculator() {
       {/* Header */}
       <header className="mb-6 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h1 className="text-2xl font-semibold tracking-tight text-slate-900">
+          <h2 className="text-2xl font-semibold tracking-tight text-slate-900">
             Compound Interest Calculator
-          </h1>
+          </h2>
           <p className="text-sm text-slate-600">
             Adjust the values and see how your money grows over time.
           </p>

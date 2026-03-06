@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect } from "react";
+import { useState, useMemo, useEffect } from "react";
 import {
   ResponsiveContainer,
   LineChart,
@@ -98,7 +98,6 @@ function calculateInflationAdjustment(amount, country, fromYear, toYear, CPI_DAT
 
   // Generate yearly breakdown
   const yearlyBreakdown = [];
-  const step = years > 0 ? 1 : -1;
   const startYear = years > 0 ? fromYear : toYear;
   const endYear = years > 0 ? toYear : fromYear;
   
@@ -198,9 +197,9 @@ export default function InflationCalculator() {
       {/* Header */}
       <header className="mb-6 flex flex-col gap-2">
         <div>
-          <h1 className="text-2xl font-semibold tracking-tight text-slate-900">
+          <h2 className="text-2xl font-semibold tracking-tight text-slate-900">
             Inflation Calculator
-          </h1>
+          </h2>
           <p className="text-sm text-slate-600">
             Adjust amounts for inflation based on country-specific rates. Calculate past purchasing power or future values.
           </p>
