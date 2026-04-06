@@ -12,7 +12,7 @@ layout: "../layouts/MarkdownLayout.astro"
 
 ## Academic
 
-**Revisiting Inflation in the American Civil War: Alternative Explanations Beyond Money Supply Growth**. 2026. _APEE 50th Meeting. The History of Private Enterprise Education_. Caesars Palace Las Vegas. Las Vegas, Nevada. Miguel González-Calvo. [Data and code](https://github.com/MiguelPuntoEs/greenbacks) publicly available.
+**Revisiting Inflation in the American Civil War: Alternative Explanations Beyond Money Supply Growth**. 2026. _APEE 50th Meeting. The History of Private Enterprise Education_. Caesars Palace Las Vegas. Las Vegas, Nevada. Miguel González-Calvo. [Data and code](https://github.com/MiguelPuntoEs/greenbacks) publicly available. [Presentation](/docs/apee-2026-presentation.pdf)
 
 **Revisiting Inflation in the American Civil War: Alternative Explanations Beyond Money Supply Growth**. 2025. _Economics Affairs Applied Research Workshop 2025_. Universidad de las Hespérides, Las Palmas de Gran Canaria.
 Miguel González-Calvo.
