@@ -1,0 +1,136 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Calculator from "../../components/LoanCalculator.jsx";
+
+const faqs = [
+  {
+    question: "¿Qué es el cuadro de amortización de un préstamo?",
+    answer:
+      "El cuadro de amortización es la tabla que muestra, período a período, cómo se descompone cada pago del préstamo en cuota de interés, cuota de amortización, capital amortizado acumulado y capital vivo pendiente. Permite anticipar el coste total de la deuda y planificar su devolución.",
+  },
+  {
+    question:
+      "¿Qué diferencia hay entre el sistema francés, italiano y americano?",
+    answer:
+      "El sistema francés mantiene el término amortizativo constante: al principio se paga más interés y menos capital, y con el tiempo la proporción se invierte. El sistema italiano mantiene la cuota de amortización constante, por lo que el término amortizativo total decrece en cada período. El sistema americano paga sólo la cuota de interés durante la vida del préstamo y devuelve el capital íntegro en un único pago final (bullet).",
+  },
+  {
+    question: "¿Qué es el término amortizativo?",
+    answer:
+      "El término amortizativo es el pago total que realiza el prestatario en cada período. Se compone de la cuota de interés (pago de los intereses devengados sobre el capital vivo) y la cuota de amortización (devolución de parte del capital pendiente).",
+  },
+  {
+    question: "¿Qué es el capital vivo y el capital amortizado?",
+    answer:
+      "El capital vivo es la parte del capital inicial que aún está pendiente de devolver en un momento dado. El capital amortizado es la suma acumulada del capital ya devuelto hasta ese momento. La suma de ambos es siempre igual al capital inicial del préstamo.",
+  },
+  {
+    question: "¿Cómo se calcula la cuota del sistema francés?",
+    answer:
+      "La cuota constante se calcula como C = P · i / (1 − (1 + i)^−n), donde P es el capital inicial, i la tasa de interés por período y n el número de períodos. En cada período, la cuota de interés es I_k = i · B_{k−1} (donde B_{k−1} es el capital vivo al inicio del período) y la cuota de amortización es A_k = C − I_k.",
+  },
+  {
+    question: "¿Cuándo conviene cada sistema de amortización?",
+    answer:
+      "El sistema francés es el habitual en hipotecas y préstamos al consumo porque ofrece un pago constante y previsible. El sistema italiano reduce los intereses totales pagados a cambio de cuotas iniciales más altas. El sistema americano se utiliza en operaciones financieras específicas (bonos, préstamos puente) donde se prevé disponer del capital al vencimiento.",
+  },
+];
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map(({ question, answer }) => ({
+    "@type": "Question",
+    name: question,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: answer,
+    },
+  })),
+};
+---
+
+<Layout
+  title="Calculadora de préstamos y cuadro de amortización | Miguel González Calvo"
+  description="Calculadora de préstamos interactiva en línea. Compara los sistemas de amortización francés, italiano y americano con el cuadro de amortización completo y gráficas del capital vivo y capital amortizado."
+  lang="es"
+>
+  <script
+    is:inline
+    slot="head"
+    type="application/ld+json"
+    set:html={JSON.stringify(faqSchema)}
+  />
+  <main class="min-h-screen px-3 py-10 sm:px-6">
+    <section class="mx-auto max-w-6xl space-y-6">
+      <header class="space-y-2 text-center">
+        <p
+          class="text-xs font-semibold uppercase tracking-[0.2em] text-indigo-600"
+        >
+          Herramientas
+        </p>
+        <h1 class="text-3xl font-semibold tracking-tight text-slate-900">
+          Calculadora de préstamos y cuadro de amortización
+        </h1>
+        <p class="mx-auto max-w-2xl text-sm text-slate-600">
+          Compara los sistemas de amortización francés, italiano y americano.
+          Obtén el cuadro de amortización completo y visualiza la evolución del
+          capital vivo, el capital amortizado y la descomposición del término
+          amortizativo en cuota de interés y cuota de amortización.
+        </p>
+      </header>
+
+      <Calculator client:only="react" />
+
+      <section class="mx-auto max-w-3xl pt-6">
+        <h2 class="mb-3 text-xl font-semibold tracking-tight text-slate-900">
+          Recursos relacionados
+        </h2>
+        <ul class="list-disc space-y-2 pl-5 text-sm text-slate-700">
+          <li>
+            <a
+              href="/resources/financial-mathematics"
+              class="text-blue-600 hover:text-blue-500"
+            >
+              Formulario de matemáticas financieras
+            </a>{" "}
+            — fórmulas de interés simple y compuesto, rentas, préstamos y más.
+          </li>
+          <li>
+            <a
+              href="/courses/financial-mathematics"
+              class="text-blue-600 hover:text-blue-500"
+            >
+              Curso de matemáticas financieras
+            </a>{" "}
+            — temario, apuntes y material docente de la asignatura impartida
+            en la Universidad Francisco Marroquín.
+          </li>
+        </ul>
+      </section>
+
+      <section class="mx-auto max-w-3xl pt-6">
+        <h2 class="mb-4 text-xl font-semibold tracking-tight text-slate-900">
+          Preguntas frecuentes
+        </h2>
+        <div class="space-y-3">
+          {
+            faqs.map(({ question, answer }) => (
+              <details class="group rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
+                <summary class="flex cursor-pointer items-center justify-between text-sm font-semibold text-slate-900">
+                  <span>{question}</span>
+                  <span class="ml-4 text-slate-400 transition-transform group-open:rotate-180">
+                    ▾
+                  </span>
+                </summary>
+                <p class="mt-3 text-sm leading-relaxed text-slate-600">
+                  {answer}
+                </p>
+              </details>
+            ))
+          }
+        </div>
+      </section>
+    </section>
+  </main>
+</Layout>
