@@ -205,6 +205,7 @@ Web3:
 - Giacomini and Rossi. Bitcoin: New Financial Order or Libertarian Dystopia? An answer from the Past: Free Banking in Scotland 1727-1845. A Critical Review of Decentralised Systems of Private Money Supply
 - Laura Davidson and Walter Block. Bitcoin, the Regression Theorem, and the Emergence of a New Medium of Exchange
 - Konrad Graf. Revisiting Conceptions of Commodity and Scarcity in Light of Bitcoin
+- Nick Szabo. [Unenumerated](https://unenumerated.blogspot.com)
 
 ### Finance
 
@@ -221,6 +222,12 @@ Web3:
 - Fernando Navarrete [Do we really need a digital euro: A solution to what problem exactly?](https://institutodeanalistas.com/wp-content/uploads/8.-DO-WE-REALLY-NEED-THE-DIGITAL-EURO.-A-SOLUTION-TO-WHAT-PROBLEM-EXACTLY-FERNANDO-NAVARRETE-1.pdf)
 - European Central Bank. [Report on a digital euro](https://www.ecb.europa.eu/pub/pdf/other/Report_on_a_digital_euro~4d7268b458.en.pdf)
 - Miguel A. Fernández Ordóñez. Adiós a los bancos: Una visión distinta del dinero y la banca (2020)
+
+Digital euro:
+
+- Progress on the preparation phase of a digital euro. [Closing progress report](https://www.ecb.europa.eu/euro/digital_euro/timeline/profuse/shared/pdf/ecb.derdgp250731_Draft_digital_euro_scheme_rulebook_v0.9.en.pdf)
+- Digital Euro Scheme Rulebook. [0.9 draft](https://www.ecb.europa.eu/euro/digital_euro/timeline/profuse/shared/pdf/ecb.derdgp250731_Draft_digital_euro_scheme_rulebook_v0.9.en.pdf)
+- [Piero Cipollone on the digital euro and the future of Payments](https://www.youtube.com/watch?v=kPbJHSIAsFA)
 
 ### Stablecoins
 
