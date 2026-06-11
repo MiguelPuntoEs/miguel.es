@@ -78,6 +78,7 @@ Curso práctico sobre el uso de la inteligencia artificial generativa como copil
 ## Diapositivas
 
 - [Sesión 2 · *Prompting* para estudiantes](/docs/academic-copilot-sesion2.pdf)
+- [Sesión 4 · Captura y organización: construye tu segunda mente](/docs/academic-copilot-sesion4.pdf)
 
 ## Evaluación
 
@@ -92,10 +93,13 @@ Curso práctico sobre el uso de la inteligencia artificial generativa como copil
 
 Gestión del conocimiento y aprendizaje:
 
-- Söhnke Ahrens. *El método Zettelkasten: Cómo tomar notas eficaces* (*How to Take Smart Notes*)
-- Tiago Forte. *Crea tu segundo cerebro* (*Building a Second Brain*)
-- Peter C. Brown, Henry L. Roediger III, Mark A. McDaniel. *Make It Stick: The Science of Successful Learning* (2014). Harvard University Press
-- Barbara Oakley. *A Mind for Numbers: How to Excel at Math and Science*
+- Söhnke Ahrens. *El método Zettelkasten: Cómo tomar notas eficaces* (*How to Take Smart Notes*). 2.ª ed. 2022 (orig. 2017)
+- Tiago Forte. *Crea tu segundo cerebro* (*Building a Second Brain*). Atria Books, 2022
+- David Kadavy. *Digital Zettelkasten: Principles, Methods & Examples*. Kadavy Inc., 2021
+- Peter C. Brown, Henry L. Roediger III, Mark A. McDaniel. *Make It Stick: The Science of Successful Learning*. Harvard University Press, 2014
+- Barbara Oakley. *A Mind for Numbers: How to Excel at Math and Science* (2014). Véase también el curso *Learning How to Learn* (Oakley y Terrence Sejnowski), Coursera, 2014
+- Cal Newport. *Deep Work: Rules for Focused Success in a Distracted World*. Grand Central Publishing, 2016
+- Cal Newport. *How to Become a Straight-A Student*. Three Rivers Press, 2007
 
 Modelos de lenguaje y fundamentos:
 
