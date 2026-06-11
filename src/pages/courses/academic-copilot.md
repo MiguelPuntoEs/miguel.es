@@ -98,6 +98,7 @@ Gestión del conocimiento y aprendizaje:
 - David Kadavy. *Digital Zettelkasten: Principles, Methods & Examples*. Kadavy Inc., 2021
 - Peter C. Brown, Henry L. Roediger III, Mark A. McDaniel. *Make It Stick: The Science of Successful Learning*. Harvard University Press, 2014
 - Barbara Oakley. *A Mind for Numbers: How to Excel at Math and Science* (2014). Véase también el curso *Learning How to Learn* (Oakley y Terrence Sejnowski), Coursera, 2014
+- Oakley, Barbara, Michael Johnston, Ken-Zen Chen, Eulho Jung, y Terrence Sejnowski. *Why Our Brains Need Knowledge in an Age of AI*. s. f.
 - Cal Newport. *Deep Work: Rules for Focused Success in a Distracted World*. Grand Central Publishing, 2016
 - Cal Newport. *How to Become a Straight-A Student*. Three Rivers Press, 2007
 
