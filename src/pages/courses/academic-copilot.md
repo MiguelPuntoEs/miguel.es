@@ -79,6 +79,11 @@ Curso práctico sobre el uso de la inteligencia artificial generativa como copil
 
 - [Sesión 2 · *Prompting* para estudiantes](/docs/academic-copilot-sesion2.pdf)
 - [Sesión 4 · Captura y organización: construye tu segunda mente](/docs/academic-copilot-sesion4.pdf)
+- [Sesión 6 · Repaso espaciado y comprensión profunda con IA](/docs/academic-copilot-sesion6.pdf)
+
+## Materiales
+
+- [Reto en grupo: Cread una asignatura con IA](/docs/academic-copilot-reto-grupal.pdf) (sesión 6)
 
 ## Evaluación
 
@@ -101,6 +106,9 @@ Gestión del conocimiento y aprendizaje:
 - Oakley, Barbara, Michael Johnston, Ken-Zen Chen, Eulho Jung, y Terrence Sejnowski. *Why Our Brains Need Knowledge in an Age of AI*. s. f.
 - Cal Newport. *Deep Work: Rules for Focused Success in a Distracted World*. Grand Central Publishing, 2016
 - Cal Newport. *How to Become a Straight-A Student*. Three Rivers Press, 2007
+- Hermann Ebbinghaus. *Über das Gedächtnis* (*Memory: A Contribution to Experimental Psychology*). 1885
+- Henry L. Roediger III, y Jeffrey D. Karpicke. «Test-Enhanced Learning: Taking Memory Tests Improves Long-Term Retention». *Psychological Science*, 2006
+- Richard P. Feynman. *Surely You're Joking, Mr. Feynman!* (1985)
 
 Modelos de lenguaje y fundamentos:
 
