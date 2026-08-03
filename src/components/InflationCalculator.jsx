@@ -200,6 +200,7 @@ export default function InflationCalculator() {
   const [fromYear, setFromYear] = useState(INITIAL.fromYear ?? 2020);
   const [toYear, setToYear] = useState(INITIAL.toYear ?? 2024);
   const [compareCountries, setCompareCountries] = useState(INITIAL.compareCountries ?? []);
+  const [chartMode, setChartMode] = useState("equivalent");
   const [cpiData, setCpiData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [copied, setCopied] = useState(false);
@@ -567,9 +568,31 @@ export default function InflationCalculator() {
       {/* Chart */}
       {result.yearlyBreakdown.length > 1 && (
         <section className="mb-6">
-          <h2 className="mb-2 text-sm font-medium text-slate-700">
-            Value over time ({startYear} - {endYear})
-          </h2>
+          <div className="mb-2 flex flex-wrap items-center justify-between gap-2">
+            <h2 className="text-sm font-medium text-slate-700">
+              Value over time ({startYear} - {endYear})
+            </h2>
+            <div className="inline-flex rounded-lg border border-slate-200 bg-slate-100 p-0.5 text-xs" role="group" aria-label="Chart mode">
+              {[
+                { key: "equivalent", label: "Equivalent value" },
+                { key: "power", label: "Purchasing power" },
+              ].map((mode) => (
+                <button
+                  key={mode.key}
+                  type="button"
+                  onClick={() => setChartMode(mode.key)}
+                  aria-pressed={chartMode === mode.key}
+                  className={`rounded-md px-2.5 py-1 transition ${
+                    chartMode === mode.key
+                      ? "bg-white font-medium text-slate-900 shadow-sm"
+                      : "text-slate-500 hover:text-slate-700"
+                  }`}
+                >
+                  {mode.label}
+                </button>
+              ))}
+            </div>
+          </div>
           <div style={{ width: '100%', height: '320px' }} className="rounded-xl border border-slate-200 bg-slate-50">
             <ResponsiveContainer width="100%" height="100%">
               <LineChart
@@ -590,33 +613,24 @@ export default function InflationCalculator() {
                   labelFormatter={(label) => `Year ${label}`}
                   wrapperClassName="!text-xs"
                 />
-                <Legend wrapperStyle={{ fontSize: "0.75rem" }} />
                 <Line
                   type="monotone"
-                  dataKey="amount"
-                  name="Equivalent value"
-                  stroke="#4f46e5"
+                  dataKey={chartMode === "equivalent" ? "amount" : "purchasingPower"}
+                  name={chartMode === "equivalent" ? "Equivalent value" : `Purchasing power of ${fromYear} money`}
+                  stroke={chartMode === "equivalent" ? "#4f46e5" : "#e11d48"}
                   strokeWidth={2}
                   dot={{ r: 3 }}
-                  isAnimationActive={true}
-                />
-                <Line
-                  type="monotone"
-                  dataKey="purchasingPower"
-                  name={`Purchasing power of ${fromYear} money`}
-                  stroke="#e11d48"
-                  strokeWidth={2}
-                  strokeDasharray="5 5"
-                  dot={false}
                   isAnimationActive={true}
                 />
               </LineChart>
             </ResponsiveContainer>
           </div>
           <p className="mt-1.5 text-xs text-slate-500">
-            The solid line is the amount needed each year to match {symbol}{formatCurrency(safeAmount)} of {fromYear}.
-            The dashed line is what that original {symbol}{formatCurrency(safeAmount)} can still buy, in {fromYear} money —
-            the value of money eroding as prices rise.
+            {chartMode === "equivalent" ? (
+              <>Amount needed each year to match the purchasing power of {symbol}{formatCurrency(safeAmount)} in {fromYear}.</>
+            ) : (
+              <>What the original {symbol}{formatCurrency(safeAmount)} from {fromYear} can still buy each year, in {fromYear} money — the value of money eroding as prices rise.</>
+            )}
           </p>
         </section>
       )}
