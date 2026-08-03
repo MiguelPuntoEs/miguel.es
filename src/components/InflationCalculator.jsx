@@ -10,38 +10,44 @@ import {
   Legend,
 } from "recharts";
 
-// Map country codes to full names and currency info
+const COMPARE_COLORS = ["#4f46e5", "#e11d48", "#059669", "#d97706"];
+const MAX_COMPARE = 3;
+
+// Map country codes to full names and currency info.
+// `legacy` holds the pre-euro national currency with its fixed, irrevocable
+// euro conversion rate (1 EUR = `rate` legacy units) and the last year the
+// legacy currency was in everyday use (cash changeover year minus one).
 const COUNTRY_MAP = {
   "NOR": { name: "Norway", code: "NOK", symbol: "kr" },
   "USA": { name: "United States", code: "USD", symbol: "$" },
   "GBR": { name: "United Kingdom", code: "GBP", symbol: "£" },
-  "DEU": { name: "Germany", code: "EUR", symbol: "€" },
-  "FRA": { name: "France", code: "EUR", symbol: "€" },
-  "ESP": { name: "Spain", code: "EUR", symbol: "€" },
-  "ITA": { name: "Italy", code: "EUR", symbol: "€" },
+  "DEU": { name: "Germany", code: "EUR", symbol: "€", legacy: { name: "Deutsche Mark", symbol: "DM", rate: 1.95583, lastYear: 2001 } },
+  "FRA": { name: "France", code: "EUR", symbol: "€", legacy: { name: "French franc", symbol: "F", rate: 6.55957, lastYear: 2001 } },
+  "ESP": { name: "Spain", code: "EUR", symbol: "€", legacy: { name: "peseta", symbol: "Pta", rate: 166.386, lastYear: 2001 } },
+  "ITA": { name: "Italy", code: "EUR", symbol: "€", legacy: { name: "Italian lira", symbol: "Lit.", rate: 1936.27, lastYear: 2001 } },
   "JPN": { name: "Japan", code: "JPY", symbol: "¥" },
   "CAN": { name: "Canada", code: "CAD", symbol: "$" },
   "AUS": { name: "Australia", code: "AUD", symbol: "$" },
   "CHE": { name: "Switzerland", code: "CHF", symbol: "CHF" },
   "SWE": { name: "Sweden", code: "SEK", symbol: "kr" },
   "DNK": { name: "Denmark", code: "DKK", symbol: "kr" },
-  "NLD": { name: "Netherlands", code: "EUR", symbol: "€" },
-  "BEL": { name: "Belgium", code: "EUR", symbol: "€" },
-  "AUT": { name: "Austria", code: "EUR", symbol: "€" },
-  "FIN": { name: "Finland", code: "EUR", symbol: "€" },
-  "IRL": { name: "Ireland", code: "EUR", symbol: "€" },
-  "PRT": { name: "Portugal", code: "EUR", symbol: "€" },
-  "GRC": { name: "Greece", code: "EUR", symbol: "€" },
+  "NLD": { name: "Netherlands", code: "EUR", symbol: "€", legacy: { name: "Dutch guilder", symbol: "ƒ", rate: 2.20371, lastYear: 2001 } },
+  "BEL": { name: "Belgium", code: "EUR", symbol: "€", legacy: { name: "Belgian franc", symbol: "fr.", rate: 40.3399, lastYear: 2001 } },
+  "AUT": { name: "Austria", code: "EUR", symbol: "€", legacy: { name: "Austrian schilling", symbol: "öS", rate: 13.7603, lastYear: 2001 } },
+  "FIN": { name: "Finland", code: "EUR", symbol: "€", legacy: { name: "Finnish markka", symbol: "mk", rate: 5.94573, lastYear: 2001 } },
+  "IRL": { name: "Ireland", code: "EUR", symbol: "€", legacy: { name: "Irish pound", symbol: "IR£", rate: 0.787564, lastYear: 2001 } },
+  "PRT": { name: "Portugal", code: "EUR", symbol: "€", legacy: { name: "Portuguese escudo", symbol: "Esc", rate: 200.482, lastYear: 2001 } },
+  "GRC": { name: "Greece", code: "EUR", symbol: "€", legacy: { name: "Greek drachma", symbol: "Dr", rate: 340.750, lastYear: 2001 } },
   "POL": { name: "Poland", code: "PLN", symbol: "zł" },
   "CZE": { name: "Czechia", code: "CZK", symbol: "Kč" },
   "HUN": { name: "Hungary", code: "HUF", symbol: "Ft" },
-  "SVK": { name: "Slovak Republic", code: "EUR", symbol: "€" },
-  "SVN": { name: "Slovenia", code: "EUR", symbol: "€" },
-  "EST": { name: "Estonia", code: "EUR", symbol: "€" },
-  "LVA": { name: "Latvia", code: "EUR", symbol: "€" },
-  "LTU": { name: "Lithuania", code: "EUR", symbol: "€" },
+  "SVK": { name: "Slovak Republic", code: "EUR", symbol: "€", legacy: { name: "Slovak koruna", symbol: "Sk", rate: 30.1260, lastYear: 2008 } },
+  "SVN": { name: "Slovenia", code: "EUR", symbol: "€", legacy: { name: "Slovenian tolar", symbol: "SIT", rate: 239.640, lastYear: 2006 } },
+  "EST": { name: "Estonia", code: "EUR", symbol: "€", legacy: { name: "Estonian kroon", symbol: "kr", rate: 15.6466, lastYear: 2010 } },
+  "LVA": { name: "Latvia", code: "EUR", symbol: "€", legacy: { name: "Latvian lats", symbol: "Ls", rate: 0.702804, lastYear: 2013 } },
+  "LTU": { name: "Lithuania", code: "EUR", symbol: "€", legacy: { name: "Lithuanian litas", symbol: "Lt", rate: 3.45280, lastYear: 2014 } },
   "BGR": { name: "Bulgaria", code: "BGN", symbol: "лв" },
-  "HRV": { name: "Croatia", code: "EUR", symbol: "€" },
+  "HRV": { name: "Croatia", code: "EUR", symbol: "€", legacy: { name: "Croatian kuna", symbol: "kn", rate: 7.53450, lastYear: 2022 } },
   "ISL": { name: "Iceland", code: "ISK", symbol: "kr" },
   "MEX": { name: "Mexico", code: "MXN", symbol: "$" },
   "CHL": { name: "Chile", code: "CLP", symbol: "$" },
@@ -70,20 +76,12 @@ function processCPIData(cpiDataRaw) {
 }
 
 function calculateInflationAdjustment(amount, country, fromYear, toYear, CPI_DATA) {
-  const years = toYear - fromYear;
-  if (years === 0) {
-    return {
-      adjustedAmount: amount,
-      totalInflation: 0,
-      yearlyBreakdown: [],
-    };
-  }
-
   const countryData = CPI_DATA[country];
   if (!countryData || !countryData[fromYear] || !countryData[toYear]) {
     return {
       adjustedAmount: amount,
       totalInflation: 0,
+      avgAnnualInflation: null,
       yearlyBreakdown: [],
       error: "Data not available for selected years",
     };
@@ -91,30 +89,32 @@ function calculateInflationAdjustment(amount, country, fromYear, toYear, CPI_DAT
 
   const fromCPI = countryData[fromYear];
   const toCPI = countryData[toYear];
-  
-  // Adjust amount based on CPI ratio
-  const adjustedAmount = (amount * toCPI) / fromCPI;
-  const totalInflation = ((adjustedAmount - amount) / amount) * 100;
 
-  // Generate yearly breakdown
+  // Adjust amount based on CPI ratio (works in both directions)
+  const adjustedAmount = (amount * toCPI) / fromCPI;
+  const totalInflation = ((toCPI - fromCPI) / fromCPI) * 100;
+
+  // Average annual inflation over the covered period, always chronological
+  const startYear = Math.min(fromYear, toYear);
+  const endYear = Math.max(fromYear, toYear);
+  const span = endYear - startYear;
+  const avgAnnualInflation =
+    span > 0
+      ? (Math.pow(countryData[endYear] / countryData[startYear], 1 / span) - 1) * 100
+      : null;
+
+  // Yearly breakdown, in chronological order
   const yearlyBreakdown = [];
-  const startYear = years > 0 ? fromYear : toYear;
-  const endYear = years > 0 ? toYear : fromYear;
-  
   for (let year = startYear; year <= endYear; year++) {
     if (countryData[year]) {
-      const yearAmount = (amount * countryData[year]) / fromCPI;
       const prevYear = year - 1;
-      let yearlyInflation = 0;
-      
-      if (year > startYear && countryData[prevYear]) {
-        yearlyInflation = ((countryData[year] - countryData[prevYear]) / countryData[prevYear]) * 100;
-      }
-      
       yearlyBreakdown.push({
         year,
-        amount: yearAmount,
-        yearlyInflation,
+        amount: (amount * countryData[year]) / fromCPI,
+        yearlyInflation:
+          year > startYear && countryData[prevYear]
+            ? ((countryData[year] - countryData[prevYear]) / countryData[prevYear]) * 100
+            : null,
         cpi: countryData[year],
       });
     }
@@ -123,7 +123,8 @@ function calculateInflationAdjustment(amount, country, fromYear, toYear, CPI_DAT
   return {
     adjustedAmount,
     totalInflation,
-    yearlyBreakdown: years < 0 ? yearlyBreakdown.reverse() : yearlyBreakdown,
+    avgAnnualInflation,
+    yearlyBreakdown,
   };
 }
 
@@ -135,15 +136,74 @@ function formatCurrency(value, decimals = 2) {
   });
 }
 
+// Legacy-currency equivalent of a euro amount for years before the changeover,
+// e.g. "102,563 Pta" for €616.41 in Spain, 2001 or earlier.
+function formatLegacy(countryInfo, year, euroAmount) {
+  const legacy = countryInfo?.legacy;
+  if (!legacy || year > legacy.lastYear || !Number.isFinite(euroAmount)) return null;
+  const decimals = legacy.rate >= 10 ? 0 : 2;
+  return `${formatCurrency(euroAmount * legacy.rate, decimals)} ${legacy.symbol}`;
+}
+
+const compactFormatter = new Intl.NumberFormat(undefined, {
+  notation: "compact",
+  maximumFractionDigits: 1,
+});
+
+const inputClass =
+  "h-9 rounded-lg border border-slate-300 bg-slate-50 px-2 text-sm text-slate-900 shadow-inner focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500";
+
+const CODE_BY_NAME = Object.fromEntries(
+  Object.entries(COUNTRY_MAP).map(([code, info]) => [info.name, code])
+);
+
+// Quick-start examples; "latest" resolves to the newest year with data
+const PRESETS = [
+  { label: "€1,000 from 2002 (Spain)", amount: 1000, country: "Spain", from: 2002, to: "latest" },
+  { label: "€1,000 back to pesetas (Spain)", amount: 1000, country: "Spain", from: "latest", to: 2001 },
+  { label: "$100 from 1980 (US)", amount: 100, country: "United States", from: 1980, to: "latest" },
+  { label: "€1,000 from the DM era (Germany)", amount: 1000, country: "Germany", from: 1990, to: "latest" },
+  { label: "₺1,000 from 2010 (Türkiye)", amount: 1000, country: "Türkiye", from: 2010, to: "latest" },
+];
+
+// Read shareable state from the URL, e.g. ?amount=1000&country=ESP&from=2024&to=2002
+function readParamsFromURL() {
+  if (typeof window === "undefined") return {};
+  const params = new URLSearchParams(window.location.search);
+  const out = {};
+  const amount = Number.parseFloat(params.get("amount"));
+  if (Number.isFinite(amount) && amount >= 0) out.amountInput = String(amount);
+  const code = params.get("country")?.toUpperCase();
+  if (code && COUNTRY_MAP[code]) out.country = COUNTRY_MAP[code].name;
+  const from = Number.parseInt(params.get("from"), 10);
+  if (Number.isFinite(from)) out.fromYear = from;
+  const to = Number.parseInt(params.get("to"), 10);
+  if (Number.isFinite(to)) out.toYear = to;
+  const compare = params.get("compare");
+  if (compare) {
+    out.compareCountries = compare
+      .split(",")
+      .map((c) => COUNTRY_MAP[c.trim().toUpperCase()]?.name)
+      .filter(Boolean)
+      .slice(0, MAX_COMPARE);
+  }
+  return out;
+}
+
+const INITIAL = readParamsFromURL();
+
 export default function InflationCalculator() {
-  const [amount, setAmount] = useState(1000);
-  const [country, setCountry] = useState("United States");
-  const [fromYear, setFromYear] = useState(2020);
-  const [toYear, setToYear] = useState(2024);
+  const [amountInput, setAmountInput] = useState(INITIAL.amountInput ?? "1000");
+  const [country, setCountry] = useState(INITIAL.country ?? "United States");
+  const [fromYear, setFromYear] = useState(INITIAL.fromYear ?? 2020);
+  const [toYear, setToYear] = useState(INITIAL.toYear ?? 2024);
+  const [compareCountries, setCompareCountries] = useState(INITIAL.compareCountries ?? []);
   const [cpiData, setCpiData] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [copied, setCopied] = useState(false);
 
-  const currentYear = new Date().getFullYear();
+  const amount = Number.parseFloat(amountInput);
+  const safeAmount = Number.isFinite(amount) && amount >= 0 ? amount : 0;
 
   // Load CPI data from public folder
   useEffect(() => {
@@ -158,29 +218,122 @@ export default function InflationCalculator() {
         setLoading(false);
       });
   }, []);
-  
+
   // Get available countries
   const availableCountries = useMemo(() => {
     if (!cpiData) return [];
     return Object.keys(cpiData).sort();
   }, [cpiData]);
-  
-  // Get available year range for selected country
+
+  // Available years for the selected country, most recent first (for the dropdowns)
   const availableYears = useMemo(() => {
     if (!cpiData || !cpiData[country]) return [];
-    return Object.keys(cpiData[country]).map(Number).sort((a, b) => a - b);
+    return Object.keys(cpiData[country]).map(Number).sort((a, b) => b - a);
   }, [cpiData, country]);
 
-  const minYear = availableYears.length > 0 ? availableYears[0] : 1950;
-  const maxYear = availableYears.length > 0 ? availableYears[availableYears.length - 1] : currentYear;
+  const maxYear = availableYears.length > 0 ? availableYears[0] : null;
+  const minYear = availableYears.length > 0 ? availableYears[availableYears.length - 1] : null;
+
+  // When the country changes, snap years to the nearest available year
+  useEffect(() => {
+    if (availableYears.length === 0) return;
+    const nearest = (y) =>
+      availableYears.reduce((a, b) => (Math.abs(b - y) < Math.abs(a - y) ? b : a));
+    setFromYear((y) => (availableYears.includes(y) ? y : nearest(y)));
+    setToYear((y) => (availableYears.includes(y) ? y : nearest(y)));
+  }, [availableYears]);
+
+  // Keep the URL in sync so any conversion can be shared as a link
+  useEffect(() => {
+    if (!cpiData || typeof window === "undefined") return;
+    const params = new URLSearchParams(window.location.search);
+    params.set("amount", String(safeAmount));
+    params.set("country", CODE_BY_NAME[country]);
+    params.set("from", String(fromYear));
+    params.set("to", String(toYear));
+    if (compareCountries.length > 0) {
+      params.set("compare", compareCountries.map((c) => CODE_BY_NAME[c]).join(","));
+    } else {
+      params.delete("compare");
+    }
+    window.history.replaceState(null, "", `${window.location.pathname}?${params}`);
+  }, [safeAmount, country, fromYear, toYear, compareCountries, cpiData]);
+
+  const copyLink = () => {
+    navigator.clipboard?.writeText(window.location.href).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1500);
+    });
+  };
 
   const result = useMemo(() => {
-    if (!cpiData) return { adjustedAmount: 0, totalInflation: 0, yearlyBreakdown: [] };
-    return calculateInflationAdjustment(amount, country, fromYear, toYear, cpiData);
-  }, [amount, country, fromYear, toYear, cpiData]);
+    if (!cpiData) {
+      return { adjustedAmount: 0, totalInflation: 0, avgAnnualInflation: null, yearlyBreakdown: [] };
+    }
+    return calculateInflationAdjustment(safeAmount, country, fromYear, toYear, cpiData);
+  }, [safeAmount, country, fromYear, toYear, cpiData]);
 
   const countryInfo = Object.values(COUNTRY_MAP).find(c => c.name === country);
-  const isFutureCalculation = toYear > fromYear;
+  const symbol = countryInfo?.symbol ?? "";
+  const isBackward = toYear < fromYear;
+  const fromLegacy = formatLegacy(countryInfo, fromYear, safeAmount);
+  const toLegacy = formatLegacy(countryInfo, toYear, result.adjustedAmount);
+
+  // Table follows the from -> to direction; chart stays chronological
+  const tableRows = useMemo(
+    () => (isBackward ? [...result.yearlyBreakdown].reverse() : result.yearlyBreakdown),
+    [result.yearlyBreakdown, isBackward]
+  );
+
+  const startYear = Math.min(fromYear, toYear);
+  const endYear = Math.max(fromYear, toYear);
+
+  // CPI indexed to 100 at the start year, for the selected country plus comparisons
+  const comparison = useMemo(() => {
+    if (!cpiData) return { rows: [], series: [], dropped: [] };
+    const names = [country, ...compareCountries.filter((c) => c !== country)];
+    const series = [];
+    const dropped = [];
+    names.forEach((name) => {
+      const data = cpiData[name];
+      if (data && data[startYear]) series.push({ name, base: data[startYear] });
+      else dropped.push(name);
+    });
+    const rows = [];
+    for (let year = startYear; year <= endYear; year++) {
+      const row = { year };
+      series.forEach((s) => {
+        const value = cpiData[s.name][year];
+        if (value) row[s.name] = (value / s.base) * 100;
+      });
+      rows.push(row);
+    }
+    return { rows, series: series.map((s) => s.name), dropped };
+  }, [cpiData, country, compareCountries, startYear, endYear]);
+
+  const addCompareCountry = (name) => {
+    if (!name || name === country || compareCountries.includes(name)) return;
+    setCompareCountries((prev) => [...prev, name].slice(0, MAX_COMPARE));
+  };
+
+  const removeCompareCountry = (name) => {
+    setCompareCountries((prev) => prev.filter((c) => c !== name));
+  };
+
+  const swapYears = () => {
+    setFromYear(toYear);
+    setToYear(fromYear);
+  };
+
+  const applyPreset = (preset) => {
+    const latest = (cpiData && cpiData[preset.country])
+      ? Math.max(...Object.keys(cpiData[preset.country]).map(Number))
+      : maxYear;
+    setAmountInput(String(preset.amount));
+    setCountry(preset.country);
+    setFromYear(preset.from === "latest" ? latest : preset.from);
+    setToYear(preset.to === "latest" ? latest : preset.to);
+  };
 
   if (loading) {
     return (
@@ -195,7 +348,7 @@ export default function InflationCalculator() {
   return (
     <div className="max-w-5xl mx-auto rounded-2xl border border-slate-200 bg-white p-6 shadow-lg shadow-slate-200/60">
       {/* Header */}
-      <header className="mb-6 flex flex-col gap-2">
+      <header className="mb-6 flex flex-wrap items-start justify-between gap-3">
         <div>
           <h2 className="text-2xl font-semibold tracking-tight text-slate-900">
             Inflation Calculator
@@ -204,32 +357,56 @@ export default function InflationCalculator() {
             Adjust amounts for inflation based on country-specific rates. Calculate past purchasing power or future values.
           </p>
         </div>
+        <button
+          type="button"
+          onClick={copyLink}
+          className="inline-flex h-8 shrink-0 items-center gap-1.5 rounded-lg border border-slate-300 bg-slate-50 px-3 text-xs font-medium text-slate-600 shadow-sm transition hover:border-indigo-400 hover:text-indigo-600 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+        >
+          <svg
+            viewBox="0 0 20 20"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.6"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="h-3.5 w-3.5"
+            aria-hidden="true"
+          >
+            <path d="M8.5 11.5a3.5 3.5 0 0 0 5 0l2.5-2.5a3.54 3.54 0 0 0-5-5l-1 1" />
+            <path d="M11.5 8.5a3.5 3.5 0 0 0-5 0L4 11a3.54 3.54 0 0 0 5 5l1-1" />
+          </svg>
+          {copied ? "Copied!" : "Copy link"}
+        </button>
       </header>
 
       {/* Inputs */}
-      <section className="mb-6 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+      <section className="mb-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <div className="flex flex-col gap-1.5">
-          <label className="text-xs font-semibold uppercase tracking-wide text-slate-500">
+          <label htmlFor="inflation-amount" className="text-xs font-semibold uppercase tracking-wide text-slate-500">
             Amount
           </label>
           <input
+            id="inflation-amount"
             type="number"
+            inputMode="decimal"
             min="0"
             step="0.01"
-            value={amount}
-            onChange={(e) => setAmount(Number(e.target.value))}
-            className="h-9 rounded-lg border border-slate-300 bg-slate-50 px-2 text-sm text-slate-900 placeholder:text-slate-400 shadow-inner focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+            value={amountInput}
+            onChange={(e) => setAmountInput(e.target.value)}
+            placeholder="1000"
+            className={`${inputClass} placeholder:text-slate-400`}
           />
         </div>
 
         <div className="flex flex-col gap-1.5">
-          <label className="text-xs font-semibold uppercase tracking-wide text-slate-500">
+          <label htmlFor="inflation-country" className="text-xs font-semibold uppercase tracking-wide text-slate-500">
             Country
           </label>
           <select
+            id="inflation-country"
             value={country}
             onChange={(e) => setCountry(e.target.value)}
-            className="h-9 rounded-lg border border-slate-300 bg-slate-50 px-2 text-sm text-slate-900 shadow-inner focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+            className={inputClass}
           >
             {availableCountries.map((c) => (
               <option key={c} value={c}>
@@ -239,34 +416,81 @@ export default function InflationCalculator() {
           </select>
         </div>
 
-        <div className="flex flex-col gap-1.5">
-          <label className="text-xs font-semibold uppercase tracking-wide text-slate-500">
-            From Year
-          </label>
-          <input
-            type="number"
-            min={minYear}
-            max={maxYear}
-            value={fromYear}
-            onChange={(e) => setFromYear(Number(e.target.value))}
-            className="h-9 rounded-lg border border-slate-300 bg-slate-50 px-2 text-sm text-slate-900 placeholder:text-slate-400 shadow-inner focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
-          />
-        </div>
-
-        <div className="flex flex-col gap-1.5">
-          <label className="text-xs font-semibold uppercase tracking-wide text-slate-500">
-            To Year
-          </label>
-          <input
-            type="number"
-            min={minYear}
-            max={maxYear}
-            value={toYear}
-            onChange={(e) => setToYear(Number(e.target.value))}
-            className="h-9 rounded-lg border border-slate-300 bg-slate-50 px-2 text-sm text-slate-900 placeholder:text-slate-400 shadow-inner focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
-          />
+        <div className="flex flex-col gap-1.5 sm:col-span-2">
+          <div className="grid grid-cols-[1fr_auto_1fr] items-end gap-2">
+            <div className="flex flex-col gap-1.5">
+              <label htmlFor="inflation-from-year" className="text-xs font-semibold uppercase tracking-wide text-slate-500">
+                From Year
+              </label>
+              <select
+                id="inflation-from-year"
+                value={fromYear}
+                onChange={(e) => setFromYear(Number(e.target.value))}
+                className={`${inputClass} w-full`}
+              >
+                {availableYears.map((y) => (
+                  <option key={y} value={y}>
+                    {y}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <button
+              type="button"
+              onClick={swapYears}
+              title="Swap years"
+              aria-label="Swap from and to years"
+              className="h-9 w-9 shrink-0 rounded-lg border border-slate-300 bg-slate-50 text-slate-600 shadow-inner transition hover:border-indigo-400 hover:text-indigo-600 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+            >
+              <svg
+                viewBox="0 0 20 20"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.6"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="mx-auto h-4 w-4"
+                aria-hidden="true"
+              >
+                <path d="M4 7h11M12 4l3 3-3 3" />
+                <path d="M16 13H5M8 10l-3 3 3 3" />
+              </svg>
+            </button>
+            <div className="flex flex-col gap-1.5">
+              <label htmlFor="inflation-to-year" className="text-xs font-semibold uppercase tracking-wide text-slate-500">
+                To Year
+              </label>
+              <select
+                id="inflation-to-year"
+                value={toYear}
+                onChange={(e) => setToYear(Number(e.target.value))}
+                className={`${inputClass} w-full`}
+              >
+                {availableYears.map((y) => (
+                  <option key={y} value={y}>
+                    {y}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
         </div>
       </section>
+
+      {/* Quick-start presets */}
+      <div className="mb-4 flex flex-wrap items-center gap-2">
+        <span className="text-xs font-medium text-slate-500">Try:</span>
+        {PRESETS.map((preset) => (
+          <button
+            key={preset.label}
+            type="button"
+            onClick={() => applyPreset(preset)}
+            className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-xs text-slate-600 transition hover:border-indigo-400 hover:bg-indigo-50 hover:text-indigo-700 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+          >
+            {preset.label}
+          </button>
+        ))}
+      </div>
 
       {availableYears.length > 0 && (
         <div className="mb-4 text-xs text-slate-500">
@@ -275,29 +499,43 @@ export default function InflationCalculator() {
       )}
 
       {/* Summary cards */}
-      <section className="mb-6 grid gap-4 sm:grid-cols-3">
+      <section className="mb-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <div className="rounded-xl border border-slate-200 bg-slate-50/80 px-4 py-3">
           <div className="text-xs font-medium uppercase tracking-wide text-slate-500">
             Original amount ({fromYear})
           </div>
           <div className="mt-1 text-lg font-semibold text-slate-900">
-            {countryInfo?.symbol}{formatCurrency(amount)}
+            {symbol}{formatCurrency(safeAmount)}
           </div>
+          {fromLegacy && (
+            <div className="mt-0.5 text-xs text-slate-500">≈ {fromLegacy}</div>
+          )}
         </div>
         <div className="rounded-xl border border-slate-200 bg-slate-50/80 px-4 py-3">
           <div className="text-xs font-medium uppercase tracking-wide text-slate-500">
-            {isFutureCalculation ? `Projected value (${toYear})` : `Equivalent in ${toYear}`}
+            Equivalent in {toYear}
           </div>
           <div className="mt-1 text-lg font-semibold text-indigo-700">
-            {countryInfo?.symbol}{formatCurrency(result.adjustedAmount)}
+            {symbol}{formatCurrency(result.adjustedAmount)}
           </div>
+          {toLegacy && (
+            <div className="mt-0.5 text-xs text-slate-500">≈ {toLegacy}</div>
+          )}
         </div>
         <div className="rounded-xl border border-slate-200 bg-slate-50/80 px-4 py-3">
           <div className="text-xs font-medium uppercase tracking-wide text-slate-500">
-            {isFutureCalculation ? 'Total inflation' : 'Purchasing power change'}
+            {isBackward ? 'Change vs ' + fromYear : 'Total inflation'}
           </div>
           <div className={`mt-1 text-lg font-semibold ${result.totalInflation >= 0 ? 'text-red-700' : 'text-emerald-700'}`}>
             {result.totalInflation >= 0 ? '+' : ''}{formatCurrency(result.totalInflation, 1)}%
+          </div>
+        </div>
+        <div className="rounded-xl border border-slate-200 bg-slate-50/80 px-4 py-3">
+          <div className="text-xs font-medium uppercase tracking-wide text-slate-500">
+            Avg. annual inflation
+          </div>
+          <div className="mt-1 text-lg font-semibold text-slate-900">
+            {result.avgAnnualInflation === null ? '-' : `${formatCurrency(result.avgAnnualInflation, 2)}%`}
           </div>
         </div>
       </section>
@@ -313,22 +551,12 @@ export default function InflationCalculator() {
         <section className="mb-6">
           <div className="rounded-xl border border-indigo-200 bg-indigo-50/80 px-4 py-3">
             <div className="text-xs font-medium uppercase tracking-wide text-indigo-700">
-              {isFutureCalculation ? 'Inflation Impact' : 'Purchasing Power'}
+              Purchasing Power
             </div>
             <div className="mt-1 text-sm text-indigo-900">
-              {isFutureCalculation ? (
-                <>
-                  {countryInfo?.symbol}{formatCurrency(amount)} in {fromYear} will have the purchasing power of{' '}
-                  <strong>{countryInfo?.symbol}{formatCurrency(result.adjustedAmount)}</strong> in {toYear}
-                  {' '}(based on historical CPI data).
-                </>
-              ) : (
-                <>
-                  {countryInfo?.symbol}{formatCurrency(amount)} in {fromYear} had the same purchasing power as{' '}
-                  <strong>{countryInfo?.symbol}{formatCurrency(result.adjustedAmount)}</strong> in {toYear}
-                  {' '}(based on actual CPI data).
-                </>
-              )}
+              {symbol}{formatCurrency(safeAmount)}{fromLegacy ? ` (≈ ${fromLegacy})` : ''} in {fromYear} {isBackward ? 'had' : 'has'} the same purchasing power as{' '}
+              <strong>{symbol}{formatCurrency(result.adjustedAmount)}{toLegacy ? ` (≈ ${toLegacy})` : ''}</strong> in {toYear}
+              {' '}(based on actual CPI data).
             </div>
           </div>
         </section>
@@ -338,7 +566,7 @@ export default function InflationCalculator() {
       {result.yearlyBreakdown.length > 1 && (
         <section className="mb-6">
           <h2 className="mb-2 text-sm font-medium text-slate-700">
-            Value over time
+            Value over time ({startYear} - {endYear})
           </h2>
           <div style={{ width: '100%', height: '320px' }} className="rounded-xl border border-slate-200 bg-slate-50">
             <ResponsiveContainer width="100%" height="100%">
@@ -351,17 +579,19 @@ export default function InflationCalculator() {
                   dataKey="year"
                   tick={{ fontSize: 10 }}
                 />
-                <YAxis tick={{ fontSize: 10 }} />
+                <YAxis
+                  tick={{ fontSize: 10 }}
+                  tickFormatter={(value) => compactFormatter.format(value)}
+                />
                 <Tooltip
-                  formatter={(value) => [formatCurrency(value), "Value"]}
+                  formatter={(value) => [`${symbol}${formatCurrency(value)}`, "Value"]}
                   labelFormatter={(label) => `Year ${label}`}
                   wrapperClassName="!text-xs"
                 />
-                <Legend wrapperStyle={{ fontSize: "0.75rem" }} />
                 <Line
                   type="monotone"
                   dataKey="amount"
-                  name={`Value (${countryInfo?.symbol})`}
+                  name={`Value (${symbol})`}
                   stroke="#4f46e5"
                   strokeWidth={2}
                   dot={{ r: 3 }}
@@ -373,8 +603,96 @@ export default function InflationCalculator() {
         </section>
       )}
 
+      {/* Cross-country comparison */}
+      {result.yearlyBreakdown.length > 1 && (
+        <section className="mb-6">
+          <div className="mb-2 flex flex-wrap items-center gap-2">
+            <h2 className="text-sm font-medium text-slate-700">
+              Compare inflation across countries (index, {startYear} = 100)
+            </h2>
+            {compareCountries.map((name) => (
+              <span
+                key={name}
+                className="inline-flex items-center gap-1 rounded-full border border-slate-200 bg-slate-50 px-2.5 py-0.5 text-xs text-slate-600"
+              >
+                {name}
+                <button
+                  type="button"
+                  onClick={() => removeCompareCountry(name)}
+                  aria-label={`Remove ${name} from comparison`}
+                  className="text-slate-400 transition hover:text-red-600"
+                >
+                  ×
+                </button>
+              </span>
+            ))}
+            {compareCountries.length < MAX_COMPARE && (
+              <select
+                value=""
+                onChange={(e) => addCompareCountry(e.target.value)}
+                aria-label="Add country to comparison"
+                className="h-7 rounded-full border border-dashed border-slate-300 bg-slate-50 px-2 text-xs text-slate-500 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+              >
+                <option value="">+ Add country</option>
+                {availableCountries
+                  .filter((c) => c !== country && !compareCountries.includes(c))
+                  .map((c) => (
+                    <option key={c} value={c}>
+                      {c}
+                    </option>
+                  ))}
+              </select>
+            )}
+          </div>
+          {compareCountries.length > 0 && (
+            <>
+              <div style={{ width: '100%', height: '320px' }} className="rounded-xl border border-slate-200 bg-slate-50">
+                <ResponsiveContainer width="100%" height="100%">
+                  <LineChart
+                    data={comparison.rows}
+                    margin={{ top: 12, right: 20, left: 10, bottom: 12 }}
+                  >
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <XAxis dataKey="year" tick={{ fontSize: 10 }} />
+                    <YAxis
+                      tick={{ fontSize: 10 }}
+                      tickFormatter={(value) => compactFormatter.format(value)}
+                      domain={['auto', 'auto']}
+                    />
+                    <Tooltip
+                      formatter={(value, name) => [formatCurrency(value, 1), name]}
+                      labelFormatter={(label) => `Year ${label}`}
+                      wrapperClassName="!text-xs"
+                    />
+                    <Legend wrapperStyle={{ fontSize: "0.75rem" }} />
+                    {comparison.series.map((name, i) => (
+                      <Line
+                        key={name}
+                        type="monotone"
+                        dataKey={name}
+                        stroke={COMPARE_COLORS[i % COMPARE_COLORS.length]}
+                        strokeWidth={2}
+                        dot={false}
+                        isAnimationActive={true}
+                      />
+                    ))}
+                  </LineChart>
+                </ResponsiveContainer>
+              </div>
+              <p className="mt-1.5 text-xs text-slate-500">
+                Each line shows the CPI relative to {startYear} (=100), so price levels
+                across countries are directly comparable regardless of currency.
+                {comparison.dropped.length > 0 && (
+                  <> No data for {comparison.dropped.join(", ")} in {startYear}.</>
+                )}
+              </p>
+            </>
+          )}
+        </section>
+      )}
+
       {/* Year-by-year breakdown */}
-      {result.yearlyBreakdown.length > 0 && (
+      {tableRows.length > 0 && (
         <section>
           <h2 className="mb-2 text-sm font-medium text-slate-700">
             Year-by-year breakdown
@@ -389,17 +707,23 @@ export default function InflationCalculator() {
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-200 bg-white">
-                {result.yearlyBreakdown.map((row) => (
+                {tableRows.map((row) => {
+                  const rowLegacy = formatLegacy(countryInfo, row.year, row.amount);
+                  return (
                   <tr key={row.year} className="hover:bg-slate-50/80">
                     <td className="px-3 py-1.5 text-slate-700">{row.year}</td>
                     <td className="px-3 py-1.5 text-right text-slate-800 font-mono">
-                      {countryInfo?.symbol}{formatCurrency(row.amount)}
+                      {symbol}{formatCurrency(row.amount)}
+                      {rowLegacy && (
+                        <span className="ml-1.5 text-[0.65rem] text-slate-400">≈ {rowLegacy}</span>
+                      )}
                     </td>
                     <td className="px-3 py-1.5 text-right text-slate-600">
-                      {row.yearlyInflation === 0 ? '-' : `${formatCurrency(row.yearlyInflation, 1)}%`}
+                      {row.yearlyInflation === null ? '-' : `${formatCurrency(row.yearlyInflation, 1)}%`}
                     </td>
                   </tr>
-                ))}
+                  );
+                })}
               </tbody>
             </table>
           </div>
@@ -409,6 +733,12 @@ export default function InflationCalculator() {
               <strong>Note:</strong> This calculator uses actual Consumer Price Index (CPI) data from OECD.
               The CPI measures changes in the price level of a basket of consumer goods and services.
             </p>
+            {countryInfo?.legacy && (
+              <p>
+                For years before the euro changeover, amounts are also shown in the pre-euro currency
+                ({countryInfo.legacy.name}) using the fixed conversion rate of 1 € = {countryInfo.legacy.rate} {countryInfo.legacy.symbol}.
+              </p>
+            )}
             <p className="text-slate-400">
               Source:{" "}
               <a
