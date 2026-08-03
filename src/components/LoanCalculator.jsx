@@ -134,6 +134,11 @@ function formatCurrency(value) {
   });
 }
 
+const compactFormatter = new Intl.NumberFormat(undefined, {
+  notation: "compact",
+  maximumFractionDigits: 1,
+});
+
 export default function LoanCalculator() {
   const [principal, setPrincipal] = useState(150000);
   const [annualRate, setAnnualRate] = useState(4);
@@ -187,6 +192,7 @@ export default function LoanCalculator() {
           </label>
           <input
             type="number"
+            inputMode="decimal"
             min="0"
             value={principal}
             onChange={(e) => setPrincipal(e.target.value)}
@@ -200,6 +206,7 @@ export default function LoanCalculator() {
           </label>
           <input
             type="number"
+            inputMode="decimal"
             min="0"
             step="0.01"
             value={annualRate}
@@ -214,6 +221,7 @@ export default function LoanCalculator() {
           </label>
           <input
             type="number"
+            inputMode="decimal"
             min="0"
             step="0.5"
             value={years}
@@ -328,7 +336,10 @@ export default function LoanCalculator() {
                   style: { fontSize: 10, fill: "#64748b" },
                 }}
               />
-              <YAxis tick={{ fontSize: 10 }} />
+              <YAxis
+                tick={{ fontSize: 10 }}
+                tickFormatter={(value) => compactFormatter.format(value)}
+              />
               <Tooltip
                 formatter={(value, name) => [formatCurrency(value), name]}
                 labelFormatter={(label) => `Período ${label}`}
@@ -385,7 +396,10 @@ export default function LoanCalculator() {
                   style: { fontSize: 10, fill: "#64748b" },
                 }}
               />
-              <YAxis tick={{ fontSize: 10 }} />
+              <YAxis
+                tick={{ fontSize: 10 }}
+                tickFormatter={(value) => compactFormatter.format(value)}
+              />
               <Tooltip
                 formatter={(value, name) => [formatCurrency(value), name]}
                 labelFormatter={(label) => `Período ${label}`}

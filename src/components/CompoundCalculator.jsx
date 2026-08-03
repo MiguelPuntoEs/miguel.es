@@ -81,6 +81,11 @@ function formatCurrency(value) {
   });
 }
 
+const compactFormatter = new Intl.NumberFormat(undefined, {
+  notation: "compact",
+  maximumFractionDigits: 1,
+});
+
 export default function CompoundCalculator() {
   const [principal, setPrincipal] = useState(1000);
   const [monthlyContribution, setMonthlyContribution] = useState(200);
@@ -128,6 +133,7 @@ export default function CompoundCalculator() {
           </label>
           <input
             type="number"
+            inputMode="decimal"
             min="0"
             value={principal}
             onChange={(e) => setPrincipal(e.target.value)}
@@ -141,6 +147,7 @@ export default function CompoundCalculator() {
           </label>
           <input
             type="number"
+            inputMode="decimal"
             min="0"
             value={monthlyContribution}
             onChange={(e) => setMonthlyContribution(e.target.value)}
@@ -154,6 +161,7 @@ export default function CompoundCalculator() {
           </label>
           <input
             type="number"
+            inputMode="decimal"
             min="0"
             step="0.1"
             value={annualRate}
@@ -168,6 +176,7 @@ export default function CompoundCalculator() {
           </label>
           <input
             type="number"
+            inputMode="decimal"
             min="0"
             value={years}
             onChange={(e) => setYears(e.target.value)}
@@ -234,7 +243,10 @@ export default function CompoundCalculator() {
                 dataKey="label"
                 tick={{ fontSize: 10 }}
               />
-              <YAxis tick={{ fontSize: 10 }} />
+              <YAxis
+                tick={{ fontSize: 10 }}
+                tickFormatter={(value) => compactFormatter.format(value)}
+              />
               <Tooltip
                 formatter={(value, name) => [formatCurrency(value), name]}
                 labelFormatter={(label) => `Year ${label}`}
@@ -262,17 +274,6 @@ export default function CompoundCalculator() {
               />
             </LineChart>
           </ResponsiveContainer>
-        </div>
-
-        <div className="mt-2 flex flex-wrap gap-4 text-xs text-slate-600">
-          <div className="inline-flex items-center gap-1">
-            <span className="h-0.5 w-6 rounded-full bg-indigo-600" />
-            Total balance
-          </div>
-          <div className="inline-flex items-center gap-1">
-            <span className="h-0.5 w-6 rounded-full bg-emerald-600" />
-            Total contributed
-          </div>
         </div>
       </section>
 

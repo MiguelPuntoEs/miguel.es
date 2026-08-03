@@ -76,9 +76,12 @@ function formatCurrency(value, decimals = 2) {
 }
 
 export default function PPPCalculator() {
-  const [amount, setAmount] = useState(1000);
+  const [amountInput, setAmountInput] = useState("1000");
   const [fromCountry, setFromCountry] = useState("United States");
   const [searchTerm, setSearchTerm] = useState("");
+
+  const parsed = Number.parseFloat(amountInput);
+  const amount = Number.isFinite(parsed) && parsed >= 0 ? parsed : 0;
 
   const conversions = useMemo(
     () => calculatePPPConversions(amount, fromCountry),
@@ -119,10 +122,12 @@ export default function PPPCalculator() {
           </label>
           <input
             type="number"
+            inputMode="decimal"
             min="0"
             step="0.01"
-            value={amount}
-            onChange={(e) => setAmount(Number(e.target.value))}
+            value={amountInput}
+            onChange={(e) => setAmountInput(e.target.value)}
+            placeholder="1000"
             className="h-9 rounded-lg border border-slate-300 bg-slate-50 px-2 text-sm text-slate-900 placeholder:text-slate-400 shadow-inner focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
           />
         </div>
