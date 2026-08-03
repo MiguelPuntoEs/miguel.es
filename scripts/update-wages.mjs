@@ -1,0 +1,141 @@
+#!/usr/bin/env node
+// Generates public/wages.json from the OECD SDMX API.
+// Dataset: DSD_EARNINGS@AV_AN_WAGE — average annual wages per full-time
+// equivalent employee. Three series per country:
+//   nominal — current prices, national currency (PRICE_BASE=V)
+//   real    — constant prices, national currency (PRICE_BASE=Q)
+//   usdPpp  — constant prices, USD PPP converted (UNIT_MEASURE=USD_PPP)
+// Run: node scripts/update-wages.mjs
+
+import { writeFileSync, readFileSync, existsSync } from "node:fs";
+import { fileURLToPath } from "node:url";
+import { dirname, join } from "node:path";
+
+const root = join(dirname(fileURLToPath(import.meta.url)), "..");
+const outPath = join(root, "public", "wages.json");
+const existing = existsSync(outPath) ? JSON.parse(readFileSync(outPath, "utf8")) : {};
+
+const BASE =
+  "https://sdmx.oecd.org/public/rest/data/OECD.ELS.SAE,DSD_EARNINGS@AV_AN_WAGE,1.0/";
+
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+
+// The OECD API intermittently returns 500/429 for valid queries.
+async function fetchWithRetry(url, attempts = 5) {
+  for (let attempt = 1; ; attempt++) {
+    try {
+      const res = await fetch(url, { headers: { "User-Agent": "wages-updater (miguel.es)" } });
+      if (res.ok) return res.json();
+      if (attempt >= attempts) throw new Error(`OECD API returned ${res.status}`);
+      console.warn(`Attempt ${attempt} got ${res.status}, retrying...`);
+      if (res.status === 429) {
+        const retryAfter = Number(res.headers.get("retry-after"));
+        await sleep(Number.isFinite(retryAfter) && retryAfter > 0 ? retryAfter * 1000 : 30000 * attempt);
+        continue;
+      }
+    } catch (err) {
+      if (attempt >= attempts) throw err;
+      console.warn(`Attempt ${attempt} failed (${err.message}), retrying...`);
+    }
+    await sleep(3000 * attempt);
+  }
+}
+
+function parseResponse({ data }) {
+  const structure = data.structures?.[0] ?? data.structure;
+  const sdims = structure.dimensions.series;
+  const idx = Object.fromEntries(sdims.map((d, i) => [d.id, i]));
+  const years = structure.dimensions.observation[0].values.map((v) => Number(v.id));
+  const rows = [];
+  for (const [key, series] of Object.entries(data.dataSets[0].series ?? {})) {
+    const parts = key.split(":");
+    const dimVal = (id) => sdims[idx[id]].values[Number(parts[idx[id]])].id;
+    const obs = Object.entries(series.observations)
+      .map(([i, v]) => ({ year: years[Number(i)], value: v[0] }))
+      .filter((e) => Number.isFinite(e.year) && Number.isFinite(e.value))
+      .sort((a, b) => a.year - b.year);
+    rows.push({
+      code: dimVal("REF_AREA"),
+      unit: dimVal("UNIT_MEASURE"),
+      priceBase: dimVal("PRICE_BASE"),
+      obs,
+    });
+  }
+  return rows;
+}
+
+// Discover available countries, then fetch in small chunks (bulk queries truncate)
+const probe = await fetchWithRetry(`${BASE}all?format=jsondata&lastNObservations=1`);
+const probeStruct = probe.data.structures?.[0] ?? probe.data.structure;
+const refDim = probeStruct.dimensions.series.find((d) => d.id === "REF_AREA");
+const codes = refDim.values.map((v) => v.id);
+console.log(`Found ${codes.length} reference areas`);
+
+const CHUNK_SIZE = 8;
+const out = {};
+function mergeRows(rows) {
+  for (const row of rows) {
+    const entry = (out[row.code] ??= {});
+    if (row.unit === "USD_PPP") {
+      entry.usdPpp = row.obs;
+    } else if (row.priceBase === "V") {
+      entry.currency = row.unit;
+      entry.nominal = row.obs;
+    } else if (row.priceBase === "Q") {
+      entry.real = row.obs;
+    }
+  }
+}
+
+const keyURL = (list) => `${BASE}${list.join("+")}.WG..A..MEAN._Z?format=jsondata`;
+
+for (let i = 0; i < codes.length; i += CHUNK_SIZE) {
+  const chunk = codes.slice(i, i + CHUNK_SIZE);
+  try {
+    mergeRows(parseResponse(await fetchWithRetry(keyURL(chunk))));
+    console.log(`Fetched ${chunk.join(",")}`);
+  } catch {
+    // Fall back to one request per country; failures are dropped later
+    console.warn(`Chunk ${chunk.join(",")} failed, retrying countries individually...`);
+    for (const code of chunk) {
+      try {
+        mergeRows(parseResponse(await fetchWithRetry(keyURL([code]), 3)));
+        console.log(`Fetched ${code}`);
+      } catch (err) {
+        console.warn(`Skipping ${code} (${err.message})`);
+      }
+      await sleep(500);
+    }
+  }
+  await sleep(1000);
+}
+
+// Keep only areas with the full set of series; fall back to previous data
+// for areas the API failed to return this run
+const complete = {};
+const dropped = [];
+const isComplete = (e) => e?.nominal?.length && e?.real?.length && e?.usdPpp?.length && e?.currency;
+for (const [code, entry] of Object.entries(out)) {
+  if (isComplete(entry)) complete[code] = entry;
+  else dropped.push(code);
+}
+for (const [code, entry] of Object.entries(existing)) {
+  if (!complete[code] && isComplete(entry)) {
+    complete[code] = entry;
+    console.warn(`Keeping previous data for ${code}`);
+  }
+}
+if (dropped.length) console.warn("Incomplete from API:", dropped.join(", "));
+
+const points = Object.values(complete).reduce(
+  (n, e) => n + e.nominal.length + e.real.length + e.usdPpp.length,
+  0
+);
+if (Object.keys(complete).length < 30) {
+  throw new Error(`Only ${Object.keys(complete).length} complete countries; aborting.`);
+}
+
+writeFileSync(outPath, JSON.stringify(complete, null, 2) + "\n");
+console.log(
+  `Wrote ${Object.keys(complete).length} countries, ${points} data points to public/wages.json`
+);
