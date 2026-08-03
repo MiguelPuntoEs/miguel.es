@@ -111,6 +111,8 @@ function calculateInflationAdjustment(amount, country, fromYear, toYear, CPI_DAT
       yearlyBreakdown.push({
         year,
         amount: (amount * countryData[year]) / fromCPI,
+        // What the original fromYear amount can still buy, in fromYear money
+        purchasingPower: (amount * fromCPI) / countryData[year],
         yearlyInflation:
           year > startYear && countryData[prevYear]
             ? ((countryData[year] - countryData[prevYear]) / countryData[prevYear]) * 100
@@ -584,22 +586,38 @@ export default function InflationCalculator() {
                   tickFormatter={(value) => compactFormatter.format(value)}
                 />
                 <Tooltip
-                  formatter={(value) => [`${symbol}${formatCurrency(value)}`, "Value"]}
+                  formatter={(value, name) => [`${symbol}${formatCurrency(value)}`, name]}
                   labelFormatter={(label) => `Year ${label}`}
                   wrapperClassName="!text-xs"
                 />
+                <Legend wrapperStyle={{ fontSize: "0.75rem" }} />
                 <Line
                   type="monotone"
                   dataKey="amount"
-                  name={`Value (${symbol})`}
+                  name="Equivalent value"
                   stroke="#4f46e5"
                   strokeWidth={2}
                   dot={{ r: 3 }}
                   isAnimationActive={true}
                 />
+                <Line
+                  type="monotone"
+                  dataKey="purchasingPower"
+                  name={`Purchasing power of ${fromYear} money`}
+                  stroke="#e11d48"
+                  strokeWidth={2}
+                  strokeDasharray="5 5"
+                  dot={false}
+                  isAnimationActive={true}
+                />
               </LineChart>
             </ResponsiveContainer>
           </div>
+          <p className="mt-1.5 text-xs text-slate-500">
+            The solid line is the amount needed each year to match {symbol}{formatCurrency(safeAmount)} of {fromYear}.
+            The dashed line is what that original {symbol}{formatCurrency(safeAmount)} can still buy, in {fromYear} money —
+            the value of money eroding as prices rise.
+          </p>
         </section>
       )}
 
@@ -702,7 +720,8 @@ export default function InflationCalculator() {
               <thead className="bg-slate-100 text-left text-[0.7rem] uppercase tracking-wide text-slate-500">
                 <tr>
                   <th className="px-3 py-2">Year</th>
-                  <th className="px-3 py-2 text-right">Value</th>
+                  <th className="px-3 py-2 text-right">Equivalent value</th>
+                  <th className="px-3 py-2 text-right">{fromYear} money buys</th>
                   <th className="px-3 py-2 text-right">Annual Inflation</th>
                 </tr>
               </thead>
@@ -717,6 +736,9 @@ export default function InflationCalculator() {
                       {rowLegacy && (
                         <span className="ml-1.5 text-[0.65rem] text-slate-400">≈ {rowLegacy}</span>
                       )}
+                    </td>
+                    <td className="px-3 py-1.5 text-right text-rose-700 font-mono">
+                      {symbol}{formatCurrency(row.purchasingPower)}
                     </td>
                     <td className="px-3 py-1.5 text-right text-slate-600">
                       {row.yearlyInflation === null ? '-' : `${formatCurrency(row.yearlyInflation, 1)}%`}
