@@ -291,15 +291,17 @@ export default function InflationCalculator() {
   const startYear = Math.min(fromYear, toYear);
   const endYear = Math.max(fromYear, toYear);
 
-  // CPI indexed to 100 at the start year, for the selected country plus comparisons
-  const comparison = useMemo(() => {
+  // One line per country: the starting amount under each country's inflation,
+  // anchored so all lines pass through (fromYear, amount). chartMode picks the
+  // rising (equivalent value) or falling (purchasing power) view.
+  const chartSeries = useMemo(() => {
     if (!cpiData) return { rows: [], series: [], dropped: [] };
     const names = [country, ...compareCountries.filter((c) => c !== country)];
     const series = [];
     const dropped = [];
     names.forEach((name) => {
       const data = cpiData[name];
-      if (data && data[startYear]) series.push({ name, base: data[startYear] });
+      if (data && data[fromYear]) series.push({ name, base: data[fromYear] });
       else dropped.push(name);
     });
     const rows = [];
@@ -307,12 +309,17 @@ export default function InflationCalculator() {
       const row = { year };
       series.forEach((s) => {
         const value = cpiData[s.name][year];
-        if (value) row[s.name] = (value / s.base) * 100;
+        if (value) {
+          row[s.name] =
+            chartMode === "equivalent"
+              ? (safeAmount * value) / s.base
+              : (safeAmount * s.base) / value;
+        }
       });
       rows.push(row);
     }
     return { rows, series: series.map((s) => s.name), dropped };
-  }, [cpiData, country, compareCountries, startYear, endYear]);
+  }, [cpiData, country, compareCountries, startYear, endYear, fromYear, chartMode, safeAmount]);
 
   const addCompareCountry = (name) => {
     if (!name || name === country || compareCountries.includes(name)) return;
@@ -593,55 +600,8 @@ export default function InflationCalculator() {
               ))}
             </div>
           </div>
-          <div style={{ width: '100%', height: '320px' }} className="rounded-xl border border-slate-200 bg-slate-50">
-            <ResponsiveContainer width="100%" height="100%">
-              <LineChart
-                data={result.yearlyBreakdown}
-                margin={{ top: 12, right: 20, left: 10, bottom: 12 }}
-              >
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis
-                  dataKey="year"
-                  tick={{ fontSize: 10 }}
-                />
-                <YAxis
-                  tick={{ fontSize: 10 }}
-                  tickFormatter={(value) => compactFormatter.format(value)}
-                />
-                <Tooltip
-                  formatter={(value, name) => [`${symbol}${formatCurrency(value)}`, name]}
-                  labelFormatter={(label) => `Year ${label}`}
-                  wrapperClassName="!text-xs"
-                />
-                <Line
-                  type="monotone"
-                  dataKey={chartMode === "equivalent" ? "amount" : "purchasingPower"}
-                  name={chartMode === "equivalent" ? "Equivalent value" : `Purchasing power of ${fromYear} money`}
-                  stroke={chartMode === "equivalent" ? "#4f46e5" : "#e11d48"}
-                  strokeWidth={2}
-                  dot={{ r: 3 }}
-                  isAnimationActive={true}
-                />
-              </LineChart>
-            </ResponsiveContainer>
-          </div>
-          <p className="mt-1.5 text-xs text-slate-500">
-            {chartMode === "equivalent" ? (
-              <>Amount needed each year to match the purchasing power of {symbol}{formatCurrency(safeAmount)} in {fromYear}.</>
-            ) : (
-              <>What the original {symbol}{formatCurrency(safeAmount)} from {fromYear} can still buy each year, in {fromYear} money — the value of money eroding as prices rise.</>
-            )}
-          </p>
-        </section>
-      )}
-
-      {/* Cross-country comparison */}
-      {result.yearlyBreakdown.length > 1 && (
-        <section className="mb-6">
           <div className="mb-2 flex flex-wrap items-center gap-2">
-            <h2 className="text-sm font-medium text-slate-700">
-              Compare inflation across countries (index, {startYear} = 100)
-            </h2>
+            <span className="text-xs font-medium text-slate-500">Compare:</span>
             {compareCountries.map((name) => (
               <span
                 key={name}
@@ -676,50 +636,63 @@ export default function InflationCalculator() {
               </select>
             )}
           </div>
-          {compareCountries.length > 0 && (
-            <>
-              <div style={{ width: '100%', height: '320px' }} className="rounded-xl border border-slate-200 bg-slate-50">
-                <ResponsiveContainer width="100%" height="100%">
-                  <LineChart
-                    data={comparison.rows}
-                    margin={{ top: 12, right: 20, left: 10, bottom: 12 }}
-                  >
-                    <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis dataKey="year" tick={{ fontSize: 10 }} />
-                    <YAxis
-                      tick={{ fontSize: 10 }}
-                      tickFormatter={(value) => compactFormatter.format(value)}
-                      domain={['auto', 'auto']}
-                    />
-                    <Tooltip
-                      formatter={(value, name) => [formatCurrency(value, 1), name]}
-                      labelFormatter={(label) => `Year ${label}`}
-                      wrapperClassName="!text-xs"
-                    />
-                    <Legend wrapperStyle={{ fontSize: "0.75rem" }} />
-                    {comparison.series.map((name, i) => (
-                      <Line
-                        key={name}
-                        type="monotone"
-                        dataKey={name}
-                        stroke={COMPARE_COLORS[i % COMPARE_COLORS.length]}
-                        strokeWidth={2}
-                        dot={false}
-                        isAnimationActive={true}
-                      />
-                    ))}
-                  </LineChart>
-                </ResponsiveContainer>
-              </div>
-              <p className="mt-1.5 text-xs text-slate-500">
-                Each line shows the CPI relative to {startYear} (=100), so price levels
-                across countries are directly comparable regardless of currency.
-                {comparison.dropped.length > 0 && (
-                  <> No data for {comparison.dropped.join(", ")} in {startYear}.</>
+          <div style={{ width: '100%', height: '320px' }} className="rounded-xl border border-slate-200 bg-slate-50">
+            <ResponsiveContainer width="100%" height="100%">
+              <LineChart
+                data={chartSeries.rows}
+                margin={{ top: 12, right: 20, left: 10, bottom: 12 }}
+              >
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis
+                  dataKey="year"
+                  tick={{ fontSize: 10 }}
+                />
+                <YAxis
+                  tick={{ fontSize: 10 }}
+                  tickFormatter={(value) => compactFormatter.format(value)}
+                />
+                <Tooltip
+                  formatter={(value, name) => [
+                    chartSeries.series.length > 1 ? formatCurrency(value) : `${symbol}${formatCurrency(value)}`,
+                    name,
+                  ]}
+                  labelFormatter={(label) => `Year ${label}`}
+                  wrapperClassName="!text-xs"
+                />
+                {chartSeries.series.length > 1 && (
+                  <Legend wrapperStyle={{ fontSize: "0.75rem" }} />
                 )}
-              </p>
-            </>
-          )}
+                {chartSeries.series.map((name, i) => (
+                  <Line
+                    key={name}
+                    type="monotone"
+                    dataKey={name}
+                    stroke={
+                      chartSeries.series.length === 1
+                        ? (chartMode === "equivalent" ? "#4f46e5" : "#e11d48")
+                        : COMPARE_COLORS[i % COMPARE_COLORS.length]
+                    }
+                    strokeWidth={2}
+                    dot={chartSeries.series.length === 1 ? { r: 3 } : false}
+                    isAnimationActive={true}
+                  />
+                ))}
+              </LineChart>
+            </ResponsiveContainer>
+          </div>
+          <p className="mt-1.5 text-xs text-slate-500">
+            {chartMode === "equivalent" ? (
+              <>Amount needed each year to match the purchasing power of {symbol}{formatCurrency(safeAmount)} in {fromYear}.</>
+            ) : (
+              <>What the original {symbol}{formatCurrency(safeAmount)} from {fromYear} can still buy each year, in {fromYear} money — the value of money eroding as prices rise.</>
+            )}
+            {chartSeries.series.length > 1 && (
+              <> Each line applies that country's inflation to the same starting amount, so all lines cross at {fromYear}.</>
+            )}
+            {chartSeries.dropped.length > 0 && (
+              <> No data for {chartSeries.dropped.join(", ")} in {fromYear}.</>
+            )}
+          </p>
         </section>
       )}
 
