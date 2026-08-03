@@ -2,16 +2,41 @@
 import Layout from "../layouts/Layout.astro";
 ---
 
-<Layout title="Lost in the void" description="This page doesn't exist.">
-  <main class="mx-auto px-4 py-24 flex flex-col items-center gap-6">
-    <p style="font-size: 15vw;" class="leading-none font-bold tracking-tighter text-gray-200 dark:text-gray-800 select-none">404</p>
-    <div class="text-center space-y-2">
-      <h1 class="text-xl font-semibold">You've ventured off the map</h1>
-      <p class="text-sm text-gray-500 dark:text-gray-400">This page got lost somewhere between Madrid and the internet.</p>
-    </div>
-    <div class="flex gap-4 mt-2">
-      <a href="/" class="px-4 py-2 text-sm font-medium bg-gray-900 text-white dark:bg-white dark:text-gray-900 rounded-lg hover:opacity-80 transition-opacity">Take me home</a>
-      <a href="/resources" class="px-4 py-2 text-sm font-medium border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">Browse resources</a>
+<Layout title="Off the chart — 404" description="This page doesn't exist.">
+  <main class="mx-auto flex max-w-2xl flex-col items-center px-5 py-24 text-center sm:py-32">
+    <svg viewBox="0 0 320 90" fill="none" class="w-64 text-hair" aria-hidden="true">
+      <path
+        d="M0 70 L40 55 L80 62 L120 40 L160 48 L200 25 L240 60"
+        stroke="currentColor"
+        stroke-width="2.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      ></path>
+      <path
+        d="M240 60 L280 95 L320 30"
+        stroke="var(--color-amber)"
+        stroke-width="2.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-dasharray="3 6"
+      ></path>
+    </svg>
+    <p class="font-mono mt-6 text-xs uppercase tracking-[0.18em] text-amber">Error 404</p>
+    <h1 class="font-display mt-3 text-3xl sm:text-4xl">This data point is off the chart</h1>
+    <p class="mt-3 text-sm text-ink-soft">
+      The page you're after isn't in the series. Let's get you back to a known value.
+    </p>
+    <div class="mt-8 flex flex-wrap justify-center gap-4">
+      <a
+        href="/"
+        class="rounded-full bg-ink px-6 py-2.5 text-sm font-medium text-paper transition-colors hover:bg-amber"
+        >Take me home</a
+      >
+      <a
+        href="/resources"
+        class="rounded-full border border-hair px-6 py-2.5 text-sm font-medium text-ink transition-colors hover:border-amber hover:text-amber"
+        >Browse resources</a
+      >
     </div>
   </main>
 </Layout>

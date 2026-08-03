@@ -6,21 +6,28 @@ export interface Props {
   dateRange: string;
   url?: string;
 }
-
 const { logo: Logo, courseName, university, dateRange, url } = Astro.props;
+const Wrapper = url ? "a" : "div";
 ---
 
-<div class="flex gap-4">
-  <Logo
-    height={50}
-    width={50}
-    class="bg-slate-50/80 p-2 rounded-lg border border-slate-200/40"
-  />
-  <div class="flex-1">
-    <p class="font-semibold text-sm">
-      {url ? <a href={url}>{courseName}</a> : courseName}
-    </p>
-    <p class="text-xs">{university}</p>
-    <p class="text-xs text-gray-500">{dateRange}</p>
+<Wrapper
+  {...url ? { href: url } : {}}
+  class:list={[
+    "group flex h-full flex-col rounded-xl border border-hair bg-panel/40 p-5 transition-all",
+    url && "hover:-translate-y-0.5 hover:border-amber/60 hover:bg-panel/70",
+  ]}
+>
+  <div class="mb-4 flex items-center justify-between">
+    <div class="flex h-9 w-9 items-center justify-center rounded-lg border border-hair bg-paper">
+      <Logo height={22} width={22} class="max-h-5 max-w-5" />
+    </div>
+    <span class="font-mono text-[0.65rem] uppercase tracking-[0.1em] text-ink-soft"
+      >{dateRange}</span
+    >
   </div>
-</div>
+  <h3 class="font-display text-lg leading-snug">
+    {courseName}
+    {url && <span class="text-amber transition-transform group-hover:translate-x-0.5 inline-block">→</span>}
+  </h3>
+  <p class="mt-1 text-sm text-ink-soft">{university}</p>
+</Wrapper>

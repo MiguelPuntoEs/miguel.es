@@ -1,12 +1,12 @@
 ---
 import Image from "astro/components/Image.astro";
 import LogoA5 from "../assets/companies/a5labs.svg";
-import LogoAemet from "../assets/companies/aemet.svg";
 import LogoAirbus from "../assets/companies/airbus.svg";
 import LogoGmv from "../assets/companies/gmv.svg";
 import LogoLeica from "../assets/companies/leica.svg";
 import LogoPascual from "../assets/companies/pascual.svg";
 import LogoToom from "../assets/companies/toom.svg";
+import LogoAemet from "../assets/companies/aemet.svg";
 import profile from "../assets/pictures/profile.jpg";
 import LogoHesperides from "../assets/universities/hesperides.svg";
 import LogoUfm from "../assets/universities/ufm.svg";
@@ -16,222 +16,303 @@ import EducationEntry from "../components/EducationEntry.astro";
 import JobEntry from "../components/JobEntry.astro";
 import TeachingEntry from "../components/TeachingEntry.astro";
 import Layout from "../layouts/Layout.astro";
+
+const ticker = [
+  "Forecasting",
+  "LLMs",
+  "Econometrics",
+  "Time series",
+  "RAG & agents",
+  "Panel data",
+  "Signal processing",
+  "Teaching",
+  "Python · R · SQL",
+];
+const press = [
+  { year: "2026", title: "Revisiting Inflation in the American Civil War", where: "APEE 50th Meeting — Las Vegas, Nevada" },
+  { year: "2025", title: "Sistemas de pensiones comparados", where: "Centro Ruth Richardson, Universidad de las Hespérides" },
+  { year: "2025", title: "Big Data: el arte de domar las mareas de información", where: "Revista Emprendedores España" },
+  { year: "2024", title: "Quantity Theory of Money Around the Globe", where: "Economics Affairs Workshop — UFM, Madrid" },
+];
 ---
 
 <Layout
-  title="Miguel González Calvo - Senior LLM Engineer | AI & Data Science"
-  description="Miguel González Calvo - Senior LLM Engineer. 8+ years in software development, 5+ in Data Science. Specialized in LLMs, time series, and AI."
+  title="Miguel González Calvo — AI Engineer, Economist & Educator"
+  description="Miguel González Calvo: AI Engineering Lead, quantitative economist and university lecturer in Madrid. Forecasting, LLMs, econometrics and signal processing."
 >
-  <main>
-  <section
-    class="max-w-3xl mx-auto flex flex-col sm:flex-row gap-4 sm:gap-8 px-4 my-8"
-  >
-    <Image
-      src={profile}
-      alt="Miguel González Calvo - Senior LLM Engineer"
-      class="rounded w-32 h-32 sm:w-40 sm:h-40 flex-shrink-0"
-      height={160}
-      width={160}
-      densities={[2]}
-      loading="eager"
-      fetchpriority="high"
-    />
-    <div class="flex flex-col gap-3">
-      <h1 class="text-sm">Hi, I'm <strong>Miguel González Calvo</strong> 👋</h1>
-      <p class="text-2xl font-semibold">Senior LLM Engineer</p>
-      <p class="text-sm">
-        AI engineer from Madrid with 8+ years of experience in software
-        development
-      </p>
+  <!-- ===================== HERO ===================== -->
+  <section class="mx-auto max-w-6xl px-5 sm:px-8 pt-12 sm:pt-16">
+    <div class="grid items-end gap-10 lg:grid-cols-[1fr_auto]">
+      <div>
+        <p class="font-mono text-xs uppercase tracking-[0.2em] text-ink-soft">
+          Madrid · AI · Economics · Teaching
+        </p>
+        <h1
+          class="font-display mt-6 text-[3.25rem] font-bold leading-[0.92] tracking-tight sm:text-7xl lg:text-8xl"
+        >
+          AI engineer.<br />
+          Economist.<br />
+          <span class="text-amber">Educator.</span>
+        </h1>
+        <p class="mt-7 max-w-xl text-base leading-relaxed text-ink-soft sm:text-lg">
+          I lead GenAI engineering at A5 Labs, research monetary economics, and
+          teach finance and AI at four universities — turning messy data into
+          things people can actually decide on.
+        </p>
+
+        <div class="mt-8 flex flex-wrap items-center gap-x-5 gap-y-3 text-sm">
+          <a
+            href="#work"
+            class="group inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3 font-medium text-paper transition-colors hover:bg-amber"
+          >
+            See the work
+            <span class="transition-transform group-hover:translate-y-0.5">↓</span>
+          </a>
+          <a href="#contact" class="font-medium underline-offset-4 hover:text-amber hover:underline">
+            Get in touch
+          </a>
+        </div>
+      </div>
+
+      <figure class="relative hidden w-64 shrink-0 justify-self-end lg:block">
+        <div class="absolute inset-0 translate-x-3 translate-y-3 rounded-[1.75rem] bg-amber"></div>
+        <Image
+          src={profile}
+          alt="Portrait of Miguel González Calvo"
+          class="relative w-full rounded-[1.75rem] object-cover"
+          width={264}
+          height={320}
+          densities={[2]}
+          loading="eager"
+          fetchpriority="high"
+        />
+      </figure>
     </div>
   </section>
-  <section class="max-w-3xl mx-auto px-4 mt-4">
-    <h2 class="font-semibold text-lg">Bio</h2>
-    <p class="text-sm">
-      Professional with 5+ years of experience in Data Science specialized in
-      LLMs and time series, and 8+ years in software development. Constantly
-      learning about AI from new publications and specialized content. Motivated
-      by implementing innovative methodologies and observing their impact and
-      TensorFlow-certified.
-    </p>
-    <h3 class="font-medium text-base mt-2">Education</h3>
-    <p class="text-sm">
-      I hold a BSc. in Aerospace Engineering (2016), a MSc. in Signal Theory and
-      Communications (2019) from the Polytechnic University of Madrid (Spain),
-      and a MA. in Economics (2024) from Universidad de las Hespérides (Spain).
-    </p>
+
+  <!-- Kinetic signature: looping ticker of what I work on -->
+  <section class="mt-14 overflow-hidden border-y border-hair py-4 sm:mt-20">
+    <div class="marquee items-center gap-8 font-display text-2xl font-semibold sm:text-3xl">
+      {
+        [...ticker, ...ticker].map((t) => (
+          <span class="flex items-center gap-8 whitespace-nowrap">
+            {t}
+            <span class="text-amber">✳</span>
+          </span>
+        ))
+      }
+    </div>
   </section>
-  <section class="max-w-3xl mx-auto px-4 mt-8">
-    <h2 class="text-xl font-semibold mb-4">Professional Experience</h2>
-    <div class="flex flex-col gap-4 lg:gap-6">
+
+  <!-- ===================== NOW (dark block) ===================== -->
+  <section class="mx-auto mt-20 max-w-6xl px-5 sm:px-8">
+    <div class="reveal rounded-3xl bg-ink p-7 text-paper sm:p-12">
+      <p class="font-mono text-xs uppercase tracking-[0.2em] text-amber">Right now</p>
+      <div class="mt-7 grid gap-8 sm:grid-cols-3">
+        <div>
+          <p class="font-display text-2xl">AI Engineering Lead</p>
+          <p class="mt-2 text-sm leading-relaxed text-paper/60">
+            A5 Labs — leading a team of five building GenAI systems from design to
+            production.
+          </p>
+        </div>
+        <div>
+          <p class="font-display text-2xl">PhD candidate</p>
+          <p class="mt-2 text-sm leading-relaxed text-paper/60">
+            Monetary economics &amp; inflation at Universidad de las Hespérides.
+          </p>
+        </div>
+        <div>
+          <p class="font-display text-2xl">Lecturer</p>
+          <p class="mt-2 text-sm leading-relaxed text-paper/60">
+            Finance, economics &amp; applied AI at UFM, Hespérides and UAX.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== WORK ===================== -->
+  <section id="work" class="mx-auto mt-24 max-w-6xl px-5 sm:px-8 scroll-mt-20">
+    <div class="reveal flex items-end justify-between">
+      <h2 class="font-display text-3xl font-bold sm:text-5xl">Work</h2>
+      <p class="font-mono text-xs uppercase tracking-[0.12em] text-ink-soft">2016 — now</p>
+    </div>
+
+    <div class="reveal mt-8 border-b border-hair">
       <JobEntry
         logo={LogoA5}
-        jobTitle="Senior LLM Engineer"
         companyName="A5 Labs"
-        dateRange="Jan 2025 - Present"
         location="California, US (remote)"
-        logoClass="bg-[#202348] p-2 rounded-lg"
+        logoClass="bg-[#202348] border-[#202348]"
+        roles={[
+          { jobTitle: "AI Engineering Lead", dateRange: "Oct 2025 — now" },
+          { jobTitle: "Senior LLM Engineer", dateRange: "Jan 2025 — Sep 2025" },
+        ]}
+        summary="Lead a team of five delivering GenAI systems end to end — RAG and agentic platforms in production — and set the evaluation, model-lifecycle and regression-testing standards behind them."
       />
       <JobEntry
         logo={LogoPascual}
-        jobTitle="Lead Data Scientist"
-        companyName="Pascual"
-        dateRange="Aug 2024 - Jan 2025"
+        companyName="Calidad Pascual"
         location="Madrid, ES"
+        roles={[{ jobTitle: "Lead Data Scientist", dateRange: "Aug 2024 — Jan 2025" }]}
+        summary="Built scenario-based time-series forecasts (multivariate ARIMA with exogenous regressors) for commercial planning, and segmented the customer portfolio with RFM clustering for risk-tiered decisions."
       />
       <JobEntry
         logo={LogoToom}
-        jobTitle="Data Scientist"
         companyName="toom Baumarkt"
-        dateRange="Jul 2023 - Jul 2024"
         location="Cologne, DE"
+        roles={[{ jobTitle: "Data Scientist", dateRange: "Jul 2023 — Jul 2024" }]}
+        summary="Productionized demand forecasting across 330+ stores, churn and recommendation models, and an internal RAG chatbot (LangGraph + Azure) — with A/B tests measuring the impact."
+        metric={{ value: "−15%", label: "avg. inventory", points: [9, 8.4, 8.6, 7.9, 7.4, 6.8, 6.9, 6.2, 5.7] }}
       />
       <JobEntry
         logo={LogoLeica}
-        jobTitle="Product Engineer"
         companyName="Leica Geosystems"
-        dateRange="Jun 2019 - Jul 2023"
         location="Heerbrugg, CH"
+        roles={[{ jobTitle: "AI Specialist — Product Engineer", dateRange: "Jun 2019 — Jul 2023" }]}
+        summary="Forecasting and statistical validation for GNSS post-processing — ARIMA, state-space and Temporal Fusion Transformers on noisy multivariate signals, with automated monitoring tooling."
+        metric={{ value: "−90%", label: "validation time", points: [10, 9.2, 7.5, 6, 4.2, 3, 1.8, 1.2, 1] }}
       />
       <JobEntry
         logo={LogoAirbus}
-        jobTitle="Software Engineer"
         companyName="Airbus Defence and Space"
-        dateRange="May 2018 - May 2019"
         location="Munich, DE"
+        roles={[{ jobTitle: "Software Development Engineer", dateRange: "May 2018 — May 2019" }]}
+        summary="Prototyped satellite-based positioning algorithms in C++ and defined their requirements and limitations."
       />
       <JobEntry
         logo={LogoGmv}
-        jobTitle="Software Engineer"
         companyName="GMV"
-        dateRange="Mar 2017 - Jul 2017"
         location="Tres Cantos, ES"
+        roles={[{ jobTitle: "Software Engineer", dateRange: "Mar 2017 — May 2018" }]}
+        summary="Developed satellite-based receiver positioning algorithms in C++ and an Android app for high-accuracy positioning integrating C++ libraries."
       />
       <JobEntry
         logo={LogoAemet}
-        jobTitle="Internship: Developer"
-        companyName="AEMet"
-        dateRange="Jan 2016 - Jun 2016"
+        companyName="AEMET"
         location="Madrid, ES"
+        roles={[{ jobTitle: "Developer (internship)", dateRange: "Jan 2016 — Jun 2016" }]}
+        summary="Built a web tool to decode and visualize SIGMET/AIRMET meteorological data for aviation."
       />
     </div>
   </section>
-  <section class="max-w-3xl mx-auto px-4 mt-8">
-    <h2 class="text-xl font-semibold mb-4">Teaching</h2>
-    <div class="flex flex-col gap-4 lg:gap-6">
-      <TeachingEntry
-        logo={LogoUfm}
-        courseName="IA: Tu Copiloto Académico"
-        url="/courses/academic-copilot"
-        university="Universidad Francisco Marroquín"
-        dateRange="Jun 2026 - Jul 2026"
-      />
-      <TeachingEntry
-        logo={LogoUfm}
-        courseName="Python for Finance"
-        url="/courses/python-for-finance"
-        university="Universidad Francisco Marroquín"
-        dateRange="Sep 2025 -"
-      />
-      <TeachingEntry
-        logo={LogoUfm}
-        courseName="Technology A"
-        url="/courses/technology"
-        university="Universidad Francisco Marroquín"
-        dateRange="Sep 2025 -"
-      />
-      <TeachingEntry
-        logo={LogoHesperides}
-        courseName="International Economics and Globalization"
-        url="/courses/international-economics"
-        university="Universidad de las Hespérides"
-        dateRange="Sep 2025 -"
-      />
-      <TeachingEntry
-        logo={LogoUax}
-        courseName="Blockchain"
-        url="/courses/blockchain"
-        university="Universidad Alfonso X el Sabio"
-        dateRange="Sep 2025 -"
-      />
-      <TeachingEntry
-        logo={LogoUfm}
-        courseName="Economics I"
-        url="/courses/economics-i"
-        university="Universidad Francisco Marroquín"
-        dateRange="Jan 2025 - May 2025"
-      />
-      <TeachingEntry
-        logo={LogoUfm}
-        courseName="Python Seminar"
-        university="Universidad Francisco Marroquín"
-        dateRange="Jun 2025"
-      />
+
+  <!-- ===================== TEACHING ===================== -->
+  <section class="mx-auto mt-24 max-w-6xl px-5 sm:px-8">
+    <div class="reveal flex items-end justify-between">
+      <h2 class="font-display text-3xl font-bold sm:text-5xl">Teaching</h2>
+      <p class="font-mono text-xs uppercase tracking-[0.12em] text-ink-soft">4 universities</p>
     </div>
-  </section><section class="max-w-3xl mx-auto px-4 mt-8">
-    <h2 class="text-xl font-semibold mb-4">Education</h2>
-    <div class="flex flex-col gap-4 lg:gap-6">
+    <div class="reveal mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <TeachingEntry logo={LogoUfm} courseName="Python for Finance" url="/courses/python-for-finance" university="Universidad Francisco Marroquín" dateRange="Sep 2025 — now" />
+      <TeachingEntry logo={LogoUfm} courseName="Financial Mathematics" url="/courses/financial-mathematics" university="Universidad Francisco Marroquín" dateRange="Sep 2025 — now" />
+      <TeachingEntry logo={LogoUfm} courseName="Technology" url="/courses/technology" university="Universidad Francisco Marroquín" dateRange="Sep 2025 — now" />
+      <TeachingEntry logo={LogoHesperides} courseName="International Economics & Globalization" url="/courses/international-economics" university="Universidad de las Hespérides" dateRange="Sep 2025 — now" />
+      <TeachingEntry logo={LogoUax} courseName="Blockchain" url="/courses/blockchain" university="Universidad Alfonso X el Sabio" dateRange="Sep 2025 — now" />
+      <TeachingEntry logo={LogoUfm} courseName="IA: Tu Copiloto Académico" url="/courses/academic-copilot" university="Universidad Francisco Marroquín" dateRange="Jun — Jul 2026" />
+      <TeachingEntry logo={LogoUfm} courseName="Economics I" url="/courses/economics-i" university="Universidad Francisco Marroquín" dateRange="Jan — May 2025" />
+    </div>
+  </section>
+
+  <!-- ===================== EDUCATION ===================== -->
+  <section class="mx-auto mt-24 max-w-6xl px-5 sm:px-8">
+    <h2 class="reveal font-display text-3xl font-bold sm:text-5xl">Education</h2>
+    <div class="reveal mt-8 border-b border-hair">
+      <EducationEntry
+        logo={LogoHesperides}
+        degree="PhD Economics"
+        university="Universidad de las Hespérides"
+        dateRange="Sep 2025 — now"
+        specialization="Monetary economics & inflation"
+      />
       <EducationEntry
         logo={LogoHesperides}
         degree="MA Economics"
         university="Universidad de las Hespérides"
-        dateRange="Oct 2023 - Nov 2024"
-        thesis={{
-          title:
-            "Quantity Theory of Money Around the Globe: Money Growth, Money Velocity and Inflation Subject to Different Monetary Policies",
-          grade:
-            "Honors in: Economics and Institutions, Econometrics, Quantitative Methods for Economics, Game Theory and Information Economics, Monetary and Financial Integration, Experimental Economics",
-        }}
+        dateRange="Sep 2023 — Nov 2024"
+        grade="9.60"
+        thesis={{ title: "Quantity Theory of Money Around the Globe: Money Growth, Money Velocity and Inflation Subject to Different Monetary Policies", grade: "panel econometrics across monetary regimes" }}
+        honors={["Econometrics", "Quantitative Methods", "Game Theory", "Monetary & Financial Integration", "Experimental Economics"]}
       />
-
       <EducationEntry
         logo={LogoUpm}
-        degree="MSc. in Signal Theory and Communications"
+        degree="MSc Signal Theory & Communications"
         university="Universidad Politécnica de Madrid"
-        dateRange="Sep 2017 - Feb 2019"
+        dateRange="Sep 2017 — Feb 2019"
         grade="8.5"
-        thesis={{
-          title:
-            "Full-Wave Design of Coaxial to Waveguide Transitions and Waveguide Mode Transducers",
-          grade: "10 out of 10, Distinction",
-        }}
+        thesis={{ title: "Full-Wave Design of Coaxial to Waveguide Transitions and Waveguide Mode Transducers", grade: "10/10, Distinction" }}
       />
-
       <EducationEntry
         logo={LogoUpm}
-        degree="BSc. in Aerospace Engineering"
+        degree="BSc Aerospace Engineering"
         university="Universidad Politécnica de Madrid"
-        dateRange="Sep 2012 - Sep 2016"
+        dateRange="Sep 2012 — Sep 2016"
         grade="7.6"
         specialization="Air Navigation Systems"
-        thesis={{
-          title: "SIGMET and AIRMET decoding web-based tool",
-          grade: "9.5 out of 10",
-        }}
+        thesis={{ title: "SIGMET and AIRMET decoding web-based tool", grade: "9.5/10" }}
       />
     </div>
   </section>
-  <section class="max-w-3xl mx-auto px-4 mt-8 mb-16">
-    <h2 class="text-xl font-semibold mb-4">Contact</h2>
-    <p class="text-sm">
-      I don’t monitor all communications sent through this website. If you need
-      to get in touch, please reach out to me directly on <a
-        href="https://linkedin.com/in/mgcalvo/" target="_blank" rel="noopener noreferrer"
-        class="font-semibold">LinkedIn</a
-      > or <a href="https://github.com/MiguelPuntoEs" target="_blank" rel="noopener noreferrer" class="font-semibold"
-        >GitHub</a
-      >.
-    </p>
-    <div class="mt-4 p-4 bg-gray-100 dark:bg-gray-800 rounded-lg border border-gray-300 dark:border-gray-700">
-      <p class="text-sm mb-2">
-        🔐🧅 <strong>Feeling a bit hacky?</strong> You can also visit this site over Tor at:
+
+  <!-- ===================== WRITING & PRESS ===================== -->
+  <section class="mx-auto mt-24 max-w-6xl px-5 sm:px-8">
+    <div class="reveal flex items-end justify-between">
+      <h2 class="font-display text-3xl font-bold sm:text-5xl">Writing &amp; press</h2>
+      <a href="/publications" class="font-mono text-xs uppercase tracking-[0.12em] text-amber hover:underline underline-offset-4">
+        All publications →
+      </a>
+    </div>
+    <ul class="reveal mt-8 border-t border-hair">
+      {
+        press.map((p) => (
+          <li class="group grid grid-cols-[auto_1fr] gap-x-5 border-b border-hair py-5 transition-colors hover:bg-panel sm:gap-x-10 sm:px-3">
+            <span class="font-mono text-sm text-amber">{p.year}</span>
+            <div>
+              <p class="font-display text-lg leading-snug">{p.title}</p>
+              <p class="mt-0.5 text-sm text-ink-soft">{p.where}</p>
+            </div>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+
+  <!-- ===================== RESOURCES ===================== -->
+  <section class="mx-auto mt-24 max-w-6xl px-5 sm:px-8">
+    <a
+      href="/resources"
+      class="reveal group flex flex-col gap-4 rounded-3xl border border-hair bg-panel p-7 transition-all hover:-translate-y-0.5 hover:border-amber sm:flex-row sm:items-center sm:justify-between sm:p-10"
+    >
+      <div>
+        <p class="font-mono text-xs uppercase tracking-[0.18em] text-amber">Free resources</p>
+        <h2 class="font-display mt-2 text-2xl font-bold sm:text-3xl">Calculators, guides &amp; course materials</h2>
+        <p class="mt-2 max-w-lg text-sm text-ink-soft">
+          Interactive finance calculators, a QR generator, and curated references
+          on Python, machine learning and economics.
+        </p>
+      </div>
+      <span class="font-display shrink-0 text-3xl text-amber transition-transform group-hover:translate-x-1">→</span>
+    </a>
+  </section>
+
+  <!-- ===================== CONTACT (orange block) ===================== -->
+  <section id="contact" class="mx-auto mt-24 max-w-6xl px-5 sm:px-8 scroll-mt-20">
+    <div class="reveal rounded-3xl bg-amber p-10 text-center text-white sm:p-16">
+      <h2 class="font-display mx-auto max-w-3xl text-3xl font-bold leading-[1.05] sm:text-5xl">
+        Building something with data, forecasting or AI? Let's talk.
+      </h2>
+      <p class="mx-auto mt-5 max-w-md text-sm text-white/80">
+        I'm most responsive on LinkedIn and GitHub — reach out there directly.
       </p>
-      <a
-        href="http://miguel3wuxsv5wb63n7522pvk7tpwc3lvsvbdzai32bvvca2ac5olbqd.onion/"
-        class="font-mono text-xs block break-all"
-        >miguel3wuxsv5wb63n7522pvk7tpwc3lvsvbdzai32bvvca2ac5olbqd.onion</a
-      >
+      <div class="mt-8 flex flex-wrap items-center justify-center gap-4">
+        <a href="https://linkedin.com/in/mgcalvo/" target="_blank" rel="noopener noreferrer" class="rounded-full bg-ink px-7 py-3 text-sm font-medium text-paper transition-transform hover:-translate-y-0.5">
+          LinkedIn
+        </a>
+        <a href="https://github.com/MiguelPuntoEs" target="_blank" rel="noopener noreferrer" class="rounded-full bg-white px-7 py-3 text-sm font-medium text-ink transition-transform hover:-translate-y-0.5">
+          GitHub
+        </a>
+      </div>
     </div>
   </section>
-  </main>
 </Layout>

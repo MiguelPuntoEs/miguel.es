@@ -11,11 +11,16 @@ const courseEntries = courses.map(course => ({
 ---
 
 <Layout title="Miguel González Calvo | Resources" description="Teaching materials, calculators, and curated reference resources on AI, economics, Python, and data science">
-  <main class="max-w-3xl mx-auto px-4">
-    <h1 class="text-2xl font-semibold mb-4">Resources</h1>
-    
-    <h2 class="text-lg font-semibold mb-3 mt-6">Teaching</h2>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-6 mb-8">
+  <main class="mx-auto max-w-5xl px-5 sm:px-8 pt-12 sm:pt-16">
+    <p class="font-mono text-xs uppercase tracking-[0.15em] text-amber">Free &amp; open</p>
+    <h1 class="font-display mt-3 text-4xl sm:text-5xl">Resources</h1>
+    <p class="mt-3 max-w-xl text-sm text-ink-soft">
+      Course materials, interactive calculators and curated references on AI,
+      economics, Python and data science.
+    </p>
+
+    <h2 class="font-display text-xl mt-12 mb-4">Teaching</h2>
+    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 mb-12">
       {courseEntries.map(course => (
         <ResourceEntry
           title={course.title}
@@ -35,8 +40,8 @@ const courseEntries = courses.map(course => ({
       />
     </div>
 
-    <h2 class="text-lg font-semibold mb-3">Tools & Calculators</h2>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-6 mb-8">
+    <h2 class="font-display text-xl mb-4">Tools &amp; calculators</h2>
+    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 mb-12">
       <ResourceEntry
         title="QR Code Generator"
         description="Generate QR codes for URLs, contacts, WiFi, events, and more."
@@ -69,8 +74,8 @@ const courseEntries = courses.map(course => ({
       />
     </div>
 
-    <h2 class="text-lg font-semibold mb-3">Reference Materials</h2>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-6">
+    <h2 class="font-display text-xl mb-4">Reference materials</h2>
+    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
       <ResourceEntry
         title="Interesting APIs"
         description="Collection of useful APIs for development and data analysis."

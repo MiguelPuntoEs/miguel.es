@@ -8,16 +8,42 @@ const { title, description, lang = "en", article = false, university } = Astro.p
 
 <html lang={lang} class="scroll-smooth">
   <head>
+    <script is:inline>
+      document.documentElement.classList.add("js");
+    </script>
     <link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/inter-latin-ext.woff2" as="font" type="font/woff2" crossorigin />
 
     <MainHead {title} {description} {lang} {article} {university} />
     <slot name="head" />
   </head>
-  
-  <body>
+
+  <body class="flex min-h-screen flex-col">
     <Navbar />
-    <slot />
+    <div class="flex-1">
+      <slot />
+    </div>
     <Footer />
+
+    <script>
+      const els = document.querySelectorAll(".reveal");
+      const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (reduce || !("IntersectionObserver" in window)) {
+        els.forEach((el) => el.classList.add("in"));
+      } else {
+        const io = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((e) => {
+              if (e.isIntersecting) {
+                e.target.classList.add("in");
+                io.unobserve(e.target);
+              }
+            });
+          },
+          { rootMargin: "0px 0px -10% 0px", threshold: 0.08 },
+        );
+        els.forEach((el) => io.observe(el));
+      }
+    </script>
   </body>
 </html>

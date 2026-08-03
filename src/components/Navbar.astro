@@ -1,21 +1,54 @@
-<div class="max-w-3xl mx-auto flex flex-col mt-8 px-4 mb-8">
-  <a href="/" class="text-xl font-light"
-    ><strong class="font-bold">Miguel</strong> González Calvo</a
+---
+const { pathname } = Astro.url;
+const links = [
+  { href: "/", label: "Home" },
+  { href: "/publications", label: "Writing" },
+  { href: "/resources", label: "Resources" },
+  { href: "/qr", label: "QR" },
+];
+const isActive = (href: string) =>
+  href === "/" ? pathname === "/" : pathname.startsWith(href);
+---
+
+<header
+  class="sticky top-0 z-50 border-b border-hair bg-paper/85 backdrop-blur-md"
+>
+  <div
+    class="max-w-5xl mx-auto px-5 sm:px-8 h-14 flex items-center justify-between"
   >
-  <nav class="mt-6" aria-label="Main">
-    <ul class="font-semibold text-xs flex gap-4">
-      <li><a href="/">Home</a></li>
-      <li><a href="/resources">Resources</a></li>
-      <li><a href="/qr">QR Generator</a></li>
-      <li><a href="/publications">Publications</a></li>
-      <li>
-        <a
-          href="https://www.youtube.com/@MiguelPuntoEs"
-          target="_blank"
-          rel="noopener noreferrer">YouTube</a
-        >
-      </li>
-    </ul>
-  </nav>
-  <hr class="border-gray-300 mt-4" />
-</div>
+    <a href="/" class="group flex items-center gap-2.5" aria-label="Home">
+      <span
+        class="inline-block h-2 w-2 rounded-full bg-amber transition-transform group-hover:scale-125"
+      ></span>
+      <span class="font-display text-base tracking-tight">
+        <strong class="font-semibold">Miguel</strong>
+        <span class="hidden text-ink-soft sm:inline">González Calvo</span>
+      </span>
+    </a>
+    <nav aria-label="Main">
+      <ul
+        class="flex items-center gap-3.5 sm:gap-7 font-mono text-[0.62rem] sm:text-[0.7rem] uppercase tracking-[0.08em] sm:tracking-[0.12em]"
+      >
+        {
+          links.map((l) => (
+            <li>
+              <a
+                href={l.href}
+                aria-current={isActive(l.href) ? "page" : undefined}
+                class:list={[
+                  "relative py-1 transition-colors hover:text-amber",
+                  isActive(l.href) ? "text-ink" : "text-ink-soft",
+                ]}
+              >
+                {l.label}
+                {isActive(l.href) && (
+                  <span class="absolute -bottom-px left-0 h-px w-full bg-amber" />
+                )}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+  </div>
+</header>

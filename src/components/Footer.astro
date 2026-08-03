@@ -3,36 +3,72 @@ import Image from "astro/components/Image.astro";
 import LogoGitHub from "../assets/logos/github.svg";
 import LogoLinkedIn from "../assets/logos/linkedin.svg";
 import LogoYouTube from "../assets/logos/youtube.svg";
+
+const social = [
+  { href: "https://linkedin.com/in/mgcalvo/", label: "LinkedIn", icon: LogoLinkedIn },
+  { href: "https://github.com/MiguelPuntoEs", label: "GitHub", icon: LogoGitHub },
+  { href: "https://www.youtube.com/@MiguelPuntoEs", label: "YouTube", icon: LogoYouTube },
+];
+const nav = [
+  { href: "/", label: "Home" },
+  { href: "/publications", label: "Writing & press" },
+  { href: "/resources", label: "Resources" },
+  { href: "/qr", label: "QR generator" },
+];
+const year = 2026;
 ---
 
-<footer class="max-w-3xl mx-auto px-4 py-8 mt-8 border-t border-gray-300">
-  <div class="flex flex-col sm:flex-row justify-between gap-6 text-xs text-gray-600 dark:text-gray-400">
-    <div class="flex flex-col gap-3">
-      <span class="font-semibold text-gray-900 dark:text-gray-200">Miguel González Calvo</span>
-      <div class="flex gap-4 items-center">
-        <a href="https://linkedin.com/in/mgcalvo/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-1 hover:text-gray-900 dark:hover:text-gray-200">
-          <Image src={LogoLinkedIn} alt="LinkedIn" class="w-4 h-4" width={16} height={16} />
-          LinkedIn
-        </a>
-        <a href="https://github.com/MiguelPuntoEs" target="_blank" rel="noopener noreferrer" class="flex items-center gap-1 hover:text-gray-900 dark:hover:text-gray-200">
-          <Image src={LogoGitHub} alt="GitHub" class="w-4 h-4" width={16} height={16} />
-          GitHub
-        </a>
-        <a href="https://www.youtube.com/@MiguelPuntoEs" target="_blank" rel="noopener noreferrer" class="flex items-center gap-1 hover:text-gray-900 dark:hover:text-gray-200">
-          <Image src={LogoYouTube} alt="YouTube" class="w-4 h-4" width={16} height={16} />
-          YouTube
-        </a>
+<footer class="border-t border-hair mt-24">
+  <div class="max-w-5xl mx-auto px-5 sm:px-8 py-12">
+    <div class="flex flex-col gap-10 sm:flex-row sm:justify-between">
+      <div class="max-w-xs">
+        <p class="font-display text-lg">Miguel González Calvo</p>
+        <p class="mt-2 text-sm text-ink-soft">
+          AI engineering, quantitative economics, and teaching — from Madrid.
+        </p>
+        <div class="mt-5 flex gap-4">
+          {
+            social.map((s) => (
+              <a
+                href={s.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={s.label}
+                class="flex h-9 w-9 items-center justify-center rounded-full border border-hair text-ink-soft transition-colors hover:border-amber hover:text-amber"
+              >
+                <Image src={s.icon} alt="" class="h-4 w-4" width={16} height={16} />
+              </a>
+            ))
+          }
+        </div>
       </div>
+
+      <nav aria-label="Footer" class="flex flex-col gap-2.5">
+        <span class="font-mono text-[0.65rem] uppercase tracking-[0.15em] text-ink-soft"
+          >Navigate</span
+        >
+        {
+          nav.map((n) => (
+            <a
+              href={n.href}
+              class="text-sm text-ink transition-colors hover:text-amber"
+            >
+              {n.label}
+            </a>
+          ))
+        }
+      </nav>
     </div>
-    <nav aria-label="Footer" class="flex flex-col gap-1.5 sm:text-right">
-      <a href="/" class="hover:text-gray-900 dark:hover:text-gray-200">Home</a>
-      <a href="/publications" class="hover:text-gray-900 dark:hover:text-gray-200">Publications</a>
-      <a href="/resources" class="hover:text-gray-900 dark:hover:text-gray-200">Resources</a>
-      <a href="/qr" class="hover:text-gray-900 dark:hover:text-gray-200">QR Generator</a>
-      <a href="/resources/llm" class="hover:text-gray-900 dark:hover:text-gray-200">LLM Resources</a>
-      <a href="/resources/machine-learning" class="hover:text-gray-900 dark:hover:text-gray-200">Machine Learning</a>
-      <a href="/resources/python" class="hover:text-gray-900 dark:hover:text-gray-200">Python</a>
-      <a href="/resources/economic-sources" class="hover:text-gray-900 dark:hover:text-gray-200">Economics</a>
-    </nav>
+
+    <div
+      class="mt-10 flex flex-col gap-2 border-t border-hair pt-6 font-mono text-[0.7rem] text-ink-soft sm:flex-row sm:items-center sm:justify-between"
+    >
+      <span>© {year} Miguel González Calvo</span>
+      <a
+        href="http://miguel3wuxsv5wb63n7522pvk7tpwc3lvsvbdzai32bvvca2ac5olbqd.onion/"
+        class="break-all transition-colors hover:text-amber"
+        >🧅 Also on Tor</a
+      >
+    </div>
   </div>
 </footer>
