@@ -20,8 +20,14 @@ const BASE =
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
+// Pace knobs: WAGES_CHUNK (countries/request), WAGES_ATTEMPTS (retries),
+// WAGES_PACE_MS (delay between requests) — for slow-drip runs on tight quotas
+const CHUNK_SIZE = Number(process.env.WAGES_CHUNK) || 8;
+const ATTEMPTS = Number(process.env.WAGES_ATTEMPTS) || 5;
+const PACE_MS = Number(process.env.WAGES_PACE_MS) || 1000;
+
 // The OECD API intermittently returns 500/429 for valid queries.
-async function fetchWithRetry(url, attempts = 5) {
+async function fetchWithRetry(url, attempts = ATTEMPTS) {
   for (let attempt = 1; ; attempt++) {
     try {
       const res = await fetch(url, { headers: { "User-Agent": "wages-updater (miguel.es)" } });
@@ -64,14 +70,27 @@ function parseResponse({ data }) {
   return rows;
 }
 
-// Discover available countries, then fetch in small chunks (bulk queries truncate)
-const probe = await fetchWithRetry(`${BASE}all?format=jsondata&lastNObservations=1`);
-const probeStruct = probe.data.structures?.[0] ?? probe.data.structure;
-const refDim = probeStruct.dimensions.series.find((d) => d.id === "REF_AREA");
-const codes = refDim.values.map((v) => v.id);
-console.log(`Found ${codes.length} reference areas`);
+// Known reference areas (checked 2026-08: probe `all?lastNObservations=1`)
+const KNOWN_CODES = [
+  "AUS","AUT","BEL","BGR","CAN","CHE","CHL","COL","CRI","CZE","DEU","DNK",
+  "ESP","EST","FIN","FRA","GBR","GRC","HRV","HUN","IRL","ISL","ISR","ITA",
+  "JPN","KOR","LTU","LUX","LVA","MEX","NLD","NOR","NZL","OECD","POL","PRT",
+  "ROU","SVK","SVN","SWE","TUR","USA","WXOECD",
+];
 
-const CHUNK_SIZE = 8;
+// Discover available countries (fall back to the known list if the probe
+// fails — the API is heavily rate-limited and every request counts)
+let codes = KNOWN_CODES;
+try {
+  const probe = await fetchWithRetry(`${BASE}all?format=jsondata&lastNObservations=1`, 1);
+  const probeStruct = probe.data.structures?.[0] ?? probe.data.structure;
+  const refDim = probeStruct.dimensions.series.find((d) => d.id === "REF_AREA");
+  codes = refDim.values.map((v) => v.id);
+} catch {
+  console.warn("Probe failed; using known country list");
+}
+console.log(`Fetching ${codes.length} reference areas`);
+
 const out = {};
 function mergeRows(rows) {
   for (const row of rows) {
@@ -89,7 +108,28 @@ function mergeRows(rows) {
 
 const keyURL = (list) => `${BASE}${list.join("+")}.WG..A..MEAN._Z?format=jsondata`;
 
-for (let i = 0; i < codes.length; i += CHUNK_SIZE) {
+const isComplete = (e) => e?.nominal?.length && e?.real?.length && e?.usdPpp?.length && e?.currency;
+
+// Try one unfiltered request first — a single call gets everything IF the
+// API doesn't silently truncate the response (it does for larger datasets),
+// so validate completeness before trusting it.
+let needChunks = true;
+try {
+  mergeRows(parseResponse(await fetchWithRetry(keyURL([""]), 1)));
+  const completeCount = Object.values(out).filter(isComplete).length;
+  console.log(`Bulk request: ${completeCount} complete countries`);
+  if (completeCount >= 35) {
+    needChunks = false;
+  } else {
+    console.warn("Bulk response looks truncated; falling back to chunked requests");
+    await sleep(PACE_MS);
+  }
+} catch (err) {
+  console.warn(`Bulk request failed (${err.message}); using chunked requests`);
+  await sleep(PACE_MS);
+}
+
+for (let i = 0; needChunks && i < codes.length; i += CHUNK_SIZE) {
   const chunk = codes.slice(i, i + CHUNK_SIZE);
   try {
     mergeRows(parseResponse(await fetchWithRetry(keyURL(chunk))));
@@ -99,22 +139,21 @@ for (let i = 0; i < codes.length; i += CHUNK_SIZE) {
     console.warn(`Chunk ${chunk.join(",")} failed, retrying countries individually...`);
     for (const code of chunk) {
       try {
-        mergeRows(parseResponse(await fetchWithRetry(keyURL([code]), 3)));
+        mergeRows(parseResponse(await fetchWithRetry(keyURL([code]), Math.min(ATTEMPTS, 3))));
         console.log(`Fetched ${code}`);
       } catch (err) {
         console.warn(`Skipping ${code} (${err.message})`);
       }
-      await sleep(500);
+      await sleep(PACE_MS);
     }
   }
-  await sleep(1000);
+  await sleep(PACE_MS);
 }
 
 // Keep only areas with the full set of series; fall back to previous data
 // for areas the API failed to return this run
 const complete = {};
 const dropped = [];
-const isComplete = (e) => e?.nominal?.length && e?.real?.length && e?.usdPpp?.length && e?.currency;
 for (const [code, entry] of Object.entries(out)) {
   if (isComplete(entry)) complete[code] = entry;
   else dropped.push(code);

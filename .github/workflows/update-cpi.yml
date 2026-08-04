@@ -19,11 +19,13 @@ jobs:
         with:
           node-version: 22
 
-      - name: Fetch latest CPI data from OECD
-        run: node scripts/update-cpi.mjs
-
       - name: Fetch latest wage data from OECD
+        continue-on-error: true
         run: node scripts/update-wages.mjs
+
+      - name: Fetch latest CPI data from OECD
+        continue-on-error: true
+        run: node scripts/update-cpi.mjs
 
       - name: Commit and push if changed
         run: |
