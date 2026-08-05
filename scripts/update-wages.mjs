@@ -117,6 +117,58 @@ const keyURL = (list) => `${BASE}${list.join("+")}.WG..A..MEAN._Z?format=jsondat
 
 const isComplete = (e) => e?.nominal?.length && e?.real?.length && e?.usdPpp?.length && e?.currency;
 
+// Primary strategy: ONE request in SDMX-CSV. The JSON serializer 500s on
+// large responses, but the CSV endpoint returns the full dataset reliably.
+async function tryCsvBulk() {
+  const url = `${BASE}.WG..A..MEAN._Z?format=csvfilewithlabels`;
+  const res = await fetch(url, { headers: { "User-Agent": "wages-updater (miguel.es)" } });
+  if (!res.ok) throw new Error(`CSV bulk returned ${res.status}`);
+  const text = await res.text();
+  const lines = text.split("\n").filter((l) => l.trim());
+  const header = splitCsvLine(lines[0]);
+  const col = Object.fromEntries(header.map((h, i) => [h, i]));
+  for (const need of ["REF_AREA", "UNIT_MEASURE", "PRICE_BASE", "TIME_PERIOD", "OBS_VALUE"]) {
+    if (!(need in col)) throw new Error(`CSV missing column ${need}`);
+  }
+  const series = new Map();
+  for (let i = 1; i < lines.length; i++) {
+    const f = splitCsvLine(lines[i]);
+    const code = f[col.REF_AREA];
+    const unit = f[col.UNIT_MEASURE];
+    const base = f[col.PRICE_BASE];
+    const year = Number(f[col.TIME_PERIOD]);
+    const value = Number(f[col.OBS_VALUE]);
+    if (!code || !Number.isFinite(year) || !Number.isFinite(value)) continue;
+    const key = `${code}|${unit}|${base}`;
+    if (!series.has(key)) series.set(key, []);
+    series.get(key).push({ year, value });
+  }
+  for (const [key, obs] of series) {
+    const [code, unit, priceBase] = key.split("|");
+    obs.sort((a, b) => a.year - b.year);
+    mergeRows([{ code, unit, priceBase, obs }]);
+  }
+}
+
+// Minimal CSV field splitter (handles quoted fields with commas)
+function splitCsvLine(line) {
+  const out = [];
+  let cur = "";
+  let inQuotes = false;
+  for (let i = 0; i < line.length; i++) {
+    const ch = line[i];
+    if (inQuotes) {
+      if (ch === '"' && line[i + 1] === '"') { cur += '"'; i++; }
+      else if (ch === '"') inQuotes = false;
+      else cur += ch;
+    } else if (ch === '"') inQuotes = true;
+    else if (ch === ",") { out.push(cur); cur = ""; }
+    else cur += ch;
+  }
+  out.push(cur);
+  return out;
+}
+
 // Resumable cache (WAGES_CACHE=path): progress survives across runs, so
 // repeated runs on a tight quota only request what's still missing.
 const cachePath = process.env.WAGES_CACHE;
@@ -127,6 +179,15 @@ if (cachePath && existsSync(cachePath)) {
 const saveCache = () => {
   if (cachePath) writeFileSync(cachePath, JSON.stringify(out));
 };
+
+// One CSV request usually gets everything; fall back to paced JSON chunks
+try {
+  await tryCsvBulk();
+  const csvComplete = Object.values(out).filter(isComplete).length;
+  console.log(`CSV bulk: ${csvComplete} complete countries in one request`);
+} catch (err) {
+  console.warn(`CSV bulk failed (${err.message}); falling back to JSON requests`);
+}
 
 const missing = codes.filter((c) => !isComplete(out[c]));
 console.log(`Missing: ${missing.length} of ${codes.length}`);

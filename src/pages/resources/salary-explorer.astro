@@ -1,0 +1,28 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Explorer from "../../components/SalaryExplorer.jsx";
+---
+
+<Layout
+  title="Average Salary Explorer"
+  description="Explore average annual wages across OECD countries: nominal vs real evolution and PPP-adjusted cross-country comparison."
+>
+  <main class="min-h-screen px-3 py-10 sm:px-6">
+    <section class="mx-auto max-w-6xl space-y-6">
+      <header class="space-y-2 text-center">
+        <p class="text-xs font-semibold uppercase tracking-[0.2em] text-indigo-600">
+          Tools
+        </p>
+        <h1 class="text-3xl font-semibold tracking-tight text-slate-900">
+          Average Salary Explorer
+        </h1>
+        <p class="mx-auto max-w-2xl text-sm text-slate-600">
+          How have salaries really evolved? Compare average annual wages across
+          OECD countries in nominal, inflation-adjusted and PPP-converted terms.
+        </p>
+      </header>
+
+      <Explorer client:only="react" />
+    </section>
+  </main>
+</Layout>
