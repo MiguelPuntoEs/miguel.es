@@ -1,17 +1,17 @@
 ---
 import Image from "astro/components/Image.astro";
-import LogoA5 from "../assets/companies/a5labs.svg";
-import LogoAemet from "../assets/companies/aemet.svg";
-import LogoAirbus from "../assets/companies/airbus.svg";
-import LogoGmv from "../assets/companies/gmv.svg";
-import LogoLeica from "../assets/companies/leica.svg";
-import LogoPascual from "../assets/companies/pascual.svg";
-import LogoToom from "../assets/companies/toom.svg";
+import LogoA5 from "../assets/companies/a5labs.svg?url";
+import LogoAemet from "../assets/companies/aemet.svg?url";
+import LogoAirbus from "../assets/companies/airbus.svg?url";
+import LogoGmv from "../assets/companies/gmv.svg?url";
+import LogoLeica from "../assets/companies/leica.svg?url";
+import LogoPascual from "../assets/companies/pascual.svg?url";
+import LogoToom from "../assets/companies/toom.svg?url";
 import profile from "../assets/pictures/profile.jpg";
-import LogoHesperides from "../assets/universities/hesperides.svg";
-import LogoUfm from "../assets/universities/ufm.svg";
-import LogoUpm from "../assets/universities/upm.svg";
-import LogoUax from "../assets/universities/uax.svg";
+import LogoHesperides from "../assets/universities/hesperides.svg?url";
+import LogoUfm from "../assets/universities/ufm.svg?url";
+import LogoUpm from "../assets/universities/upm.svg?url";
+import LogoUax from "../assets/universities/uax.svg?url";
 import EducationEntry from "../components/EducationEntry.astro";
 import JobEntry from "../components/JobEntry.astro";
 import TeachingEntry from "../components/TeachingEntry.astro";
@@ -135,7 +135,7 @@ import Layout from "../layouts/Layout.astro";
       />
       <TeachingEntry
         logo={LogoUfm}
-        courseName="Technology A"
+        courseName="Technology"
         url="/courses/technology"
         university="Universidad Francisco Marroquín"
         dateRange="Sep 2025 -"
@@ -222,7 +222,7 @@ import Layout from "../layouts/Layout.astro";
         >GitHub</a
       >.
     </p>
-    <div class="mt-4 p-4 bg-gray-100 dark:bg-gray-800 rounded-lg border border-gray-300 dark:border-gray-700">
+    <div class="mt-4 p-4 bg-gray-100 rounded-lg border border-gray-300">
       <p class="text-sm mb-2">
         🔐🧅 <strong>Feeling a bit hacky?</strong> You can also visit this site over Tor at:
       </p>

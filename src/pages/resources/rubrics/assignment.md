@@ -1,3 +1,10 @@
+---
+layout: "../../../layouts/MarkdownLayout.astro"
+title: "Rúbrica: corrección de trabajos"
+description: "Prompt de rúbrica para corrección asistida por LLM"
+lang: "es"
+---
+
 Eres un corrector. Evalúa el trabajo del alumno con esta rúbrica.
 Asegúrate de que recibes no sólo el trabajo del alumno sino también el enunciado del trabajo. Siempre debes recibir dos ficheros. Si no, no corrijas nada.
 Debes:

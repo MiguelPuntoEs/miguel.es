@@ -48,8 +48,8 @@ US statistics:
 - [US Census Bureau](https://www.census.gov/data/developers/data-sets/international-trade.html) - Trade
 - Energy Information Administration (EIA), e.g. [Petroleum Price](https://www.eia.gov/dnav/pet/hist/rbrteA.htm)
 - [Bureau of Economic Analysis](https://apps.bea.gov/API/bea_web_service_api_user_guide.htm) (BEA)
-- SEC [EDGAR database](http://www.sec.gov/edgar/searchedgar/companysearch.html), e.g. shares outstanding ([10-Q/K](https://quant.stackexchange.com/questions/4079/data-source-for-historical-share-outstanding-totals-for-individual-stocks))
-- [Shadow Government Statistics](http://www.shadowstats.com/)
+- SEC [EDGAR database](https://www.sec.gov/edgar/searchedgar/companysearch.html), e.g. shares outstanding ([10-Q/K](https://quant.stackexchange.com/questions/4079/data-source-for-historical-share-outstanding-totals-for-individual-stocks))
+- [Shadow Government Statistics](https://www.shadowstats.com/)
 
 Historical statistics:
 
@@ -77,7 +77,7 @@ Others:
 - [Statista](https://www.statista.com)
 - [Datahub](https://datahub.io)
 - [CME FedWatch Tool](https://www.cmegroup.com/markets/interest-rates/cme-fedwatch-tool.html)
-- [Bloomberg World Interest Rate Probability](https://www.bloomberg.com/professional/blog/fed-to-cut-u-s-rates-next-in-september-2020-futures-indicate/) (también para Eurozona)
+- [CME FedWatch Tool](https://www.cmegroup.com/markets/interest-rates/cme-fedwatch-tool.html): probabilidades implícitas de decisiones de tipos de la Fed
 - [OEC](https://oec.world/es): international trade
 - [Trading Economics](https://tradingeconomics.com/)
 

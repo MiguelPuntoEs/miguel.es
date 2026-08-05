@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import QRCode from "qrcode";
 
 const SOCIAL_PLATFORMS = [
@@ -759,18 +759,40 @@ function Textarea({ label, ...props }) {
 function PhoneInput({ label = "Phone number", value, dialCode, onChangePhone, onChangeDialCode }) {
   const [search, setSearch] = useState("");
   const [open, setOpen] = useState(false);
+  const containerRef = useRef(null);
   const selected = COUNTRIES.find((c) => c.dial === dialCode) || COUNTRIES[2];
   const filtered = search
     ? COUNTRIES.filter((c) => c.name.toLowerCase().includes(search.toLowerCase()) || c.dial.includes(search))
     : COUNTRIES;
 
+  useEffect(() => {
+    if (!open) return;
+    const onDocClick = (e) => {
+      if (containerRef.current && !containerRef.current.contains(e.target)) setOpen(false);
+    };
+    document.addEventListener("mousedown", onDocClick);
+    return () => document.removeEventListener("mousedown", onDocClick);
+  }, [open]);
+
   return (
-    <div className="block">
+    <div
+      className="block"
+      ref={containerRef}
+      onKeyDown={(e) => {
+        if (e.key === "Escape" && open) {
+          setOpen(false);
+          setSearch("");
+        }
+      }}
+    >
       <span className={LABEL}>{label}</span>
       <div className="relative flex items-center rounded-lg border border-slate-300 bg-white focus-within:ring-1 focus-within:ring-indigo-500 focus-within:border-indigo-500">
         <button
           type="button"
           onClick={() => setOpen(!open)}
+          aria-expanded={open}
+          aria-haspopup="listbox"
+          aria-label={`Country code, selected ${selected.name} ${selected.dial}`}
           className="flex items-center gap-1 pl-3 pr-1 py-2 text-sm hover:bg-slate-50 shrink-0 rounded-l-lg"
         >
           <span>{selected.flag}</span>
@@ -1187,7 +1209,7 @@ export default function QRGenerator({ defaultType = "url", showTypeSelector = tr
         <div className="flex flex-col gap-2 mb-8">
           {QR_TYPE_GROUPS.map((group) => (
             <div key={group} className="flex items-center gap-2">
-              <span className="text-[10px] font-semibold uppercase tracking-wider text-slate-400 w-16 shrink-0 text-right">{group}</span>
+              <span className="text-[10px] font-semibold uppercase tracking-wider text-slate-500 w-16 shrink-0 text-right">{group}</span>
               <div className="flex flex-wrap gap-1.5">
                 {QR_TYPES.filter((t) => t.group === group).map((t) => (
                   <button
@@ -1325,7 +1347,7 @@ export default function QRGenerator({ defaultType = "url", showTypeSelector = tr
           )}
 
           {qrString && (
-            <p className="text-xs text-slate-400 break-all max-w-[280px] text-center">
+            <p className="text-xs text-slate-500 break-all max-w-[280px] text-center">
               {qrString.length > 120 ? qrString.slice(0, 120) + "..." : qrString}
             </p>
           )}

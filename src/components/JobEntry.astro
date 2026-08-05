@@ -1,6 +1,6 @@
 ---
 export interface Props {
-  logo: any;
+  logo: string;
   jobTitle: string;
   companyName: string;
   dateRange: string;
@@ -9,7 +9,7 @@ export interface Props {
 }
 
 const {
-  logo: Logo,
+  logo,
   jobTitle,
   companyName,
   dateRange,
@@ -19,7 +19,7 @@ const {
 ---
 
 <div class="flex gap-4">
-  <Logo height={50} width={50} class={logoClass} />
+  <img src={logo} height="50" width="50" class={logoClass} alt="" loading="lazy" decoding="async" />
   <div class="flex-1">
     <p class="font-semibold text-sm">{jobTitle}</p>
     <p class="text-xs">{companyName}</p>

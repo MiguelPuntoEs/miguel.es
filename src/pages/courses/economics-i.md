@@ -17,7 +17,7 @@ university: "Universidad Francisco Marroquín"
 - Henry Hazlitt. Economics in One Lesson.
 - Per L. Bylund. How to Think about the Economy: A Primer.
 - Per L. Bylund. [The Genius of Mises's Action Axiom](https://mises.org/mises-wire/genius-misess-action-axiom).
-- Frédéric Bastiat. [The Candlemakers's Petition](https://mises.org/mises-daily/candlemakers-petition).
+- Frédéric Bastiat. [The Candlemakers' Petition](https://mises.org/mises-daily/candlemakers-petition).
 - Frédéric Bastiat. [The Broken Window](https://mises.org/mises-daily/broken-window).
 - Eduardo Blasco. [El salario mínimo](https://micajondesastre.substack.com/p/el-salario-minimo).
 - Eduardo Blasco. [La importancia del capital humano en la economía](https://micajondesastre.substack.com/p/la-importancia-del-capital-humano).

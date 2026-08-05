@@ -2,6 +2,7 @@
 title: "Blockchain"
 description: "Blockchain technology and applications. Universidad Alfonso X el Sabio"
 layout: "../../layouts/MarkdownLayout.astro"
+lang: "en"
 university: "Universidad Alfonso X el Sabio"
 ---
 
@@ -61,16 +62,16 @@ university: "Universidad Alfonso X el Sabio"
 
 ## News of interest
 
-- [Trust Wallet users lose $7 million to hacked Chrome extension](https://www.coindesk.com/business/2025/12/26/trust-wallet-users-lose-more-than-usd7-million-to-hacked-chrome-extension). CoinDesk, 26 dec. 2025
-- [Donald Trump threatens extra 100% tariff as he retaliates against China](https://www.ft.com/content/328e3195-909a-45fb-b118-9dafbd41262b). Financial Times, 10 oct. 2025
-- [The 10 charts that define Donald Trump’s tumultuous first 100 days](https://www.ft.com/content/9d3ebaed-50b6-477a-bf62-3a35a22fc222). Financial Times, 29 apr. 2025
-- [Low approval and sticky inflation: a year of Donald Trump in charts](https://www.ft.com/content/266ae6df-89c2-4413-be51-0b3a7c6e8015). Financial Times, 5 nov. 2025
-- [US Congress passes landmark bill to regulate stablecoins](https://www.ft.com/content/4c41e6e8-374c-4b1a-ac7f-88c245fb18c8). Financial Times, 17 jul. 2025
-- [The twilight of the central banking elite](https://www.ft.com/content/3b5a3fde-6110-4e40-88b1-04f71ed5b0f1). Financial Times, 22 ago. 2025
-- [Binance teams up with BBVA to let customers keep assets off exchange](https://www.ft.com/content/b1f596c8-f823-42b9-b634-d0f749a3ccca). Financial Times, 8 ago. 2025
-- [EU speeds up plans for digital euro after US stablecoin law](https://www.ft.com/content/8ad60169-d1e5-4d2c-b928-d53d668f0ec6). Financial Times, 22 ago. 2025
-- [Stablecoin group Tether holds talks to invest in gold miners](https://www.ft.com/content/135fb3dd-2395-4f04-8cc6-7fb0e87cd092). Financial Times, 5 sep. 2025
-- [Crypto group Tether to launch new stablecoin with eye on US markets](https://www.ft.com/content/f2329769-6bbc-489b-9a98-d9bbf7addf6f). Financial Times, 12 sep. 2025
+- [Trust Wallet users lose $7 million to hacked Chrome extension](https://www.coindesk.com/business/2025/12/26/trust-wallet-users-lose-more-than-usd7-million-to-hacked-chrome-extension). CoinDesk, 26 Dec. 2025
+- [Donald Trump threatens extra 100% tariff as he retaliates against China](https://www.ft.com/content/328e3195-909a-45fb-b118-9dafbd41262b). Financial Times, 10 Oct. 2025
+- [The 10 charts that define Donald Trump’s tumultuous first 100 days](https://www.ft.com/content/9d3ebaed-50b6-477a-bf62-3a35a22fc222). Financial Times, 29 Apr. 2025
+- [Low approval and sticky inflation: a year of Donald Trump in charts](https://www.ft.com/content/266ae6df-89c2-4413-be51-0b3a7c6e8015). Financial Times, 5 Nov. 2025
+- [US Congress passes landmark bill to regulate stablecoins](https://www.ft.com/content/4c41e6e8-374c-4b1a-ac7f-88c245fb18c8). Financial Times, 17 Jul. 2025
+- [The twilight of the central banking elite](https://www.ft.com/content/3b5a3fde-6110-4e40-88b1-04f71ed5b0f1). Financial Times, 22 Aug. 2025
+- [Binance teams up with BBVA to let customers keep assets off exchange](https://www.ft.com/content/b1f596c8-f823-42b9-b634-d0f749a3ccca). Financial Times, 8 Aug. 2025
+- [EU speeds up plans for digital euro after US stablecoin law](https://www.ft.com/content/8ad60169-d1e5-4d2c-b928-d53d668f0ec6). Financial Times, 22 Aug. 2025
+- [Stablecoin group Tether holds talks to invest in gold miners](https://www.ft.com/content/135fb3dd-2395-4f04-8cc6-7fb0e87cd092). Financial Times, 5 Sep. 2025
+- [Crypto group Tether to launch new stablecoin with eye on US markets](https://www.ft.com/content/f2329769-6bbc-489b-9a98-d9bbf7addf6f). Financial Times, 12 Sep. 2025
 
 ## Resources
 
@@ -94,9 +95,9 @@ Mining:
 Videos:
 
 - Juan Ramón Rallo. [Saifedean Ammous: Gold and Bitcoin, the End of the Fiat System?](https://www.youtube.com/watch?v=DZ9IUsnm0Lc)
-- Saifadean Ammous. [Conference at Fundación Rafael del Pino](https://www.youtube.com/watch?v=XwVQpU5wnpY), October 2, 2018
-- Saifadean Ammous. [Conference at Fundación Rafael del Pino](https://www.youtube.com/watch?v=Ti3lI-se1DI), January 17, 2025
-- Saifadean Ammous. [Fiat is war, Bitcoin is peace](https://www.youtube.com/watch?v=6fgFyQEWiK4), November 14, 2025
+- Saifedean Ammous. [Conference at Fundación Rafael del Pino](https://www.youtube.com/watch?v=XwVQpU5wnpY), October 2, 2018
+- Saifedean Ammous. [Conference at Fundación Rafael del Pino](https://www.youtube.com/watch?v=Ti3lI-se1DI), January 17, 2025
+- Saifedean Ammous. [Fiat is war, Bitcoin is peace](https://www.youtube.com/watch?v=6fgFyQEWiK4), November 14, 2025
 - Johnny Harris. [Gold Still Matters More Than You Think](https://www.youtube.com/watch?v=JMObz0Dgq7M): entrevistas a Thomas Hogan y Lawrence H. White
 - Lawrence White. [Why restrict stablecoins?](https://www.youtube.com/watch?v=YgIS7LR7AdI), January 8, 2026
 
@@ -110,7 +111,7 @@ Data:
   - See also [API](https://coinmarketcap.com/api/)
 - [CoinGecko](https://www.coingecko.com)
   - See also [API](https://www.coingecko.com/api)
-- [DefiLama](https://defillama.com)
+- [DefiLlama](https://defillama.com)
 - [Blockchain.com](https://www.blockchain.com), especially the [Charts](https://www.blockchain.com/explorer/charts) section and for exploring specific blocks
   - [Blockchain Size (MB)](https://www.blockchain.com/explorer/charts/blocks-size)
   - [Average Block Size (MB)](https://www.blockchain.com/explorer/charts/avg-block-size)
@@ -237,7 +238,7 @@ Digital euro:
 - Antonio Fatás. The economics of Fintech and Digital Currencies (2019). CEPR Press, Paris & London
 - George Selgin. [The Fable of the Cats](https://www.cato.org/blog/fable-cats)
 - Nic Carter. [Five perspectives on stablecoins](https://medium.com/@nic__carter/five-perspectives-on-stablecoins-5bc20076270a)
-- Gary B. Gorton, jeffrey Y. Zhang. Taming Wildcat Stablecoins (2023). The University of Chicago Law Review
+- Gary B. Gorton, Jeffrey Y. Zhang. Taming Wildcat Stablecoins (2023). The University of Chicago Law Review
 
 ### Decentralized Finance
 

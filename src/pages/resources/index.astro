@@ -2,7 +2,11 @@
 import ResourceEntry from "../../components/ResourceEntry.astro";
 import Layout from "../../layouts/Layout.astro";
 
-const courses = await Astro.glob('../courses/*.md');
+const courseModules = import.meta.glob('../courses/*.md', { eager: true });
+const courses = Object.entries(courseModules).map(([path, mod]) => ({
+  frontmatter: mod.frontmatter,
+  url: path.replace('..', '/courses').replace('/courses/courses', '/courses').replace('.md', ''),
+}));
 const courseEntries = courses.map(course => ({
   title: course.frontmatter.title,
   description: course.frontmatter.description,
@@ -56,6 +60,11 @@ const courseEntries = courses.map(course => ({
         title="Inflation Calculator"
         description="Adjust amounts for inflation using actual OECD CPI data."
         url="/resources/inflation-calculator"
+      />
+      <ResourceEntry
+        title="Average Salary Explorer"
+        description="Nominal vs real wage evolution and PPP cross-country comparison with OECD data."
+        url="/resources/salary-explorer"
       />
       <ResourceEntry
         title="Loan Amortization Calculator"

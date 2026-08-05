@@ -8,7 +8,7 @@ Economic data:
 
 - [FRED](https://fred.stlouisfed.org/docs/api/fred/): Federal Reserve Economic Data. U.S. macroeconomic data
 - [ECB](https://data.ecb.europa.eu/help/api/overview). European Central Bank
-- [OECD API](https://gitlab.algobank.oecd.org/public-documentation/dotstat-migration/-/raw/main/OECD_Data_API_documentation.pdf): Organisation for Economic Co-operation and Development.
+- [OECD API](https://www.oecd.org/en/data/insights/data-explainers/2024/09/api.html): Organisation for Economic Co-operation and Development.
 - [EIA Open Data](https://www.eia.gov/opendata/)
 - [Coingecko](https://www.coingecko.com/en/api): crypto markets
 
