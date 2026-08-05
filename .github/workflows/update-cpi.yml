@@ -13,28 +13,41 @@ jobs:
   update:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v5
         with:
           node-version: 22
 
       - name: Fetch latest wage data from OECD
         continue-on-error: true
+        timeout-minutes: 20
+        env:
+          # This endpoint 500s on wide queries and rate-limits bursts:
+          # single-country requests, no bulk attempt, gentle pacing
+          WAGES_NO_BULK: "1"
+          WAGES_CHUNK: "1"
+          WAGES_ATTEMPTS: "2"
+          WAGES_PACE_MS: "10000"
         run: node scripts/update-wages.mjs
 
       - name: Fetch latest CPI data from OECD
         continue-on-error: true
+        timeout-minutes: 20
         run: node scripts/update-cpi.mjs
 
       - name: Commit and push if changed
         run: |
-          if git diff --quiet public/cpi.json public/wages.json; then
+          # git diff misses untracked files and errors on missing paths,
+          # so stage what exists and check the index instead
+          for f in public/cpi.json public/wages.json; do
+            [ -f "$f" ] && git add "$f" || true
+          done
+          if git diff --cached --quiet; then
             echo "OECD data unchanged, nothing to commit."
           else
             git config user.name "github-actions[bot]"
             git config user.email "github-actions[bot]@users.noreply.github.com"
-            git add public/cpi.json public/wages.json
             git commit -m "chore: update CPI and wage data from OECD"
             git push
           fi

@@ -25,10 +25,14 @@ const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 const CHUNK_SIZE = Number(process.env.WAGES_CHUNK) || 8;
 const ATTEMPTS = Number(process.env.WAGES_ATTEMPTS) || 5;
 const PACE_MS = Number(process.env.WAGES_PACE_MS) || 1000;
+const MAX_REQ = Number(process.env.WAGES_MAX_REQ) || Infinity;
+let requestCount = 0;
 
 // The OECD API intermittently returns 500/429 for valid queries.
 async function fetchWithRetry(url, attempts = ATTEMPTS) {
+  if (requestCount >= MAX_REQ) throw new Error("request budget exhausted");
   for (let attempt = 1; ; attempt++) {
+    requestCount++;
     try {
       const res = await fetch(url, { headers: { "User-Agent": "wages-updater (miguel.es)" } });
       if (res.ok) return res.json();
@@ -79,15 +83,18 @@ const KNOWN_CODES = [
 ];
 
 // Discover available countries (fall back to the known list if the probe
-// fails — the API is heavily rate-limited and every request counts)
+// fails — the API is heavily rate-limited and every request counts, so
+// skip the probe entirely when resuming from a cache)
 let codes = KNOWN_CODES;
-try {
-  const probe = await fetchWithRetry(`${BASE}all?format=jsondata&lastNObservations=1`, 1);
-  const probeStruct = probe.data.structures?.[0] ?? probe.data.structure;
-  const refDim = probeStruct.dimensions.series.find((d) => d.id === "REF_AREA");
-  codes = refDim.values.map((v) => v.id);
-} catch {
-  console.warn("Probe failed; using known country list");
+if (!(process.env.WAGES_CACHE && existsSync(process.env.WAGES_CACHE))) {
+  try {
+    const probe = await fetchWithRetry(`${BASE}all?format=jsondata&lastNObservations=1`, 1);
+    const probeStruct = probe.data.structures?.[0] ?? probe.data.structure;
+    const refDim = probeStruct.dimensions.series.find((d) => d.id === "REF_AREA");
+    codes = refDim.values.map((v) => v.id);
+  } catch {
+    console.warn("Probe failed; using known country list");
+  }
 }
 console.log(`Fetching ${codes.length} reference areas`);
 
@@ -110,42 +117,51 @@ const keyURL = (list) => `${BASE}${list.join("+")}.WG..A..MEAN._Z?format=jsondat
 
 const isComplete = (e) => e?.nominal?.length && e?.real?.length && e?.usdPpp?.length && e?.currency;
 
+// Resumable cache (WAGES_CACHE=path): progress survives across runs, so
+// repeated runs on a tight quota only request what's still missing.
+const cachePath = process.env.WAGES_CACHE;
+if (cachePath && existsSync(cachePath)) {
+  Object.assign(out, JSON.parse(readFileSync(cachePath, "utf8")));
+  console.log(`Cache: ${Object.values(out).filter(isComplete).length} countries already complete`);
+}
+const saveCache = () => {
+  if (cachePath) writeFileSync(cachePath, JSON.stringify(out));
+};
+
+const missing = codes.filter((c) => !isComplete(out[c]));
+console.log(`Missing: ${missing.length} of ${codes.length}`);
+
 // Try one unfiltered request first — a single call gets everything IF the
 // API doesn't silently truncate the response (it does for larger datasets),
-// so validate completeness before trusting it.
-let needChunks = true;
-try {
-  mergeRows(parseResponse(await fetchWithRetry(keyURL([""]), 1)));
-  const completeCount = Object.values(out).filter(isComplete).length;
-  console.log(`Bulk request: ${completeCount} complete countries`);
-  if (completeCount >= 35) {
-    needChunks = false;
-  } else {
-    console.warn("Bulk response looks truncated; falling back to chunked requests");
-    await sleep(PACE_MS);
-  }
-} catch (err) {
-  console.warn(`Bulk request failed (${err.message}); using chunked requests`);
-  await sleep(PACE_MS);
-}
-
-for (let i = 0; needChunks && i < codes.length; i += CHUNK_SIZE) {
-  const chunk = codes.slice(i, i + CHUNK_SIZE);
+// so validate completeness before trusting it. Pointless when resuming.
+let needChunks = missing.length > 0;
+if (!process.env.WAGES_NO_BULK && missing.length === codes.length) {
   try {
-    mergeRows(parseResponse(await fetchWithRetry(keyURL(chunk))));
-    console.log(`Fetched ${chunk.join(",")}`);
-  } catch {
-    // Fall back to one request per country; failures are dropped later
-    console.warn(`Chunk ${chunk.join(",")} failed, retrying countries individually...`);
-    for (const code of chunk) {
-      try {
-        mergeRows(parseResponse(await fetchWithRetry(keyURL([code]), Math.min(ATTEMPTS, 3))));
-        console.log(`Fetched ${code}`);
-      } catch (err) {
-        console.warn(`Skipping ${code} (${err.message})`);
-      }
+    mergeRows(parseResponse(await fetchWithRetry(keyURL([""]), 1)));
+    saveCache();
+    const completeCount = Object.values(out).filter(isComplete).length;
+    console.log(`Bulk request: ${completeCount} complete countries`);
+    if (completeCount >= 35) {
+      needChunks = false;
+    } else {
+      console.warn("Bulk response looks truncated; falling back to chunked requests");
       await sleep(PACE_MS);
     }
+  } catch (err) {
+    console.warn(`Bulk request failed (${err.message}); using chunked requests`);
+    await sleep(PACE_MS);
+  }
+}
+
+const toFetch = codes.filter((c) => !isComplete(out[c]));
+for (let i = 0; needChunks && i < toFetch.length; i += CHUNK_SIZE) {
+  const chunk = toFetch.slice(i, i + CHUNK_SIZE);
+  try {
+    mergeRows(parseResponse(await fetchWithRetry(keyURL(chunk))));
+    saveCache();
+    console.log(`Fetched ${chunk.join(",")}`);
+  } catch (err) {
+    console.warn(`Chunk ${chunk.join(",")} failed (${err.message}); skipping this run`);
   }
   await sleep(PACE_MS);
 }
