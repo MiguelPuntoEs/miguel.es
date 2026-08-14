@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Direction E — Poster</title>
+<style>
+  :root {
+    --orange: #de6300;
+    --ink: #0e0e0e;
+    --paper: #ffffff;
+    --gray: #6b6b6b;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  ::selection { background: var(--orange); color: #000; }
+  body {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  /* Orange field */
+  .field {
+    background: var(--orange);
+    color: var(--ink);
+    padding: 48px 0 40px;
+  }
+  .wrap { max-width: 1060px; margin: 0 auto; padding: 0 28px; }
+  .field .kicker { font-size: 15px; font-weight: 700; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+  .field h1 {
+    font-size: clamp(56px, 11vw, 138px);
+    font-weight: 900;
+    letter-spacing: -0.045em;
+    line-height: 0.88;
+    text-transform: uppercase;
+    margin-top: 28px;
+    word-spacing: 0.05em;
+  }
+  .field h1 .thin { color: #fff; }
+  .field .strap {
+    margin-top: 26px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 20px;
+    flex-wrap: wrap;
+    font-size: 17px;
+    font-weight: 600;
+    max-width: 100%;
+  }
+  .field .strap .l { max-width: 46ch; }
+  .field .strap .r { font-size: 14px; font-weight: 700; text-align: right; font-variant-numeric: tabular-nums; }
+
+  /* Nav bar */
+  .bar { background: var(--ink); }
+  .bar ul { list-style: none; display: flex; gap: 30px; padding: 15px 0; font-weight: 700; font-size: 14.5px; flex-wrap: wrap; }
+  .bar a { color: #fff; text-decoration: none; }
+  .bar a:hover, .bar a[aria-current] { color: var(--orange); }
+
+  /* Body sections */
+  main section { padding: 46px 0 8px; }
+  main h2 {
+    font-size: clamp(26px, 4vw, 36px);
+    font-weight: 900;
+    letter-spacing: -0.03em;
+    text-transform: uppercase;
+    border-top: 6px solid var(--ink);
+    padding-top: 14px;
+  }
+  .rows { margin-top: 22px; }
+  .rows .r {
+    display: grid;
+    grid-template-columns: 130px 1fr auto;
+    gap: 18px;
+    align-items: baseline;
+    padding: 13px 0;
+    border-top: 1.5px solid #dcdcdc;
+  }
+  .rows .r:first-child { border-top: 0; }
+  .rows .yr { font-weight: 800; font-variant-numeric: tabular-nums; font-size: 15px; }
+  .rows .what { font-size: 19px; font-weight: 700; letter-spacing: -0.01em; }
+  .rows .what .at { font-weight: 400; color: var(--gray); font-size: 16px; }
+  .rows .what a { color: inherit; text-decoration: none; box-shadow: inset 0 -3px 0 var(--orange); }
+  .rows .what a:hover { color: var(--orange); }
+  .rows .where { color: var(--gray); font-size: 14px; text-align: right; }
+  .rows .sub { grid-column: 2 / -1; font-size: 14px; color: var(--gray); margin-top: -6px; padding-bottom: 4px; }
+
+  /* Tools as poster lines */
+  .biglinks { margin-top: 20px; }
+  .biglinks a {
+    display: block;
+    font-size: clamp(22px, 3.4vw, 32px);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    text-decoration: none;
+    padding: 12px 0;
+    border-top: 1.5px solid #dcdcdc;
+  }
+  .biglinks a:first-child { border-top: 0; }
+  .biglinks a span { font-size: 15px; font-weight: 400; color: var(--gray); letter-spacing: 0; margin-left: 14px; }
+  .biglinks a:hover { color: var(--orange); }
+  .biglinks a:hover span { color: var(--ink); }
+
+  /* Footer */
+  footer {
+    background: var(--ink);
+    color: #fff;
+    margin-top: 56px;
+    padding: 40px 0 46px;
+  }
+  footer .cols { display: flex; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
+  footer h2 { font-size: 15px; font-weight: 800; text-transform: uppercase; color: var(--orange); margin-bottom: 8px; }
+  footer p { font-size: 14px; color: #c9c9c9; max-width: 40ch; }
+  footer a { color: #fff; text-decoration: none; box-shadow: inset 0 -2px 0 var(--orange); }
+  footer a:hover { color: var(--orange); }
+  .onion { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 10.5px; color: #8f8f8f; word-break: break-all; box-shadow: none !important; }
+  footer .fin { margin-top: 34px; padding-top: 14px; border-top: 1px solid #333; font-size: 12.5px; color: #8f8f8f; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+
+  @media (max-width: 720px) {
+    .rows .r { grid-template-columns: 1fr; gap: 2px; }
+    .rows .where { text-align: left; }
+    .rows .sub { grid-column: 1; }
+  }
+</style>
+</head>
+<body>
+
+<header class="field">
+  <div class="wrap">
+    <p class="kicker"><span>miguel.es</span><span>Madrid · 40.42°N 3.70°W</span></p>
+    <h1>Miguel<br>González<br><span class="thin">Calvo</span></h1>
+    <div class="strap">
+      <p class="l">Senior LLM engineer at A5 Labs. Teaches economics, Python and blockchain. Builds calculators on live OECD data.</p>
+      <p class="r">AERO → SIGNALS → DATA → LLMS<br>2012 → NOW</p>
+    </div>
+  </div>
+</header>
+
+<nav class="bar" aria-label="Main">
+  <div class="wrap">
+    <ul>
+      <li><a href="#" aria-current="page">Home</a></li>
+      <li><a href="#">Resources</a></li>
+      <li><a href="#">Publications</a></li>
+      <li><a href="#">QR Generator</a></li>
+      <li><a href="#">YouTube</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main>
+  <section class="wrap">
+    <h2>Experience</h2>
+    <div class="rows">
+      <div class="r">
+        <span class="yr">2025 —</span>
+        <span class="what">Senior LLM Engineer <span class="at">· A5 Labs</span></span>
+        <span class="where">California, US (remote)</span>
+      </div>
+      <div class="r">
+        <span class="yr">2024 – 25</span>
+        <span class="what">Lead Data Scientist <span class="at">· Pascual</span></span>
+        <span class="where">Madrid, ES</span>
+      </div>
+      <div class="r">
+        <span class="yr">2023 – 24</span>
+        <span class="what">Data Scientist <span class="at">· toom Baumarkt</span></span>
+        <span class="where">Cologne, DE</span>
+      </div>
+      <div class="r">
+        <span class="yr">2019 – 23</span>
+        <span class="what">Product Engineer <span class="at">· Leica Geosystems</span></span>
+        <span class="where">Heerbrugg, CH</span>
+      </div>
+      <div class="r">
+        <span class="yr">2018 – 19</span>
+        <span class="what">Software Engineer <span class="at">· Airbus Defence &amp; Space</span></span>
+        <span class="where">Munich, DE</span>
+      </div>
+      <div class="r">
+        <span class="yr">2017</span>
+        <span class="what">Software Engineer <span class="at">· GMV</span></span>
+        <span class="where">Tres Cantos, ES</span>
+      </div>
+      <div class="r">
+        <span class="yr">2016</span>
+        <span class="what">Developer, intern <span class="at">· AEMet</span></span>
+        <span class="where">Madrid, ES</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap">
+    <h2>Teaching</h2>
+    <div class="rows">
+      <div class="r">
+        <span class="yr">2026</span>
+        <span class="what"><a href="#">IA: Tu Copiloto Académico</a></span>
+        <span class="where">U. Francisco Marroquín</span>
+      </div>
+      <div class="r">
+        <span class="yr">2025 —</span>
+        <span class="what"><a href="#">Python for Finance</a></span>
+        <span class="where">U. Francisco Marroquín</span>
+      </div>
+      <div class="r">
+        <span class="yr">2025 —</span>
+        <span class="what"><a href="#">Technology</a></span>
+        <span class="where">U. Francisco Marroquín</span>
+      </div>
+      <div class="r">
+        <span class="yr">2025 —</span>
+        <span class="what"><a href="#">International Economics and Globalization</a></span>
+        <span class="where">U. de las Hespérides</span>
+      </div>
+      <div class="r">
+        <span class="yr">2025 —</span>
+        <span class="what"><a href="#">Blockchain</a></span>
+        <span class="where">U. Alfonso X el Sabio</span>
+      </div>
+      <div class="r">
+        <span class="yr">2025</span>
+        <span class="what"><a href="#">Economics I</a></span>
+        <span class="where">U. Francisco Marroquín</span>
+      </div>
+      <div class="r">
+        <span class="yr">2025</span>
+        <span class="what">Python Seminar</span>
+        <span class="where">U. Francisco Marroquín</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap">
+    <h2>Education</h2>
+    <div class="rows">
+      <div class="r">
+        <span class="yr">2023 – 24</span>
+        <span class="what">MA Economics <span class="at">· U. de las Hespérides</span></span>
+        <span class="where">honors ×6</span>
+        <span class="sub">Thesis: Quantity Theory of Money Around the Globe — money growth, velocity and inflation under different monetary policies.</span>
+      </div>
+      <div class="r">
+        <span class="yr">2017 – 19</span>
+        <span class="what">MSc Signal Theory &amp; Communications <span class="at">· UPM</span></span>
+        <span class="where">thesis 10/10</span>
+        <span class="sub">Full-wave design of coaxial-to-waveguide transitions and mode transducers — distinction.</span>
+      </div>
+      <div class="r">
+        <span class="yr">2012 – 16</span>
+        <span class="what">BSc Aerospace Engineering <span class="at">· UPM</span></span>
+        <span class="where">air navigation</span>
+        <span class="sub">Thesis: SIGMET and AIRMET decoding web tool — 9.5/10.</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap">
+    <h2>Tools</h2>
+    <div class="biglinks">
+      <a href="#">Average Salary Explorer <span>real vs nominal wages, OECD</span></a>
+      <a href="#">Inflation Calculator <span>CPI-adjusted amounts</span></a>
+      <a href="#">PPP Calculator <span>purchasing power across countries</span></a>
+      <a href="#">Compound Interest <span>growth with contributions</span></a>
+      <a href="#">Loan Amortization <span>French · Italian · American</span></a>
+      <a href="#">QR Generator <span>URLs, WiFi, vCards</span></a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <h2>Contact</h2>
+        <p>Messages through this site aren't monitored. Reach me on
+          <a href="https://linkedin.com/in/mgcalvo/">LinkedIn</a> or
+          <a href="https://github.com/MiguelPuntoEs">GitHub</a>.</p>
+      </div>
+      <div>
+        <h2>Over Tor</h2>
+        <p><a class="onion" href="#">miguel3wuxsv5wb63n7522pvk7tpwc3lvsvbdzai32bvvca2ac5olbqd.onion</a></p>
+      </div>
+    </div>
+    <div class="fin">
+      <span>© 2026 Miguel González Calvo</span>
+      <span>Helvetica, black &amp; orange. Nothing else.</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

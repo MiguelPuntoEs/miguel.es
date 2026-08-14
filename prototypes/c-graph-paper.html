@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Direction C — Graph paper</title>
+<style>
+  :root {
+    --ink: #22272e;
+    --gray: #66707c;
+    --card: #ffffff;
+    --border: #cfd7e0;
+    --orange: #de6300;
+    --blue: #3e5c76;
+    --green: #2e7d5b;
+    --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    color: var(--ink);
+    font-size: 15px;
+    line-height: 1.55;
+    background-color: #fdfdfc;
+    background-image:
+      linear-gradient(rgba(62, 92, 118, 0.14) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(62, 92, 118, 0.14) 1px, transparent 1px),
+      linear-gradient(rgba(62, 92, 118, 0.055) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(62, 92, 118, 0.055) 1px, transparent 1px);
+    background-size: 40px 40px, 40px 40px, 8px 8px, 8px 8px;
+  }
+  .wrap { max-width: 900px; margin: 0 auto; padding: 40px 20px 72px; }
+
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    padding: 24px 28px;
+    margin-bottom: 20px;
+  }
+  .caption {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    color: var(--gray);
+    letter-spacing: 0.02em;
+    margin-bottom: 14px;
+  }
+  .caption b { color: var(--orange); font-weight: 600; }
+
+  /* Header */
+  header.site.card { display: flex; justify-content: space-between; gap: 24px; align-items: flex-start; flex-wrap: wrap; border-top: 3px solid var(--ink); }
+  h1 { font-size: clamp(28px, 5vw, 38px); font-weight: 750; letter-spacing: -0.02em; line-height: 1.1; }
+  .sub { font-family: var(--mono); font-size: 12px; color: var(--gray); margin-top: 8px; }
+  .sub b { color: var(--orange); font-weight: 600; }
+  nav ul { list-style: none; display: flex; flex-direction: column; gap: 3px; font-family: var(--mono); font-size: 12px; text-align: right; }
+  nav a { color: var(--ink); text-decoration: none; }
+  nav a::before { content: "./"; color: var(--gray); }
+  nav a:hover, nav a[aria-current] { color: var(--orange); }
+
+  .prose { max-width: 62ch; }
+  .prose a { color: var(--ink); text-decoration: underline; text-decoration-color: var(--orange); text-decoration-thickness: 1.5px; text-underline-offset: 3px; }
+  .prose a:hover { color: var(--orange); }
+
+  /* Figure */
+  figure svg { width: 100%; height: auto; display: block; }
+
+  /* Lists */
+  h2 { font-size: 17px; font-weight: 700; margin-bottom: 4px; }
+  .duo { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .duo .card { margin-bottom: 0; }
+  ul.log { list-style: none; margin-top: 10px; }
+  ul.log li { display: flex; gap: 14px; padding: 5px 0; border-top: 1px dashed var(--border); align-items: baseline; }
+  ul.log .yr { font-family: var(--mono); font-size: 11px; color: var(--gray); white-space: nowrap; min-width: 64px; }
+  ul.log .txt b { font-weight: 650; }
+  ul.log .txt .at { color: var(--gray); font-size: 13.5px; }
+  ul.log a { color: inherit; text-decoration: none; box-shadow: inset 0 -1.5px 0 var(--orange); }
+  ul.log a:hover { color: var(--orange); }
+
+  /* Tools grid */
+  .tools { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 12px; }
+  .tool {
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    padding: 12px 14px;
+    text-decoration: none;
+    color: var(--ink);
+    display: block;
+  }
+  .tool:hover { border-color: var(--orange); }
+  .tool .id { font-family: var(--mono); font-size: 10px; color: var(--orange); }
+  .tool .name { font-weight: 650; font-size: 14px; margin-top: 2px; }
+  .tool .desc { font-size: 12.5px; color: var(--gray); margin-top: 2px; }
+
+  /* Contact / footer */
+  .contact { display: flex; gap: 28px; flex-wrap: wrap; }
+  .contact div { min-width: 220px; flex: 1; }
+  .onion { font-family: var(--mono); font-size: 10.5px; word-break: break-all; color: var(--gray); text-decoration: none; }
+  .onion:hover { color: var(--orange); }
+  footer.site { font-family: var(--mono); font-size: 11px; color: var(--gray); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+
+  @media (max-width: 720px) {
+    .duo { grid-template-columns: 1fr; }
+    .duo .card { margin-bottom: 0; }
+    .tools { grid-template-columns: 1fr 1fr; }
+    nav ul { text-align: left; flex-direction: row; flex-wrap: wrap; gap: 12px; }
+  }
+  @media (max-width: 480px) {
+    .tools { grid-template-columns: 1fr; }
+    .card { padding: 18px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="site card">
+    <div>
+      <h1>Miguel González Calvo</h1>
+      <p class="sub">senior llm engineer <b>@</b> a5 labs · madrid, es · 40.42N 3.70W</p>
+    </div>
+    <nav aria-label="Main">
+      <ul>
+        <li><a href="#" aria-current="page">home</a></li>
+        <li><a href="#">resources</a></li>
+        <li><a href="#">publications</a></li>
+        <li><a href="#">qr</a></li>
+        <li><a href="#">youtube</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="card">
+    <p class="prose">
+      I build software around language models and teach <a href="#">economics</a>,
+      <a href="#">Python</a> and <a href="#">blockchain</a> at university.
+      Before LLMs: eight years of engineering across aerospace, geodesy and
+      retail data — a path that's easier to plot than to explain.
+    </p>
+  </div>
+
+  <figure class="card">
+    <figcaption class="caption"><b>FIG. 1</b> — CAREER, 2012 → PRESENT</figcaption>
+    <svg viewBox="0 0 800 185" role="img" aria-label="Timeline of education, industry work and teaching from 2012 to present">
+      <!-- lane labels -->
+      <text x="8" y="42" font-family="ui-monospace, Menlo, monospace" font-size="9" fill="#66707c">EDU</text>
+      <text x="8" y="84" font-family="ui-monospace, Menlo, monospace" font-size="9" fill="#66707c">WORK</text>
+      <text x="8" y="126" font-family="ui-monospace, Menlo, monospace" font-size="9" fill="#66707c">TEACH</text>
+
+      <!-- education lane (blue) -->
+      <rect x="92" y="30" width="184" height="16" fill="#3e5c76"><title>BSc Aerospace Engineering, UPM (2012–2016)</title></rect>
+      <text x="184" y="41" font-family="ui-monospace, Menlo, monospace" font-size="9" fill="#ffffff" text-anchor="middle">BSC AERO · UPM</text>
+      <rect x="322" y="30" width="65" height="16" fill="#3e5c76"><title>MSc Signal Theory and Communications, UPM (2017–2019)</title></rect>
+      <text x="354" y="26" font-family="ui-monospace, Menlo, monospace" font-size="9" fill="#66707c" text-anchor="middle">MSC</text>
+      <rect x="600" y="30" width="53" height="16" fill="#3e5c76"><title>MA Economics, Universidad de las Hespérides (2023–2024)</title></rect>
+      <text x="626" y="26" font-family="ui-monospace, Menlo, monospace" font-size="9" fill="#66707c" text-anchor="middle">MA ECON</text>
+
+      <!-- industry lane (orange) -->
+      <rect x="244" y="72" width="23" height="16" fill="#de6300"><title>AEMet, internship (2016)</title></rect>
+      <text x="255" y="68" font-family="ui-monospace, Menlo, monospace" font-size="9" fill="#66707c" text-anchor="middle">AEMET</text>
+      <rect x="299" y="72" width="19" height="16" fill="#de6300"><title>GMV, Software Engineer (2017)</title></rect>
+      <text x="308" y="101" font-family="ui-monospace, Menlo, monospace" font-size="9" fill="#66707c" text-anchor="middle">GMV</text>
+      <rect x="352" y="72" width="48" height="16" fill="#de6300"><title>Airbus Defence and Space, Software Engineer (2018–2019)</title></rect>
+      <text x="376" y="68" font-family="ui-monospace, Menlo, monospace" font-size="9" fill="#66707c" text-anchor="middle">AIRBUS</text>
+      <rect x="403" y="72" width="188" height="16" fill="#de6300"><title>Leica Geosystems, Product Engineer (2019–2023)</title></rect>
+      <text x="497" y="83" font-family="ui-monospace, Menlo, monospace" font-size="9" fill="#ffffff" text-anchor="middle">LEICA GEOSYSTEMS</text>
+      <rect x="591" y="72" width="46" height="16" fill="#de6300"><title>toom Baumarkt, Data Scientist (2023–2024)</title></rect>
+      <text x="605" y="101" font-family="ui-monospace, Menlo, monospace" font-size="9" fill="#66707c" text-anchor="middle">TOOM</text>
+      <rect x="640" y="72" width="20" height="16" fill="#de6300"><title>Pascual, Lead Data Scientist (2024–2025)</title></rect>
+      <text x="655" y="101" font-family="ui-monospace, Menlo, monospace" font-size="9" fill="#66707c" text-anchor="middle">PASCUAL</text>
+      <rect x="661" y="72" width="71" height="16" fill="#de6300"><title>A5 Labs, Senior LLM Engineer (2025–present)</title></rect>
+      <text x="695" y="68" font-family="ui-monospace, Menlo, monospace" font-size="9" fill="#66707c" text-anchor="middle">A5 LABS</text>
+
+      <!-- teaching lane (green) -->
+      <rect x="661" y="114" width="71" height="16" fill="#2e7d5b"><title>UFM, Hespérides, UAX (2025–present)</title></rect>
+      <text x="696" y="144" font-family="ui-monospace, Menlo, monospace" font-size="9" fill="#66707c" text-anchor="middle">UFM·HESP·UAX</text>
+
+      <!-- now marker -->
+      <line x1="732" y1="16" x2="732" y2="152" stroke="#22272e" stroke-width="1" stroke-dasharray="3 3"/>
+      <text x="736" y="20" font-family="ui-monospace, Menlo, monospace" font-size="9" fill="#22272e">NOW</text>
+
+      <!-- axis -->
+      <line x1="60" y1="152" x2="756" y2="152" stroke="#22272e" stroke-width="1"/>
+      <g font-family="ui-monospace, Menlo, monospace" font-size="9" fill="#66707c" text-anchor="middle">
+        <line x1="60" y1="152" x2="60" y2="157" stroke="#66707c"/><text x="60" y="170">2012</text>
+        <line x1="152" y1="152" x2="152" y2="157" stroke="#66707c"/><text x="152" y="170">2014</text>
+        <line x1="244" y1="152" x2="244" y2="157" stroke="#66707c"/><text x="244" y="170">2016</text>
+        <line x1="336" y1="152" x2="336" y2="157" stroke="#66707c"/><text x="336" y="170">2018</text>
+        <line x1="428" y1="152" x2="428" y2="157" stroke="#66707c"/><text x="428" y="170">2020</text>
+        <line x1="520" y1="152" x2="520" y2="157" stroke="#66707c"/><text x="520" y="170">2022</text>
+        <line x1="612" y1="152" x2="612" y2="157" stroke="#66707c"/><text x="612" y="170">2024</text>
+        <line x1="704" y1="152" x2="704" y2="157" stroke="#66707c"/><text x="704" y="170">2026</text>
+      </g>
+    </svg>
+  </figure>
+
+  <div class="duo">
+    <section class="card" aria-labelledby="h-exp">
+      <p class="caption"><b>TAB. 1</b> — EXPERIENCE</p>
+      <ul class="log">
+        <li><span class="yr">2025 –</span><span class="txt"><b>Senior LLM Engineer</b> <span class="at">· A5 Labs, US (remote)</span></span></li>
+        <li><span class="yr">2024 – 25</span><span class="txt"><b>Lead Data Scientist</b> <span class="at">· Pascual, Madrid</span></span></li>
+        <li><span class="yr">2023 – 24</span><span class="txt"><b>Data Scientist</b> <span class="at">· toom Baumarkt, Cologne</span></span></li>
+        <li><span class="yr">2019 – 23</span><span class="txt"><b>Product Engineer</b> <span class="at">· Leica Geosystems, CH</span></span></li>
+        <li><span class="yr">2018 – 19</span><span class="txt"><b>Software Engineer</b> <span class="at">· Airbus D&amp;S, Munich</span></span></li>
+        <li><span class="yr">2017</span><span class="txt"><b>Software Engineer</b> <span class="at">· GMV, Tres Cantos</span></span></li>
+        <li><span class="yr">2016</span><span class="txt"><b>Developer, intern</b> <span class="at">· AEMet, Madrid</span></span></li>
+      </ul>
+    </section>
+
+    <section class="card" aria-labelledby="h-teach">
+      <p class="caption"><b>TAB. 2</b> — TEACHING</p>
+      <ul class="log">
+        <li><span class="yr">2026</span><span class="txt"><a href="#"><b>IA: Tu Copiloto Académico</b></a> <span class="at">· UFM</span></span></li>
+        <li><span class="yr">2025 –</span><span class="txt"><a href="#"><b>Python for Finance</b></a> <span class="at">· UFM</span></span></li>
+        <li><span class="yr">2025 –</span><span class="txt"><a href="#"><b>Technology</b></a> <span class="at">· UFM</span></span></li>
+        <li><span class="yr">2025 –</span><span class="txt"><a href="#"><b>International Economics</b></a> <span class="at">· Hespérides</span></span></li>
+        <li><span class="yr">2025 –</span><span class="txt"><a href="#"><b>Blockchain</b></a> <span class="at">· UAX</span></span></li>
+        <li><span class="yr">2025</span><span class="txt"><a href="#"><b>Economics I</b></a> <span class="at">· UFM</span></span></li>
+        <li><span class="yr">2025</span><span class="txt"><b>Python Seminar</b> <span class="at">· UFM</span></span></li>
+      </ul>
+    </section>
+  </div>
+
+  <div style="height: 20px"></div>
+
+  <section class="card" aria-labelledby="h-tools">
+    <p class="caption"><b>INSTRUMENTS</b> — CALCULATORS ON LIVE OECD DATA</p>
+    <div class="tools">
+      <a class="tool" href="#">
+        <span class="id">/salary-explorer</span>
+        <span class="name" style="display:block">Average Salary Explorer</span>
+        <span class="desc" style="display:block">Real vs nominal wages, PPP compare</span>
+      </a>
+      <a class="tool" href="#">
+        <span class="id">/inflation-calculator</span>
+        <span class="name" style="display:block">Inflation Calculator</span>
+        <span class="desc" style="display:block">CPI-adjusted amounts over time</span>
+      </a>
+      <a class="tool" href="#">
+        <span class="id">/ppp-calculator</span>
+        <span class="name" style="display:block">PPP Calculator</span>
+        <span class="desc" style="display:block">Purchasing power across countries</span>
+      </a>
+      <a class="tool" href="#">
+        <span class="id">/compound-calculator</span>
+        <span class="name" style="display:block">Compound Interest</span>
+        <span class="desc" style="display:block">Growth with periodic contributions</span>
+      </a>
+      <a class="tool" href="#">
+        <span class="id">/loan-calculator</span>
+        <span class="name" style="display:block">Loan Amortization</span>
+        <span class="desc" style="display:block">French, Italian, American methods</span>
+      </a>
+      <a class="tool" href="#">
+        <span class="id">/qr</span>
+        <span class="name" style="display:block">QR Generator</span>
+        <span class="desc" style="display:block">URLs, WiFi, vCards, events</span>
+      </a>
+    </div>
+  </section>
+
+  <section class="card contact" aria-labelledby="h-contact">
+    <div>
+      <p class="caption"><b>CONTACT</b></p>
+      <p class="prose" style="font-size: 14px;">
+        Messages through this site aren't monitored. Reach me on
+        <a href="https://linkedin.com/in/mgcalvo/">LinkedIn</a> or
+        <a href="https://github.com/MiguelPuntoEs">GitHub</a>.
+      </p>
+    </div>
+    <div>
+      <p class="caption"><b>OVER TOR</b></p>
+      <a class="onion" href="#">miguel3wuxsv5wb63n7522pvk7tpwc3lvsvbdzai32bvvca2ac5olbqd.onion</a>
+    </div>
+  </section>
+
+  <footer class="site">
+    <span>© 2026 miguel gonzález calvo</span>
+    <span>grid: 8 px minor / 40 px major</span>
+  </footer>
+
+</div>
+</body>
+</html>
