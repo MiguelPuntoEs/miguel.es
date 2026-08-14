@@ -113,13 +113,13 @@ const faqLd = {
   <main class="min-h-screen px-3 py-10 sm:px-6">
     <section class="mx-auto max-w-6xl space-y-6">
       <header class="space-y-2 text-center">
-        <p class="text-xs font-semibold uppercase tracking-[0.2em] text-indigo-600">
+        <p class="text-[13px] font-extrabold text-accent">
           Free Tool
         </p>
-        <h1 class="text-3xl font-semibold tracking-tight text-slate-900">
+        <h1 class="text-3xl font-semibold tracking-tight text-stone-900">
           QR Code Generator
         </h1>
-        <p class="mx-auto max-w-2xl text-sm text-slate-600">
+        <p class="mx-auto max-w-2xl text-sm text-stone-600">
           Create QR codes for links, contacts, WiFi, Bitcoin, social profiles and more.
           Customize colors and frames. Download as PNG or SVG — free, no signup.
         </p>
@@ -128,11 +128,11 @@ const faqLd = {
       <QRGenerator client:only="react" />
 
       <!-- Static content for SEO — Googlebot doesn't run the React app -->
-      <section class="mx-auto max-w-3xl pt-12 border-t border-slate-200 space-y-10">
+      <section class="mx-auto max-w-3xl pt-12 border-t border-stone-200 space-y-10">
 
         <div>
-          <h2 class="text-xl font-semibold text-slate-900 mb-4">What can you generate?</h2>
-          <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 text-sm text-slate-700">
+          <h2 class="text-xl font-semibold text-stone-900 mb-4">What can you generate?</h2>
+          <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 text-sm text-stone-700">
             {[
               { label: "URLs & links", desc: "Any website or deep link" },
               { label: "WiFi networks", desc: "Scan to connect, no typing" },
@@ -147,16 +147,16 @@ const faqLd = {
               { label: "App Store links", desc: "Apple App Store & Google Play" },
               { label: "Plain text", desc: "Any text content" },
             ].map(({ label, desc }) => (
-              <div class="rounded-lg border border-slate-200 p-3">
-                <p class="font-medium text-slate-900">{label}</p>
-                <p class="text-xs text-slate-500 mt-0.5">{desc}</p>
+              <div class="rounded-lg border border-stone-200 p-3">
+                <p class="font-medium text-stone-900">{label}</p>
+                <p class="text-xs text-stone-500 mt-0.5">{desc}</p>
               </div>
             ))}
           </div>
         </div>
 
         <div>
-          <h2 class="text-xl font-semibold text-slate-900 mb-6">How to use each QR code type</h2>
+          <h2 class="text-xl font-semibold text-stone-900 mb-6">How to use each QR code type</h2>
           <dl class="space-y-6">
             {[
               {
@@ -245,15 +245,15 @@ const faqLd = {
               },
             ].map(({ term, desc }) => (
               <div class="grid sm:grid-cols-[10rem_1fr] gap-1 sm:gap-4">
-                <dt class="font-semibold text-slate-800 pt-0.5">{term}</dt>
-                <dd class="text-sm text-slate-600 leading-relaxed">{desc}</dd>
+                <dt class="font-semibold text-stone-800 pt-0.5">{term}</dt>
+                <dd class="text-sm text-stone-600 leading-relaxed">{desc}</dd>
               </div>
             ))}
           </dl>
         </div>
 
         <div>
-          <h2 class="text-xl font-semibold text-slate-900 mb-4">Frequently asked questions</h2>
+          <h2 class="text-xl font-semibold text-stone-900 mb-4">Frequently asked questions</h2>
           <dl class="space-y-5">
             {[
               {
@@ -282,8 +282,8 @@ const faqLd = {
               },
             ].map(({ q, a }) => (
               <div>
-                <dt class="font-medium text-slate-900">{q}</dt>
-                <dd class="mt-1 text-sm text-slate-600">{a}</dd>
+                <dt class="font-medium text-stone-900">{q}</dt>
+                <dd class="mt-1 text-sm text-stone-600">{a}</dd>
               </div>
             ))}
           </dl>

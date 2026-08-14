@@ -1,237 +1,302 @@
 ---
 import Image from "astro/components/Image.astro";
-import LogoA5 from "../assets/companies/a5labs.svg?url";
-import LogoAemet from "../assets/companies/aemet.svg?url";
-import LogoAirbus from "../assets/companies/airbus.svg?url";
-import LogoGmv from "../assets/companies/gmv.svg?url";
-import LogoLeica from "../assets/companies/leica.svg?url";
-import LogoPascual from "../assets/companies/pascual.svg?url";
-import LogoToom from "../assets/companies/toom.svg?url";
 import profile from "../assets/pictures/profile.jpg";
-import LogoHesperides from "../assets/universities/hesperides.svg?url";
-import LogoUfm from "../assets/universities/ufm.svg?url";
-import LogoUpm from "../assets/universities/upm.svg?url";
-import LogoUax from "../assets/universities/uax.svg?url";
 import EducationEntry from "../components/EducationEntry.astro";
 import JobEntry from "../components/JobEntry.astro";
 import TeachingEntry from "../components/TeachingEntry.astro";
 import Layout from "../layouts/Layout.astro";
+
+const year = new Date().getFullYear();
+
+const navLinks = [
+  { href: "/resources", label: "Resources" },
+  { href: "/publications", label: "Publications" },
+  { href: "/qr", label: "QR" },
+  { href: "https://www.youtube.com/@MiguelPuntoEs", label: "YouTube", external: true },
+];
 ---
 
 <Layout
+  bare
   title="Miguel González Calvo - Senior LLM Engineer | AI & Data Science"
   description="Miguel González Calvo - Senior LLM Engineer. 8+ years in software development, 5+ in Data Science. Specialized in LLMs, time series, and AI."
 >
-  <main>
-  <section
-    class="max-w-3xl mx-auto flex flex-col sm:flex-row gap-4 sm:gap-8 px-4 my-8"
-  >
-    <Image
-      src={profile}
-      alt="Miguel González Calvo - Senior LLM Engineer"
-      class="rounded w-32 h-32 sm:w-40 sm:h-40 flex-shrink-0"
-      height={160}
-      width={160}
-      densities={[2]}
-      loading="eager"
-      fetchpriority="high"
-    />
-    <div class="flex flex-col gap-3">
-      <h1 class="text-sm">Hi, I'm <strong>Miguel González Calvo</strong> 👋</h1>
-      <p class="text-2xl font-semibold">Senior LLM Engineer</p>
-      <p class="text-sm">
-        AI engineer from Madrid with 8+ years of experience in software
-        development
-      </p>
-    </div>
-  </section>
-  <section class="max-w-3xl mx-auto px-4 mt-4">
-    <h2 class="font-semibold text-lg">Bio</h2>
-    <p class="text-sm">
-      Professional with 5+ years of experience in Data Science specialized in
-      LLMs and time series, and 8+ years in software development. Constantly
-      learning about AI from new publications and specialized content. Motivated
-      by implementing innovative methodologies and observing their impact and
-      TensorFlow-certified.
-    </p>
-    <h3 class="font-medium text-base mt-2">Education</h3>
-    <p class="text-sm">
-      I hold a BSc. in Aerospace Engineering (2016), a MSc. in Signal Theory and
-      Communications (2019) from the Polytechnic University of Madrid (Spain),
-      and a MA. in Economics (2024) from Universidad de las Hespérides (Spain).
-    </p>
-  </section>
-  <section class="max-w-3xl mx-auto px-4 mt-8">
-    <h2 class="text-xl font-semibold mb-4">Professional Experience</h2>
-    <div class="flex flex-col gap-4 lg:gap-6">
-      <JobEntry
-        logo={LogoA5}
-        jobTitle="Senior LLM Engineer"
-        companyName="A5 Labs"
-        dateRange="Jan 2025 - Present"
-        location="California, US (remote)"
-        logoClass="bg-[#202348] p-2 rounded-lg"
+  <div class="grid min-h-screen md:grid-cols-[minmax(300px,42%)_1fr]">
+    <div class="duotone relative h-[46vh] overflow-hidden md:sticky md:top-0 md:h-screen">
+      <Image
+        src={profile}
+        alt="Miguel González Calvo"
+        class="h-full w-full object-cover grayscale contrast-[1.08] brightness-[1.02]"
+        width={886}
+        height={886}
+        loading="eager"
+        fetchpriority="high"
       />
-      <JobEntry
-        logo={LogoPascual}
-        jobTitle="Lead Data Scientist"
-        companyName="Pascual"
-        dateRange="Aug 2024 - Jan 2025"
-        location="Madrid, ES"
-      />
-      <JobEntry
-        logo={LogoToom}
-        jobTitle="Data Scientist"
-        companyName="toom Baumarkt"
-        dateRange="Jul 2023 - Jul 2024"
-        location="Cologne, DE"
-      />
-      <JobEntry
-        logo={LogoLeica}
-        jobTitle="Product Engineer"
-        companyName="Leica Geosystems"
-        dateRange="Jun 2019 - Jul 2023"
-        location="Heerbrugg, CH"
-      />
-      <JobEntry
-        logo={LogoAirbus}
-        jobTitle="Software Engineer"
-        companyName="Airbus Defence and Space"
-        dateRange="May 2018 - May 2019"
-        location="Munich, DE"
-      />
-      <JobEntry
-        logo={LogoGmv}
-        jobTitle="Software Engineer"
-        companyName="GMV"
-        dateRange="Mar 2017 - Jul 2017"
-        location="Tres Cantos, ES"
-      />
-      <JobEntry
-        logo={LogoAemet}
-        jobTitle="Internship: Developer"
-        companyName="AEMet"
-        dateRange="Jan 2016 - Jun 2016"
-        location="Madrid, ES"
-      />
-    </div>
-  </section>
-  <section class="max-w-3xl mx-auto px-4 mt-8">
-    <h2 class="text-xl font-semibold mb-4">Teaching</h2>
-    <div class="flex flex-col gap-4 lg:gap-6">
-      <TeachingEntry
-        logo={LogoUfm}
-        courseName="IA: Tu Copiloto Académico"
-        url="/courses/academic-copilot"
-        university="Universidad Francisco Marroquín"
-        dateRange="Jun 2026 - Jul 2026"
-      />
-      <TeachingEntry
-        logo={LogoUfm}
-        courseName="Python for Finance"
-        url="/courses/python-for-finance"
-        university="Universidad Francisco Marroquín"
-        dateRange="Sep 2025 -"
-      />
-      <TeachingEntry
-        logo={LogoUfm}
-        courseName="Technology"
-        url="/courses/technology"
-        university="Universidad Francisco Marroquín"
-        dateRange="Sep 2025 -"
-      />
-      <TeachingEntry
-        logo={LogoHesperides}
-        courseName="International Economics and Globalization"
-        url="/courses/international-economics"
-        university="Universidad de las Hespérides"
-        dateRange="Sep 2025 -"
-      />
-      <TeachingEntry
-        logo={LogoUax}
-        courseName="Blockchain"
-        url="/courses/blockchain"
-        university="Universidad Alfonso X el Sabio"
-        dateRange="Sep 2025 -"
-      />
-      <TeachingEntry
-        logo={LogoUfm}
-        courseName="Economics I"
-        url="/courses/economics-i"
-        university="Universidad Francisco Marroquín"
-        dateRange="Jan 2025 - May 2025"
-      />
-      <TeachingEntry
-        logo={LogoUfm}
-        courseName="Python Seminar"
-        university="Universidad Francisco Marroquín"
-        dateRange="Jun 2025"
-      />
-    </div>
-  </section><section class="max-w-3xl mx-auto px-4 mt-8">
-    <h2 class="text-xl font-semibold mb-4">Education</h2>
-    <div class="flex flex-col gap-4 lg:gap-6">
-      <EducationEntry
-        logo={LogoHesperides}
-        degree="MA Economics"
-        university="Universidad de las Hespérides"
-        dateRange="Oct 2023 - Nov 2024"
-        thesis={{
-          title:
-            "Quantity Theory of Money Around the Globe: Money Growth, Money Velocity and Inflation Subject to Different Monetary Policies",
-          grade:
-            "Honors in: Economics and Institutions, Econometrics, Quantitative Methods for Economics, Game Theory and Information Economics, Monetary and Financial Integration, Experimental Economics",
-        }}
-      />
-
-      <EducationEntry
-        logo={LogoUpm}
-        degree="MSc. in Signal Theory and Communications"
-        university="Universidad Politécnica de Madrid"
-        dateRange="Sep 2017 - Feb 2019"
-        grade="8.5"
-        thesis={{
-          title:
-            "Full-Wave Design of Coaxial to Waveguide Transitions and Waveguide Mode Transducers",
-          grade: "10 out of 10, Distinction",
-        }}
-      />
-
-      <EducationEntry
-        logo={LogoUpm}
-        degree="BSc. in Aerospace Engineering"
-        university="Universidad Politécnica de Madrid"
-        dateRange="Sep 2012 - Sep 2016"
-        grade="7.6"
-        specialization="Air Navigation Systems"
-        thesis={{
-          title: "SIGMET and AIRMET decoding web-based tool",
-          grade: "9.5 out of 10",
-        }}
-      />
-    </div>
-  </section>
-  <section class="max-w-3xl mx-auto px-4 mt-8 mb-16">
-    <h2 class="text-xl font-semibold mb-4">Contact</h2>
-    <p class="text-sm">
-      I don’t monitor all communications sent through this website. If you need
-      to get in touch, please reach out to me directly on <a
-        href="https://linkedin.com/in/mgcalvo/" target="_blank" rel="noopener noreferrer"
-        class="font-semibold">LinkedIn</a
-      > or <a href="https://github.com/MiguelPuntoEs" target="_blank" rel="noopener noreferrer" class="font-semibold"
-        >GitHub</a
-      >.
-    </p>
-    <div class="mt-4 p-4 bg-gray-100 rounded-lg border border-gray-300">
-      <p class="text-sm mb-2">
-        🔐🧅 <strong>Feeling a bit hacky?</strong> You can also visit this site over Tor at:
-      </p>
-      <a
-        href="http://miguel3wuxsv5wb63n7522pvk7tpwc3lvsvbdzai32bvvca2ac5olbqd.onion/"
-        class="font-mono text-xs block break-all"
-        >miguel3wuxsv5wb63n7522pvk7tpwc3lvsvbdzai32bvvca2ac5olbqd.onion</a
+      <span class="absolute left-[18px] bottom-[14px] z-2 text-[11px] text-white/85"
+        >Madrid, 40.42°N 3.70°W</span
       >
     </div>
-  </section>
-  </main>
+
+    <main class="max-w-[760px] px-7 pb-20 pt-12 md:px-[clamp(28px,6vw,84px)]">
+      <div class="flex flex-wrap items-baseline justify-between gap-4 text-[13px] font-semibold">
+        <span class="text-soft">miguel.es</span>
+        <nav aria-label="Main" class="flex flex-wrap gap-[18px]">
+          <a href="/" aria-current="page" class="text-accent">Home</a>
+          {
+            navLinks.map(({ href, label, external }) => (
+              <a
+                href={href}
+                target={external ? "_blank" : undefined}
+                rel={external ? "noopener noreferrer" : undefined}
+                class="text-ink hover:text-accent"
+              >
+                {label}
+              </a>
+            ))
+          }
+        </nav>
+      </div>
+
+      <h1
+        class="relative z-3 mt-11 text-[clamp(42px,6.5vw,74px)] font-[850] leading-[0.96] tracking-[-0.04em] md:-ml-[clamp(40px,12vw,160px)]"
+      >
+        Miguel<span class="block">González Calvo</span>
+      </h1>
+
+      <p class="deck mt-[26px] max-w-[32ch] text-[clamp(20px,2.6vw,26px)] leading-[1.35] tracking-[-0.01em]">
+        Builds with <b class="font-bold">language models</b> by day; teaches
+        <span class="mk">economics, Python and blockchain</span> the rest of the time.
+      </p>
+      <p class="mt-[18px] text-[13px] text-soft">
+        Senior LLM Engineer, A5 Labs · Madrid → California, remotely
+      </p>
+
+      <div class="copy mt-[34px] max-w-[58ch]">
+        <p class="dropcap mb-[14px]">
+          The path wasn't straight: aerospace engineering first, then signal theory, four countries
+          of software and data work — weather at AEMet, satellites at Airbus, precision instruments
+          at Leica — before settling into data science and, for the last years, LLM engineering.
+        </p>
+        <p>
+          The economics came later, deliberately: an MA at Universidad de las Hespérides, a
+          <a href="/publications">thesis on the quantity theory of money</a>, and now courses at
+          three universities plus a set of <a href="/resources">calculators on live OECD data</a>
+          that students and strangers actually use.
+        </p>
+      </div>
+
+      <blockquote
+        class="my-10 max-w-[30ch] border-l-4 border-accent pl-5 text-[22px] font-bold leading-[1.3] tracking-[-0.015em]"
+      >
+        "Aero → signals → data → LLMs. The tools change; the engineering doesn't."
+        <span class="mt-2 block text-[13px] font-normal text-soft">— the short version of the CV</span>
+      </blockquote>
+
+      <section aria-labelledby="h-experience">
+        <h2 id="h-experience" class="text-[13px] font-extrabold text-accent">Experience</h2>
+        <hr class="mb-[5px] mt-1 border-t-2 border-ink" />
+        <div class="divide-y divide-line">
+          <JobEntry
+            jobTitle="Senior LLM Engineer"
+            companyName="A5 Labs"
+            dateRange="2025 —"
+            location="California (remote)"
+          />
+          <JobEntry
+            jobTitle="Lead Data Scientist"
+            companyName="Pascual"
+            dateRange="2024 – 25"
+            location="Madrid"
+          />
+          <JobEntry
+            jobTitle="Data Scientist"
+            companyName="toom Baumarkt"
+            dateRange="2023 – 24"
+            location="Cologne"
+          />
+          <JobEntry
+            jobTitle="Product Engineer"
+            companyName="Leica Geosystems"
+            dateRange="2019 – 23"
+            location="Heerbrugg"
+          />
+          <JobEntry
+            jobTitle="Software Engineer"
+            companyName="Airbus Defence & Space"
+            dateRange="2018 – 19"
+            location="Munich"
+          />
+          <JobEntry
+            jobTitle="Software Engineer"
+            companyName="GMV"
+            dateRange="2017"
+            location="Tres Cantos"
+          />
+          <JobEntry
+            jobTitle="Developer, intern"
+            companyName="AEMet"
+            dateRange="2016"
+            location="Madrid"
+          />
+        </div>
+      </section>
+
+      <section class="mt-[46px]" aria-labelledby="h-teaching">
+        <h2 id="h-teaching" class="text-[13px] font-extrabold text-accent">Teaching</h2>
+        <hr class="mb-[5px] mt-1 border-t-2 border-ink" />
+        <div class="divide-y divide-line">
+          <TeachingEntry
+            courseName="IA: Tu Copiloto Académico"
+            url="/courses/academic-copilot"
+            university="U. Francisco Marroquín"
+            dateRange="2026"
+          />
+          <TeachingEntry
+            courseName="Python for Finance"
+            url="/courses/python-for-finance"
+            university="U. Francisco Marroquín"
+            dateRange="2025 —"
+          />
+          <TeachingEntry
+            courseName="Technology"
+            url="/courses/technology"
+            university="U. Francisco Marroquín"
+            dateRange="2025 —"
+          />
+          <TeachingEntry
+            courseName="International Economics and Globalization"
+            url="/courses/international-economics"
+            university="U. de las Hespérides"
+            dateRange="2025 —"
+          />
+          <TeachingEntry
+            courseName="Blockchain"
+            url="/courses/blockchain"
+            university="U. Alfonso X el Sabio"
+            dateRange="2025 —"
+          />
+          <TeachingEntry
+            courseName="Economics I"
+            url="/courses/economics-i"
+            university="U. Francisco Marroquín"
+            dateRange="2025"
+          />
+          <TeachingEntry
+            courseName="Python Seminar"
+            university="U. Francisco Marroquín"
+            dateRange="2025"
+          />
+        </div>
+      </section>
+
+      <section class="mt-[46px]" aria-labelledby="h-education">
+        <h2 id="h-education" class="text-[13px] font-extrabold text-accent">Education</h2>
+        <hr class="mb-[5px] mt-1 border-t-2 border-ink" />
+        <div class="divide-y divide-line">
+          <EducationEntry
+            degree="MA Economics"
+            university="U. de las Hespérides"
+            dateRange="2023 – 24"
+            note="Quantity Theory of Money Around the Globe · honors in six subjects"
+          />
+          <EducationEntry
+            degree="MSc Signal Theory & Communications"
+            university="UPM"
+            dateRange="2017 – 19"
+            note="Coaxial-to-waveguide transitions and mode transducers · 10/10, distinction"
+          />
+          <EducationEntry
+            degree="BSc Aerospace Engineering"
+            university="UPM"
+            dateRange="2012 – 16"
+            note="Air navigation systems · SIGMET/AIRMET decoding tool · 9.5/10"
+          />
+        </div>
+      </section>
+
+      <section class="mt-[46px]" aria-labelledby="h-tools">
+        <h2 id="h-tools" class="text-[13px] font-extrabold text-accent">Tools</h2>
+        <hr class="mb-[14px] mt-1 border-t-2 border-ink" />
+        <div class="flex flex-wrap gap-2">
+          <a href="/resources/salary-explorer" class="pill">Salary Explorer</a>
+          <a href="/resources/inflation-calculator" class="pill">Inflation Calculator</a>
+          <a href="/resources/ppp-calculator" class="pill">PPP Calculator</a>
+          <a href="/resources/compound-calculator" class="pill">Compound Interest</a>
+          <a href="/resources/loan-calculator" class="pill">Loan Amortization</a>
+          <a href="/qr" class="pill">QR Generator</a>
+        </div>
+      </section>
+
+      <section class="mt-[46px]" aria-labelledby="h-contact">
+        <h2 id="h-contact" class="text-[13px] font-extrabold text-accent">Contact</h2>
+        <hr class="mb-[14px] mt-1 border-t-2 border-ink" />
+        <p class="copy max-w-[52ch] text-[14.5px] text-soft">
+          Messages through this site aren't monitored — reach me on
+          <a href="https://linkedin.com/in/mgcalvo/" target="_blank" rel="noopener noreferrer" class="contact-link">LinkedIn</a>
+          or
+          <a href="https://github.com/MiguelPuntoEs" target="_blank" rel="noopener noreferrer" class="contact-link">GitHub</a>.
+          Also served over Tor:
+        </p>
+        <a
+          href="http://miguel3wuxsv5wb63n7522pvk7tpwc3lvsvbdzai32bvvca2ac5olbqd.onion/"
+          class="mt-2 block break-all font-mono text-[10.5px] text-soft hover:text-accent"
+          >miguel3wuxsv5wb63n7522pvk7tpwc3lvsvbdzai32bvvca2ac5olbqd.onion</a
+        >
+      </section>
+
+      <footer
+        class="mt-12 flex flex-wrap justify-between gap-2 border-t-2 border-ink pt-[14px] text-[12.5px] text-soft"
+      >
+        <span>© {year} Miguel González Calvo</span>
+        <span>One photo, one orange, Helvetica.</span>
+      </footer>
+    </main>
+  </div>
 </Layout>
+
+<style>
+  .duotone::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: var(--color-accent);
+    mix-blend-mode: multiply;
+    opacity: 0.32;
+  }
+  .deck .mk {
+    background-image: linear-gradient(transparent 62%, rgba(217, 95, 2, 0.25) 62%);
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+  }
+  .dropcap::first-letter {
+    float: left;
+    font-size: 3.1em;
+    font-weight: 850;
+    line-height: 0.85;
+    padding: 4px 8px 0 0;
+    color: var(--color-accent);
+  }
+  .copy a {
+    text-decoration: underline;
+    text-decoration-color: var(--color-accent);
+    text-decoration-thickness: 1.5px;
+    text-underline-offset: 3px;
+  }
+  .copy a:hover {
+    color: var(--color-accent);
+  }
+  .copy .contact-link {
+    color: var(--color-ink);
+  }
+  .pill {
+    border: 1.5px solid var(--color-ink);
+    border-radius: 999px;
+    padding: 6px 14px;
+    font-size: 13.5px;
+    font-weight: 650;
+  }
+  .pill:hover {
+    background: var(--color-ink);
+    color: var(--color-paper);
+  }
+</style>

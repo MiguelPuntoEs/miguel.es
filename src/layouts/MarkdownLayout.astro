@@ -16,7 +16,12 @@ const { title, description, latex, lang, university } = frontmatter;
     )
   }
   <main
-    class="prose prose-sm prose-p:mb-1 prose-ul:my-1 prose-ol:my-1 prose-headings:font-semibold prose-h1:text-2xl prose-a:text-blue-600 prose-a:hover:text-blue-500 max-w-3xl mx-auto px-4"
+    class="prose prose-sm prose-stone max-w-3xl mx-auto px-4
+      prose-p:mb-1 prose-ul:my-1 prose-ol:my-1
+      prose-headings:tracking-tight prose-headings:font-bold
+      prose-h1:text-[30px] prose-h1:font-[850] prose-h1:tracking-[-0.03em] prose-h1:text-ink
+      prose-h2:text-[13px] prose-h2:font-extrabold prose-h2:text-accent prose-h2:border-b-2 prose-h2:border-ink prose-h2:pb-[6px]
+      prose-a:text-ink prose-a:decoration-accent prose-a:decoration-[1.5px] prose-a:underline-offset-[3px] hover:prose-a:text-accent"
   >
     <article class="mt-8">
       <h1>{title}</h1>

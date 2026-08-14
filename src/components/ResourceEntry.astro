@@ -8,22 +8,22 @@ export interface Props {
 const { title, description, url } = Astro.props;
 ---
 
-<div class="flex flex-col gap-1">
+<div class="flex flex-col items-start gap-1">
   {
     url ? (
       <a
         href={url}
-        class="font-semibold text-sm text-slate-800 hover:text-slate-600 transition-colors"
+        class="font-bold text-sm border-b-2 border-accent/35 hover:text-accent hover:border-accent"
       >
         {title}
       </a>
     ) : (
-      <h3 class="font-semibold text-sm text-slate-800">{title}</h3>
+      <h3 class="font-bold text-sm">{title}</h3>
     )
   }
   {
     description && (
-      <p class="text-xs text-slate-600 leading-relaxed">{description}</p>
+      <p class="text-[13px] text-soft leading-relaxed">{description}</p>
     )
   }
 </div>

@@ -16,9 +16,9 @@ const courseEntries = courses.map(course => ({
 
 <Layout title="Miguel González Calvo | Resources" description="Teaching materials, calculators, and curated reference resources on AI, economics, Python, and data science">
   <main class="max-w-3xl mx-auto px-4">
-    <h1 class="text-2xl font-semibold mb-4">Resources</h1>
-    
-    <h2 class="text-lg font-semibold mb-3 mt-6">Teaching</h2>
+    <h1 class="text-[30px] font-[850] tracking-[-0.03em] mb-6 mt-2">Resources</h1>
+
+    <h2 class="text-[13px] font-extrabold text-accent border-b-2 border-ink pb-[6px] mb-4 mt-8">Teaching</h2>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-6 mb-8">
       {courseEntries.map(course => (
         <ResourceEntry
@@ -39,7 +39,7 @@ const courseEntries = courses.map(course => ({
       />
     </div>
 
-    <h2 class="text-lg font-semibold mb-3">Tools & Calculators</h2>
+    <h2 class="text-[13px] font-extrabold text-accent border-b-2 border-ink pb-[6px] mb-4">Tools & Calculators</h2>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-6 mb-8">
       <ResourceEntry
         title="QR Code Generator"
@@ -78,7 +78,7 @@ const courseEntries = courses.map(course => ({
       />
     </div>
 
-    <h2 class="text-lg font-semibold mb-3">Reference Materials</h2>
+    <h2 class="text-[13px] font-extrabold text-accent border-b-2 border-ink pb-[6px] mb-4">Reference Materials</h2>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-6">
       <ResourceEntry
         title="Interesting APIs"

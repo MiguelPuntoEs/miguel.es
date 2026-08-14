@@ -1,29 +1,18 @@
 ---
 export interface Props {
-  logo: string;
   jobTitle: string;
   companyName: string;
   dateRange: string;
   location: string;
-  logoClass?: string;
 }
 
-const {
-  logo,
-  jobTitle,
-  companyName,
-  dateRange,
-  location,
-  logoClass = "bg-slate-50/80 p-2 rounded-lg border border-slate-200/40",
-} = Astro.props;
+const { jobTitle, companyName, dateRange, location } = Astro.props;
 ---
 
-<div class="flex gap-4">
-  <img src={logo} height="50" width="50" class={logoClass} alt="" loading="lazy" decoding="async" />
-  <div class="flex-1">
-    <p class="font-semibold text-sm">{jobTitle}</p>
-    <p class="text-xs">{companyName}</p>
-    <p class="text-xs text-gray-500">{dateRange}</p>
-    <p class="text-xs text-gray-500">{location}</p>
-  </div>
+<div class="flex gap-[18px] py-[9px] items-baseline">
+  <span class="text-[13px] text-soft min-w-[76px] shrink-0 tabular-nums">{dateRange}</span>
+  <span>
+    <span class="font-bold">{jobTitle}</span>
+    <span class="text-soft text-sm">· {companyName}, {location}</span>
+  </span>
 </div>

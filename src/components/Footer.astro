@@ -1,38 +1,45 @@
 ---
-import Image from "astro/components/Image.astro";
-import LogoGitHub from "../assets/logos/github.svg";
-import LogoLinkedIn from "../assets/logos/linkedin.svg";
-import LogoYouTube from "../assets/logos/youtube.svg";
+const year = new Date().getFullYear();
 ---
 
-<footer class="max-w-3xl mx-auto px-4 py-8 mt-8 border-t border-gray-300">
-  <div class="flex flex-col sm:flex-row justify-between gap-6 text-xs text-gray-600">
-    <div class="flex flex-col gap-3">
-      <span class="font-semibold text-gray-900">Miguel González Calvo</span>
-      <div class="flex gap-4 items-center">
-        <a href="https://linkedin.com/in/mgcalvo/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-1 hover:text-gray-900">
-          <Image src={LogoLinkedIn} alt="LinkedIn" class="w-4 h-4" width={16} height={16} />
-          LinkedIn
-        </a>
-        <a href="https://github.com/MiguelPuntoEs" target="_blank" rel="noopener noreferrer" class="flex items-center gap-1 hover:text-gray-900">
-          <Image src={LogoGitHub} alt="GitHub" class="w-4 h-4" width={16} height={16} />
-          GitHub
-        </a>
-        <a href="https://www.youtube.com/@MiguelPuntoEs" target="_blank" rel="noopener noreferrer" class="flex items-center gap-1 hover:text-gray-900">
-          <Image src={LogoYouTube} alt="YouTube" class="w-4 h-4" width={16} height={16} />
-          YouTube
-        </a>
+<footer class="max-w-3xl mx-auto px-4 py-6 mt-14 border-t-2 border-ink">
+  <div class="flex flex-col sm:flex-row justify-between gap-6 text-xs text-soft">
+    <div class="flex flex-col gap-2">
+      <span class="font-bold text-ink">Miguel González Calvo</span>
+      <div class="flex gap-4">
+        <a
+          href="https://linkedin.com/in/mgcalvo/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-ink underline decoration-accent decoration-[1.5px] underline-offset-[3px] hover:text-accent"
+          >LinkedIn</a
+        >
+        <a
+          href="https://github.com/MiguelPuntoEs"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-ink underline decoration-accent decoration-[1.5px] underline-offset-[3px] hover:text-accent"
+          >GitHub</a
+        >
+        <a
+          href="https://www.youtube.com/@MiguelPuntoEs"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-ink underline decoration-accent decoration-[1.5px] underline-offset-[3px] hover:text-accent"
+          >YouTube</a
+        >
       </div>
+      <span class="mt-2">© {year} Miguel González Calvo</span>
     </div>
     <nav aria-label="Footer" class="flex flex-col gap-1.5 sm:text-right">
-      <a href="/" class="hover:text-gray-900">Home</a>
-      <a href="/publications" class="hover:text-gray-900">Publications</a>
-      <a href="/resources" class="hover:text-gray-900">Resources</a>
-      <a href="/qr" class="hover:text-gray-900">QR Generator</a>
-      <a href="/resources/llm" class="hover:text-gray-900">LLM Resources</a>
-      <a href="/resources/machine-learning" class="hover:text-gray-900">Machine Learning</a>
-      <a href="/resources/python" class="hover:text-gray-900">Python</a>
-      <a href="/resources/economic-sources" class="hover:text-gray-900">Economics</a>
+      <a href="/" class="hover:text-accent">Home</a>
+      <a href="/publications" class="hover:text-accent">Publications</a>
+      <a href="/resources" class="hover:text-accent">Resources</a>
+      <a href="/qr" class="hover:text-accent">QR Generator</a>
+      <a href="/resources/llm" class="hover:text-accent">LLM Resources</a>
+      <a href="/resources/machine-learning" class="hover:text-accent">Machine Learning</a>
+      <a href="/resources/python" class="hover:text-accent">Python</a>
+      <a href="/resources/economic-sources" class="hover:text-accent">Economics</a>
     </nav>
   </div>
 </footer>

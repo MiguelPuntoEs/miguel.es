@@ -171,13 +171,13 @@ export default function LoanCalculator() {
   const paymentsAreConstant = method === "frances";
 
   return (
-    <div className="max-w-5xl mx-auto rounded-2xl border border-slate-200 bg-white p-6 shadow-lg shadow-slate-200/60">
+    <div className="max-w-5xl mx-auto rounded-2xl border border-stone-200 bg-white p-6 shadow-lg shadow-stone-200/60">
       <header className="mb-6 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h2 className="text-2xl font-semibold tracking-tight text-slate-900">
+          <h2 className="text-2xl font-semibold tracking-tight text-stone-900">
             Calculadora de préstamos
           </h2>
-          <p className="text-sm text-slate-600">
+          <p className="text-sm text-stone-600">
             Ajusta los parámetros del préstamo y elige el sistema de
             amortización para obtener el cuadro de amortización y las
             gráficas de capital vivo y capital amortizado.
@@ -187,7 +187,7 @@ export default function LoanCalculator() {
 
       <section className="mb-6 grid gap-4 md:grid-cols-5">
         <div className="flex flex-col gap-1.5">
-          <label className="text-xs font-semibold uppercase tracking-wide text-slate-500">
+          <label className="text-xs font-semibold uppercase tracking-wide text-stone-500">
             Capital inicial
           </label>
           <input
@@ -196,12 +196,12 @@ export default function LoanCalculator() {
             min="0"
             value={principal}
             onChange={(e) => setPrincipal(e.target.value)}
-            className="h-9 rounded-lg border border-slate-300 bg-slate-50 px-2 text-sm text-slate-900 placeholder:text-slate-400 shadow-inner focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+            className="h-9 rounded-lg border border-stone-300 bg-stone-50 px-2 text-sm text-stone-900 placeholder:text-stone-400 shadow-inner focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent"
           />
         </div>
 
         <div className="flex flex-col gap-1.5">
-          <label className="text-xs font-semibold uppercase tracking-wide text-slate-500">
+          <label className="text-xs font-semibold uppercase tracking-wide text-stone-500">
             Tasa anual (%)
           </label>
           <input
@@ -211,12 +211,12 @@ export default function LoanCalculator() {
             step="0.01"
             value={annualRate}
             onChange={(e) => setAnnualRate(e.target.value)}
-            className="h-9 rounded-lg border border-slate-300 bg-slate-50 px-2 text-sm text-slate-900 placeholder:text-slate-400 shadow-inner focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+            className="h-9 rounded-lg border border-stone-300 bg-stone-50 px-2 text-sm text-stone-900 placeholder:text-stone-400 shadow-inner focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent"
           />
         </div>
 
         <div className="flex flex-col gap-1.5">
-          <label className="text-xs font-semibold uppercase tracking-wide text-slate-500">
+          <label className="text-xs font-semibold uppercase tracking-wide text-stone-500">
             Años
           </label>
           <input
@@ -226,18 +226,18 @@ export default function LoanCalculator() {
             step="0.5"
             value={years}
             onChange={(e) => setYears(e.target.value)}
-            className="h-9 rounded-lg border border-slate-300 bg-slate-50 px-2 text-sm text-slate-900 placeholder:text-slate-400 shadow-inner focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+            className="h-9 rounded-lg border border-stone-300 bg-stone-50 px-2 text-sm text-stone-900 placeholder:text-stone-400 shadow-inner focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent"
           />
         </div>
 
         <div className="flex flex-col gap-1.5">
-          <label className="text-xs font-semibold uppercase tracking-wide text-slate-500">
+          <label className="text-xs font-semibold uppercase tracking-wide text-stone-500">
             Pagos por año
           </label>
           <select
             value={paymentsPerYear}
             onChange={(e) => setPaymentsPerYear(Number(e.target.value))}
-            className="h-9 rounded-lg border border-slate-300 bg-slate-50 px-2 text-sm text-slate-900 shadow-inner focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+            className="h-9 rounded-lg border border-stone-300 bg-stone-50 px-2 text-sm text-stone-900 shadow-inner focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent"
           >
             <option value={1}>Anual (1)</option>
             <option value={2}>Semestral (2)</option>
@@ -247,13 +247,13 @@ export default function LoanCalculator() {
         </div>
 
         <div className="flex flex-col gap-1.5">
-          <label className="text-xs font-semibold uppercase tracking-wide text-slate-500">
+          <label className="text-xs font-semibold uppercase tracking-wide text-stone-500">
             Sistema de amortización
           </label>
           <select
             value={method}
             onChange={(e) => setMethod(e.target.value)}
-            className="h-9 rounded-lg border border-slate-300 bg-slate-50 px-2 text-sm text-slate-900 shadow-inner focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+            className="h-9 rounded-lg border border-stone-300 bg-stone-50 px-2 text-sm text-stone-900 shadow-inner focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent"
           >
             {Object.entries(METHODS).map(([key, { label }]) => (
               <option key={key} value={key}>
@@ -264,45 +264,45 @@ export default function LoanCalculator() {
         </div>
       </section>
 
-      <p className="mb-6 text-xs text-slate-500">
-        <span className="font-semibold text-slate-700">
+      <p className="mb-6 text-xs text-stone-500">
+        <span className="font-semibold text-stone-700">
           {METHODS[method].label}:
         </span>{" "}
         {METHODS[method].description}
       </p>
 
       <section className="mb-6 grid gap-4 sm:grid-cols-4">
-        <div className="rounded-xl border border-slate-200 bg-slate-50/80 px-4 py-3">
-          <div className="text-xs font-medium uppercase tracking-wide text-slate-500">
+        <div className="rounded-xl border border-stone-200 bg-stone-50/80 px-4 py-3">
+          <div className="text-xs font-medium uppercase tracking-wide text-stone-500">
             Capital inicial
           </div>
-          <div className="mt-1 text-lg font-semibold text-slate-900">
+          <div className="mt-1 text-lg font-semibold text-stone-900">
             {formatCurrency(totals.totalPrincipal)}
           </div>
         </div>
-        <div className="rounded-xl border border-slate-200 bg-slate-50/80 px-4 py-3">
-          <div className="text-xs font-medium uppercase tracking-wide text-slate-500">
+        <div className="rounded-xl border border-stone-200 bg-stone-50/80 px-4 py-3">
+          <div className="text-xs font-medium uppercase tracking-wide text-stone-500">
             Cuotas de interés (total)
           </div>
           <div className="mt-1 text-lg font-semibold text-rose-700">
             {formatCurrency(totals.totalInterest)}
           </div>
         </div>
-        <div className="rounded-xl border border-slate-200 bg-slate-50/80 px-4 py-3">
-          <div className="text-xs font-medium uppercase tracking-wide text-slate-500">
+        <div className="rounded-xl border border-stone-200 bg-stone-50/80 px-4 py-3">
+          <div className="text-xs font-medium uppercase tracking-wide text-stone-500">
             Total pagado
           </div>
-          <div className="mt-1 text-lg font-semibold text-indigo-700">
+          <div className="mt-1 text-lg font-semibold text-accent-dark">
             {formatCurrency(totals.totalPaid)}
           </div>
         </div>
-        <div className="rounded-xl border border-slate-200 bg-slate-50/80 px-4 py-3">
-          <div className="text-xs font-medium uppercase tracking-wide text-slate-500">
+        <div className="rounded-xl border border-stone-200 bg-stone-50/80 px-4 py-3">
+          <div className="text-xs font-medium uppercase tracking-wide text-stone-500">
             {paymentsAreConstant
               ? "Término amortizativo"
               : "Término amortizativo (1º / último)"}
           </div>
-          <div className="mt-1 text-lg font-semibold text-slate-900">
+          <div className="mt-1 text-lg font-semibold text-stone-900">
             {paymentsAreConstant
               ? formatCurrency(totals.firstPayment)
               : `${formatCurrency(totals.firstPayment)} / ${formatCurrency(
@@ -313,12 +313,12 @@ export default function LoanCalculator() {
       </section>
 
       <section className="mb-6">
-        <h3 className="mb-2 text-sm font-medium text-slate-700">
+        <h3 className="mb-2 text-sm font-medium text-stone-700">
           Capital vivo y capital amortizado
         </h3>
         <div
           style={{ width: "100%", height: "320px" }}
-          className="rounded-xl border border-slate-200 bg-slate-50"
+          className="rounded-xl border border-stone-200 bg-stone-50"
         >
           <ResponsiveContainer width="100%" height="100%">
             <LineChart
@@ -333,7 +333,7 @@ export default function LoanCalculator() {
                   value: "Período",
                   position: "insideBottom",
                   offset: -4,
-                  style: { fontSize: 10, fill: "#64748b" },
+                  style: { fontSize: 10, fill: "#78716c" },
                 }}
               />
               <YAxis
@@ -350,7 +350,7 @@ export default function LoanCalculator() {
                 type="monotone"
                 dataKey="balance"
                 name="Capital vivo"
-                stroke="#4f46e5"
+                stroke="#d95f02"
                 strokeWidth={2}
                 dot={false}
                 isAnimationActive={true}
@@ -371,13 +371,13 @@ export default function LoanCalculator() {
       </section>
 
       <section className="mb-6">
-        <h3 className="mb-2 text-sm font-medium text-slate-700">
+        <h3 className="mb-2 text-sm font-medium text-stone-700">
           Descomposición del término amortizativo: cuota de interés vs. cuota
           de amortización
         </h3>
         <div
           style={{ width: "100%", height: "320px" }}
-          className="rounded-xl border border-slate-200 bg-slate-50"
+          className="rounded-xl border border-stone-200 bg-stone-50"
         >
           <ResponsiveContainer width="100%" height="100%">
             <AreaChart
@@ -393,7 +393,7 @@ export default function LoanCalculator() {
                   value: "Período",
                   position: "insideBottom",
                   offset: -4,
-                  style: { fontSize: 10, fill: "#64748b" },
+                  style: { fontSize: 10, fill: "#78716c" },
                 }}
               />
               <YAxis
@@ -432,12 +432,12 @@ export default function LoanCalculator() {
       </section>
 
       <section>
-        <h3 className="mb-2 text-sm font-medium text-slate-700">
+        <h3 className="mb-2 text-sm font-medium text-stone-700">
           Cuadro de amortización
         </h3>
-        <div className="max-h-[480px] overflow-auto rounded-xl border border-slate-200 bg-slate-50">
+        <div className="max-h-[480px] overflow-auto rounded-xl border border-stone-200 bg-stone-50">
           <table className="min-w-full text-xs">
-            <thead className="sticky top-0 bg-slate-100 text-left text-[0.7rem] uppercase tracking-wide text-slate-500">
+            <thead className="sticky top-0 bg-stone-100 text-left text-[0.7rem] uppercase tracking-wide text-stone-500">
               <tr>
                 <th className="px-3 py-2">Período</th>
                 <th className="px-3 py-2 text-right">Término amortizativo</th>
@@ -447,11 +447,11 @@ export default function LoanCalculator() {
                 <th className="px-3 py-2 text-right">Capital vivo</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-200 bg-white">
+            <tbody className="divide-y divide-stone-200 bg-white">
               {schedule.map((row) => (
-                <tr key={row.period} className="hover:bg-slate-50/80">
-                  <td className="px-3 py-1.5 text-slate-700">{row.period}</td>
-                  <td className="px-3 py-1.5 text-right text-slate-800">
+                <tr key={row.period} className="hover:bg-stone-50/80">
+                  <td className="px-3 py-1.5 text-stone-700">{row.period}</td>
+                  <td className="px-3 py-1.5 text-right text-stone-800">
                     {row.period === 0 ? "-" : formatCurrency(row.payment)}
                   </td>
                   <td className="px-3 py-1.5 text-right text-rose-700">
@@ -463,7 +463,7 @@ export default function LoanCalculator() {
                   <td className="px-3 py-1.5 text-right text-emerald-700">
                     {formatCurrency(row.cumulativePrincipal)}
                   </td>
-                  <td className="px-3 py-1.5 text-right text-slate-800">
+                  <td className="px-3 py-1.5 text-right text-stone-800">
                     {formatCurrency(row.balance)}
                   </td>
                 </tr>

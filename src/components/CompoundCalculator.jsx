@@ -112,14 +112,14 @@ export default function CompoundCalculator() {
       : { balance: 0, totalContributed: 0, totalInterest: 0 };
 
   return (
-    <div className="max-w-5xl mx-auto rounded-2xl border border-slate-200 bg-white p-6 shadow-lg shadow-slate-200/60">
+    <div className="max-w-5xl mx-auto rounded-2xl border border-stone-200 bg-white p-6 shadow-lg shadow-stone-200/60">
       {/* Header */}
       <header className="mb-6 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h2 className="text-2xl font-semibold tracking-tight text-slate-900">
+          <h2 className="text-2xl font-semibold tracking-tight text-stone-900">
             Compound Interest Calculator
           </h2>
-          <p className="text-sm text-slate-600">
+          <p className="text-sm text-stone-600">
             Adjust the values and see how your money grows over time.
           </p>
         </div>
@@ -128,7 +128,7 @@ export default function CompoundCalculator() {
       {/* Inputs */}
       <section className="mb-6 grid gap-4 md:grid-cols-5">
         <div className="flex flex-col gap-1.5">
-          <label className="text-xs font-semibold uppercase tracking-wide text-slate-500">
+          <label className="text-xs font-semibold uppercase tracking-wide text-stone-500">
             Initial amount
           </label>
           <input
@@ -137,12 +137,12 @@ export default function CompoundCalculator() {
             min="0"
             value={principal}
             onChange={(e) => setPrincipal(e.target.value)}
-            className="h-9 rounded-lg border border-slate-300 bg-slate-50 px-2 text-sm text-slate-900 placeholder:text-slate-400 shadow-inner focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+            className="h-9 rounded-lg border border-stone-300 bg-stone-50 px-2 text-sm text-stone-900 placeholder:text-stone-400 shadow-inner focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent"
           />
         </div>
 
         <div className="flex flex-col gap-1.5">
-          <label className="text-xs font-semibold uppercase tracking-wide text-slate-500">
+          <label className="text-xs font-semibold uppercase tracking-wide text-stone-500">
             Monthly deposit
           </label>
           <input
@@ -151,12 +151,12 @@ export default function CompoundCalculator() {
             min="0"
             value={monthlyContribution}
             onChange={(e) => setMonthlyContribution(e.target.value)}
-            className="h-9 rounded-lg border border-slate-300 bg-slate-50 px-2 text-sm text-slate-900 placeholder:text-slate-400 shadow-inner focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+            className="h-9 rounded-lg border border-stone-300 bg-stone-50 px-2 text-sm text-stone-900 placeholder:text-stone-400 shadow-inner focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent"
           />
         </div>
 
         <div className="flex flex-col gap-1.5">
-          <label className="text-xs font-semibold uppercase tracking-wide text-slate-500">
+          <label className="text-xs font-semibold uppercase tracking-wide text-stone-500">
             Annual rate (%)
           </label>
           <input
@@ -166,12 +166,12 @@ export default function CompoundCalculator() {
             step="0.1"
             value={annualRate}
             onChange={(e) => setAnnualRate(e.target.value)}
-            className="h-9 rounded-lg border border-slate-300 bg-slate-50 px-2 text-sm text-slate-900 placeholder:text-slate-400 shadow-inner focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+            className="h-9 rounded-lg border border-stone-300 bg-stone-50 px-2 text-sm text-stone-900 placeholder:text-stone-400 shadow-inner focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent"
           />
         </div>
 
         <div className="flex flex-col gap-1.5">
-          <label className="text-xs font-semibold uppercase tracking-wide text-slate-500">
+          <label className="text-xs font-semibold uppercase tracking-wide text-stone-500">
             Years
           </label>
           <input
@@ -180,18 +180,18 @@ export default function CompoundCalculator() {
             min="0"
             value={years}
             onChange={(e) => setYears(e.target.value)}
-            className="h-9 rounded-lg border border-slate-300 bg-slate-50 px-2 text-sm text-slate-900 placeholder:text-slate-400 shadow-inner focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+            className="h-9 rounded-lg border border-stone-300 bg-stone-50 px-2 text-sm text-stone-900 placeholder:text-stone-400 shadow-inner focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent"
           />
         </div>
 
         <div className="flex flex-col gap-1.5">
-          <label className="text-xs font-semibold uppercase tracking-wide text-slate-500">
+          <label className="text-xs font-semibold uppercase tracking-wide text-stone-500">
             Payment timing
           </label>
           <select
             value={paymentTiming}
             onChange={(e) => setPaymentTiming(e.target.value)}
-            className="h-9 rounded-lg border border-slate-300 bg-slate-50 px-2 text-sm text-slate-900 shadow-inner focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+            className="h-9 rounded-lg border border-stone-300 bg-stone-50 px-2 text-sm text-stone-900 shadow-inner focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent"
           >
             <option value="ordinary">Ordinary annuity</option>
             <option value="due">Annuity due</option>
@@ -201,27 +201,27 @@ export default function CompoundCalculator() {
 
       {/* Summary cards */}
       <section className="mb-6 grid gap-4 sm:grid-cols-3">
-        <div className="rounded-xl border border-slate-200 bg-slate-50/80 px-4 py-3">
-          <div className="text-xs font-medium uppercase tracking-wide text-slate-500">
+        <div className="rounded-xl border border-stone-200 bg-stone-50/80 px-4 py-3">
+          <div className="text-xs font-medium uppercase tracking-wide text-stone-500">
             Total contributed
           </div>
-          <div className="mt-1 text-lg font-semibold text-slate-900">
+          <div className="mt-1 text-lg font-semibold text-stone-900">
             {formatCurrency(finalRow.totalContributed)}
           </div>
         </div>
-        <div className="rounded-xl border border-slate-200 bg-slate-50/80 px-4 py-3">
-          <div className="text-xs font-medium uppercase tracking-wide text-slate-500">
+        <div className="rounded-xl border border-stone-200 bg-stone-50/80 px-4 py-3">
+          <div className="text-xs font-medium uppercase tracking-wide text-stone-500">
             Total interest earned
           </div>
           <div className="mt-1 text-lg font-semibold text-emerald-700">
             {formatCurrency(finalRow.totalInterest)}
           </div>
         </div>
-        <div className="rounded-xl border border-slate-200 bg-slate-50/80 px-4 py-3">
-          <div className="text-xs font-medium uppercase tracking-wide text-slate-500">
+        <div className="rounded-xl border border-stone-200 bg-stone-50/80 px-4 py-3">
+          <div className="text-xs font-medium uppercase tracking-wide text-stone-500">
             Final balance
           </div>
-          <div className="mt-1 text-lg font-semibold text-indigo-700">
+          <div className="mt-1 text-lg font-semibold text-accent-dark">
             {formatCurrency(finalRow.balance)}
           </div>
         </div>
@@ -229,10 +229,10 @@ export default function CompoundCalculator() {
 
       {/* Chart */}
       <section className="mb-6">
-        <h2 className="mb-2 text-sm font-medium text-slate-700">
+        <h2 className="mb-2 text-sm font-medium text-stone-700">
           Growth over time
         </h2>
-        <div style={{ width: '100%', height: '320px' }} className="rounded-xl border border-slate-200 bg-slate-50">
+        <div style={{ width: '100%', height: '320px' }} className="rounded-xl border border-stone-200 bg-stone-50">
           <ResponsiveContainer width="100%" height="100%">
             <LineChart
               data={schedule}
@@ -257,7 +257,7 @@ export default function CompoundCalculator() {
                 type="monotone"
                 dataKey="balance"
                 name="Total balance"
-                stroke="#4f46e5"
+                stroke="#d95f02"
                 strokeWidth={2}
                 dot={false}
                 isAnimationActive={true}
@@ -279,12 +279,12 @@ export default function CompoundCalculator() {
 
       {/* Table */}
       <section>
-        <h2 className="mb-2 text-sm font-medium text-slate-700">
+        <h2 className="mb-2 text-sm font-medium text-stone-700">
           Year-by-year breakdown
         </h2>
-        <div className="overflow-x-auto rounded-xl border border-slate-200 bg-slate-50">
+        <div className="overflow-x-auto rounded-xl border border-stone-200 bg-stone-50">
           <table className="min-w-full text-xs">
-            <thead className="bg-slate-100 text-left text-[0.7rem] uppercase tracking-wide text-slate-500">
+            <thead className="bg-stone-100 text-left text-[0.7rem] uppercase tracking-wide text-stone-500">
               <tr>
                 <th className="px-3 py-2">Year</th>
                 <th className="px-3 py-2 text-right">Balance</th>
@@ -292,14 +292,14 @@ export default function CompoundCalculator() {
                 <th className="px-3 py-2 text-right">Total interest</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-200 bg-white">
+            <tbody className="divide-y divide-stone-200 bg-white">
               {schedule.map((row) => (
-                <tr key={row.label} className="hover:bg-slate-50/80">
-                  <td className="px-3 py-1.5 text-slate-700">{row.label}</td>
-                  <td className="px-3 py-1.5 text-right text-slate-800">
+                <tr key={row.label} className="hover:bg-stone-50/80">
+                  <td className="px-3 py-1.5 text-stone-700">{row.label}</td>
+                  <td className="px-3 py-1.5 text-right text-stone-800">
                     {formatCurrency(row.balance)}
                   </td>
-                  <td className="px-3 py-1.5 text-right text-slate-800">
+                  <td className="px-3 py-1.5 text-right text-stone-800">
                     {formatCurrency(row.totalContributed)}
                   </td>
                   <td className="px-3 py-1.5 text-right text-emerald-700">

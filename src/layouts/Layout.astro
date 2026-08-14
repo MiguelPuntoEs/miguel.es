@@ -3,20 +3,18 @@ import MainHead from "../components/MainHead.astro";
 import Footer from "../components/Footer.astro";
 import Navbar from "../components/Navbar.astro";
 import "../styles/global.css";
-const { title, description, lang = "en", article = false, university } = Astro.props;
+const { title, description, lang = "en", article = false, university, bare = false } = Astro.props;
 ---
 
 <html lang={lang} class="scroll-smooth">
   <head>
-    <link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin />
-
     <MainHead {title} {description} {lang} {article} {university} />
     <slot name="head" />
   </head>
-  
+
   <body>
-    <Navbar />
+    {!bare && <Navbar />}
     <slot />
-    <Footer />
+    {!bare && <Footer />}
   </body>
 </html>

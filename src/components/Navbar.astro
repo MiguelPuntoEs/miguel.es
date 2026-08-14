@@ -1,21 +1,46 @@
-<div class="max-w-3xl mx-auto flex flex-col mt-8 px-4 mb-8">
-  <a href="/" class="text-xl font-light"
-    ><strong class="font-bold">Miguel</strong> González Calvo</a
-  >
-  <nav class="mt-6" aria-label="Main">
-    <ul class="font-semibold text-xs flex gap-4">
-      <li><a href="/">Home</a></li>
-      <li><a href="/resources">Resources</a></li>
-      <li><a href="/qr">QR Generator</a></li>
-      <li><a href="/publications">Publications</a></li>
-      <li>
-        <a
-          href="https://www.youtube.com/@MiguelPuntoEs"
-          target="_blank"
-          rel="noopener noreferrer">YouTube</a
-        >
-      </li>
-    </ul>
-  </nav>
-  <hr class="border-gray-300 mt-4" />
-</div>
+---
+const links = [
+  { href: "/", label: "Home" },
+  { href: "/resources", label: "Resources" },
+  { href: "/publications", label: "Publications" },
+  { href: "/qr", label: "QR" },
+];
+const path = Astro.url.pathname.replace(/\/$/, "") || "/";
+const isCurrent = (href) =>
+  href === "/" ? path === "/" : path === href || path.startsWith(href + "/");
+---
+
+<header class="max-w-3xl mx-auto px-4 pt-8 pb-3">
+  <div class="flex justify-between items-baseline gap-4 flex-wrap text-[13px] font-semibold">
+    <a href="/" class="text-ink hover:text-accent">miguel.es</a>
+    <nav aria-label="Main">
+      <ul class="flex gap-[18px] flex-wrap">
+        {
+          links.map(({ href, label }) => (
+            <li>
+              <a
+                href={href}
+                aria-current={isCurrent(href) ? "page" : undefined}
+                class:list={[
+                  "hover:text-accent",
+                  isCurrent(href) ? "text-accent" : "text-ink",
+                ]}
+              >
+                {label}
+              </a>
+            </li>
+          ))
+        }
+        <li>
+          <a
+            href="https://www.youtube.com/@MiguelPuntoEs"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-ink hover:text-accent">YouTube</a
+          >
+        </li>
+      </ul>
+    </nav>
+  </div>
+  <hr class="border-line mt-4" />
+</header>

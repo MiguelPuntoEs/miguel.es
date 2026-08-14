@@ -59,28 +59,28 @@ const faqLd = {
   <main class="min-h-screen px-3 py-10 sm:px-6">
     <section class="mx-auto max-w-6xl space-y-6">
       <header class="space-y-2 text-center">
-        <p class="text-xs font-semibold uppercase tracking-[0.2em] text-indigo-600">
+        <p class="text-[13px] font-extrabold text-accent">
           Free Tool
         </p>
-        <h1 class="text-3xl font-semibold tracking-tight text-slate-900">{heading}</h1>
-        <p class="mx-auto max-w-2xl text-sm text-slate-600">{sub}</p>
+        <h1 class="text-3xl font-semibold tracking-tight text-stone-900">{heading}</h1>
+        <p class="mx-auto max-w-2xl text-sm text-stone-600">{sub}</p>
       </header>
 
       <QRGenerator client:only="react" defaultType={qrType} showTypeSelector={false} />
 
-      <section class="mx-auto max-w-3xl pt-12 border-t border-slate-200 space-y-10">
+      <section class="mx-auto max-w-3xl pt-12 border-t border-stone-200 space-y-10">
 
         <div>
-          <h2 class="text-xl font-semibold text-slate-900 mb-3">About {heading}</h2>
-          <p class="text-sm text-slate-600 leading-relaxed">{about}</p>
+          <h2 class="text-xl font-semibold text-stone-900 mb-3">About {heading}</h2>
+          <p class="text-sm text-stone-600 leading-relaxed">{about}</p>
         </div>
 
         <div>
-          <h2 class="text-xl font-semibold text-slate-900 mb-3">Common uses</h2>
+          <h2 class="text-xl font-semibold text-stone-900 mb-3">Common uses</h2>
           <ul class="space-y-2">
             {uses.map((use) => (
-              <li class="flex items-start gap-2 text-sm text-slate-600">
-                <span class="mt-1 h-1.5 w-1.5 rounded-full bg-indigo-400 shrink-0"></span>
+              <li class="flex items-start gap-2 text-sm text-stone-600">
+                <span class="mt-1 h-1.5 w-1.5 rounded-full bg-accent shrink-0"></span>
                 {use}
               </li>
             ))}
@@ -88,26 +88,26 @@ const faqLd = {
         </div>
 
         <div>
-          <h2 class="text-xl font-semibold text-slate-900 mb-4">Frequently asked questions</h2>
+          <h2 class="text-xl font-semibold text-stone-900 mb-4">Frequently asked questions</h2>
           <dl class="space-y-5">
             {faqs.map(({ q, a }) => (
               <div>
-                <dt class="font-medium text-slate-900">{q}</dt>
-                <dd class="mt-1 text-sm text-slate-600">{a}</dd>
+                <dt class="font-medium text-stone-900">{q}</dt>
+                <dd class="mt-1 text-sm text-stone-600">{a}</dd>
               </div>
             ))}
           </dl>
         </div>
 
-        <div class="border-t border-slate-200 pt-8">
-          <p class="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-3">Related generators</p>
+        <div class="border-t border-stone-200 pt-8">
+          <p class="text-xs font-semibold uppercase tracking-wider text-stone-400 mb-3">Related generators</p>
           <div class="flex flex-wrap gap-2">
             {relatedPages.map(({ slug: s, heading: h }) => (
-              <a href={`/qr/${s}`} class="rounded-full border border-slate-200 px-3 py-1.5 text-xs font-medium text-slate-600 hover:border-indigo-300 hover:text-indigo-600 transition-colors">
+              <a href={`/qr/${s}`} class="rounded-full border border-stone-200 px-3 py-1.5 text-xs font-medium text-stone-600 hover:border-accent hover:text-accent transition-colors">
                 {h}
               </a>
             ))}
-            <a href="/qr" class="rounded-full border border-slate-200 px-3 py-1.5 text-xs font-medium text-slate-500 hover:border-indigo-300 hover:text-indigo-600 transition-colors">
+            <a href="/qr" class="rounded-full border border-stone-200 px-3 py-1.5 text-xs font-medium text-stone-500 hover:border-accent hover:text-accent transition-colors">
               Browse all types →
             </a>
           </div>
