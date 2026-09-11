@@ -1,4 +1,6 @@
 ---
+import { DISCLAIMER } from "../data/site.js";
+
 const year = new Date().getFullYear();
 const onion = "miguel3wuxsv5wb63n7522pvk7tpwc3lvsvbdzai32bvvca2ac5olbqd.onion";
 ---
@@ -28,6 +30,9 @@ const onion = "miguel3wuxsv5wb63n7522pvk7tpwc3lvsvbdzai32bvvca2ac5olbqd.onion";
   <p class="footer__fine">
     Messages sent through this site aren't monitored — LinkedIn is the reliable inbox.
   </p>
+
+  <p class="disclaimer">{DISCLAIMER}</p>
+
   <p class="footer__fine">© {year} Miguel González Calvo</p>
 </footer>
 
@@ -76,6 +81,17 @@ const onion = "miguel3wuxsv5wb63n7522pvk7tpwc3lvsvbdzai32bvvca2ac5olbqd.onion";
   .onion:global(.copied) :global(.icon--check) { display: block; }
 
   .footer__fine { margin-top: 1.25rem; font-size: 0.75rem; color: var(--color-text-3); }
+
+  /* Formal notice: set apart from the practical footer notes above it. */
+  .disclaimer {
+    margin-top: 1.25rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--color-line);
+    font-size: 0.75rem;
+    line-height: 1.6;
+    color: var(--color-text-3);
+    max-width: 52ch;
+  }
 </style>
 
 <script>
