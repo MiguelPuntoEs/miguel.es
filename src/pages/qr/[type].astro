@@ -10,7 +10,7 @@ export function getStaticPaths() {
 const { type: qrType, title, description, heading, sub, about, uses, faqs, related, slug } = Astro.props;
 
 const canonicalURL = new URL(`/qr/${slug}`, Astro.site);
-const socialImage = new URL("/og-image.png", Astro.site).href;
+const socialImage = new URL("/og-image.jpg", Astro.site).href;
 
 const relatedPages = related
   .map((r) => QR_SUBPAGES.find((p) => p.slug === r))
