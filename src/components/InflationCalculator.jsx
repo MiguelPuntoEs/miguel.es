@@ -10,7 +10,7 @@ import {
   Legend,
 } from "recharts";
 
-const COMPARE_COLORS = ["#4f46e5", "#e11d48", "#059669", "#d97706"];
+const COMPARE_COLORS = ["#0551d8", "#d92d53", "#0f9d76", "#d97706"];
 const MAX_COMPARE = 3;
 
 // Map country codes to full names and currency info.
@@ -153,7 +153,7 @@ const compactFormatter = new Intl.NumberFormat(undefined, {
 });
 
 const inputClass =
-  "h-9 rounded-lg border border-slate-300 bg-slate-50 px-2 text-sm text-slate-900 shadow-inner focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500";
+  "h-9 rounded-lg border border-line-strong bg-bg-2 px-2 text-sm text-text-1 shadow-inner focus:border-blue focus:outline-none focus:ring-1 focus:ring-blue";
 
 const CODE_BY_NAME = Object.fromEntries(
   Object.entries(COUNTRY_MAP).map(([code, info]) => [info.name, code])
@@ -347,30 +347,30 @@ export default function InflationCalculator() {
 
   if (loading) {
     return (
-      <div className="max-w-5xl mx-auto rounded-2xl border border-slate-200 bg-white p-6 shadow-lg shadow-slate-200/60">
+      <div className="max-w-5xl mx-auto rounded-2xl border border-line bg-bg-1 p-6 shadow-lg shadow-black/5">
         <div className="text-center py-12">
-          <div className="text-slate-600">Loading inflation data...</div>
+          <div className="text-text-2">Loading inflation data...</div>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="max-w-5xl mx-auto rounded-2xl border border-slate-200 bg-white p-6 shadow-lg shadow-slate-200/60">
+    <div className="max-w-5xl mx-auto rounded-2xl border border-line bg-bg-1 p-6 shadow-lg shadow-black/5">
       {/* Header */}
       <header className="mb-6 flex flex-wrap items-start justify-between gap-3">
         <div>
-          <h2 className="text-2xl font-semibold tracking-tight text-slate-900">
+          <h2 className="text-2xl font-semibold tracking-tight text-text-1">
             Inflation Calculator
           </h2>
-          <p className="text-sm text-slate-600">
+          <p className="text-sm text-text-2">
             Adjust amounts for inflation based on country-specific rates. Calculate past purchasing power or future values.
           </p>
         </div>
         <button
           type="button"
           onClick={copyLink}
-          className="inline-flex h-8 shrink-0 items-center gap-1.5 rounded-lg border border-slate-300 bg-slate-50 px-3 text-xs font-medium text-slate-600 shadow-sm transition hover:border-indigo-400 hover:text-indigo-600 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+          className="inline-flex h-8 shrink-0 items-center gap-1.5 rounded-lg border border-line-strong bg-bg-2 px-3 text-xs font-medium text-text-2 shadow-sm transition hover:border-blue hover:text-blue focus:border-blue focus:outline-none focus:ring-1 focus:ring-blue"
         >
           <svg
             viewBox="0 0 20 20"
@@ -392,7 +392,7 @@ export default function InflationCalculator() {
       {/* Inputs */}
       <section className="mb-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <div className="flex flex-col gap-1.5">
-          <label htmlFor="inflation-amount" className="text-xs font-semibold uppercase tracking-wide text-slate-500">
+          <label htmlFor="inflation-amount" className="text-xs font-semibold uppercase tracking-wide text-text-3">
             Amount
           </label>
           <input
@@ -404,12 +404,12 @@ export default function InflationCalculator() {
             value={amountInput}
             onChange={(e) => setAmountInput(e.target.value)}
             placeholder="1000"
-            className={`${inputClass} placeholder:text-slate-400`}
+            className={`${inputClass} placeholder:text-text-3`}
           />
         </div>
 
         <div className="flex flex-col gap-1.5">
-          <label htmlFor="inflation-country" className="text-xs font-semibold uppercase tracking-wide text-slate-500">
+          <label htmlFor="inflation-country" className="text-xs font-semibold uppercase tracking-wide text-text-3">
             Country
           </label>
           <select
@@ -429,7 +429,7 @@ export default function InflationCalculator() {
         <div className="flex flex-col gap-1.5 sm:col-span-2">
           <div className="grid grid-cols-[1fr_auto_1fr] items-end gap-2">
             <div className="flex flex-col gap-1.5">
-              <label htmlFor="inflation-from-year" className="text-xs font-semibold uppercase tracking-wide text-slate-500">
+              <label htmlFor="inflation-from-year" className="text-xs font-semibold uppercase tracking-wide text-text-3">
                 From Year
               </label>
               <select
@@ -450,7 +450,7 @@ export default function InflationCalculator() {
               onClick={swapYears}
               title="Swap years"
               aria-label="Swap from and to years"
-              className="h-9 w-9 shrink-0 rounded-lg border border-slate-300 bg-slate-50 text-slate-600 shadow-inner transition hover:border-indigo-400 hover:text-indigo-600 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+              className="h-9 w-9 shrink-0 rounded-lg border border-line-strong bg-bg-2 text-text-2 shadow-inner transition hover:border-blue hover:text-blue focus:border-blue focus:outline-none focus:ring-1 focus:ring-blue"
             >
               <svg
                 viewBox="0 0 20 20"
@@ -467,7 +467,7 @@ export default function InflationCalculator() {
               </svg>
             </button>
             <div className="flex flex-col gap-1.5">
-              <label htmlFor="inflation-to-year" className="text-xs font-semibold uppercase tracking-wide text-slate-500">
+              <label htmlFor="inflation-to-year" className="text-xs font-semibold uppercase tracking-wide text-text-3">
                 To Year
               </label>
               <select
@@ -489,13 +489,13 @@ export default function InflationCalculator() {
 
       {/* Quick-start presets */}
       <div className="mb-4 flex flex-wrap items-center gap-2">
-        <span className="text-xs font-medium text-slate-500">Try:</span>
+        <span className="text-xs font-medium text-text-3">Try:</span>
         {PRESETS.map((preset) => (
           <button
             key={preset.label}
             type="button"
             onClick={() => applyPreset(preset)}
-            className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-xs text-slate-600 transition hover:border-indigo-400 hover:bg-indigo-50 hover:text-indigo-700 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+            className="rounded-full border border-line bg-bg-2 px-3 py-1 text-xs text-text-2 transition hover:border-blue hover:bg-bg-2 hover:text-blue-hover focus:border-blue focus:outline-none focus:ring-1 focus:ring-blue"
           >
             {preset.label}
           </button>
@@ -503,48 +503,48 @@ export default function InflationCalculator() {
       </div>
 
       {availableYears.length > 0 && (
-        <div className="mb-4 text-xs text-slate-500">
+        <div className="mb-4 text-xs text-text-3">
           Data available for {country}: {minYear} - {maxYear}
         </div>
       )}
 
       {/* Summary cards */}
       <section className="mb-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        <div className="rounded-xl border border-slate-200 bg-slate-50/80 px-4 py-3">
-          <div className="text-xs font-medium uppercase tracking-wide text-slate-500">
+        <div className="rounded-xl border border-line bg-bg-2 px-4 py-3">
+          <div className="text-xs font-medium uppercase tracking-wide text-text-3">
             Original amount ({fromYear})
           </div>
-          <div className="mt-1 text-lg font-semibold text-slate-900">
+          <div className="mt-1 text-lg font-semibold text-text-1">
             {symbol}{formatCurrency(safeAmount)}
           </div>
           {fromLegacy && (
-            <div className="mt-0.5 text-xs text-slate-500">≈ {fromLegacy}</div>
+            <div className="mt-0.5 text-xs text-text-3">≈ {fromLegacy}</div>
           )}
         </div>
-        <div className="rounded-xl border border-slate-200 bg-slate-50/80 px-4 py-3">
-          <div className="text-xs font-medium uppercase tracking-wide text-slate-500">
+        <div className="rounded-xl border border-line bg-bg-2 px-4 py-3">
+          <div className="text-xs font-medium uppercase tracking-wide text-text-3">
             Equivalent in {toYear}
           </div>
-          <div className="mt-1 text-lg font-semibold text-indigo-700">
+          <div className="mt-1 text-lg font-semibold text-blue-hover">
             {symbol}{formatCurrency(result.adjustedAmount)}
           </div>
           {toLegacy && (
-            <div className="mt-0.5 text-xs text-slate-500">≈ {toLegacy}</div>
+            <div className="mt-0.5 text-xs text-text-3">≈ {toLegacy}</div>
           )}
         </div>
-        <div className="rounded-xl border border-slate-200 bg-slate-50/80 px-4 py-3">
-          <div className="text-xs font-medium uppercase tracking-wide text-slate-500">
+        <div className="rounded-xl border border-line bg-bg-2 px-4 py-3">
+          <div className="text-xs font-medium uppercase tracking-wide text-text-3">
             {isBackward ? 'Change vs ' + fromYear : 'Total inflation'}
           </div>
           <div className={`mt-1 text-lg font-semibold ${result.totalInflation >= 0 ? 'text-red-700' : 'text-emerald-700'}`}>
             {result.totalInflation >= 0 ? '+' : ''}{formatCurrency(result.totalInflation, 1)}%
           </div>
         </div>
-        <div className="rounded-xl border border-slate-200 bg-slate-50/80 px-4 py-3">
-          <div className="text-xs font-medium uppercase tracking-wide text-slate-500">
+        <div className="rounded-xl border border-line bg-bg-2 px-4 py-3">
+          <div className="text-xs font-medium uppercase tracking-wide text-text-3">
             Avg. annual inflation
           </div>
-          <div className="mt-1 text-lg font-semibold text-slate-900">
+          <div className="mt-1 text-lg font-semibold text-text-1">
             {result.avgAnnualInflation === null ? '-' : `${formatCurrency(result.avgAnnualInflation, 2)}%`}
           </div>
         </div>
@@ -559,11 +559,11 @@ export default function InflationCalculator() {
       {/* Explanation */}
       {!result.error && (
         <section className="mb-6">
-          <div className="rounded-xl border border-indigo-200 bg-indigo-50/80 px-4 py-3">
-            <div className="text-xs font-medium uppercase tracking-wide text-indigo-700">
+          <div className="rounded-xl border border-line-strong bg-bg-2 px-4 py-3">
+            <div className="text-xs font-medium uppercase tracking-wide text-blue-hover">
               Purchasing Power
             </div>
-            <div className="mt-1 text-sm text-indigo-900">
+            <div className="mt-1 text-sm text-text-1">
               {symbol}{formatCurrency(safeAmount)}{fromLegacy ? ` (≈ ${fromLegacy})` : ''} in {fromYear} {isBackward ? 'had' : 'has'} the same purchasing power as{' '}
               <strong>{symbol}{formatCurrency(result.adjustedAmount)}{toLegacy ? ` (≈ ${toLegacy})` : ''}</strong> in {toYear}
               {' '}(based on actual CPI data).
@@ -576,10 +576,10 @@ export default function InflationCalculator() {
       {result.yearlyBreakdown.length > 1 && (
         <section className="mb-6">
           <div className="mb-2 flex flex-wrap items-center justify-between gap-2">
-            <h2 className="text-sm font-medium text-slate-700">
+            <h2 className="text-sm font-medium text-text-2">
               Value over time ({startYear} - {endYear})
             </h2>
-            <div className="inline-flex rounded-lg border border-slate-200 bg-slate-100 p-0.5 text-xs" role="group" aria-label="Chart mode">
+            <div className="inline-flex rounded-lg border border-line bg-bg-2 p-0.5 text-xs" role="group" aria-label="Chart mode">
               {[
                 { key: "equivalent", label: "Equivalent value" },
                 { key: "power", label: "Purchasing power" },
@@ -591,8 +591,8 @@ export default function InflationCalculator() {
                   aria-pressed={chartMode === mode.key}
                   className={`rounded-md px-2.5 py-1 transition ${
                     chartMode === mode.key
-                      ? "bg-white font-medium text-slate-900 shadow-sm"
-                      : "text-slate-500 hover:text-slate-700"
+                      ? "bg-bg-1 font-medium text-text-1 shadow-sm"
+                      : "text-text-3 hover:text-text-2"
                   }`}
                 >
                   {mode.label}
@@ -601,18 +601,18 @@ export default function InflationCalculator() {
             </div>
           </div>
           <div className="mb-2 flex flex-wrap items-center gap-2">
-            <span className="text-xs font-medium text-slate-500">Compare:</span>
+            <span className="text-xs font-medium text-text-3">Compare:</span>
             {compareCountries.map((name) => (
               <span
                 key={name}
-                className="inline-flex items-center gap-1 rounded-full border border-slate-200 bg-slate-50 px-2.5 py-0.5 text-xs text-slate-600"
+                className="inline-flex items-center gap-1 rounded-full border border-line bg-bg-2 px-2.5 py-0.5 text-xs text-text-2"
               >
                 {name}
                 <button
                   type="button"
                   onClick={() => removeCompareCountry(name)}
                   aria-label={`Remove ${name} from comparison`}
-                  className="text-slate-400 transition hover:text-red-600"
+                  className="text-text-3 transition hover:text-red-600"
                 >
                   ×
                 </button>
@@ -623,7 +623,7 @@ export default function InflationCalculator() {
                 value=""
                 onChange={(e) => addCompareCountry(e.target.value)}
                 aria-label="Add country to comparison"
-                className="h-7 rounded-full border border-dashed border-slate-300 bg-slate-50 px-2 text-xs text-slate-500 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+                className="h-7 rounded-full border border-dashed border-line-strong bg-bg-2 px-2 text-xs text-text-3 focus:border-blue focus:outline-none focus:ring-1 focus:ring-blue"
               >
                 <option value="">+ Add country</option>
                 {availableCountries
@@ -636,7 +636,7 @@ export default function InflationCalculator() {
               </select>
             )}
           </div>
-          <div style={{ width: '100%', height: '320px' }} className="rounded-xl border border-slate-200 bg-slate-50">
+          <div style={{ width: '100%', height: '320px' }} className="rounded-xl border border-line bg-bg-2">
             <ResponsiveContainer width="100%" height="100%">
               <LineChart
                 data={chartSeries.rows}
@@ -669,7 +669,7 @@ export default function InflationCalculator() {
                     dataKey={name}
                     stroke={
                       chartSeries.series.length === 1
-                        ? (chartMode === "equivalent" ? "#4f46e5" : "#e11d48")
+                        ? (chartMode === "equivalent" ? "#0551d8" : "#d92d53")
                         : COMPARE_COLORS[i % COMPARE_COLORS.length]
                     }
                     strokeWidth={2}
@@ -680,7 +680,7 @@ export default function InflationCalculator() {
               </LineChart>
             </ResponsiveContainer>
           </div>
-          <p className="mt-1.5 text-xs text-slate-500">
+          <p className="mt-1.5 text-xs text-text-3">
             {chartMode === "equivalent" ? (
               <>Amount needed each year to match the purchasing power of {symbol}{formatCurrency(safeAmount)} in {fromYear}.</>
             ) : (
@@ -699,12 +699,12 @@ export default function InflationCalculator() {
       {/* Year-by-year breakdown */}
       {tableRows.length > 0 && (
         <section>
-          <h2 className="mb-2 text-sm font-medium text-slate-700">
+          <h2 className="mb-2 text-sm font-medium text-text-2">
             Year-by-year breakdown
           </h2>
-          <div className="overflow-x-auto rounded-xl border border-slate-200 bg-slate-50">
+          <div className="overflow-x-auto rounded-xl border border-line bg-bg-2">
             <table className="min-w-full text-xs">
-              <thead className="bg-slate-100 text-left text-[0.7rem] uppercase tracking-wide text-slate-500">
+              <thead className="bg-bg-2 text-left text-[0.7rem] uppercase tracking-wide text-text-3">
                 <tr>
                   <th className="px-3 py-2">Year</th>
                   <th className="px-3 py-2 text-right">Equivalent value</th>
@@ -712,22 +712,22 @@ export default function InflationCalculator() {
                   <th className="px-3 py-2 text-right">Annual Inflation</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-200 bg-white">
+              <tbody className="divide-y divide-slate-200 bg-bg-1">
                 {tableRows.map((row) => {
                   const rowLegacy = formatLegacy(countryInfo, row.year, row.amount);
                   return (
-                  <tr key={row.year} className="hover:bg-slate-50/80">
-                    <td className="px-3 py-1.5 text-slate-700">{row.year}</td>
-                    <td className="px-3 py-1.5 text-right text-slate-800 font-mono">
+                  <tr key={row.year} className="hover:bg-bg-2">
+                    <td className="px-3 py-1.5 text-text-2">{row.year}</td>
+                    <td className="px-3 py-1.5 text-right text-text-1 font-mono">
                       {symbol}{formatCurrency(row.amount)}
                       {rowLegacy && (
-                        <span className="ml-1.5 text-[0.65rem] text-slate-400">≈ {rowLegacy}</span>
+                        <span className="ml-1.5 text-[0.65rem] text-text-3">≈ {rowLegacy}</span>
                       )}
                     </td>
                     <td className="px-3 py-1.5 text-right text-rose-700 font-mono">
                       {symbol}{formatCurrency(row.purchasingPower)}
                     </td>
-                    <td className="px-3 py-1.5 text-right text-slate-600">
+                    <td className="px-3 py-1.5 text-right text-text-2">
                       {row.yearlyInflation === null ? '-' : `${formatCurrency(row.yearlyInflation, 1)}%`}
                     </td>
                   </tr>
@@ -737,7 +737,7 @@ export default function InflationCalculator() {
             </table>
           </div>
 
-          <div className="mt-3 text-xs text-slate-500 space-y-1">
+          <div className="mt-3 text-xs text-text-3 space-y-1">
             <p>
               <strong>Note:</strong> This calculator uses actual Consumer Price Index (CPI) data from OECD.
               The CPI measures changes in the price level of a basket of consumer goods and services.
@@ -748,13 +748,13 @@ export default function InflationCalculator() {
                 ({countryInfo.legacy.name}) using the fixed conversion rate of 1 € = {countryInfo.legacy.rate} {countryInfo.legacy.symbol}.
               </p>
             )}
-            <p className="text-slate-400">
+            <p className="text-text-3">
               Source:{" "}
               <a
                 href="https://data-explorer.oecd.org/vis?lc=en&pg=0&bp=true&snb=20&df[ds]=dsDisseminateFinalDMZ&df[id]=DSD_PRICES%40DF_PRICES_ALL&df[ag]=OECD.SDD.TPS&df[vs]=1.0&tm=Inflation%20%28CPI%29.A.N.CPI.PA._T.N.GY&to[TIME_PERIOD]=false&vw=tb&lb=bt&dq=.A.N.CPI.IX._T.N.GY%2B_Z&pd=%2C"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-indigo-600 hover:text-indigo-700 underline"
+                className="text-blue hover:text-blue-hover underline"
               >
                 OECD - Consumer price indices (CPIs, HICPs), COICOP 1999
               </a>

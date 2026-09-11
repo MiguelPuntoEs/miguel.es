@@ -38,7 +38,7 @@ const MODES = [
   { key: "ppp", label: "USD PPP" },
 ];
 
-const COMPARE_COLORS = ["#4f46e5", "#e11d48", "#059669", "#d97706"];
+const COMPARE_COLORS = ["#0551d8", "#d92d53", "#0f9d76", "#d97706"];
 const MAX_COMPARE = 3;
 
 function seriesFor(entry, mode) {
@@ -84,7 +84,7 @@ function readParamsFromURL() {
 const INITIAL = readParamsFromURL();
 
 const inputClass =
-  "h-9 rounded-lg border border-slate-300 bg-slate-50 px-2 text-sm text-slate-900 shadow-inner focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500";
+  "h-9 rounded-lg border border-line-strong bg-bg-2 px-2 text-sm text-text-1 shadow-inner focus:border-blue focus:outline-none focus:ring-1 focus:ring-blue";
 
 export default function SalaryExplorer() {
   const [country, setCountry] = useState(INITIAL.country ?? "ESP");
@@ -201,9 +201,9 @@ export default function SalaryExplorer() {
 
   if (loading) {
     return (
-      <div className="max-w-5xl mx-auto rounded-2xl border border-slate-200 bg-white p-6 shadow-lg shadow-slate-200/60">
+      <div className="max-w-5xl mx-auto rounded-2xl border border-line bg-bg-1 p-6 shadow-lg shadow-black/5">
         <div className="text-center py-12">
-          <div className="text-slate-600">Loading wage data...</div>
+          <div className="text-text-2">Loading wage data...</div>
         </div>
       </div>
     );
@@ -211,9 +211,9 @@ export default function SalaryExplorer() {
 
   if (!wages) {
     return (
-      <div className="max-w-5xl mx-auto rounded-2xl border border-slate-200 bg-white p-6 shadow-lg shadow-slate-200/60">
+      <div className="max-w-5xl mx-auto rounded-2xl border border-line bg-bg-1 p-6 shadow-lg shadow-black/5">
         <div className="text-center py-12">
-          <div className="text-slate-600">
+          <div className="text-text-2">
             Wage data could not be loaded. Please try again later.
           </div>
         </div>
@@ -222,14 +222,14 @@ export default function SalaryExplorer() {
   }
 
   return (
-    <div className="max-w-5xl mx-auto rounded-2xl border border-slate-200 bg-white p-6 shadow-lg shadow-slate-200/60">
+    <div className="max-w-5xl mx-auto rounded-2xl border border-line bg-bg-1 p-6 shadow-lg shadow-black/5">
       {/* Header */}
       <header className="mb-6 flex flex-wrap items-start justify-between gap-3">
         <div>
-          <h2 className="text-2xl font-semibold tracking-tight text-slate-900">
+          <h2 className="text-2xl font-semibold tracking-tight text-text-1">
             Average Salary Explorer
           </h2>
-          <p className="text-sm text-slate-600">
+          <p className="text-sm text-text-2">
             Average annual wages across OECD countries: nominal, inflation-adjusted (real),
             and PPP-converted for fair cross-country comparison.
           </p>
@@ -237,7 +237,7 @@ export default function SalaryExplorer() {
         <button
           type="button"
           onClick={copyLink}
-          className="inline-flex h-8 shrink-0 items-center gap-1.5 rounded-lg border border-slate-300 bg-slate-50 px-3 text-xs font-medium text-slate-600 shadow-sm transition hover:border-indigo-400 hover:text-indigo-600 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+          className="inline-flex h-8 shrink-0 items-center gap-1.5 rounded-lg border border-line-strong bg-bg-2 px-3 text-xs font-medium text-text-2 shadow-sm transition hover:border-blue hover:text-blue focus:border-blue focus:outline-none focus:ring-1 focus:ring-blue"
         >
           <svg
             viewBox="0 0 20 20"
@@ -259,7 +259,7 @@ export default function SalaryExplorer() {
       {/* Inputs */}
       <section className="mb-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         <div className="flex flex-col gap-1.5">
-          <label htmlFor="salary-country" className="text-xs font-semibold uppercase tracking-wide text-slate-500">
+          <label htmlFor="salary-country" className="text-xs font-semibold uppercase tracking-wide text-text-3">
             Country
           </label>
           <select
@@ -277,7 +277,7 @@ export default function SalaryExplorer() {
         </div>
 
         <div className="flex flex-col gap-1.5">
-          <label htmlFor="salary-from" className="text-xs font-semibold uppercase tracking-wide text-slate-500">
+          <label htmlFor="salary-from" className="text-xs font-semibold uppercase tracking-wide text-text-3">
             From Year
           </label>
           <select
@@ -295,10 +295,10 @@ export default function SalaryExplorer() {
         </div>
 
         <div className="flex flex-col gap-1.5">
-          <span className="text-xs font-semibold uppercase tracking-wide text-slate-500">
+          <span className="text-xs font-semibold uppercase tracking-wide text-text-3">
             Prices
           </span>
-          <div className="inline-flex h-9 items-center self-start rounded-lg border border-slate-200 bg-slate-100 p-0.5 text-xs" role="group" aria-label="Price mode">
+          <div className="inline-flex h-9 items-center self-start rounded-lg border border-line bg-bg-2 p-0.5 text-xs" role="group" aria-label="Price mode">
             {MODES.map((m) => (
               <button
                 key={m.key}
@@ -307,8 +307,8 @@ export default function SalaryExplorer() {
                 aria-pressed={mode === m.key}
                 className={`rounded-md px-2.5 py-1.5 transition ${
                   mode === m.key
-                    ? "bg-white font-medium text-slate-900 shadow-sm"
-                    : "text-slate-500 hover:text-slate-700"
+                    ? "bg-bg-1 font-medium text-text-1 shadow-sm"
+                    : "text-text-3 hover:text-text-2"
                 }`}
               >
                 {m.label}
@@ -320,32 +320,32 @@ export default function SalaryExplorer() {
 
       {stats && (
         <section className="mb-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          <div className="rounded-xl border border-slate-200 bg-slate-50/80 px-4 py-3">
-            <div className="text-xs font-medium uppercase tracking-wide text-slate-500">
+          <div className="rounded-xl border border-line bg-bg-2 px-4 py-3">
+            <div className="text-xs font-medium uppercase tracking-wide text-text-3">
               Avg. wage {latestYear} ({COUNTRY_NAMES[country]})
             </div>
-            <div className="mt-1 text-lg font-semibold text-slate-900">
+            <div className="mt-1 text-lg font-semibold text-text-1">
               {symbol}{formatCurrency(stats.nominalLatest)}
             </div>
           </div>
-          <div className="rounded-xl border border-slate-200 bg-slate-50/80 px-4 py-3">
-            <div className="text-xs font-medium uppercase tracking-wide text-slate-500">
+          <div className="rounded-xl border border-line bg-bg-2 px-4 py-3">
+            <div className="text-xs font-medium uppercase tracking-wide text-text-3">
               In USD PPP
             </div>
-            <div className="mt-1 text-lg font-semibold text-slate-900">
+            <div className="mt-1 text-lg font-semibold text-text-1">
               ${formatCurrency(stats.pppLatest)}
             </div>
           </div>
-          <div className="rounded-xl border border-slate-200 bg-slate-50/80 px-4 py-3">
-            <div className="text-xs font-medium uppercase tracking-wide text-slate-500">
+          <div className="rounded-xl border border-line bg-bg-2 px-4 py-3">
+            <div className="text-xs font-medium uppercase tracking-wide text-text-3">
               Nominal growth since {fromYear}
             </div>
-            <div className="mt-1 text-lg font-semibold text-slate-900">
+            <div className="mt-1 text-lg font-semibold text-text-1">
               {stats.nominalGrowth >= 0 ? "+" : ""}{formatCurrency(stats.nominalGrowth, 1)}%
             </div>
           </div>
-          <div className="rounded-xl border border-slate-200 bg-slate-50/80 px-4 py-3">
-            <div className="text-xs font-medium uppercase tracking-wide text-slate-500">
+          <div className="rounded-xl border border-line bg-bg-2 px-4 py-3">
+            <div className="text-xs font-medium uppercase tracking-wide text-text-3">
               Real growth since {fromYear}
             </div>
             <div className={`mt-1 text-lg font-semibold ${stats.realGrowth >= 0 ? "text-emerald-700" : "text-red-700"}`}>
@@ -359,22 +359,22 @@ export default function SalaryExplorer() {
       {chart.rows.length > 1 && (
         <section className="mb-6">
           <div className="mb-2 flex flex-wrap items-center gap-2">
-            <h2 className="text-sm font-medium text-slate-700">
+            <h2 className="text-sm font-medium text-text-2">
               Average annual wage ({fromYear} - {latestYear},{" "}
               {mode === "ppp" ? "constant-price USD PPP" : mode === "real" ? `constant prices, national currency` : "current prices, national currency"})
             </h2>
-            <span className="text-xs font-medium text-slate-500">Compare:</span>
+            <span className="text-xs font-medium text-text-3">Compare:</span>
             {compareCodes.map((code) => (
               <span
                 key={code}
-                className="inline-flex items-center gap-1 rounded-full border border-slate-200 bg-slate-50 px-2.5 py-0.5 text-xs text-slate-600"
+                className="inline-flex items-center gap-1 rounded-full border border-line bg-bg-2 px-2.5 py-0.5 text-xs text-text-2"
               >
                 {COUNTRY_NAMES[code]}
                 <button
                   type="button"
                   onClick={() => removeCompare(code)}
                   aria-label={`Remove ${COUNTRY_NAMES[code]} from comparison`}
-                  className="text-slate-400 transition hover:text-red-600"
+                  className="text-text-3 transition hover:text-red-600"
                 >
                   ×
                 </button>
@@ -385,7 +385,7 @@ export default function SalaryExplorer() {
                 value=""
                 onChange={(e) => addCompare(e.target.value)}
                 aria-label="Add country to comparison"
-                className="h-7 rounded-full border border-dashed border-slate-300 bg-slate-50 px-2 text-xs text-slate-500 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+                className="h-7 rounded-full border border-dashed border-line-strong bg-bg-2 px-2 text-xs text-text-3 focus:border-blue focus:outline-none focus:ring-1 focus:ring-blue"
               >
                 <option value="">+ Add country</option>
                 {availableCodes
@@ -398,7 +398,7 @@ export default function SalaryExplorer() {
               </select>
             )}
           </div>
-          <div style={{ width: "100%", height: "320px" }} className="rounded-xl border border-slate-200 bg-slate-50">
+          <div style={{ width: "100%", height: "320px" }} className="rounded-xl border border-line bg-bg-2">
             <ResponsiveContainer width="100%" height="100%">
               <LineChart data={chart.rows} margin={{ top: 12, right: 20, left: 10, bottom: 12 }}>
                 <CartesianGrid strokeDasharray="3 3" />
@@ -431,7 +431,7 @@ export default function SalaryExplorer() {
               </LineChart>
             </ResponsiveContainer>
           </div>
-          <p className="mt-1.5 text-xs text-slate-500">
+          <p className="mt-1.5 text-xs text-text-3">
             {mode === "nominal" && (
               <>Wages at each year's own prices, in national currency.</>
             )}
@@ -448,13 +448,13 @@ export default function SalaryExplorer() {
         </section>
       )}
 
-      <div className="text-xs text-slate-400">
+      <div className="text-xs text-text-3">
         Source:{" "}
         <a
           href="https://data-explorer.oecd.org/vis?df[ds]=dsDisseminateFinalDMZ&df[id]=DSD_EARNINGS%40AV_AN_WAGE&df[ag]=OECD.ELS.SAE"
           target="_blank"
           rel="noopener noreferrer"
-          className="text-indigo-600 hover:text-indigo-700 underline"
+          className="text-blue hover:text-blue-hover underline"
         >
           OECD - Average annual wages
         </a>

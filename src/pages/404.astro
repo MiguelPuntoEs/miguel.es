@@ -3,15 +3,34 @@ import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout title="Lost in the void" description="This page doesn't exist.">
-  <main class="mx-auto px-4 py-24 flex flex-col items-center gap-6">
-    <p style="font-size: 15vw;" class="leading-none font-bold tracking-tighter text-gray-200 select-none">404</p>
-    <div class="text-center space-y-2">
-      <h1 class="text-xl font-semibold">You've ventured off the map</h1>
-      <p class="text-sm text-gray-500">This page got lost somewhere between Madrid and the internet.</p>
-    </div>
-    <div class="flex gap-4 mt-2">
-      <a href="/" class="px-4 py-2 text-sm font-medium bg-gray-900 text-white rounded-lg hover:opacity-80 transition-opacity">Take me home</a>
-      <a href="/resources" class="px-4 py-2 text-sm font-medium border border-gray-300 rounded-lg hover:bg-gray-100 transition-colors">Browse resources</a>
+  <main class="page notfound reveal">
+    <p class="code">404</p>
+    <h1>You've ventured off the map</h1>
+    <p class="lede">This page got lost somewhere between Madrid and the internet.</p>
+    <div class="actions">
+      <a class="btn btn--primary" href="/">Take me home</a>
+      <a class="btn" href="/resources">Browse resources</a>
     </div>
   </main>
 </Layout>
+
+<style>
+  .notfound { text-align: center; padding-top: 6rem; }
+  .code {
+    font-size: clamp(64px, 18vw, 140px);
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -0.05em;
+    color: var(--color-line);
+    user-select: none;
+  }
+  .notfound h1 {
+    margin-top: 1.5rem;
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--color-text-1);
+    letter-spacing: -0.015em;
+  }
+  .lede { margin-top: 0.5rem; font-size: 0.9375rem; color: var(--color-text-3); }
+  .actions { display: flex; gap: 0.75rem; justify-content: center; margin-top: 1.75rem; flex-wrap: wrap; }
+</style>

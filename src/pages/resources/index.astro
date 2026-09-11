@@ -15,11 +15,11 @@ const courseEntries = courses.map(course => ({
 ---
 
 <Layout title="Miguel González Calvo | Resources" description="Teaching materials, calculators, and curated reference resources on AI, economics, Python, and data science">
-  <main class="max-w-3xl mx-auto px-4">
-    <h1 class="text-2xl font-semibold mb-4">Resources</h1>
+  <main class="page">
+    <h1 class="page-title" style="margin-bottom:1.5rem">Resources</h1>
     
-    <h2 class="text-lg font-semibold mb-3 mt-6">Teaching</h2>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-6 mb-8">
+    <h2 class="section__title">Teaching</h2>
+    <div class="rowlist section">
       {courseEntries.map(course => (
         <ResourceEntry
           title={course.title}
@@ -39,8 +39,8 @@ const courseEntries = courses.map(course => ({
       />
     </div>
 
-    <h2 class="text-lg font-semibold mb-3">Tools & Calculators</h2>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-6 mb-8">
+    <h2 class="section__title">Tools & Calculators</h2>
+    <div class="rowlist section">
       <ResourceEntry
         title="QR Code Generator"
         description="Generate QR codes for URLs, contacts, WiFi, events, and more."
@@ -78,8 +78,8 @@ const courseEntries = courses.map(course => ({
       />
     </div>
 
-    <h2 class="text-lg font-semibold mb-3">Reference Materials</h2>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-6">
+    <h2 class="section__title">Reference Materials</h2>
+    <div class="rowlist">
       <ResourceEntry
         title="Interesting APIs"
         description="Collection of useful APIs for development and data analysis."

@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Direction G — Editorial</title>
+<style>
+  :root {
+    --ink: #171512;
+    --gray: #7a746b;
+    --paper: #fbfaf8;
+    --orange: #d95f02;
+    --rule: #e4e1db;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    font-size: 15.5px;
+    line-height: 1.6;
+  }
+  .split { display: grid; grid-template-columns: minmax(300px, 42%) 1fr; min-height: 100vh; }
+
+  /* Portrait column */
+  .photo {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow: hidden;
+  }
+  .photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(1) contrast(1.08) brightness(1.02);
+    display: block;
+  }
+  .photo::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: var(--orange);
+    mix-blend-mode: multiply;
+    opacity: 0.32;
+  }
+  .photo .credit {
+    position: absolute;
+    left: 18px;
+    bottom: 14px;
+    z-index: 2;
+    color: #fff;
+    font-size: 11px;
+    opacity: 0.85;
+  }
+
+  /* Content column */
+  .content { padding: 52px clamp(28px, 6vw, 84px) 80px; max-width: 760px; }
+
+  .top { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; flex-wrap: wrap; font-size: 13px; font-weight: 600; color: var(--gray); }
+  .top nav { display: flex; gap: 18px; flex-wrap: wrap; }
+  .top a { color: var(--ink); text-decoration: none; }
+  .top a:hover, .top a[aria-current] { color: var(--orange); }
+
+  h1 {
+    margin-top: 44px;
+    font-size: clamp(42px, 6.5vw, 74px);
+    font-weight: 850;
+    letter-spacing: -0.04em;
+    line-height: 0.96;
+    margin-left: calc(-1 * clamp(40px, 12vw, 160px));
+    position: relative;
+    z-index: 3;
+  }
+  h1 .apellido { display: block; }
+  .deck {
+    margin-top: 26px;
+    font-size: clamp(20px, 2.6vw, 26px);
+    line-height: 1.35;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    max-width: 32ch;
+  }
+  .deck b { font-weight: 700; }
+  .deck .mk {
+    background-image: linear-gradient(transparent 62%, rgba(217, 95, 2, 0.25) 62%);
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+  }
+  .byline { margin-top: 18px; font-size: 13px; color: var(--gray); }
+
+  .body-copy { margin-top: 34px; max-width: 58ch; }
+  .body-copy p { margin-bottom: 14px; }
+  .body-copy p:first-child::first-letter {
+    font-size: 3.1em;
+    font-weight: 850;
+    float: left;
+    line-height: 0.85;
+    padding: 4px 8px 0 0;
+    color: var(--orange);
+  }
+  .body-copy a { color: inherit; text-decoration: underline; text-decoration-color: var(--orange); text-decoration-thickness: 1.5px; text-underline-offset: 3px; }
+  .body-copy a:hover { color: var(--orange); }
+
+  section { margin-top: 46px; }
+  h2 {
+    font-size: 13px;
+    font-weight: 800;
+    color: var(--orange);
+    margin-bottom: 4px;
+  }
+  h2 + .hrule { border: 0; border-top: 2px solid var(--ink); margin-bottom: 14px; }
+
+  .entry { display: flex; gap: 18px; padding: 9px 0; border-bottom: 1px solid var(--rule); align-items: baseline; }
+  .entry:last-child { border-bottom: 0; }
+  .entry .yr { font-size: 13px; color: var(--gray); min-width: 76px; font-variant-numeric: tabular-nums; }
+  .entry .txt b { font-weight: 700; }
+  .entry .txt .at { color: var(--gray); font-size: 14px; }
+  .entry .txt a { color: inherit; text-decoration: none; border-bottom: 2px solid rgba(217, 95, 2, 0.35); }
+  .entry .txt a:hover { color: var(--orange); border-bottom-color: var(--orange); }
+  .entry .txt .sub { display: block; font-size: 13px; color: var(--gray); }
+
+  .pull {
+    margin: 40px 0;
+    padding-left: 20px;
+    border-left: 4px solid var(--orange);
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.015em;
+    line-height: 1.3;
+    max-width: 30ch;
+  }
+  .pull small { display: block; font-size: 13px; font-weight: 400; color: var(--gray); margin-top: 8px; }
+
+  .tools { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
+  .tools a {
+    border: 1.5px solid var(--ink);
+    border-radius: 999px;
+    padding: 6px 14px;
+    font-size: 13.5px;
+    font-weight: 650;
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .tools a:hover { background: var(--ink); color: var(--paper); }
+
+  .contact { font-size: 14.5px; color: var(--gray); max-width: 52ch; }
+  .contact a { color: var(--ink); text-decoration: underline; text-decoration-color: var(--orange); text-decoration-thickness: 1.5px; text-underline-offset: 3px; }
+  .onion { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 10.5px; word-break: break-all; color: var(--gray); display: block; margin-top: 8px; text-decoration: none; }
+  .onion:hover { color: var(--orange); }
+  footer { margin-top: 48px; padding-top: 14px; border-top: 2px solid var(--ink); font-size: 12.5px; color: var(--gray); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+
+  @media (max-width: 860px) {
+    .split { grid-template-columns: 1fr; }
+    .photo { position: relative; height: 46vh; }
+    h1 { margin-left: 0; margin-top: 30px; }
+  }
+</style>
+</head>
+<body>
+<div class="split">
+
+  <div class="photo">
+    <img src="../src/assets/pictures/profile.jpg" alt="Miguel González Calvo">
+    <span class="credit">Madrid, 40.42°N 3.70°W</span>
+  </div>
+
+  <div class="content">
+    <div class="top">
+      <span>miguel.es</span>
+      <nav aria-label="Main">
+        <a href="#" aria-current="page">Home</a>
+        <a href="#">Resources</a>
+        <a href="#">Publications</a>
+        <a href="#">QR</a>
+        <a href="#">YouTube</a>
+      </nav>
+    </div>
+
+    <h1>Miguel<span class="apellido">González Calvo</span></h1>
+
+    <p class="deck">
+      Builds with <b>language models</b> by day; teaches
+      <span class="mk">economics, Python and blockchain</span> the rest of the time.
+    </p>
+    <p class="byline">Senior LLM Engineer, A5 Labs · Madrid → California, remotely</p>
+
+    <div class="body-copy">
+      <p>
+        The path wasn't straight: aerospace engineering first, then signal
+        theory, four countries of software and data work — weather at
+        <a href="#">AEMet</a>, satellites at Airbus, precision instruments at
+        Leica — before settling into data science and, for the last years,
+        LLM engineering.
+      </p>
+      <p>
+        The economics came later, deliberately: an MA at
+        <a href="#">Universidad de las Hespérides</a>, a thesis on the quantity
+        theory of money, and now courses at three universities plus a set of
+        <a href="#">calculators on live OECD data</a> that students and
+        strangers actually use.
+      </p>
+    </div>
+
+    <blockquote class="pull">
+      "Aero → signals → data → LLMs. The tools change; the engineering doesn't."
+      <small>— the short version of the CV</small>
+    </blockquote>
+
+    <section>
+      <h2>Experience</h2>
+      <hr class="hrule">
+      <div class="entry"><span class="yr">2025 —</span><span class="txt"><b>Senior LLM Engineer</b> <span class="at">· A5 Labs, California (remote)</span></span></div>
+      <div class="entry"><span class="yr">2024 – 25</span><span class="txt"><b>Lead Data Scientist</b> <span class="at">· Pascual, Madrid</span></span></div>
+      <div class="entry"><span class="yr">2023 – 24</span><span class="txt"><b>Data Scientist</b> <span class="at">· toom Baumarkt, Cologne</span></span></div>
+      <div class="entry"><span class="yr">2019 – 23</span><span class="txt"><b>Product Engineer</b> <span class="at">· Leica Geosystems, Heerbrugg</span></span></div>
+      <div class="entry"><span class="yr">2018 – 19</span><span class="txt"><b>Software Engineer</b> <span class="at">· Airbus Defence &amp; Space, Munich</span></span></div>
+      <div class="entry"><span class="yr">2017</span><span class="txt"><b>Software Engineer</b> <span class="at">· GMV, Tres Cantos</span></span></div>
+      <div class="entry"><span class="yr">2016</span><span class="txt"><b>Developer, intern</b> <span class="at">· AEMet, Madrid</span></span></div>
+    </section>
+
+    <section>
+      <h2>Teaching</h2>
+      <hr class="hrule">
+      <div class="entry"><span class="yr">2026</span><span class="txt"><a href="#"><b>IA: Tu Copiloto Académico</b></a> <span class="at">· U. Francisco Marroquín</span></span></div>
+      <div class="entry"><span class="yr">2025 —</span><span class="txt"><a href="#"><b>Python for Finance</b></a> <span class="at">· U. Francisco Marroquín</span></span></div>
+      <div class="entry"><span class="yr">2025 —</span><span class="txt"><a href="#"><b>Technology</b></a> <span class="at">· U. Francisco Marroquín</span></span></div>
+      <div class="entry"><span class="yr">2025 —</span><span class="txt"><a href="#"><b>International Economics and Globalization</b></a> <span class="at">· U. de las Hespérides</span></span></div>
+      <div class="entry"><span class="yr">2025 —</span><span class="txt"><a href="#"><b>Blockchain</b></a> <span class="at">· U. Alfonso X el Sabio</span></span></div>
+      <div class="entry"><span class="yr">2025</span><span class="txt"><a href="#"><b>Economics I</b></a> <span class="at">· U. Francisco Marroquín</span></span></div>
+      <div class="entry"><span class="yr">2025</span><span class="txt"><b>Python Seminar</b> <span class="at">· U. Francisco Marroquín</span></span></div>
+    </section>
+
+    <section>
+      <h2>Education</h2>
+      <hr class="hrule">
+      <div class="entry">
+        <span class="yr">2023 – 24</span>
+        <span class="txt"><b>MA Economics</b> <span class="at">· U. de las Hespérides</span>
+          <span class="sub">Quantity Theory of Money Around the Globe · honors in six subjects</span></span>
+      </div>
+      <div class="entry">
+        <span class="yr">2017 – 19</span>
+        <span class="txt"><b>MSc Signal Theory &amp; Communications</b> <span class="at">· UPM</span>
+          <span class="sub">Coaxial-to-waveguide transitions and mode transducers · 10/10, distinction</span></span>
+      </div>
+      <div class="entry">
+        <span class="yr">2012 – 16</span>
+        <span class="txt"><b>BSc Aerospace Engineering</b> <span class="at">· UPM</span>
+          <span class="sub">Air navigation systems · SIGMET/AIRMET decoding tool · 9.5/10</span></span>
+      </div>
+    </section>
+
+    <section>
+      <h2>Tools</h2>
+      <hr class="hrule">
+      <div class="tools">
+        <a href="#">Salary Explorer</a>
+        <a href="#">Inflation Calculator</a>
+        <a href="#">PPP Calculator</a>
+        <a href="#">Compound Interest</a>
+        <a href="#">Loan Amortization</a>
+        <a href="#">QR Generator</a>
+      </div>
+    </section>
+
+    <section>
+      <h2>Contact</h2>
+      <hr class="hrule">
+      <p class="contact">
+        Messages through this site aren't monitored — reach me on
+        <a href="https://linkedin.com/in/mgcalvo/">LinkedIn</a> or
+        <a href="https://github.com/MiguelPuntoEs">GitHub</a>. Also served over Tor:
+        <a class="onion" href="#">miguel3wuxsv5wb63n7522pvk7tpwc3lvsvbdzai32bvvca2ac5olbqd.onion</a>
+      </p>
+    </section>
+
+    <footer>
+      <span>© 2026 Miguel González Calvo</span>
+      <span>One photo, one orange, Helvetica.</span>
+    </footer>
+  </div>
+
+</div>
+</body>
+</html>

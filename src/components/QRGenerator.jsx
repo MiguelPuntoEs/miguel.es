@@ -313,13 +313,13 @@ const FRAME_STYLES = [
 ];
 
 function FrameThumb({ id, color }) {
-  const c = color || "#4f46e5";
-  const qr = <rect x="9" y="9" width="26" height="26" fill="#cbd5e1" rx="2" />;
+  const c = color || "#0551d8";
+  const qr = <rect x="9" y="9" width="26" height="26" fill="#cecece" rx="2" />;
   switch (id) {
     case "none":
       return (
         <svg viewBox="0 0 44 44" className="w-9 h-9">
-          <rect x="3" y="3" width="38" height="38" fill="#f1f5f9" rx="3" />
+          <rect x="3" y="3" width="38" height="38" fill="#f5f5f5" rx="3" />
           {qr}
         </svg>
       );
@@ -362,7 +362,7 @@ function FrameThumb({ id, color }) {
           <rect width="44" height="54" fill={c} rx="5" />
           <text x="22" y="11" fill="white" fontSize="7" textAnchor="middle" fontWeight="bold">SCAN ME</text>
           <rect x="4" y="16" width="36" height="34" fill="white" rx="3" />
-          <rect x="9" y="21" width="26" height="24" fill="#cbd5e1" rx="2" />
+          <rect x="9" y="21" width="26" height="24" fill="#cecece" rx="2" />
         </svg>
       );
     case "banner":
@@ -716,8 +716,8 @@ function overlayLogo(dataUrl, platformId, brandColor, moduleCount) {
   });
 }
 
-const INPUT = "w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 placeholder:text-slate-400 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 focus:outline-none";
-const LABEL = "block text-xs font-medium text-slate-600 mb-1";
+const INPUT = "w-full rounded-lg border border-line-strong bg-bg-1 px-3 py-2 text-sm text-text-1 placeholder:text-text-3 focus:border-blue focus:ring-1 focus:ring-blue focus:outline-none";
+const LABEL = "block text-xs font-medium text-text-2 mb-1";
 
 function Field({ label, children }) {
   return (
@@ -786,31 +786,31 @@ function PhoneInput({ label = "Phone number", value, dialCode, onChangePhone, on
       }}
     >
       <span className={LABEL}>{label}</span>
-      <div className="relative flex items-center rounded-lg border border-slate-300 bg-white focus-within:ring-1 focus-within:ring-indigo-500 focus-within:border-indigo-500">
+      <div className="relative flex items-center rounded-lg border border-line-strong bg-bg-1 focus-within:ring-1 focus-within:ring-blue focus-within:border-blue">
         <button
           type="button"
           onClick={() => setOpen(!open)}
           aria-expanded={open}
           aria-haspopup="listbox"
           aria-label={`Country code, selected ${selected.name} ${selected.dial}`}
-          className="flex items-center gap-1 pl-3 pr-1 py-2 text-sm hover:bg-slate-50 shrink-0 rounded-l-lg"
+          className="flex items-center gap-1 pl-3 pr-1 py-2 text-sm hover:bg-bg-2 shrink-0 rounded-l-lg"
         >
           <span>{selected.flag}</span>
-          <span className="text-slate-500 text-xs">{selected.dial}</span>
-          <svg className="w-3 h-3 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
+          <span className="text-text-3 text-xs">{selected.dial}</span>
+          <svg className="w-3 h-3 text-text-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
         </button>
         <input
-          className="w-full bg-transparent py-2 pr-3 pl-1 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none rounded-r-lg"
+          className="w-full bg-transparent py-2 pr-3 pl-1 text-sm text-text-1 placeholder:text-text-3 focus:outline-none rounded-r-lg"
           type="tel"
           placeholder="612 345 678"
           value={value}
           onChange={onChangePhone}
         />
         {open && (
-          <div className="absolute top-full left-0 mt-1 w-56 max-h-48 overflow-y-auto rounded-lg border border-slate-200 bg-white shadow-lg z-10">
-            <div className="sticky top-0 bg-white p-1.5 border-b border-slate-100">
+          <div className="absolute top-full left-0 mt-1 w-56 max-h-48 overflow-y-auto rounded-lg border border-line bg-bg-1 shadow-lg z-10">
+            <div className="sticky top-0 bg-bg-1 p-1.5 border-b border-line">
               <input
-                className="w-full rounded border border-slate-200 px-2 py-1 text-xs placeholder:text-slate-400 focus:outline-none focus:border-indigo-400"
+                className="w-full rounded border border-line px-2 py-1 text-xs placeholder:text-text-3 focus:outline-none focus:border-blue"
                 placeholder="Search country..."
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
@@ -821,12 +821,12 @@ function PhoneInput({ label = "Phone number", value, dialCode, onChangePhone, on
               <button
                 key={c.name}
                 type="button"
-                className={`flex w-full items-center gap-2 px-3 py-1.5 text-xs hover:bg-slate-50 ${c.dial === dialCode ? "bg-indigo-50" : ""}`}
+                className={`flex w-full items-center gap-2 px-3 py-1.5 text-xs hover:bg-bg-2 ${c.dial === dialCode ? "bg-bg-2" : ""}`}
                 onClick={() => { onChangeDialCode(c.dial); setOpen(false); setSearch(""); }}
               >
                 <span>{c.flag}</span>
-                <span className="text-slate-500">{c.dial}</span>
-                <span className="text-slate-700">{c.name}</span>
+                <span className="text-text-3">{c.dial}</span>
+                <span className="text-text-2">{c.name}</span>
               </button>
             ))}
           </div>
@@ -840,17 +840,17 @@ function UrlInput({ value, onChange }) {
   const valid = isValidUrl(value);
   const hasProtocol = /^https?:\/\//i.test(value);
   const borderClass =
-    valid === null ? "border-slate-300" : valid ? "border-green-500" : "border-red-400";
+    valid === null ? "border-line-strong" : valid ? "border-green-500" : "border-red-400";
 
   return (
     <label className="block">
       <span className={LABEL}>URL</span>
-      <div className={`flex items-center rounded-lg border bg-white overflow-hidden focus-within:ring-1 focus-within:ring-indigo-500 focus-within:border-indigo-500 ${borderClass}`}>
+      <div className={`flex items-center rounded-lg border bg-bg-1 overflow-hidden focus-within:ring-1 focus-within:ring-blue focus-within:border-blue ${borderClass}`}>
         {!hasProtocol && value && (
-          <span className="pl-3 text-sm text-slate-400 select-none whitespace-nowrap">https://</span>
+          <span className="pl-3 text-sm text-text-3 select-none whitespace-nowrap">https://</span>
         )}
         <input
-          className={`w-full bg-transparent py-2 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none ${!hasProtocol && value ? "pl-0 pr-3" : "px-3"}`}
+          className={`w-full bg-transparent py-2 text-sm text-text-1 placeholder:text-text-3 focus:outline-none ${!hasProtocol && value ? "pl-0 pr-3" : "px-3"}`}
           type="text"
           placeholder="example.com"
           value={value}
@@ -867,13 +867,13 @@ function UrlInput({ value, onChange }) {
 function CryptoAddressInput({ type, label, placeholder, value, onChange }) {
   const valid = validateCryptoAddress(type, value);
   const borderClass =
-    valid === null ? "border-slate-300" : valid ? "border-green-500" : "border-red-400";
+    valid === null ? "border-line-strong" : valid ? "border-green-500" : "border-red-400";
   return (
     <label className="block">
       <span className={LABEL}>{label}</span>
-      <div className={`flex items-center rounded-lg border bg-white overflow-hidden focus-within:ring-1 focus-within:ring-indigo-500 focus-within:border-indigo-500 ${borderClass}`}>
+      <div className={`flex items-center rounded-lg border bg-bg-1 overflow-hidden focus-within:ring-1 focus-within:ring-blue focus-within:border-blue ${borderClass}`}>
         <input
-          className="w-full bg-transparent px-3 py-2 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none"
+          className="w-full bg-transparent px-3 py-2 text-sm text-text-1 placeholder:text-text-3 focus:outline-none"
           type="text"
           placeholder={placeholder}
           value={value}
@@ -949,8 +949,8 @@ function TypeForm({ type, data, onChange }) {
               { value: "nopass", label: "None" },
             ]}
           />
-          <label className="flex items-center gap-2 text-sm text-slate-600">
-            <input type="checkbox" checked={data.hidden || false} onChange={set("hidden")} className="rounded border-slate-300" />
+          <label className="flex items-center gap-2 text-sm text-text-2">
+            <input type="checkbox" checked={data.hidden || false} onChange={set("hidden")} className="rounded border-line-strong" />
             Hidden network
           </label>
         </div>
@@ -1092,7 +1092,7 @@ export default function QRGenerator({ defaultType = "url", showTypeSelector = tr
   const [copied, setCopied] = useState(false);
   const [frameStyle, setFrameStyle] = useState("none");
   const [frameLabel, setFrameLabel] = useState("SCAN ME");
-  const [frameColor, setFrameColor] = useState("#4f46e5");
+  const [frameColor, setFrameColor] = useState("#0551d8");
 
   const currentData = formData[activeType] || {};
   const setCurrentData = (data) => setFormData((prev) => ({ ...prev, [activeType]: data }));
@@ -1209,7 +1209,7 @@ export default function QRGenerator({ defaultType = "url", showTypeSelector = tr
         <div className="flex flex-col gap-2 mb-8">
           {QR_TYPE_GROUPS.map((group) => (
             <div key={group} className="flex items-center gap-2">
-              <span className="text-[10px] font-semibold uppercase tracking-wider text-slate-500 w-16 shrink-0 text-right">{group}</span>
+              <span className="text-[10px] font-semibold uppercase tracking-wider text-text-3 w-16 shrink-0 text-right">{group}</span>
               <div className="flex flex-wrap gap-1.5">
                 {QR_TYPES.filter((t) => t.group === group).map((t) => (
                   <button
@@ -1217,8 +1217,8 @@ export default function QRGenerator({ defaultType = "url", showTypeSelector = tr
                     onClick={() => setActiveType(t.id)}
                     className={`rounded-full px-3 py-1.5 text-xs font-medium transition-colors ${
                       activeType === t.id
-                        ? "bg-indigo-600 text-white"
-                        : "bg-slate-100 text-slate-600 hover:bg-slate-200"
+                        ? "bg-blue text-white"
+                        : "bg-bg-2 text-text-2 hover:bg-line"
                     }`}
                   >
                     {t.label}
@@ -1237,24 +1237,24 @@ export default function QRGenerator({ defaultType = "url", showTypeSelector = tr
 
           {/* Color options */}
           {!logoConfig && (
-            <div className="pt-3 border-t border-slate-200">
-              <p className="text-xs font-medium text-slate-600 mb-2">Colors</p>
+            <div className="pt-3 border-t border-line">
+              <p className="text-xs font-medium text-text-2 mb-2">Colors</p>
               <div className="flex gap-4">
-                <label className="flex items-center gap-2 text-xs text-slate-600">
+                <label className="flex items-center gap-2 text-xs text-text-2">
                   <input
                     type="color"
                     value={fgColor}
                     onChange={(e) => setFgColor(e.target.value)}
-                    className="h-8 w-8 cursor-pointer rounded border border-slate-300"
+                    className="h-8 w-8 cursor-pointer rounded border border-line-strong"
                   />
                   Foreground
                 </label>
-                <label className="flex items-center gap-2 text-xs text-slate-600">
+                <label className="flex items-center gap-2 text-xs text-text-2">
                   <input
                     type="color"
                     value={bgColor}
                     onChange={(e) => setBgColor(e.target.value)}
-                    className="h-8 w-8 cursor-pointer rounded border border-slate-300"
+                    className="h-8 w-8 cursor-pointer rounded border border-line-strong"
                   />
                   Background
                 </label>
@@ -1263,8 +1263,8 @@ export default function QRGenerator({ defaultType = "url", showTypeSelector = tr
           )}
 
           {/* Frame option */}
-          <div className="pt-3 border-t border-slate-200">
-            <p className="text-xs font-medium text-slate-600 mb-2">Frame</p>
+          <div className="pt-3 border-t border-line">
+            <p className="text-xs font-medium text-text-2 mb-2">Frame</p>
             <div className="grid grid-cols-4 gap-2">
               {FRAME_STYLES.map((s) => (
                 <button
@@ -1273,26 +1273,26 @@ export default function QRGenerator({ defaultType = "url", showTypeSelector = tr
                   onClick={() => setFrameStyle(s.id)}
                   className={`flex flex-col items-center gap-1 rounded-lg p-2 transition-colors border ${
                     frameStyle === s.id
-                      ? "border-indigo-500 bg-indigo-50"
-                      : "border-slate-200 hover:border-slate-300 hover:bg-slate-50"
+                      ? "border-blue bg-bg-2"
+                      : "border-line hover:border-line-strong hover:bg-bg-2"
                   }`}
                 >
                   <FrameThumb id={s.id} color={effectiveFrameColor} />
-                  <span className="text-[10px] text-slate-600 leading-tight text-center">{s.label}</span>
+                  <span className="text-[10px] text-text-2 leading-tight text-center">{s.label}</span>
                 </button>
               ))}
             </div>
             {frameStyle !== "none" && (
               <div className="mt-3 flex flex-wrap gap-4">
-                <label className="flex items-center gap-2 text-xs text-slate-600">
+                <label className="flex items-center gap-2 text-xs text-text-2">
                   <input
                     type="color"
                     value={effectiveFrameColor}
                     onChange={(e) => setFrameColor(e.target.value)}
                     disabled={!!logoConfig}
-                    className="h-8 w-8 rounded border border-slate-300 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+                    className="h-8 w-8 rounded border border-line-strong disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
                   />
-                  Frame color{logoConfig && <span className="text-slate-400">(matched to brand)</span>}
+                  Frame color{logoConfig && <span className="text-text-3">(matched to brand)</span>}
                 </label>
               </div>
             )}
@@ -1311,11 +1311,11 @@ export default function QRGenerator({ defaultType = "url", showTypeSelector = tr
 
         {/* QR Preview & Download */}
         <div className="flex flex-col items-center gap-4">
-          <div className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm flex items-center justify-center min-h-[17rem]">
+          <div className="rounded-xl border border-line bg-bg-1 p-4 shadow-sm flex items-center justify-center min-h-[17rem]">
             {qrDataUrl ? (
               <img src={qrDataUrl} alt="QR Code" className="max-w-[16rem] max-h-[22rem] w-auto h-auto" />
             ) : (
-              <div className="w-64 h-64 flex items-center justify-center text-sm text-slate-400">
+              <div className="w-64 h-64 flex items-center justify-center text-sm text-text-3">
                 Fill in the form to generate a QR code
               </div>
             )}
@@ -1325,21 +1325,21 @@ export default function QRGenerator({ defaultType = "url", showTypeSelector = tr
             <div className="flex gap-2">
               <button
                 onClick={() => downloadQR("png")}
-                className="rounded-lg bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-700 transition-colors"
+                className="rounded-lg bg-blue px-4 py-2 text-sm font-medium text-white hover:bg-blue-hover transition-colors"
               >
                 Download PNG
               </button>
               {!logoConfig && (
                 <button
                   onClick={() => downloadQR("svg")}
-                  className="rounded-lg border border-slate-300 px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50 transition-colors"
+                  className="rounded-lg border border-line-strong px-4 py-2 text-sm font-medium text-text-2 hover:bg-bg-2 transition-colors"
                 >
                   Download SVG
                 </button>
               )}
               <button
                 onClick={copyQR}
-                className="rounded-lg border border-slate-300 px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50 transition-colors"
+                className="rounded-lg border border-line-strong px-4 py-2 text-sm font-medium text-text-2 hover:bg-bg-2 transition-colors"
               >
                 {copied ? "Copied!" : "Copy"}
               </button>
@@ -1347,7 +1347,7 @@ export default function QRGenerator({ defaultType = "url", showTypeSelector = tr
           )}
 
           {qrString && (
-            <p className="text-xs text-slate-500 break-all max-w-[280px] text-center">
+            <p className="text-xs text-text-3 break-all max-w-[280px] text-center">
               {qrString.length > 120 ? qrString.slice(0, 120) + "..." : qrString}
             </p>
           )}

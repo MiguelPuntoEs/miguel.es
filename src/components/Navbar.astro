@@ -1,21 +1,103 @@
-<div class="max-w-3xl mx-auto flex flex-col mt-8 px-4 mb-8">
-  <a href="/" class="text-xl font-light"
-    ><strong class="font-bold">Miguel</strong> González Calvo</a
-  >
-  <nav class="mt-6" aria-label="Main">
-    <ul class="font-semibold text-xs flex gap-4">
-      <li><a href="/">Home</a></li>
-      <li><a href="/resources">Resources</a></li>
-      <li><a href="/qr">QR Generator</a></li>
-      <li><a href="/publications">Publications</a></li>
-      <li>
-        <a
-          href="https://www.youtube.com/@MiguelPuntoEs"
-          target="_blank"
-          rel="noopener noreferrer">YouTube</a
-        >
-      </li>
-    </ul>
-  </nav>
-  <hr class="border-gray-300 mt-4" />
-</div>
+---
+const links = [
+  { href: "/", label: "Home" },
+  { href: "/projects", label: "Projects" },
+  { href: "/publications", label: "Writing" },
+  { href: "/resources", label: "Resources" },
+];
+const path = Astro.url.pathname.replace(/\/$/, "") || "/";
+const isCurrent = (href: string) =>
+  href === "/" ? path === "/" : path === href || path.startsWith(href + "/");
+---
+
+<nav class="nav" aria-label="Main">
+  <div class="nav__inner">
+    <div class="nav__links">
+      {
+        links.map(({ href, label }) => (
+          <a href={href} aria-current={isCurrent(href) ? "page" : undefined}>
+            {label}
+          </a>
+        ))
+      }
+    </div>
+    <button class="nav__toggle" id="theme-toggle" type="button" aria-label="Switch theme">
+      <svg class="icon icon--sun"><use href="#i-sun" /></svg>
+      <svg class="icon icon--moon"><use href="#i-moon" /></svg>
+    </button>
+  </div>
+</nav>
+
+<style>
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: color-mix(in srgb, var(--color-bg-1) 82%, transparent);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.3s, background 0.3s;
+  }
+  .nav:global(.scrolled) { border-bottom-color: var(--color-line); }
+  .nav__inner {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 0.875rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+  .nav__links { display: flex; gap: 1.25rem; font-size: 0.875rem; font-weight: 500; }
+  .nav__links a { color: var(--color-text-3); transition: color 0.2s; }
+  .nav__links a:hover,
+  .nav__links a[aria-current] { color: var(--color-text-1); }
+  .nav__toggle {
+    display: grid;
+    place-items: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    color: var(--color-text-3);
+    font-size: 17px;
+    cursor: pointer;
+    transition: color 0.2s, background-color 0.25s;
+  }
+  .nav__toggle:hover { color: var(--color-text-1); background: var(--color-bg-2); }
+  .nav__toggle :global(.icon--moon) { display: none; }
+  :global([data-theme="dark"]) .nav__toggle :global(.icon--sun) { display: none; }
+  :global([data-theme="dark"]) .nav__toggle :global(.icon--moon) { display: block; }
+
+  @media (max-width: 400px) {
+    .nav__inner { padding-inline: 1rem; }
+    .nav__links { gap: 0.9rem; font-size: 0.8125rem; }
+  }
+</style>
+
+<script>
+  const root = document.documentElement;
+  const btn = document.getElementById("theme-toggle");
+
+  const syncLabel = () => {
+    btn?.setAttribute(
+      "aria-label",
+      root.dataset.theme === "dark" ? "Switch to light theme" : "Switch to dark theme",
+    );
+  };
+  syncLabel();
+
+  btn?.addEventListener("click", () => {
+    root.dataset.theme = root.dataset.theme === "dark" ? "light" : "dark";
+    try {
+      localStorage.setItem("theme", root.dataset.theme);
+    } catch {
+      /* private mode — the choice just won't persist */
+    }
+    syncLabel();
+  });
+
+  const nav = document.querySelector(".nav");
+  const onScroll = () => nav?.classList.toggle("scrolled", window.scrollY > 8);
+  onScroll();
+  addEventListener("scroll", onScroll, { passive: true });
+</script>

@@ -1,237 +1,372 @@
 ---
 import Image from "astro/components/Image.astro";
-import LogoA5 from "../assets/companies/a5labs.svg?url";
-import LogoAemet from "../assets/companies/aemet.svg?url";
-import LogoAirbus from "../assets/companies/airbus.svg?url";
-import LogoGmv from "../assets/companies/gmv.svg?url";
-import LogoLeica from "../assets/companies/leica.svg?url";
-import LogoPascual from "../assets/companies/pascual.svg?url";
-import LogoToom from "../assets/companies/toom.svg?url";
 import profile from "../assets/pictures/profile.jpg";
-import LogoHesperides from "../assets/universities/hesperides.svg?url";
-import LogoUfm from "../assets/universities/ufm.svg?url";
-import LogoUpm from "../assets/universities/upm.svg?url";
-import LogoUax from "../assets/universities/uax.svg?url";
-import EducationEntry from "../components/EducationEntry.astro";
-import JobEntry from "../components/JobEntry.astro";
-import TeachingEntry from "../components/TeachingEntry.astro";
 import Layout from "../layouts/Layout.astro";
+import { PROJECTS } from "../data/projects.js";
+
+const tools = [
+  {
+    url: "/resources/salary-explorer",
+    icon: "i-chart",
+    name: "Average Salary Explorer",
+    desc: "Real vs nominal wages, compared across countries at PPP",
+  },
+  {
+    url: "/resources/inflation-calculator",
+    icon: "i-receipt",
+    name: "Inflation Calculator",
+    desc: "What an amount is worth over time, on actual CPI series",
+  },
+  {
+    url: "/resources/ppp-calculator",
+    icon: "i-globe",
+    name: "PPP Calculator",
+    desc: "Convert a salary between countries by purchasing power",
+  },
+  {
+    url: "/resources/compound-calculator",
+    icon: "i-layers",
+    name: "Compound Interest",
+    desc: "Growth with periodic contributions, charted",
+  },
+  {
+    url: "/resources/loan-calculator",
+    icon: "i-bank",
+    name: "Loan Amortization",
+    desc: "French, Italian and American methods side by side",
+  },
+  {
+    url: "/qr",
+    icon: "i-qr",
+    name: "QR Generator",
+    desc: "URLs, WiFi, vCards and crypto — generated in your browser",
+  },
+];
+
+const experience = [
+  {
+    role: "Expert in Data Science",
+    org: "Banco de España",
+    meta: ["Sep 2026", "Madrid"],
+    current: true,
+  },
+  {
+    role: "AI Engineering Lead",
+    org: "A5 Labs",
+    meta: ["Oct 2025 — Aug 2026", "California, remote"],
+    previously: { role: "Senior LLM Engineer", dates: "Jan — Sep 2025" },
+  },
+  { role: "Lead Data Scientist", org: "Pascual", meta: ["2024 — 2025", "Madrid"] },
+  { role: "Data Scientist", org: "toom Baumarkt", meta: ["2023 — 2024", "Cologne"] },
+  { role: "Product Engineer", org: "Leica Geosystems", meta: ["2019 — 2023", "Heerbrugg"] },
+  { role: "Software Engineer", org: "Airbus Defence & Space", meta: ["2018 — 2019", "Munich"] },
+  { role: "Software Engineer", org: "GMV", meta: ["2017", "Tres Cantos"] },
+  { role: "Developer, intern", org: "AEMet", meta: ["2016", "Madrid"] },
+];
+
+const teaching = [
+  { title: "Python for Finance", sub: "U. Francisco Marroquín", meta: "2025 —", url: "/courses/python-for-finance" },
+  { title: "International Economics and Globalization", sub: "U. de las Hespérides", meta: "2025 —", url: "/courses/international-economics" },
+  { title: "Blockchain", sub: "U. Alfonso X el Sabio", meta: "2025 —", url: "/courses/blockchain" },
+  { title: "Technology", sub: "U. Francisco Marroquín", meta: "2025 —", url: "/courses/technology" },
+  { title: "IA: Tu Copiloto Académico", sub: "U. Francisco Marroquín", meta: "2026", url: "/courses/academic-copilot" },
+  { title: "Economics I", sub: "U. Francisco Marroquín", meta: "2025", url: "/courses/economics-i" },
+  { title: "Python Seminar", sub: "U. Francisco Marroquín", meta: "2025" },
+];
+
+const writing = [
+  {
+    title: "Revisiting Inflation in the American Civil War",
+    sub: "APEE 50th Meeting, Las Vegas",
+    meta: "2026",
+    url: "/publications",
+  },
+  {
+    title: "Sistemas de pensiones comparados",
+    sub: "Centro Ruth Richardson, Hespérides",
+    meta: "Nov 2025",
+    url: "/docs/hesperides/sistemas_pensiones_comparados.pdf",
+  },
+  {
+    title: "Big Data: el arte de domar las mareas",
+    sub: "Revista Emprendedores",
+    meta: "Sep 2025",
+    url: "https://emprendedores.es/formacion/big-data-el-arte-de-domar-las-mareas-de-informacion/",
+  },
+  {
+    title: "Quantity Theory of Money Around the Globe",
+    sub: "MA thesis · Universidad de las Hespérides",
+    meta: "2024",
+    url: "/docs/meco-tfm.pdf",
+  },
+];
 ---
 
 <Layout
-  title="Miguel González Calvo - Senior LLM Engineer | AI & Data Science"
-  description="Miguel González Calvo - Senior LLM Engineer. 8+ years in software development, 5+ in Data Science. Specialized in LLMs, time series, and AI."
+  title="Miguel González Calvo — Data Scientist & AI Engineer"
+  description="Miguel González Calvo, Expert in Data Science at Banco de España. Previously AI engineering at A5 Labs. Teaches economics, Python and blockchain; builds GNSS Calculator and Próxima Parada."
 >
-  <main>
-  <section
-    class="max-w-3xl mx-auto flex flex-col sm:flex-row gap-4 sm:gap-8 px-4 my-8"
-  >
-    <Image
-      src={profile}
-      alt="Miguel González Calvo - Senior LLM Engineer"
-      class="rounded w-32 h-32 sm:w-40 sm:h-40 flex-shrink-0"
-      height={160}
-      width={160}
-      densities={[2]}
-      loading="eager"
-      fetchpriority="high"
-    />
-    <div class="flex flex-col gap-3">
-      <h1 class="text-sm">Hi, I'm <strong>Miguel González Calvo</strong> 👋</h1>
-      <p class="text-2xl font-semibold">Senior LLM Engineer</p>
-      <p class="text-sm">
-        AI engineer from Madrid with 8+ years of experience in software
-        development
+  <main class="page">
+    <header class="section reveal" style="--i:0">
+      <div class="hero__top">
+        <Image
+          class="hero__avatar"
+          src={profile}
+          alt="Miguel González Calvo"
+          width={88}
+          height={88}
+          densities={[2]}
+          loading="eager"
+          fetchpriority="high"
+        />
+        <div>
+          <h1 class="hero__name">Miguel González Calvo</h1>
+          <p class="hero__where"><svg class="icon"><use href="#i-pin" /></svg> Madrid, Spain</p>
+        </div>
+      </div>
+      <p class="hero__bio">
+        I'm a data scientist and AI engineer. I work at <a
+          class="link link--ext"
+          href="https://www.bde.es/"
+          target="_blank"
+          rel="noopener noreferrer">Banco de España<svg class="icon"><use href="#i-arrow-out" /></svg></a
+        >, Spain's central bank, as an Expert in Data Science.
       </p>
-    </div>
-  </section>
-  <section class="max-w-3xl mx-auto px-4 mt-4">
-    <h2 class="font-semibold text-lg">Bio</h2>
-    <p class="text-sm">
-      Professional with 5+ years of experience in Data Science specialized in
-      LLMs and time series, and 8+ years in software development. Constantly
-      learning about AI from new publications and specialized content. Motivated
-      by implementing innovative methodologies and observing their impact and
-      TensorFlow-certified.
-    </p>
-    <h3 class="font-medium text-base mt-2">Education</h3>
-    <p class="text-sm">
-      I hold a BSc. in Aerospace Engineering (2016), a MSc. in Signal Theory and
-      Communications (2019) from the Polytechnic University of Madrid (Spain),
-      and a MA. in Economics (2024) from Universidad de las Hespérides (Spain).
-    </p>
-  </section>
-  <section class="max-w-3xl mx-auto px-4 mt-8">
-    <h2 class="text-xl font-semibold mb-4">Professional Experience</h2>
-    <div class="flex flex-col gap-4 lg:gap-6">
-      <JobEntry
-        logo={LogoA5}
-        jobTitle="Senior LLM Engineer"
-        companyName="A5 Labs"
-        dateRange="Jan 2025 - Present"
-        location="California, US (remote)"
-        logoClass="bg-[#202348] p-2 rounded-lg"
-      />
-      <JobEntry
-        logo={LogoPascual}
-        jobTitle="Lead Data Scientist"
-        companyName="Pascual"
-        dateRange="Aug 2024 - Jan 2025"
-        location="Madrid, ES"
-      />
-      <JobEntry
-        logo={LogoToom}
-        jobTitle="Data Scientist"
-        companyName="toom Baumarkt"
-        dateRange="Jul 2023 - Jul 2024"
-        location="Cologne, DE"
-      />
-      <JobEntry
-        logo={LogoLeica}
-        jobTitle="Product Engineer"
-        companyName="Leica Geosystems"
-        dateRange="Jun 2019 - Jul 2023"
-        location="Heerbrugg, CH"
-      />
-      <JobEntry
-        logo={LogoAirbus}
-        jobTitle="Software Engineer"
-        companyName="Airbus Defence and Space"
-        dateRange="May 2018 - May 2019"
-        location="Munich, DE"
-      />
-      <JobEntry
-        logo={LogoGmv}
-        jobTitle="Software Engineer"
-        companyName="GMV"
-        dateRange="Mar 2017 - Jul 2017"
-        location="Tres Cantos, ES"
-      />
-      <JobEntry
-        logo={LogoAemet}
-        jobTitle="Internship: Developer"
-        companyName="AEMet"
-        dateRange="Jan 2016 - Jun 2016"
-        location="Madrid, ES"
-      />
-    </div>
-  </section>
-  <section class="max-w-3xl mx-auto px-4 mt-8">
-    <h2 class="text-xl font-semibold mb-4">Teaching</h2>
-    <div class="flex flex-col gap-4 lg:gap-6">
-      <TeachingEntry
-        logo={LogoUfm}
-        courseName="IA: Tu Copiloto Académico"
-        url="/courses/academic-copilot"
-        university="Universidad Francisco Marroquín"
-        dateRange="Jun 2026 - Jul 2026"
-      />
-      <TeachingEntry
-        logo={LogoUfm}
-        courseName="Python for Finance"
-        url="/courses/python-for-finance"
-        university="Universidad Francisco Marroquín"
-        dateRange="Sep 2025 -"
-      />
-      <TeachingEntry
-        logo={LogoUfm}
-        courseName="Technology"
-        url="/courses/technology"
-        university="Universidad Francisco Marroquín"
-        dateRange="Sep 2025 -"
-      />
-      <TeachingEntry
-        logo={LogoHesperides}
-        courseName="International Economics and Globalization"
-        url="/courses/international-economics"
-        university="Universidad de las Hespérides"
-        dateRange="Sep 2025 -"
-      />
-      <TeachingEntry
-        logo={LogoUax}
-        courseName="Blockchain"
-        url="/courses/blockchain"
-        university="Universidad Alfonso X el Sabio"
-        dateRange="Sep 2025 -"
-      />
-      <TeachingEntry
-        logo={LogoUfm}
-        courseName="Economics I"
-        url="/courses/economics-i"
-        university="Universidad Francisco Marroquín"
-        dateRange="Jan 2025 - May 2025"
-      />
-      <TeachingEntry
-        logo={LogoUfm}
-        courseName="Python Seminar"
-        university="Universidad Francisco Marroquín"
-        dateRange="Jun 2025"
-      />
-    </div>
-  </section><section class="max-w-3xl mx-auto px-4 mt-8">
-    <h2 class="text-xl font-semibold mb-4">Education</h2>
-    <div class="flex flex-col gap-4 lg:gap-6">
-      <EducationEntry
-        logo={LogoHesperides}
-        degree="MA Economics"
-        university="Universidad de las Hespérides"
-        dateRange="Oct 2023 - Nov 2024"
-        thesis={{
-          title:
-            "Quantity Theory of Money Around the Globe: Money Growth, Money Velocity and Inflation Subject to Different Monetary Policies",
-          grade:
-            "Honors in: Economics and Institutions, Econometrics, Quantitative Methods for Economics, Game Theory and Information Economics, Monetary and Financial Integration, Experimental Economics",
-        }}
-      />
-
-      <EducationEntry
-        logo={LogoUpm}
-        degree="MSc. in Signal Theory and Communications"
-        university="Universidad Politécnica de Madrid"
-        dateRange="Sep 2017 - Feb 2019"
-        grade="8.5"
-        thesis={{
-          title:
-            "Full-Wave Design of Coaxial to Waveguide Transitions and Waveguide Mode Transducers",
-          grade: "10 out of 10, Distinction",
-        }}
-      />
-
-      <EducationEntry
-        logo={LogoUpm}
-        degree="BSc. in Aerospace Engineering"
-        university="Universidad Politécnica de Madrid"
-        dateRange="Sep 2012 - Sep 2016"
-        grade="7.6"
-        specialization="Air Navigation Systems"
-        thesis={{
-          title: "SIGMET and AIRMET decoding web-based tool",
-          grade: "9.5 out of 10",
-        }}
-      />
-    </div>
-  </section>
-  <section class="max-w-3xl mx-auto px-4 mt-8 mb-16">
-    <h2 class="text-xl font-semibold mb-4">Contact</h2>
-    <p class="text-sm">
-      I don’t monitor all communications sent through this website. If you need
-      to get in touch, please reach out to me directly on <a
-        href="https://linkedin.com/in/mgcalvo/" target="_blank" rel="noopener noreferrer"
-        class="font-semibold">LinkedIn</a
-      > or <a href="https://github.com/MiguelPuntoEs" target="_blank" rel="noopener noreferrer" class="font-semibold"
-        >GitHub</a
-      >.
-    </p>
-    <div class="mt-4 p-4 bg-gray-100 rounded-lg border border-gray-300">
-      <p class="text-sm mb-2">
-        🔐🧅 <strong>Feeling a bit hacky?</strong> You can also visit this site over Tor at:
+      <p class="hero__bio">
+        Before that I led AI engineering at A5 Labs, building systems around language models,
+        after eight years across aerospace, geodesy and retail data — Airbus, Leica, toom,
+        Pascual. I also teach <a class="link" href="/courses/economics-i">economics</a>,
+        <a class="link" href="/courses/python-for-finance">Python</a> and
+        <a class="link" href="/courses/blockchain">blockchain</a> at three universities, and keep
+        building things on the side — a GNSS calculator, a Renfe train app, and small tools on
+        live OECD data.
       </p>
-      <a
-        href="http://miguel3wuxsv5wb63n7522pvk7tpwc3lvsvbdzai32bvvca2ac5olbqd.onion/"
-        class="font-mono text-xs block break-all"
-        >miguel3wuxsv5wb63n7522pvk7tpwc3lvsvbdzai32bvvca2ac5olbqd.onion</a
-      >
-    </div>
-  </section>
+    </header>
+
+    <section class="section reveal" id="projects" style="--i:1">
+      <h2 class="section__title"><svg class="icon"><use href="#i-box" /></svg> Projects</h2>
+      <div class="rowlist">
+        {
+          PROJECTS.map((p) => (
+            <a class="rowlink" href={p.url}>
+              <span class="rowlink__icon">
+                <svg class="icon"><use href={`#${p.icon}`} /></svg>
+              </span>
+              <span class="rowlink__text">
+                <span class="rowlink__name">
+                  {p.name} <span class="tag">{p.platform}</span>
+                </span>
+                <span class="rowlink__desc">{p.summary}</span>
+              </span>
+              <svg class="icon rowlink__go"><use href="#i-arrow-right" /></svg>
+            </a>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="section reveal" id="tools" style="--i:2">
+      <h2 class="section__title"><svg class="icon"><use href="#i-terminal" /></svg> Tools</h2>
+      <div class="rowlist">
+        {
+          tools.map((t) => (
+            <a class="rowlink" href={t.url}>
+              <span class="rowlink__icon">
+                <svg class="icon"><use href={`#${t.icon}`} /></svg>
+              </span>
+              <span class="rowlink__text">
+                <span class="rowlink__name">{t.name}</span>
+                <span class="rowlink__desc">{t.desc}</span>
+              </span>
+              <svg class="icon rowlink__go"><use href="#i-arrow-right" /></svg>
+            </a>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="section reveal" style="--i:3">
+      <h2 class="section__title"><svg class="icon"><use href="#i-briefcase" /></svg> Experience</h2>
+      <div class="tl">
+        {
+          experience.map((e, i) => (
+            <div class:list={["tl__row", e.current && "tl__row--current"]}>
+              <div class="tl__rail">
+                <span class="tl__dot" />
+                {i < experience.length - 1 && <span class="tl__line" />}
+              </div>
+              <div class="tl__body">
+                <p>
+                  <span class="tl__role">{e.role}</span> <span class="tl__org">· {e.org}</span>
+                </p>
+                <p class="tl__meta">
+                  {e.current && <span class="badge-now">Now</span>}
+                  {e.meta.map((m, j) => (
+                    <>
+                      {j > 0 && <span class="sep" />}
+                      <span>{m}</span>
+                    </>
+                  ))}
+                </p>
+                {e.previously && (
+                  <p class="tl__prev">
+                    <span>
+                      Previously <b>{e.previously.role}</b>
+                    </span>
+                    <span class="sep" />
+                    <span>{e.previously.dates}</span>
+                  </p>
+                )}
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="section reveal" style="--i:4">
+      <h2 class="section__title"><svg class="icon"><use href="#i-cap" /></svg> Teaching</h2>
+      <div class="rowlist">
+        {
+          teaching.map((t) =>
+            t.url ? (
+              <a class="row" href={t.url}>
+                <span class="row__main">
+                  <span class="row__title">{t.title}</span>
+                  <span class="row__sub">{t.sub}</span>
+                </span>
+                <span class="row__meta">{t.meta}</span>
+              </a>
+            ) : (
+              <div class="row">
+                <span class="row__main">
+                  <span class="row__title">{t.title}</span>
+                  <span class="row__sub">{t.sub}</span>
+                </span>
+                <span class="row__meta">{t.meta}</span>
+              </div>
+            ),
+          )
+        }
+      </div>
+    </section>
+
+    <section class="section reveal" id="writing" style="--i:5">
+      <h2 class="section__title"><svg class="icon"><use href="#i-doc" /></svg> Writing</h2>
+      <div class="rowlist">
+        {
+          writing.map((w) => (
+            <a class="row" href={w.url}>
+              <span class="row__main">
+                <span class="row__title">{w.title}</span>
+                <span class="row__sub">{w.sub}</span>
+              </span>
+              <span class="row__meta">{w.meta}</span>
+            </a>
+          ))
+        }
+      </div>
+      <p style="margin-top:0.75rem">
+        <a class="link" href="/publications">All publications and talks →</a>
+      </p>
+    </section>
   </main>
 </Layout>
+
+<style>
+  .hero__top { display: flex; align-items: center; gap: 0.875rem; margin-bottom: 1.25rem; }
+  .hero__avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid var(--color-line);
+  }
+  .hero__name {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-text-1);
+    line-height: 1.25;
+    letter-spacing: -0.005em;
+  }
+  .hero__where {
+    font-size: 0.875rem;
+    color: var(--color-text-3);
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    margin-top: 0.15rem;
+  }
+  .hero__where :global(.icon) { font-size: 13px; }
+  .hero__bio {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--color-text-2);
+    margin-bottom: 1rem;
+    line-height: 1.6;
+  }
+  .hero__bio:last-child { margin-bottom: 0; }
+
+  .tl { display: flex; flex-direction: column; }
+  .tl__row { display: flex; gap: 0.875rem; }
+  .tl__rail { display: flex; flex-direction: column; align-items: center; width: 12px; flex-shrink: 0; }
+  .tl__dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--color-line-strong);
+    margin-top: 7px;
+    flex-shrink: 0;
+  }
+  .tl__row--current .tl__dot {
+    background: var(--color-blue);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-blue) 12%, transparent);
+  }
+  .tl__line {
+    width: 1px;
+    flex: 1;
+    background: var(--color-line-strong);
+    opacity: 0.7;
+    margin-top: 4px;
+  }
+  .tl__body { padding-bottom: 1.5rem; flex: 1; min-width: 0; }
+  .tl__row:last-child .tl__body { padding-bottom: 0; }
+  .tl__role {
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: var(--color-text-1);
+    letter-spacing: -0.01em;
+  }
+  .tl__org { font-size: 0.9375rem; font-weight: 400; color: var(--color-text-2); }
+  .tl__meta,
+  .tl__prev {
+    font-size: 0.8125rem;
+    color: var(--color-text-3);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    align-items: center;
+  }
+  .tl__meta { margin-top: 0.15rem; }
+  /* An earlier title at the same employer — subordinate to the role above it. */
+  .tl__prev { margin-top: 0.3rem; }
+  .tl__prev b { font-weight: 500; color: var(--color-text-2); }
+  .sep {
+    width: 2px;
+    height: 2px;
+    border-radius: 50%;
+    background: var(--color-text-3);
+    opacity: 0.6;
+  }
+  .badge-now {
+    font-size: 0.6875rem;
+    font-weight: 600;
+    color: var(--color-blue);
+    background: color-mix(in srgb, var(--color-blue) 10%, transparent);
+    border-radius: 100px;
+    padding: 0.1rem 0.5rem;
+    letter-spacing: 0.01em;
+  }
+
+  .row__main { min-width: 0; }
+</style>

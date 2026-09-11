@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Direction H — Departures</title>
+<style>
+  :root {
+    --concourse: #e9ebee;
+    --board: #101216;
+    --board-row: #16191f;
+    --board-line: #23272f;
+    --solari-yellow: #f2c035;
+    --solari-white: #e8eaec;
+    --solari-dim: #8b929c;
+    --ok: #55c47a;
+    --ink: #1a1d21;
+    --gray: #676d75;
+    --sign: #0f4d2e;
+    --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--concourse);
+    color: var(--ink);
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 15px;
+    line-height: 1.55;
+  }
+  .wrap { max-width: 960px; margin: 0 auto; padding: 36px 20px 72px; }
+
+  /* Top identity strip */
+  .idstrip { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; flex-wrap: wrap; margin-bottom: 22px; }
+  .idstrip .name { font-size: 24px; font-weight: 800; letter-spacing: -0.02em; }
+  .idstrip .name span { color: var(--gray); font-weight: 400; }
+  .idstrip nav { display: flex; gap: 18px; font-size: 13.5px; font-weight: 700; flex-wrap: wrap; }
+  .idstrip a { color: var(--ink); text-decoration: none; }
+  .idstrip a:hover, .idstrip a[aria-current] { color: #b25000; }
+
+  /* Boards */
+  .board {
+    background: var(--board);
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 14px 40px rgba(16, 18, 22, 0.25);
+    margin-bottom: 26px;
+  }
+  .board .bhead {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 20px;
+    color: var(--solari-yellow);
+    font-family: var(--mono);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    border-bottom: 2px solid var(--board-line);
+  }
+  .board .bhead .clock { color: var(--solari-dim); letter-spacing: 0.05em; }
+  .board table { width: 100%; border-collapse: collapse; font-family: var(--mono); }
+  .board th {
+    text-align: left;
+    color: var(--solari-dim);
+    font-size: 10.5px;
+    letter-spacing: 0.12em;
+    font-weight: 400;
+    padding: 10px 12px 8px;
+    border-bottom: 1px solid var(--board-line);
+  }
+  .board td {
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--board-line);
+    color: var(--solari-white);
+    font-size: 13px;
+    letter-spacing: 0.06em;
+    white-space: nowrap;
+  }
+  .board tr:last-child td { border-bottom: 0; }
+  .board td.yr { color: var(--solari-yellow); }
+  .board td.dest { font-weight: 600; text-transform: uppercase; }
+  .board td.dest a { color: inherit; text-decoration: none; }
+  .board td.dest a:hover { color: var(--solari-yellow); }
+  .board td.via { color: var(--solari-dim); text-transform: uppercase; }
+  .board td.gate { color: var(--solari-white); }
+  .board td.rmk { text-transform: uppercase; font-size: 12px; }
+  .board td.rmk.boarding { color: var(--ok); }
+  .board td.rmk.scheduled { color: var(--solari-yellow); }
+  .board td.rmk.departed { color: var(--solari-dim); }
+
+  /* Airport signage section headers */
+  .sign {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--sign);
+    color: #fff;
+    border-radius: 5px;
+    padding: 9px 16px;
+    font-size: 16px;
+    font-weight: 750;
+    margin: 26px 0 14px;
+  }
+  .sign .arrow { font-size: 18px; }
+
+  .paper {
+    background: #fff;
+    border-radius: 6px;
+    padding: 20px 24px;
+    border: 1px solid #d9dce1;
+  }
+  .paper p.lede { font-size: 16.5px; max-width: 62ch; }
+  .paper a { color: #0f4d2e; font-weight: 650; text-decoration: none; border-bottom: 1.5px solid #bcd3c5; }
+  .paper a:hover { border-bottom-color: #0f4d2e; }
+
+  .edu .e { display: flex; gap: 16px; padding: 10px 0; border-top: 1px solid #eceef1; align-items: baseline; }
+  .edu .e:first-child { border-top: 0; }
+  .edu .yr { font-family: var(--mono); font-size: 12px; color: var(--gray); min-width: 70px; }
+  .edu b { font-weight: 700; }
+  .edu .sub { display: block; font-size: 13px; color: var(--gray); }
+
+  .services { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .svc {
+    background: #fff;
+    border: 1px solid #d9dce1;
+    border-radius: 6px;
+    padding: 14px 16px;
+    text-decoration: none;
+    color: var(--ink);
+    display: block;
+  }
+  .svc:hover { border-color: var(--sign); }
+  .svc .no { font-family: var(--mono); font-size: 10px; color: var(--gray); letter-spacing: 0.1em; }
+  .svc b { display: block; font-weight: 700; margin-top: 2px; }
+  .svc p { font-size: 12.5px; color: var(--gray); margin-top: 2px; }
+
+  .foot { margin-top: 30px; display: flex; justify-content: space-between; gap: 14px; flex-wrap: wrap; font-size: 12.5px; color: var(--gray); }
+  .onion { font-family: var(--mono); font-size: 10px; word-break: break-all; color: var(--gray); text-decoration: none; }
+  .onion:hover { color: var(--sign); }
+
+  @media (max-width: 760px) {
+    .board td.via, .board th.via { display: none; }
+    .services { grid-template-columns: 1fr; }
+    .board td, .board th { padding: 8px 8px; }
+    .board td { white-space: normal; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="idstrip">
+    <span class="name">Miguel González Calvo <span>· Senior LLM Engineer</span></span>
+    <nav aria-label="Main">
+      <a href="#" aria-current="page">Home</a>
+      <a href="#">Resources</a>
+      <a href="#">Publications</a>
+      <a href="#">QR</a>
+      <a href="#">YouTube</a>
+    </nav>
+  </div>
+
+  <div class="board">
+    <div class="bhead">
+      <span>DEPARTURES · CAREER</span>
+      <span class="clock">MAD 40.42N 3.70W</span>
+    </div>
+    <table>
+      <thead>
+        <tr><th>YEAR</th><th>DESTINATION</th><th class="via">OPERATOR</th><th>GATE</th><th>REMARKS</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="yr">2025</td><td class="dest">Senior LLM Engineer</td><td class="via">A5 Labs</td><td class="gate">SFO·REM</td><td class="rmk boarding">● Boarding</td>
+        </tr>
+        <tr>
+          <td class="yr">2024</td><td class="dest">Lead Data Scientist</td><td class="via">Pascual</td><td class="gate">MAD</td><td class="rmk departed">Departed</td>
+        </tr>
+        <tr>
+          <td class="yr">2023</td><td class="dest">Data Scientist</td><td class="via">toom Baumarkt</td><td class="gate">CGN</td><td class="rmk departed">Departed</td>
+        </tr>
+        <tr>
+          <td class="yr">2019</td><td class="dest">Product Engineer</td><td class="via">Leica Geosystems</td><td class="gate">ACH</td><td class="rmk departed">Departed</td>
+        </tr>
+        <tr>
+          <td class="yr">2018</td><td class="dest">Software Engineer</td><td class="via">Airbus D&amp;S</td><td class="gate">MUC</td><td class="rmk departed">Departed</td>
+        </tr>
+        <tr>
+          <td class="yr">2017</td><td class="dest">Software Engineer</td><td class="via">GMV</td><td class="gate">MAD</td><td class="rmk departed">Departed</td>
+        </tr>
+        <tr>
+          <td class="yr">2016</td><td class="dest">Developer · Intern</td><td class="via">AEMet</td><td class="gate">MAD</td><td class="rmk departed">Departed</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="board">
+    <div class="bhead">
+      <span>DEPARTURES · TEACHING</span>
+      <span class="clock">UFM · HESP · UAX</span>
+    </div>
+    <table>
+      <tbody>
+        <tr><td class="yr">2026</td><td class="dest"><a href="#">IA: Tu Copiloto Académico</a></td><td class="via">UFM</td><td class="gate">GT1</td><td class="rmk scheduled">Scheduled</td></tr>
+        <tr><td class="yr">2025</td><td class="dest"><a href="#">Python for Finance</a></td><td class="via">UFM</td><td class="gate">GT1</td><td class="rmk boarding">● Boarding</td></tr>
+        <tr><td class="yr">2025</td><td class="dest"><a href="#">Technology</a></td><td class="via">UFM</td><td class="gate">GT1</td><td class="rmk boarding">● Boarding</td></tr>
+        <tr><td class="yr">2025</td><td class="dest"><a href="#">International Economics</a></td><td class="via">Hespérides</td><td class="gate">HSP</td><td class="rmk boarding">● Boarding</td></tr>
+        <tr><td class="yr">2025</td><td class="dest"><a href="#">Blockchain</a></td><td class="via">UAX</td><td class="gate">UAX</td><td class="rmk boarding">● Boarding</td></tr>
+        <tr><td class="yr">2025</td><td class="dest"><a href="#">Economics I</a></td><td class="via">UFM</td><td class="gate">GT1</td><td class="rmk departed">Departed</td></tr>
+        <tr><td class="yr">2025</td><td class="dest">Python Seminar</td><td class="via">UFM</td><td class="gate">GT1</td><td class="rmk departed">Departed</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="paper">
+    <p class="lede">
+      Aerospace engineer who ended up in language models, with stops in
+      meteorology, satellites and precision geodesy along the way. Now senior
+      LLM engineer at <a href="#">A5 Labs</a>, teaching
+      <a href="#">economics</a>, <a href="#">Python</a> and
+      <a href="#">blockchain</a> at three universities — and building
+      <a href="#">calculators on live OECD data</a>. Based in Madrid; the BSc
+      was literally in air navigation, hence the boards.
+    </p>
+  </div>
+
+  <h2 class="sign"><span class="arrow">↱</span> Education</h2>
+  <div class="paper edu">
+    <div class="e">
+      <span class="yr">2023–24</span>
+      <span><b>MA Economics</b> · U. de las Hespérides
+        <span class="sub">Quantity Theory of Money Around the Globe · honors in six subjects</span></span>
+    </div>
+    <div class="e">
+      <span class="yr">2017–19</span>
+      <span><b>MSc Signal Theory &amp; Communications</b> · UPM
+        <span class="sub">Coaxial-to-waveguide transitions and mode transducers · 10/10, distinction</span></span>
+    </div>
+    <div class="e">
+      <span class="yr">2012–16</span>
+      <span><b>BSc Aerospace Engineering</b> · UPM
+        <span class="sub">Air navigation systems · SIGMET/AIRMET decoding tool · 9.5/10</span></span>
+    </div>
+  </div>
+
+  <h2 class="sign"><span class="arrow">→</span> Services</h2>
+  <div class="services">
+    <a class="svc" href="#"><span class="no">SVC 01</span><b>Average Salary Explorer</b><p>Real vs nominal wages, PPP compare</p></a>
+    <a class="svc" href="#"><span class="no">SVC 02</span><b>Inflation Calculator</b><p>CPI-adjusted amounts over time</p></a>
+    <a class="svc" href="#"><span class="no">SVC 03</span><b>PPP Calculator</b><p>Purchasing power across countries</p></a>
+    <a class="svc" href="#"><span class="no">SVC 04</span><b>Compound Interest</b><p>Growth with periodic contributions</p></a>
+    <a class="svc" href="#"><span class="no">SVC 05</span><b>Loan Amortization</b><p>French, Italian, American methods</p></a>
+    <a class="svc" href="#"><span class="no">SVC 06</span><b>QR Generator</b><p>URLs, WiFi, vCards, events</p></a>
+  </div>
+
+  <h2 class="sign"><span class="arrow">ⓘ</span> Information</h2>
+  <div class="paper">
+    <p style="max-width: 60ch;">
+      Messages through this site aren't monitored — reach me on
+      <a href="https://linkedin.com/in/mgcalvo/">LinkedIn</a> or
+      <a href="https://github.com/MiguelPuntoEs">GitHub</a>.
+      Also served over Tor:
+    </p>
+    <a class="onion" href="#">miguel3wuxsv5wb63n7522pvk7tpwc3lvsvbdzai32bvvca2ac5olbqd.onion</a>
+  </div>
+
+  <div class="foot">
+    <span>© 2026 Miguel González Calvo</span>
+    <span>Gates: MAD · MUC · CGN · ACH · SFO</span>
+  </div>
+
+</div>
+</body>
+</html>

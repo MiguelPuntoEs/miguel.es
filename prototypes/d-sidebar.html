@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Direction D — Sidebar</title>
+<style>
+  :root {
+    --side: #22384e;
+    --side-ink: #cfdae6;
+    --side-dim: #8ba1b8;
+    --ink: #1d2530;
+    --gray: #64748b;
+    --bg: #f6f7f8;
+    --card: #ffffff;
+    --border: #e2e6ea;
+    --accent: #de6300;
+    --link: #205e8c;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    color: var(--ink);
+    background: var(--bg);
+    font-size: 15px;
+    line-height: 1.6;
+  }
+  .shell { display: grid; grid-template-columns: 240px 1fr; min-height: 100vh; }
+
+  /* Sidebar */
+  aside {
+    background: var(--side);
+    color: var(--side-ink);
+    padding: 36px 0;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  aside .id { padding: 0 26px 26px; }
+  aside .id .name { font-size: 19px; font-weight: 750; color: #fff; line-height: 1.25; }
+  aside .id .role { font-size: 12.5px; color: var(--side-dim); margin-top: 6px; }
+  aside nav { flex: 1; }
+  aside nav a {
+    display: block;
+    padding: 8px 26px;
+    color: var(--side-ink);
+    text-decoration: none;
+    font-size: 14px;
+    border-left: 3px solid transparent;
+  }
+  aside nav a:hover { color: #fff; background: rgba(255,255,255,0.05); }
+  aside nav a.on { border-left-color: var(--accent); color: #fff; font-weight: 650; background: rgba(255,255,255,0.06); }
+  aside nav .grp { padding: 18px 26px 6px; font-size: 11.5px; color: var(--side-dim); }
+  aside .foot { padding: 20px 26px 0; font-size: 12.5px; color: var(--side-dim); }
+  aside .foot a { color: var(--side-ink); text-decoration: none; }
+  aside .foot a:hover { color: #fff; }
+
+  /* Main */
+  main { padding: 48px 56px 80px; max-width: 860px; }
+  .crumb { font-size: 12.5px; color: var(--gray); margin-bottom: 26px; }
+  .crumb b { color: var(--accent); font-weight: 600; }
+  h1 { font-size: 30px; font-weight: 750; letter-spacing: -0.02em; margin-bottom: 10px; }
+  .intro { font-size: 16.5px; max-width: 60ch; color: #33404f; }
+  .intro a { color: var(--link); text-decoration: none; border-bottom: 1.5px solid #b8cede; }
+  .intro a:hover { border-bottom-color: var(--link); }
+
+  section { margin-top: 44px; }
+  h2 { font-size: 19px; font-weight: 720; margin-bottom: 14px; display: flex; align-items: baseline; gap: 10px; }
+  h2 .n { font-size: 12px; color: var(--gray); font-weight: 500; }
+
+  .panel {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .prow {
+    display: grid;
+    grid-template-columns: 105px 1fr auto;
+    gap: 16px;
+    padding: 13px 18px;
+    border-top: 1px solid var(--border);
+    align-items: baseline;
+  }
+  .prow:first-child { border-top: 0; }
+  .prow .yr { font-size: 13px; color: var(--gray); font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .prow .what b { font-weight: 650; }
+  .prow .what .at { color: var(--gray); font-size: 13.5px; }
+  .prow .what a { color: inherit; text-decoration: none; border-bottom: 1.5px solid #f0c9a8; }
+  .prow .what a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+  .prow .tag { font-size: 12px; color: var(--gray); white-space: nowrap; }
+  .prow.now { box-shadow: inset 3px 0 0 var(--accent); }
+  .prow.now .tag { color: var(--accent); font-weight: 650; }
+  .pnote { padding: 4px 18px 13px; margin-top: -6px; font-size: 13px; color: var(--gray); border-top: 0; }
+
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .tile {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 15px 18px;
+    text-decoration: none;
+    color: var(--ink);
+    display: block;
+  }
+  .tile:hover { border-color: var(--accent); }
+  .tile b { font-weight: 650; }
+  .tile p { font-size: 13px; color: var(--gray); margin-top: 2px; }
+
+  .contact { font-size: 14.5px; max-width: 58ch; }
+  .contact a { color: var(--link); text-decoration: none; border-bottom: 1.5px solid #b8cede; }
+  .onion { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 11px; color: var(--gray); word-break: break-all; display: block; margin-top: 10px; text-decoration: none; }
+  .onion:hover { color: var(--accent); }
+
+  @media (max-width: 860px) {
+    .shell { grid-template-columns: 1fr; }
+    aside { position: static; height: auto; padding: 20px 0; }
+    aside nav { display: flex; flex-wrap: wrap; gap: 0; }
+    aside nav .grp { display: none; }
+    aside nav a { border-left: 0; border-bottom: 3px solid transparent; padding: 8px 14px; }
+    aside nav a.on { border-bottom-color: var(--accent); background: none; }
+    aside .foot { display: none; }
+    main { padding: 30px 20px 60px; }
+    .grid2 { grid-template-columns: 1fr; }
+    .prow { grid-template-columns: 1fr; gap: 2px; }
+  }
+</style>
+</head>
+<body>
+<div class="shell">
+
+  <aside>
+    <div class="id">
+      <div class="name">Miguel<br>González Calvo</div>
+      <div class="role">Senior LLM Engineer · Madrid</div>
+    </div>
+    <nav aria-label="Main">
+      <a href="#" class="on">Overview</a>
+      <a href="#exp">Experience</a>
+      <a href="#teach">Teaching</a>
+      <a href="#edu">Education</a>
+      <a href="#tools">Tools</a>
+      <a href="#contact">Contact</a>
+      <div class="grp">Elsewhere</div>
+      <a href="https://github.com/MiguelPuntoEs">GitHub</a>
+      <a href="https://linkedin.com/in/mgcalvo/">LinkedIn</a>
+      <a href="#">YouTube</a>
+    </nav>
+    <div class="foot">
+      Also on <a href="#">Tor</a> · © 2026
+    </div>
+  </aside>
+
+  <main>
+    <p class="crumb"><b>miguel.es</b> / overview</p>
+    <h1>Software around language models — and the economics to reason about it.</h1>
+    <p class="intro" style="margin-top: 8px;">
+      I'm an AI engineer in Madrid: eight years of software across aerospace,
+      geodesy and retail data, the last five in data science and LLMs, now at
+      <a href="#">A5 Labs</a>. On the side I teach <a href="#">economics</a>,
+      <a href="#">Python</a> and <a href="#">blockchain</a> at three universities,
+      and build small calculators on live OECD data.
+    </p>
+
+    <section id="exp">
+      <h2>Experience <span class="n">7 positions · 2016 – present</span></h2>
+      <div class="panel">
+        <div class="prow now">
+          <span class="yr">2025 —</span>
+          <span class="what"><b>Senior LLM Engineer</b> <span class="at">· A5 Labs, California (remote)</span></span>
+          <span class="tag">current</span>
+        </div>
+        <div class="prow">
+          <span class="yr">2024 – 2025</span>
+          <span class="what"><b>Lead Data Scientist</b> <span class="at">· Pascual, Madrid</span></span>
+          <span class="tag">dairy &amp; beverages</span>
+        </div>
+        <div class="prow">
+          <span class="yr">2023 – 2024</span>
+          <span class="what"><b>Data Scientist</b> <span class="at">· toom Baumarkt, Cologne</span></span>
+          <span class="tag">retail</span>
+        </div>
+        <div class="prow">
+          <span class="yr">2019 – 2023</span>
+          <span class="what"><b>Product Engineer</b> <span class="at">· Leica Geosystems, Heerbrugg</span></span>
+          <span class="tag">geodesy</span>
+        </div>
+        <div class="prow">
+          <span class="yr">2018 – 2019</span>
+          <span class="what"><b>Software Engineer</b> <span class="at">· Airbus Defence &amp; Space, Munich</span></span>
+          <span class="tag">aerospace</span>
+        </div>
+        <div class="prow">
+          <span class="yr">2017</span>
+          <span class="what"><b>Software Engineer</b> <span class="at">· GMV, Tres Cantos</span></span>
+          <span class="tag">space</span>
+        </div>
+        <div class="prow">
+          <span class="yr">2016</span>
+          <span class="what"><b>Developer, intern</b> <span class="at">· AEMet, Madrid</span></span>
+          <span class="tag">meteorology</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="teach">
+      <h2>Teaching <span class="n">3 universities · 2025 – present</span></h2>
+      <div class="panel">
+        <div class="prow">
+          <span class="yr">2026</span>
+          <span class="what"><a href="#"><b>IA: Tu Copiloto Académico</b></a> <span class="at">· U. Francisco Marroquín</span></span>
+          <span class="tag">scheduled</span>
+        </div>
+        <div class="prow now">
+          <span class="yr">2025 —</span>
+          <span class="what"><a href="#"><b>Python for Finance</b></a> <span class="at">· U. Francisco Marroquín</span></span>
+          <span class="tag">running</span>
+        </div>
+        <div class="prow now">
+          <span class="yr">2025 —</span>
+          <span class="what"><a href="#"><b>Technology</b></a> <span class="at">· U. Francisco Marroquín</span></span>
+          <span class="tag">running</span>
+        </div>
+        <div class="prow now">
+          <span class="yr">2025 —</span>
+          <span class="what"><a href="#"><b>International Economics and Globalization</b></a> <span class="at">· U. de las Hespérides</span></span>
+          <span class="tag">running</span>
+        </div>
+        <div class="prow now">
+          <span class="yr">2025 —</span>
+          <span class="what"><a href="#"><b>Blockchain</b></a> <span class="at">· U. Alfonso X el Sabio</span></span>
+          <span class="tag">running</span>
+        </div>
+        <div class="prow">
+          <span class="yr">2025</span>
+          <span class="what"><a href="#"><b>Economics I</b></a> <span class="at">· U. Francisco Marroquín</span></span>
+          <span class="tag">completed</span>
+        </div>
+        <div class="prow">
+          <span class="yr">2025</span>
+          <span class="what"><b>Python Seminar</b> <span class="at">· U. Francisco Marroquín</span></span>
+          <span class="tag">completed</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="edu">
+      <h2>Education</h2>
+      <div class="panel">
+        <div class="prow">
+          <span class="yr">2023 – 2024</span>
+          <span class="what"><b>MA Economics</b> <span class="at">· U. de las Hespérides</span></span>
+          <span class="tag">honors ×6</span>
+        </div>
+        <p class="pnote">Thesis: Quantity Theory of Money Around the Globe — money growth, velocity and inflation under different monetary policies.</p>
+        <div class="prow" style="border-top: 1px solid var(--border);">
+          <span class="yr">2017 – 2019</span>
+          <span class="what"><b>MSc Signal Theory &amp; Communications</b> <span class="at">· U. Politécnica de Madrid</span></span>
+          <span class="tag">thesis 10/10</span>
+        </div>
+        <p class="pnote">Full-wave design of coaxial-to-waveguide transitions and mode transducers — distinction.</p>
+        <div class="prow" style="border-top: 1px solid var(--border);">
+          <span class="yr">2012 – 2016</span>
+          <span class="what"><b>BSc Aerospace Engineering</b> <span class="at">· U. Politécnica de Madrid</span></span>
+          <span class="tag">air navigation</span>
+        </div>
+        <p class="pnote">Thesis: SIGMET and AIRMET decoding web tool — 9.5/10.</p>
+      </div>
+    </section>
+
+    <section id="tools">
+      <h2>Tools <span class="n">calculators on live OECD data</span></h2>
+      <div class="grid2">
+        <a class="tile" href="#"><b>Average Salary Explorer</b><p>Real vs nominal wage evolution, PPP comparison across countries.</p></a>
+        <a class="tile" href="#"><b>Inflation Calculator</b><p>Adjust any amount for inflation with actual CPI series.</p></a>
+        <a class="tile" href="#"><b>PPP Calculator</b><p>Purchasing-power conversion between countries.</p></a>
+        <a class="tile" href="#"><b>Compound Interest</b><p>Growth with periodic contributions, charted.</p></a>
+        <a class="tile" href="#"><b>Loan Amortization</b><p>French, Italian and American methods compared.</p></a>
+        <a class="tile" href="#"><b>QR Generator</b><p>URLs, WiFi, vCards, events — no tracking.</p></a>
+      </div>
+    </section>
+
+    <section id="contact">
+      <h2>Contact</h2>
+      <p class="contact">
+        Messages sent through this site aren't monitored — reach me on
+        <a href="https://linkedin.com/in/mgcalvo/">LinkedIn</a> or
+        <a href="https://github.com/MiguelPuntoEs">GitHub</a>. The site is also
+        served as an onion service:
+      </p>
+      <a class="onion" href="#">miguel3wuxsv5wb63n7522pvk7tpwc3lvsvbdzai32bvvca2ac5olbqd.onion</a>
+    </section>
+  </main>
+
+</div>
+</body>
+</html>

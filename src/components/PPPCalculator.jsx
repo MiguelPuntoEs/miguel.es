@@ -101,14 +101,14 @@ export default function PPPCalculator() {
   const fromCurrency = PPP_RATES[fromCountry];
 
   return (
-    <div className="max-w-5xl mx-auto rounded-2xl border border-slate-200 bg-white p-6 shadow-lg shadow-slate-200/60">
+    <div className="max-w-5xl mx-auto rounded-2xl border border-line bg-bg-1 p-6 shadow-lg shadow-black/5">
       {/* Header */}
       <header className="mb-6 flex flex-col gap-2">
         <div>
-          <h2 className="text-2xl font-semibold tracking-tight text-slate-900">
+          <h2 className="text-2xl font-semibold tracking-tight text-text-1">
             PPP Calculator
           </h2>
-          <p className="text-sm text-slate-600">
+          <p className="text-sm text-text-2">
             Convert amounts based on Purchasing Power Parity to see equivalent buying power across countries.
           </p>
         </div>
@@ -117,7 +117,7 @@ export default function PPPCalculator() {
       {/* Inputs */}
       <section className="mb-6 grid gap-4 md:grid-cols-3">
         <div className="flex flex-col gap-1.5">
-          <label className="text-xs font-semibold uppercase tracking-wide text-slate-500">
+          <label className="text-xs font-semibold uppercase tracking-wide text-text-3">
             Amount
           </label>
           <input
@@ -128,18 +128,18 @@ export default function PPPCalculator() {
             value={amountInput}
             onChange={(e) => setAmountInput(e.target.value)}
             placeholder="1000"
-            className="h-9 rounded-lg border border-slate-300 bg-slate-50 px-2 text-sm text-slate-900 placeholder:text-slate-400 shadow-inner focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+            className="h-9 rounded-lg border border-line-strong bg-bg-2 px-2 text-sm text-text-1 placeholder:text-text-3 shadow-inner focus:border-blue focus:outline-none focus:ring-1 focus:ring-blue"
           />
         </div>
 
         <div className="flex flex-col gap-1.5">
-          <label className="text-xs font-semibold uppercase tracking-wide text-slate-500">
+          <label className="text-xs font-semibold uppercase tracking-wide text-text-3">
             From Country
           </label>
           <select
             value={fromCountry}
             onChange={(e) => setFromCountry(e.target.value)}
-            className="h-9 rounded-lg border border-slate-300 bg-slate-50 px-2 text-sm text-slate-900 shadow-inner focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+            className="h-9 rounded-lg border border-line-strong bg-bg-2 px-2 text-sm text-text-1 shadow-inner focus:border-blue focus:outline-none focus:ring-1 focus:ring-blue"
           >
             {Object.keys(PPP_RATES).sort().map((country) => (
               <option key={country} value={country}>
@@ -150,7 +150,7 @@ export default function PPPCalculator() {
         </div>
 
         <div className="flex flex-col gap-1.5">
-          <label className="text-xs font-semibold uppercase tracking-wide text-slate-500">
+          <label className="text-xs font-semibold uppercase tracking-wide text-text-3">
             Search Countries
           </label>
           <input
@@ -158,21 +158,21 @@ export default function PPPCalculator() {
             placeholder="Filter by country or currency..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="h-9 rounded-lg border border-slate-300 bg-slate-50 px-2 text-sm text-slate-900 placeholder:text-slate-400 shadow-inner focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+            className="h-9 rounded-lg border border-line-strong bg-bg-2 px-2 text-sm text-text-1 placeholder:text-text-3 shadow-inner focus:border-blue focus:outline-none focus:ring-1 focus:ring-blue"
           />
         </div>
       </section>
 
       {/* Summary card */}
       <section className="mb-6">
-        <div className="rounded-xl border border-indigo-200 bg-indigo-50/80 px-4 py-3">
-          <div className="text-xs font-medium uppercase tracking-wide text-indigo-700">
+        <div className="rounded-xl border border-line-strong bg-bg-2 px-4 py-3">
+          <div className="text-xs font-medium uppercase tracking-wide text-blue-hover">
             Converting
           </div>
-          <div className="mt-1 text-lg font-semibold text-indigo-900">
+          <div className="mt-1 text-lg font-semibold text-text-1">
             {fromCurrency?.symbol}{formatCurrency(amount)} ({fromCountry})
           </div>
-          <div className="mt-1 text-xs text-indigo-600">
+          <div className="mt-1 text-xs text-blue">
             Shows equivalent purchasing power in other countries
           </div>
         </div>
@@ -180,12 +180,12 @@ export default function PPPCalculator() {
 
       {/* Conversions Table */}
       <section>
-        <h2 className="mb-2 text-sm font-medium text-slate-700">
+        <h2 className="mb-2 text-sm font-medium text-text-2">
           PPP-Equivalent Amounts ({filteredConversions.length} countries)
         </h2>
-        <div className="overflow-x-auto rounded-xl border border-slate-200 bg-slate-50">
+        <div className="overflow-x-auto rounded-xl border border-line bg-bg-2">
           <table className="min-w-full text-xs">
-            <thead className="bg-slate-100 text-left text-[0.7rem] uppercase tracking-wide text-slate-500">
+            <thead className="bg-bg-2 text-left text-[0.7rem] uppercase tracking-wide text-text-3">
               <tr>
                 <th className="px-3 py-2">Country</th>
                 <th className="px-3 py-2">Currency</th>
@@ -193,31 +193,31 @@ export default function PPPCalculator() {
                 <th className="px-3 py-2 text-right">PPP Rate</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-200 bg-white">
+            <tbody className="divide-y divide-slate-200 bg-bg-1">
               {filteredConversions.map((conversion) => {
                 const isSourceCountry = conversion.country === fromCountry;
                 return (
                   <tr
                     key={conversion.country}
-                    className={`hover:bg-slate-50/80 ${
-                      isSourceCountry ? "bg-indigo-50/40" : ""
+                    className={`hover:bg-bg-2 ${
+                      isSourceCountry ? "bg-bg-2" : ""
                     }`}
                   >
-                    <td className="px-3 py-2 text-slate-700 font-medium">
+                    <td className="px-3 py-2 text-text-2 font-medium">
                       {conversion.country}
                       {isSourceCountry && (
-                        <span className="ml-2 text-[0.65rem] text-indigo-600 font-semibold">
+                        <span className="ml-2 text-[0.65rem] text-blue font-semibold">
                           (SOURCE)
                         </span>
                       )}
                     </td>
-                    <td className="px-3 py-2 text-slate-600">
+                    <td className="px-3 py-2 text-text-2">
                       {conversion.code}
                     </td>
-                    <td className="px-3 py-2 text-right text-slate-800 font-mono">
+                    <td className="px-3 py-2 text-right text-text-1 font-mono">
                       {conversion.symbol}{formatCurrency(conversion.amount)}
                     </td>
-                    <td className="px-3 py-2 text-right text-slate-600 font-mono text-[0.7rem]">
+                    <td className="px-3 py-2 text-right text-text-2 font-mono text-[0.7rem]">
                       {formatCurrency(conversion.rate, 2)}
                     </td>
                   </tr>
@@ -227,20 +227,20 @@ export default function PPPCalculator() {
           </table>
         </div>
         
-        <div className="mt-3 text-xs text-slate-500 space-y-1">
+        <div className="mt-3 text-xs text-text-3 space-y-1">
           <p>
             <strong>Note:</strong> PPP rates show how much local currency is needed to buy the same basket of goods as 1 USD would buy in the United States.
           </p>
           <p>
             For example, if the PPP rate is 0.70, it means that 0.70 units of local currency have the same purchasing power as 1 USD in the US.
           </p>
-          <p className="text-slate-400">
+          <p className="text-text-3">
             Data from{" "}
             <a
               href="https://data-explorer.oecd.org/vis?fs[0]=Topic%2C1%7CEconomy%23ECO%23%7CPrices%23ECO_PRI%23&pg=20&fc=Topic&bp=true&snb=30&vw=tb&df[ds]=dsDisseminateFinalDMZ&df[id]=DSD_PPP%40DF_PPP&df[ag]=OECD.SDD.TPS&df[vs]=1.0&dq=.A.PPP..XDC_USD.USA&pd=2024%2C2024&to[TIME_PERIOD]=false"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-indigo-600 hover:text-indigo-700 underline"
+              className="text-blue hover:text-blue-hover underline"
             >
               OECD (2024)
             </a>{" "}

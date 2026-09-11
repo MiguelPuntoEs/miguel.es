@@ -1,6 +1,7 @@
 ---
 import MainHead from "../components/MainHead.astro";
 import Footer from "../components/Footer.astro";
+import Icons from "../components/Icons.astro";
 import Navbar from "../components/Navbar.astro";
 import "../styles/global.css";
 const { title, description, lang = "en", article = false, university } = Astro.props;
@@ -8,13 +9,25 @@ const { title, description, lang = "en", article = false, university } = Astro.p
 
 <html lang={lang} class="scroll-smooth">
   <head>
-    <link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/geist-latin.woff2" as="font" type="font/woff2" crossorigin />
+    {/* Must run before first paint, or dark-mode visitors get a white flash. */}
+    <script is:inline>
+      (function () {
+        var stored = null;
+        try {
+          stored = localStorage.getItem("theme");
+        } catch (e) {}
+        var system = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+        document.documentElement.dataset.theme = stored || system;
+      })();
+    </script>
 
     <MainHead {title} {description} {lang} {article} {university} />
     <slot name="head" />
   </head>
-  
+
   <body>
+    <Icons />
     <Navbar />
     <slot />
     <Footer />

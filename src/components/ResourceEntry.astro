@@ -6,24 +6,16 @@ export interface Props {
 }
 
 const { title, description, url } = Astro.props;
+const Tag = url ? "a" : "div";
 ---
 
-<div class="flex flex-col gap-1">
-  {
-    url ? (
-      <a
-        href={url}
-        class="font-semibold text-sm text-slate-800 hover:text-slate-600 transition-colors"
-      >
-        {title}
-      </a>
-    ) : (
-      <h3 class="font-semibold text-sm text-slate-800">{title}</h3>
-    )
-  }
-  {
-    description && (
-      <p class="text-xs text-slate-600 leading-relaxed">{description}</p>
-    )
-  }
-</div>
+<Tag class="row" href={url}>
+  <span class="row__main">
+    <span class="row__title">{title}</span>
+    {description && <span class="row__sub">{description}</span>}
+  </span>
+</Tag>
+
+<style>
+  .row__main { min-width: 0; }
+</style>
