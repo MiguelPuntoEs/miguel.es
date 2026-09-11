@@ -71,7 +71,28 @@ const teaching = [
   { title: "Technology", sub: "U. Francisco Marroquín", meta: "2025 —", url: "/courses/technology" },
   { title: "IA: Tu Copiloto Académico", sub: "U. Francisco Marroquín", meta: "2026", url: "/courses/academic-copilot" },
   { title: "Economics I", sub: "U. Francisco Marroquín", meta: "2025", url: "/courses/economics-i" },
-  { title: "Python Seminar", sub: "U. Francisco Marroquín", meta: "2025" },
+  { title: "Taller de Python", sub: "U. Francisco Marroquín", meta: "2025", url: "/courses/python-seminar" },
+];
+
+const education = [
+  {
+    role: "MA Economics",
+    org: "U. de las Hespérides",
+    meta: ["2023 — 2024"],
+    note: "Thesis: Quantity Theory of Money Around the Globe · honors in six subjects",
+  },
+  {
+    role: "MSc Signal Theory & Communications",
+    org: "U. Politécnica de Madrid",
+    meta: ["2017 — 2019"],
+    note: "Thesis: coaxial-to-waveguide transitions and mode transducers · 10/10, distinction",
+  },
+  {
+    role: "BSc Aerospace Engineering",
+    org: "U. Politécnica de Madrid",
+    meta: ["2012 — 2016"],
+    note: "Air navigation systems · thesis: SIGMET/AIRMET decoding tool · 9.5/10",
+  },
 ];
 
 const writing = [
@@ -251,7 +272,34 @@ const writing = [
       </div>
     </section>
 
-    <section class="section reveal" id="writing" style="--i:5">
+    <section class="section reveal" style="--i:5">
+      <h2 class="section__title"><svg class="icon"><use href="#i-book" /></svg> Education</h2>
+      <div class="tl">
+        {
+          education.map((e, i) => (
+            <div class="tl__row">
+              <div class="tl__rail">
+                <span class="tl__dot" />
+                {i < education.length - 1 && <span class="tl__line" />}
+              </div>
+              <div class="tl__body">
+                <p>
+                  <span class="tl__role">{e.role}</span> <span class="tl__org">· {e.org}</span>
+                </p>
+                <p class="tl__meta">
+                  {e.meta.map((m) => (
+                    <span>{m}</span>
+                  ))}
+                </p>
+                <p class="tl__note">{e.note}</p>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="section reveal" id="writing" style="--i:6">
       <h2 class="section__title"><svg class="icon"><use href="#i-doc" /></svg> Writing</h2>
       <div class="rowlist">
         {
@@ -339,7 +387,8 @@ const writing = [
   }
   .tl__org { font-size: 0.9375rem; font-weight: 400; color: var(--color-text-2); }
   .tl__meta,
-  .tl__prev {
+  .tl__prev,
+  .tl__note {
     font-size: 0.8125rem;
     color: var(--color-text-3);
     display: flex;
@@ -351,6 +400,8 @@ const writing = [
   /* An earlier title at the same employer — subordinate to the role above it. */
   .tl__prev { margin-top: 0.3rem; }
   .tl__prev b { font-weight: 500; color: var(--color-text-2); }
+  /* Thesis / specialisation line under a degree. */
+  .tl__note { margin-top: 0.3rem; display: block; line-height: 1.5; }
   .sep {
     width: 2px;
     height: 2px;
