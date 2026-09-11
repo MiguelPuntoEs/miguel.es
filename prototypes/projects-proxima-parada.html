@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Próxima Parada — Miguel González Calvo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script>
+  // Runs before first paint so dark-mode visitors never see a white flash.
+  (function () {
+    var stored = null;
+    try { stored = localStorage.getItem("theme"); } catch (e) {}
+    var system = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    document.documentElement.dataset.theme = stored || system;
+  })();
+</script>
+<link rel="stylesheet" href="assets/quiet-blue.css">
+</head>
+<body>
+
+<svg style="display:none" aria-hidden="true">
+  <symbol id="i-arrow-out" viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></symbol>
+  <symbol id="i-arrow-left" viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24"><path d="M21 13A9 9 0 1 1 11 3a7 7 0 0 0 10 10Z"/></symbol>
+</svg>
+
+<nav class="nav" aria-label="Main">
+  <div class="nav__inner">
+    <div class="nav__links">
+      <a href="i-quiet-blue.html">Home</a>
+      <a href="i-quiet-blue.html#projects" aria-current="page">Projects</a>
+      <a href="i-quiet-blue.html#writing">Writing</a>
+      <a href="#">Resources</a>
+    </div>
+    <button class="nav__toggle" id="theme" type="button" aria-label="Switch to dark theme">
+      <svg class="icon icon--sun"><use href="#i-sun"/></svg>
+      <svg class="icon icon--moon"><use href="#i-moon"/></svg>
+    </button>
+  </div>
+</nav>
+
+<main class="page">
+
+  <a class="back reveal" href="i-quiet-blue.html#projects" style="--i:0">
+    <svg class="icon"><use href="#i-arrow-left"/></svg> Projects
+  </a>
+
+  <header class="section reveal" style="--i:1">
+    <h1 class="case__title">Próxima Parada</h1>
+    <p class="case__sub">
+      When your train arrives, where it is on the map, and which platform it leaves from —
+      without opening five apps. An unofficial companion for Renfe trains, on iPhone, Apple
+      Watch and Mac.
+    </p>
+    <div class="case__badges">
+      <span class="badge">iOS 18+</span>
+      <span class="badge">iPhone · Watch · Mac</span>
+      <span class="badge">Free, no account</span>
+      <span class="badge">Spanish</span>
+    </div>
+    <div class="case__actions">
+      <a class="btn btn--primary" href="https://apps.apple.com/es/app/id6766212839" target="_blank" rel="noopener noreferrer">
+        View on the App Store <svg class="icon"><use href="#i-arrow-out"/></svg>
+      </a>
+    </div>
+
+    <figure>
+      <div class="phones">
+        <img src="assets/pp-1.png" alt="Full itinerary for a C10 service, listing every stop with scheduled times and a six-minute delay against each">
+        <img src="assets/pp-2.png" alt="Station picker with favourite stations pinned above the full list">
+        <img src="assets/pp-3.png" alt="Active service alerts for the user's lines, colour-coded by line number">
+      </div>
+      <figcaption>
+        Left to right: the full itinerary with live delay against every stop; the station
+        picker with favourites; and active incidents on your own lines, so you don't have to
+        go hunting for Renfe's notice.
+      </figcaption>
+    </figure>
+  </header>
+
+  <section class="section reveal" style="--i:2">
+    <h2 class="section__title">Why it exists</h2>
+    <div class="prose">
+      <p>
+        Renfe publishes the data — departures, platform assignments, live vehicle positions
+        and service alerts all flow through public GTFS-RT feeds. What's missing is a way to
+        see the four things a commuter actually needs at once. The official channels spread
+        them across separate screens and notices, so answering "which platform, and how late"
+        turns into several apps and a bit of guesswork.
+      </p>
+      <p>
+        Próxima Parada answers that in one screen, with no ads and nothing else competing for
+        attention.
+      </p>
+      <div class="todo">
+        <b>Your part — the origin</b>
+        Which line do you actually ride, and what was the specific moment that made you build
+        this? A concrete commute beats any general statement about "the problem space" — it's
+        also the detail that makes readers trust the rest of the page.
+      </div>
+    </div>
+  </section>
+
+  <section class="section reveal" style="--i:3">
+    <h2 class="section__title">What it does</h2>
+    <div class="prose">
+      <ul>
+        <li><b>Live departures</b> from your station, in real time.</li>
+        <li><b>The train on a map</b>, actually positioned — not just labelled "en route".</li>
+        <li><b>The exact platform</b>, as soon as Renfe assigns it.</li>
+        <li><b>Delays to the minute</b>, straight from the official GTFS-RT feed.</li>
+        <li><b>The full itinerary</b>, every stop with its estimated time.</li>
+        <li><b>Active incidents</b> on your lines, surfaced rather than buried.</li>
+      </ul>
+      <p>Three things it does that the official apps don't:</p>
+      <ul>
+        <li><b>An "on platform" alert</b> the moment your train is sitting there waiting.</li>
+        <li><b>A compensation warning</b> when your delay crosses Renfe's official refund threshold, for Avant, AVE, Larga Distancia and Media Distancia — money most passengers never claim because nobody tells them they qualify.</li>
+        <li><b>A plain-language planner</b>: "trains tomorrow at 15:00, Atocha to Toledo".</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section reveal" style="--i:4">
+    <h2 class="section__title">Privacy</h2>
+    <div class="prose">
+      <p>
+        No account, no registration, and no analytics or telemetry of any kind. Location is
+        read only in the moment you ask for the nearest station. A commuting app knows where
+        you are every morning and evening; the only way not to be trusted with that is not to
+        collect it.
+      </p>
+    </div>
+  </section>
+
+  <section class="section reveal" style="--i:5">
+    <h2 class="section__title">Details</h2>
+    <dl class="facts">
+      <div class="fact"><dt>Platform</dt><dd>iOS 18 or later — iPhone, Apple Watch, and Mac menu bar, with home and lock screen widgets</dd></div>
+      <div class="fact"><dt>Coverage</dt><dd>All Renfe Cercanías networks (Madrid, Barcelona, Bilbao, Valencia, Asturias, Cantabria, San Sebastián, Sevilla, Cádiz, Málaga, Murcia, Zaragoza), Cercanías Avant, AVE, and Larga Distancia (Alvia, Intercity)</dd></div>
+      <div class="fact"><dt>Data</dt><dd>Renfe Operadora's public GTFS-RT feeds</dd></div>
+      <div class="fact"><dt>Price</dt><dd>Free</dd></div>
+      <div class="fact"><dt>Released</dt><dd>May 2026</dd></div>
+      <div class="fact"><dt>Language</dt><dd>Spanish</dd></div>
+    </dl>
+    <p class="footer__fine" style="margin-top:1.25rem">
+      Próxima Parada is not affiliated with or endorsed by Renfe Operadora, S.A.
+    </p>
+  </section>
+
+  <footer class="footer reveal" style="--i:6">
+    <p class="footer__fine">
+      <a class="link" href="i-quiet-blue.html">← Back to miguel.es</a>
+    </p>
+  </footer>
+
+</main>
+
+<script>
+  const root = document.documentElement;
+  const btn = document.getElementById("theme");
+  const syncLabel = () => {
+    btn.setAttribute("aria-label",
+      root.dataset.theme === "dark" ? "Switch to light theme" : "Switch to dark theme");
+  };
+  syncLabel();
+  btn.addEventListener("click", () => {
+    root.dataset.theme = root.dataset.theme === "dark" ? "light" : "dark";
+    localStorage.setItem("theme", root.dataset.theme);
+    syncLabel();
+  });
+
+  const nav = document.querySelector(".nav");
+  const onScroll = () => nav.classList.toggle("scrolled", scrollY > 8);
+  onScroll();
+  addEventListener("scroll", onScroll, { passive: true });
+</script>
+</body>
+</html>

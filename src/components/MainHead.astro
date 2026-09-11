@@ -1,4 +1,6 @@
 ---
+import { EMPLOYER } from "../data/site.js";
+
 const { title, description, lang = "en", article = false, university } = Astro.props;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const socialImage = new URL('/og-image.jpg', Astro.site).href;
@@ -45,12 +47,17 @@ const jsonLd = {
   "alternateName": "Miguel González",
   "givenName": "Miguel",
   "familyName": "González Calvo",
-  "jobTitle": "Senior LLM Engineer",
+  "jobTitle": "Expert in Data Science",
   "url": Astro.site,
   "sameAs": [
     "https://linkedin.com/in/mgcalvo/",
-    "https://github.com/MiguelPuntoEs"
+    "https://github.com/MiguelPuntoEs",
+    "https://www.youtube.com/@MiguelPuntoEs"
   ],
+  "worksFor": {
+    "@type": "Organization",
+    "name": EMPLOYER
+  },
   "alumniOf": [
     {
       "@type": "EducationalOrganization",
@@ -89,7 +96,7 @@ const jsonLd = {
 <meta property="og:description" content={description} />
 <meta property="og:image" content={socialImage} />
 <meta property="og:image:width" content="1200" />
-<meta property="og:image:height" content="800" />
+<meta property="og:image:height" content="630" />
 <meta property="og:image:alt" content={title} />
 <meta property="og:image:type" content="image/jpeg" />
 <meta property="og:locale" content={lang === "es" ? "es_ES" : "en_US"} />

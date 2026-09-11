@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Direction B — The index</title>
+<style>
+  :root {
+    --ink: #1c1c1c;
+    --green: #1a5c3a;
+    --green-dark: #124228;
+    --gray: #71716c;
+    --rule: #e2e2dd;
+    --paper: #ffffff;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    font-size: 14px;
+    line-height: 1.55;
+    font-variant-numeric: tabular-nums;
+  }
+  a { color: var(--green); text-decoration: none; }
+  a:hover, a:focus-visible { text-decoration: underline; text-underline-offset: 2px; }
+
+  .wrap { max-width: 1040px; margin: 0 auto; padding: 48px 28px 80px; }
+
+  /* Masthead: set like an index entry */
+  header.site {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 28px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--ink);
+  }
+  .mast h1 {
+    font-size: clamp(30px, 5vw, 44px);
+    font-weight: 750;
+    letter-spacing: -0.025em;
+    line-height: 1.05;
+  }
+  .mast h1 em { font-style: normal; color: var(--green); }
+  .mast .entryline {
+    margin-top: 10px;
+    font-size: 15px;
+    max-width: 58ch;
+    color: var(--ink);
+  }
+  .mast .entryline .gloss { color: var(--gray); }
+  .portrait {
+    width: 84px;
+    height: 84px;
+    object-fit: cover;
+    filter: grayscale(1) contrast(1.05);
+    border: 1px solid var(--rule);
+    flex-shrink: 0;
+  }
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 18px;
+    flex-wrap: wrap;
+    padding: 12px 0 0;
+    font-size: 13px;
+    font-weight: 600;
+  }
+  nav a { color: var(--ink); }
+  nav a[aria-current], nav a:hover { color: var(--green); }
+
+  /* Index body: two columns of sections */
+  .cols {
+    margin-top: 36px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 56px;
+  }
+  section { break-inside: avoid; margin-bottom: 34px; }
+  h2 {
+    font-size: 14px;
+    font-weight: 750;
+    color: var(--green-dark);
+    padding-bottom: 6px;
+    margin-bottom: 8px;
+    border-bottom: 1px solid var(--ink);
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+  h2 .range { font-weight: 500; color: var(--gray); font-size: 12px; }
+
+  /* Dot-leader rows */
+  .ix { list-style: none; }
+  .ix li { padding: 4.5px 0; display: flex; align-items: baseline; gap: 8px; }
+  .ix .k { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .ix .k b { font-weight: 650; }
+  .ix .k .at { color: var(--gray); font-weight: 400; }
+  .ix .lead { flex: 1 1 12px; min-width: 12px; border-bottom: 1.5px dotted #b9b9b2; transform: translateY(-3.5px); }
+  .ix .v { white-space: nowrap; font-weight: 600; font-size: 13px; }
+  .ix .v.muted { color: var(--gray); font-weight: 500; }
+  .ix li.sub .k { padding-left: 14px; font-size: 13px; color: var(--gray); white-space: normal; }
+
+  .note { font-size: 12.5px; color: var(--gray); margin-top: 6px; max-width: 44ch; }
+
+  /* Footer */
+  footer.site {
+    margin-top: 26px;
+    padding-top: 16px;
+    border-top: 2px solid var(--ink);
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+    font-size: 12.5px;
+    color: var(--gray);
+  }
+  .onion {
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 10.5px;
+    word-break: break-all;
+    color: var(--gray);
+  }
+  .onion:hover { color: var(--green); }
+
+  @media (max-width: 760px) {
+    .cols { grid-template-columns: 1fr; }
+    .portrait { width: 64px; height: 64px; }
+    .ix .k { white-space: normal; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="site">
+    <div class="mast">
+      <h1>González Calvo, <em>Miguel</em></h1>
+      <p class="entryline">
+        Senior LLM engineer, A5 Labs. Teaches economics, Python and blockchain
+        at UFM, Hespérides and UAX. <span class="gloss">— b. Madrid; formerly
+        aerospace and signal theory. Everything below is on this site.</span>
+      </p>
+      <nav aria-label="Main">
+        <ul>
+          <li><a href="#" aria-current="page">Home</a></li>
+          <li><a href="#">Resources</a></li>
+          <li><a href="#">Publications</a></li>
+          <li><a href="#">QR Generator</a></li>
+          <li><a href="#">YouTube</a></li>
+        </ul>
+      </nav>
+    </div>
+    <img class="portrait" src="../src/assets/pictures/profile.jpg" alt="Miguel González Calvo">
+  </header>
+
+  <div class="cols">
+
+    <section aria-labelledby="ix-exp">
+      <h2 id="ix-exp">Experience <span class="range">2016 – present</span></h2>
+      <ul class="ix">
+        <li>
+          <span class="k"><b>Senior LLM Engineer</b> <span class="at">· A5 Labs, US (remote)</span></span>
+          <span class="lead"></span><span class="v">2025 –</span>
+        </li>
+        <li>
+          <span class="k"><b>Lead Data Scientist</b> <span class="at">· Pascual, Madrid</span></span>
+          <span class="lead"></span><span class="v">2024 – 25</span>
+        </li>
+        <li>
+          <span class="k"><b>Data Scientist</b> <span class="at">· toom Baumarkt, Cologne</span></span>
+          <span class="lead"></span><span class="v">2023 – 24</span>
+        </li>
+        <li>
+          <span class="k"><b>Product Engineer</b> <span class="at">· Leica Geosystems, CH</span></span>
+          <span class="lead"></span><span class="v">2019 – 23</span>
+        </li>
+        <li>
+          <span class="k"><b>Software Engineer</b> <span class="at">· Airbus D&amp;S, Munich</span></span>
+          <span class="lead"></span><span class="v">2018 – 19</span>
+        </li>
+        <li>
+          <span class="k"><b>Software Engineer</b> <span class="at">· GMV, Tres Cantos</span></span>
+          <span class="lead"></span><span class="v">2017</span>
+        </li>
+        <li>
+          <span class="k"><b>Developer, intern</b> <span class="at">· AEMet, Madrid</span></span>
+          <span class="lead"></span><span class="v">2016</span>
+        </li>
+      </ul>
+    </section>
+
+    <section aria-labelledby="ix-teach">
+      <h2 id="ix-teach">Teaching <span class="range">2025 – present</span></h2>
+      <ul class="ix">
+        <li>
+          <span class="k"><a href="#"><b>IA: Tu Copiloto Académico</b></a> <span class="at">· UFM</span></span>
+          <span class="lead"></span><span class="v">2026</span>
+        </li>
+        <li>
+          <span class="k"><a href="#"><b>Python for Finance</b></a> <span class="at">· UFM</span></span>
+          <span class="lead"></span><span class="v">2025 –</span>
+        </li>
+        <li>
+          <span class="k"><a href="#"><b>Technology</b></a> <span class="at">· UFM</span></span>
+          <span class="lead"></span><span class="v">2025 –</span>
+        </li>
+        <li>
+          <span class="k"><a href="#"><b>International Economics</b></a> <span class="at">· Hespérides</span></span>
+          <span class="lead"></span><span class="v">2025 –</span>
+        </li>
+        <li>
+          <span class="k"><a href="#"><b>Blockchain</b></a> <span class="at">· UAX</span></span>
+          <span class="lead"></span><span class="v">2025 –</span>
+        </li>
+        <li>
+          <span class="k"><a href="#"><b>Economics I</b></a> <span class="at">· UFM</span></span>
+          <span class="lead"></span><span class="v">2025</span>
+        </li>
+        <li>
+          <span class="k"><b>Python Seminar</b> <span class="at">· UFM</span></span>
+          <span class="lead"></span><span class="v">2025</span>
+        </li>
+      </ul>
+    </section>
+
+    <section aria-labelledby="ix-edu">
+      <h2 id="ix-edu">Education</h2>
+      <ul class="ix">
+        <li>
+          <span class="k"><b>MA Economics</b> <span class="at">· Hespérides</span></span>
+          <span class="lead"></span><span class="v">2023 – 24</span>
+        </li>
+        <li class="sub">
+          <span class="k">Thesis: Quantity Theory of Money Around the Globe. Honors ×6.</span>
+        </li>
+        <li>
+          <span class="k"><b>MSc Signal Theory &amp; Comms</b> <span class="at">· UPM</span></span>
+          <span class="lead"></span><span class="v">2017 – 19</span>
+        </li>
+        <li class="sub">
+          <span class="k">Thesis: coaxial-to-waveguide transitions — 10/10, distinction.</span>
+        </li>
+        <li>
+          <span class="k"><b>BSc Aerospace Engineering</b> <span class="at">· UPM</span></span>
+          <span class="lead"></span><span class="v">2012 – 16</span>
+        </li>
+        <li class="sub">
+          <span class="k">Air navigation systems. Thesis: SIGMET/AIRMET decoder — 9.5/10.</span>
+        </li>
+      </ul>
+    </section>
+
+    <section aria-labelledby="ix-tools">
+      <h2 id="ix-tools">Tools &amp; calculators <span class="range">live OECD data</span></h2>
+      <ul class="ix">
+        <li><span class="k"><a href="#"><b>Average Salary Explorer</b></a> <span class="at">· real vs nominal wages</span></span><span class="lead"></span><span class="v muted">wages</span></li>
+        <li><span class="k"><a href="#"><b>Inflation Calculator</b></a> <span class="at">· CPI-adjusted amounts</span></span><span class="lead"></span><span class="v muted">prices</span></li>
+        <li><span class="k"><a href="#"><b>PPP Calculator</b></a> <span class="at">· cross-country conversion</span></span><span class="lead"></span><span class="v muted">prices</span></li>
+        <li><span class="k"><a href="#"><b>Compound Interest</b></a> <span class="at">· with contributions</span></span><span class="lead"></span><span class="v muted">finance</span></li>
+        <li><span class="k"><a href="#"><b>Loan Amortization</b></a> <span class="at">· French, Italian, American</span></span><span class="lead"></span><span class="v muted">finance</span></li>
+        <li><span class="k"><a href="#"><b>QR Generator</b></a> <span class="at">· URLs, WiFi, vCards</span></span><span class="lead"></span><span class="v muted">utility</span></li>
+      </ul>
+      <p class="note">Plus reference lists: APIs, economic sources, statistical errors, LLM, machine learning, Python.</p>
+    </section>
+
+    <section aria-labelledby="ix-else">
+      <h2 id="ix-else">Elsewhere</h2>
+      <ul class="ix">
+        <li><span class="k"><a href="https://linkedin.com/in/mgcalvo/"><b>LinkedIn</b></a> <span class="at">· the reliable inbox</span></span><span class="lead"></span><span class="v muted">/in/mgcalvo</span></li>
+        <li><span class="k"><a href="https://github.com/MiguelPuntoEs"><b>GitHub</b></a></span><span class="lead"></span><span class="v muted">MiguelPuntoEs</span></li>
+        <li><span class="k"><a href="#"><b>YouTube</b></a></span><span class="lead"></span><span class="v muted">@MiguelPuntoEs</span></li>
+      </ul>
+      <p class="note">Messages sent through this site aren't monitored — LinkedIn is the way to reach me.</p>
+    </section>
+
+    <section aria-labelledby="ix-onion">
+      <h2 id="ix-onion">Over Tor</h2>
+      <p class="note" style="margin-top: 2px;">This site is also served as an onion service:</p>
+      <p style="margin-top: 6px;"><a class="onion" href="#">miguel3wuxsv5wb63n7522pvk7tpwc3lvsvbdzai32bvvca2ac5olbqd.onion</a></p>
+    </section>
+
+  </div>
+
+  <footer class="site">
+    <span>© 2026 Miguel González Calvo</span>
+    <span>Set in the system face, tabular figures throughout.</span>
+  </footer>
+
+</div>
+</body>
+</html>

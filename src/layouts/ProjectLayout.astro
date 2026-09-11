@@ -1,0 +1,135 @@
+---
+import Layout from "./Layout.astro";
+
+const { title, description, subtitle, badges = [], actions = [] } = Astro.props;
+---
+
+<Layout {title} {description} article>
+  <main class="page">
+    <a class="back reveal" href="/projects" style="--i:0">
+      <svg class="icon" aria-hidden="true"><use href="#i-arrow-left" /></svg> Projects
+    </a>
+
+    <header class="section reveal" style="--i:1">
+      <h1 class="page-title">{title}</h1>
+      <p class="page-lede">{subtitle}</p>
+
+      {
+        badges.length > 0 && (
+          <div class="case__badges">
+            {badges.map((b: string) => (
+              <span class="badge">{b}</span>
+            ))}
+          </div>
+        )
+      }
+
+      {
+        actions.length > 0 && (
+          <div class="case__actions">
+            {actions.map((a: { label: string; href: string; primary?: boolean }) => (
+              <a
+                class:list={["btn", a.primary && "btn--primary"]}
+                href={a.href}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {a.label} <svg class="icon" aria-hidden="true"><use href="#i-arrow-out" /></svg>
+              </a>
+            ))}
+          </div>
+        )
+      }
+
+      <slot name="hero" />
+    </header>
+
+    <slot />
+  </main>
+</Layout>
+
+<style is:global>
+  .back {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.875rem;
+    color: var(--color-text-3);
+    margin-bottom: 1.5rem;
+    transition: color 0.2s;
+  }
+  .back:hover { color: var(--color-blue); }
+  .back .icon { font-size: 15px; transition: transform 0.2s ease-out; }
+  .back:hover .icon { transform: translateX(-2px); }
+
+  .case__badges { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1rem; }
+  .case__actions { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1.25rem; }
+
+  .case-prose p {
+    font-size: 1rem;
+    color: var(--color-text-2);
+    line-height: 1.7;
+    margin-bottom: 0.875rem;
+  }
+  .case-prose p:last-child { margin-bottom: 0; }
+  .case-prose ul {
+    margin: 0 0 0.875rem;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+  }
+  .case-prose li {
+    position: relative;
+    padding-left: 1rem;
+    font-size: 0.9375rem;
+    color: var(--color-text-2);
+    line-height: 1.6;
+  }
+  .case-prose li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.62em;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--color-text-3);
+  }
+  .case-prose li b { font-weight: 600; color: var(--color-text-1); }
+
+  .fig { margin: 1.75rem 0; }
+  .fig img {
+    width: 100%;
+    height: auto;
+    border: 1px solid var(--color-line);
+    border-radius: 12px;
+  }
+  .fig figcaption {
+    margin-top: 0.6rem;
+    font-size: 0.8125rem;
+    color: var(--color-text-3);
+    line-height: 1.5;
+  }
+  .phones { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; }
+
+  .facts { display: flex; flex-direction: column; }
+  .fact {
+    display: flex;
+    gap: 1rem;
+    padding: 0.55rem 0;
+    font-size: 0.875rem;
+    border-top: 1px solid var(--color-line);
+  }
+  .fact:first-child { border-top: 0; }
+  .fact dt { color: var(--color-text-3); min-width: 108px; flex-shrink: 0; }
+  .fact dd { color: var(--color-text-2); margin: 0; }
+
+  .project-note { margin-top: 1.25rem; font-size: 0.75rem; color: var(--color-text-3); }
+
+  @media (max-width: 520px) {
+    .phones { grid-template-columns: 1fr; gap: 1rem; }
+    .fact { flex-direction: column; gap: 0.1rem; }
+  }
+</style>

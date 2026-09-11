@@ -1,0 +1,367 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Direction A — Data plate</title>
+<style>
+  :root {
+    --ink: #141414;
+    --paper: #ffffff;
+    --orange: #de6300;
+    --gray: #6f6f6f;
+    --rule: #d9d9d9;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: var(--ink);
+    background: var(--paper);
+    font-size: 15px;
+    line-height: 1.5;
+    border-top: 6px solid var(--orange);
+  }
+  .wrap { max-width: 940px; margin: 0 auto; padding: 0 24px; }
+
+  /* Masthead */
+  header.site { padding-top: 40px; }
+  .mast {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+  h1 {
+    font-size: clamp(46px, 8.5vw, 88px);
+    font-weight: 800;
+    letter-spacing: -0.035em;
+    line-height: 0.92;
+    text-transform: none;
+  }
+  .plate {
+    text-align: right;
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 1.55;
+    padding-bottom: 6px;
+  }
+  .plate .role { color: var(--orange); }
+  .plate .geo { color: var(--gray); font-weight: 500; font-variant-numeric: tabular-nums; }
+  .rule-heavy { border: 0; border-top: 3px solid var(--ink); margin-top: 22px; }
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 22px;
+    padding: 10px 0;
+    font-size: 14px;
+    font-weight: 700;
+    flex-wrap: wrap;
+  }
+  nav a { color: var(--ink); text-decoration: none; }
+  nav a:hover, nav a:focus-visible { color: var(--orange); }
+  nav a[aria-current] { box-shadow: inset 0 -2px 0 var(--orange); }
+  .rule-light { border: 0; border-top: 1px solid var(--rule); }
+
+  /* Lede */
+  .lede {
+    padding: 44px 0 10px;
+    max-width: 44ch;
+    font-size: clamp(19px, 2.6vw, 24px);
+    font-weight: 500;
+    line-height: 1.35;
+    letter-spacing: -0.01em;
+  }
+  .lede a { color: inherit; text-decoration: underline; text-decoration-color: var(--orange); text-decoration-thickness: 2px; text-underline-offset: 3px; }
+  .lede-meta {
+    padding: 18px 0 34px;
+    color: var(--gray);
+    font-size: 14px;
+    max-width: 62ch;
+  }
+
+  /* Sections */
+  section { margin-bottom: 48px; }
+  h2 {
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    border-top: 3px solid var(--ink);
+    padding-top: 10px;
+    margin-bottom: 18px;
+  }
+  h2 .count { color: var(--orange); font-variant-numeric: tabular-nums; font-size: 15px; vertical-align: super; margin-left: 4px; }
+
+  /* Data table */
+  .t { width: 100%; }
+  .t .thead, .t .row {
+    display: grid;
+    grid-template-columns: 118px 1.3fr 1fr 150px;
+    gap: 16px;
+    align-items: baseline;
+  }
+  .t .thead {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--gray);
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--ink);
+  }
+  .t .row { padding: 11px 0; border-bottom: 1px solid var(--rule); }
+  .t .yrs { font-weight: 700; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .t .what { font-weight: 700; }
+  .t .what a { color: inherit; text-decoration: none; box-shadow: inset 0 -2px 0 var(--orange); }
+  .t .what a:hover { color: var(--orange); }
+  .t .who { }
+  .t .where { color: var(--gray); font-size: 13.5px; }
+  .t .note { grid-column: 2 / -1; color: var(--gray); font-size: 13px; margin-top: 2px; }
+
+  /* Tools strip */
+  .tools { display: flex; flex-wrap: wrap; gap: 0 8px; font-size: 16px; font-weight: 700; line-height: 2; }
+  .tools a { color: var(--ink); text-decoration: none; box-shadow: inset 0 -2px 0 var(--orange); }
+  .tools a:hover { color: var(--orange); }
+  .tools .sep { color: var(--rule); font-weight: 400; }
+
+  /* Footer */
+  footer.site {
+    background: var(--ink);
+    color: #fff;
+    margin-top: 64px;
+  }
+  footer .wrap { padding: 34px 24px 40px; display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  footer h2 { border-top: 0; padding-top: 0; font-size: 16px; color: #fff; margin-bottom: 10px; }
+  footer p { font-size: 13.5px; color: #b9b9b9; max-width: 40ch; }
+  footer a { color: #fff; text-decoration: underline; text-decoration-color: var(--orange); text-decoration-thickness: 2px; text-underline-offset: 3px; }
+  .onion {
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 11px;
+    color: #8f8f8f;
+    word-break: break-all;
+    display: block;
+    margin-top: 10px;
+    text-decoration: none;
+  }
+  .onion:hover { color: var(--orange); }
+  footer .fin { grid-column: 1 / -1; border-top: 1px solid #333; padding-top: 14px; font-size: 12px; color: #8f8f8f; display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+  footer .fin span b { color: var(--orange); }
+
+  @media (max-width: 720px) {
+    .t .thead { display: none; }
+    .t .row { grid-template-columns: 1fr; gap: 1px; padding: 12px 0; }
+    .t .where { font-size: 13px; }
+    .t .note { grid-column: 1; }
+    footer .wrap { grid-template-columns: 1fr; }
+    .mast { align-items: flex-start; }
+    .plate { text-align: left; }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    nav a, .tools a, .t .what a { transition: color 120ms ease; }
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header class="site">
+    <div class="mast">
+      <h1>Miguel<br>González Calvo</h1>
+      <div class="plate">
+        <div class="role">SENIOR LLM ENGINEER</div>
+        <div>A5 LABS</div>
+        <div class="geo">MADRID, ES · 40.42°N 3.70°W</div>
+      </div>
+    </div>
+    <hr class="rule-heavy">
+    <nav aria-label="Main">
+      <ul>
+        <li><a href="#" aria-current="page">Home</a></li>
+        <li><a href="#">Resources</a></li>
+        <li><a href="#">Publications</a></li>
+        <li><a href="#">QR Generator</a></li>
+        <li><a href="#">YouTube</a></li>
+      </ul>
+    </nav>
+    <hr class="rule-light">
+  </header>
+
+  <p class="lede">
+    I build software around language models, and I teach
+    <a href="#">economics</a> and <a href="#">Python</a> at university.
+  </p>
+  <p class="lede-meta">
+    Eight years across aerospace, geodesy and retail data science before LLMs;
+    trained as an aerospace engineer (UPM), later in signal theory (UPM) and
+    economics (Hespérides). TensorFlow certified. Based in Madrid, working
+    remotely for California.
+  </p>
+
+  <section aria-labelledby="h-exp">
+    <h2 id="h-exp">Experience<span class="count">7</span></h2>
+    <div class="t">
+      <div class="thead">
+        <span>YEARS</span><span>ROLE</span><span>ORGANISATION</span><span>LOCATION</span>
+      </div>
+      <div class="row">
+        <span class="yrs">2025 —</span>
+        <span class="what">Senior LLM Engineer</span>
+        <span class="who">A5 Labs</span>
+        <span class="where">California, US (remote)</span>
+      </div>
+      <div class="row">
+        <span class="yrs">2024 – 2025</span>
+        <span class="what">Lead Data Scientist</span>
+        <span class="who">Pascual</span>
+        <span class="where">Madrid, ES</span>
+      </div>
+      <div class="row">
+        <span class="yrs">2023 – 2024</span>
+        <span class="what">Data Scientist</span>
+        <span class="who">toom Baumarkt</span>
+        <span class="where">Cologne, DE</span>
+      </div>
+      <div class="row">
+        <span class="yrs">2019 – 2023</span>
+        <span class="what">Product Engineer</span>
+        <span class="who">Leica Geosystems</span>
+        <span class="where">Heerbrugg, CH</span>
+      </div>
+      <div class="row">
+        <span class="yrs">2018 – 2019</span>
+        <span class="what">Software Engineer</span>
+        <span class="who">Airbus Defence &amp; Space</span>
+        <span class="where">Munich, DE</span>
+      </div>
+      <div class="row">
+        <span class="yrs">2017</span>
+        <span class="what">Software Engineer</span>
+        <span class="who">GMV</span>
+        <span class="where">Tres Cantos, ES</span>
+      </div>
+      <div class="row">
+        <span class="yrs">2016</span>
+        <span class="what">Developer (internship)</span>
+        <span class="who">AEMet</span>
+        <span class="where">Madrid, ES</span>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="h-teach">
+    <h2 id="h-teach">Teaching<span class="count">7</span></h2>
+    <div class="t">
+      <div class="thead">
+        <span>YEARS</span><span>COURSE</span><span>UNIVERSITY</span><span></span>
+      </div>
+      <div class="row">
+        <span class="yrs">2026</span>
+        <span class="what"><a href="#">IA: Tu Copiloto Académico</a></span>
+        <span class="who">U. Francisco Marroquín</span>
+        <span class="where"></span>
+      </div>
+      <div class="row">
+        <span class="yrs">2025 —</span>
+        <span class="what"><a href="#">Python for Finance</a></span>
+        <span class="who">U. Francisco Marroquín</span>
+        <span class="where"></span>
+      </div>
+      <div class="row">
+        <span class="yrs">2025 —</span>
+        <span class="what"><a href="#">Technology</a></span>
+        <span class="who">U. Francisco Marroquín</span>
+        <span class="where"></span>
+      </div>
+      <div class="row">
+        <span class="yrs">2025 —</span>
+        <span class="what"><a href="#">International Economics and Globalization</a></span>
+        <span class="who">U. de las Hespérides</span>
+        <span class="where"></span>
+      </div>
+      <div class="row">
+        <span class="yrs">2025 —</span>
+        <span class="what"><a href="#">Blockchain</a></span>
+        <span class="who">U. Alfonso X el Sabio</span>
+        <span class="where"></span>
+      </div>
+      <div class="row">
+        <span class="yrs">2025</span>
+        <span class="what"><a href="#">Economics I</a></span>
+        <span class="who">U. Francisco Marroquín</span>
+        <span class="where"></span>
+      </div>
+      <div class="row">
+        <span class="yrs">2025</span>
+        <span class="what">Python Seminar</span>
+        <span class="who">U. Francisco Marroquín</span>
+        <span class="where"></span>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="h-edu">
+    <h2 id="h-edu">Education<span class="count">3</span></h2>
+    <div class="t">
+      <div class="row">
+        <span class="yrs">2023 – 2024</span>
+        <span class="what">MA Economics</span>
+        <span class="who">U. de las Hespérides</span>
+        <span class="where"></span>
+        <span class="note">Thesis: Quantity Theory of Money Around the Globe — money growth, velocity and inflation under different monetary policies. Honors in econometrics, game theory, monetary integration, experimental economics.</span>
+      </div>
+      <div class="row">
+        <span class="yrs">2017 – 2019</span>
+        <span class="what">MSc Signal Theory &amp; Communications</span>
+        <span class="who">U. Politécnica de Madrid</span>
+        <span class="where"></span>
+        <span class="note">Thesis: full-wave design of coaxial-to-waveguide transitions and mode transducers — 10/10, distinction.</span>
+      </div>
+      <div class="row">
+        <span class="yrs">2012 – 2016</span>
+        <span class="what">BSc Aerospace Engineering</span>
+        <span class="who">U. Politécnica de Madrid</span>
+        <span class="where"></span>
+        <span class="note">Air navigation systems. Thesis: SIGMET and AIRMET decoding web tool — 9.5/10.</span>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="h-tools">
+    <h2 id="h-tools">Tools I've built</h2>
+    <p class="tools">
+      <a href="#">Average Salary Explorer</a> <span class="sep">/</span>
+      <a href="#">Inflation Calculator</a> <span class="sep">/</span>
+      <a href="#">PPP Calculator</a> <span class="sep">/</span>
+      <a href="#">Compound Interest</a> <span class="sep">/</span>
+      <a href="#">Loan Amortization</a> <span class="sep">/</span>
+      <a href="#">QR Generator</a>
+    </p>
+    <p class="lede-meta" style="padding: 12px 0 0;">
+      Small, fast calculators running on live OECD data — the same series I use in class.
+    </p>
+  </section>
+</div>
+
+<footer class="site">
+  <div class="wrap">
+    <div>
+      <h2>Contact</h2>
+      <p>
+        I don't monitor messages sent through this site. Reach me on
+        <a href="https://linkedin.com/in/mgcalvo/">LinkedIn</a> or
+        <a href="https://github.com/MiguelPuntoEs">GitHub</a>.
+      </p>
+    </div>
+    <div>
+      <h2>Over Tor</h2>
+      <p>This site is also served as an onion service:</p>
+      <a class="onion" href="#">miguel3wuxsv5wb63n7522pvk7tpwc3lvsvbdzai32bvvca2ac5olbqd.onion</a>
+    </div>
+    <div class="fin">
+      <span>© 2026 Miguel González Calvo</span>
+      <span>Madrid <b>·</b> 40.42°N 3.70°W</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

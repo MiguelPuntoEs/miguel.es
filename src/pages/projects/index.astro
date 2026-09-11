@@ -1,0 +1,40 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { PROJECTS } from "../../data/projects.js";
+---
+
+<Layout
+  title="Projects — Miguel González Calvo"
+  description="Things I've built and shipped: GNSS Calculator, a browser toolkit for satellite navigation, and Próxima Parada, an unofficial Renfe train app for iPhone, Watch and Mac."
+>
+  <main class="page">
+    <header class="section reveal" style="--i:0">
+      <h1 class="page-title">Projects</h1>
+      <p class="page-lede">
+        Things I've built and shipped, outside work and teaching. Smaller calculators live under
+        <a class="link" href="/resources">resources</a>.
+      </p>
+    </header>
+
+    <section class="section reveal" style="--i:1">
+      <div class="rowlist">
+        {
+          PROJECTS.map((p) => (
+            <a class="rowlink" href={p.url}>
+              <span class="rowlink__icon">
+                <svg class="icon" aria-hidden="true"><use href={`#${p.icon}`} /></svg>
+              </span>
+              <span class="rowlink__text">
+                <span class="rowlink__name">
+                  {p.name} <span class="tag">{p.platform}</span>
+                </span>
+                <span class="rowlink__desc">{p.summary}</span>
+              </span>
+              <svg class="icon rowlink__go" aria-hidden="true"><use href="#i-arrow-right" /></svg>
+            </a>
+          ))
+        }
+      </div>
+    </section>
+  </main>
+</Layout>

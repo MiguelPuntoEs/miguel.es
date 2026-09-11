@@ -1,38 +1,113 @@
 ---
-import Image from "astro/components/Image.astro";
-import LogoGitHub from "../assets/logos/github.svg";
-import LogoLinkedIn from "../assets/logos/linkedin.svg";
-import LogoYouTube from "../assets/logos/youtube.svg";
+import { DISCLAIMER } from "../data/site.js";
+
+const year = new Date().getFullYear();
+const onion = "miguel3wuxsv5wb63n7522pvk7tpwc3lvsvbdzai32bvvca2ac5olbqd.onion";
 ---
 
-<footer class="max-w-3xl mx-auto px-4 py-8 mt-8 border-t border-gray-300">
-  <div class="flex flex-col sm:flex-row justify-between gap-6 text-xs text-gray-600">
-    <div class="flex flex-col gap-3">
-      <span class="font-semibold text-gray-900">Miguel González Calvo</span>
-      <div class="flex gap-4 items-center">
-        <a href="https://linkedin.com/in/mgcalvo/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-1 hover:text-gray-900">
-          <Image src={LogoLinkedIn} alt="LinkedIn" class="w-4 h-4" width={16} height={16} />
-          LinkedIn
-        </a>
-        <a href="https://github.com/MiguelPuntoEs" target="_blank" rel="noopener noreferrer" class="flex items-center gap-1 hover:text-gray-900">
-          <Image src={LogoGitHub} alt="GitHub" class="w-4 h-4" width={16} height={16} />
-          GitHub
-        </a>
-        <a href="https://www.youtube.com/@MiguelPuntoEs" target="_blank" rel="noopener noreferrer" class="flex items-center gap-1 hover:text-gray-900">
-          <Image src={LogoYouTube} alt="YouTube" class="w-4 h-4" width={16} height={16} />
-          YouTube
-        </a>
-      </div>
-    </div>
-    <nav aria-label="Footer" class="flex flex-col gap-1.5 sm:text-right">
-      <a href="/" class="hover:text-gray-900">Home</a>
-      <a href="/publications" class="hover:text-gray-900">Publications</a>
-      <a href="/resources" class="hover:text-gray-900">Resources</a>
-      <a href="/qr" class="hover:text-gray-900">QR Generator</a>
-      <a href="/resources/llm" class="hover:text-gray-900">LLM Resources</a>
-      <a href="/resources/machine-learning" class="hover:text-gray-900">Machine Learning</a>
-      <a href="/resources/python" class="hover:text-gray-900">Python</a>
-      <a href="/resources/economic-sources" class="hover:text-gray-900">Economics</a>
-    </nav>
+<footer class="footer">
+  <div class="footer__links">
+    <a href="https://linkedin.com/in/mgcalvo/" target="_blank" rel="noopener noreferrer">
+      <svg class="icon" aria-hidden="true"><use href="#i-linkedin" /></svg> LinkedIn
+    </a>
+    <a href="https://github.com/MiguelPuntoEs" target="_blank" rel="noopener noreferrer">
+      <svg class="icon" aria-hidden="true"><use href="#i-github" /></svg> GitHub
+    </a>
+    <a href="https://www.youtube.com/@MiguelPuntoEs" target="_blank" rel="noopener noreferrer">
+      <svg class="icon" aria-hidden="true"><use href="#i-play" /></svg> YouTube
+    </a>
   </div>
+
+  <div class="copyrow">
+    <span class="copyrow__label">Also on Tor</span>
+    <button class="onion" id="onion-copy" type="button" data-onion={onion} aria-label="Copy onion address">
+      <span class="onion__addr">{onion}</span>
+      <svg class="icon icon--copy" aria-hidden="true"><use href="#i-copy" /></svg>
+      <svg class="icon icon--check" aria-hidden="true"><use href="#i-check" /></svg>
+    </button>
+  </div>
+
+  <p class="footer__fine">
+    Messages sent through this site aren't monitored — LinkedIn is the reliable inbox.
+  </p>
+
+  <p class="disclaimer">{DISCLAIMER}</p>
+
+  <p class="footer__fine">© {year} Miguel González Calvo</p>
 </footer>
+
+<style>
+  .footer {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 1.5rem 1.5rem 3rem;
+    border-top: 1px solid var(--color-line);
+  }
+  .footer__links { display: flex; flex-wrap: wrap; gap: 1.25rem; margin-bottom: 1.25rem; }
+  .footer__links a {
+    font-size: 0.875rem;
+    color: var(--color-text-3);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    transition: color 0.2s;
+  }
+  .footer__links a:hover { color: var(--color-blue); }
+  .footer__links :global(.icon) { font-size: 15px; }
+
+  .copyrow { display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; }
+  .copyrow__label { font-size: 0.8125rem; color: var(--color-text-3); }
+  .onion {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 0.6875rem;
+    color: var(--color-text-3);
+    background: var(--color-bg-2);
+    border: 1px solid var(--color-line);
+    border-radius: 100px;
+    padding: 0.3rem 0.7rem;
+    max-width: 100%;
+    cursor: pointer;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .onion:hover { color: var(--color-text-1); border-color: var(--color-line-strong); }
+  .onion__addr { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .onion :global(.icon) { font-size: 13px; }
+  .onion :global(.icon--check) { display: none; color: var(--color-blue); }
+  .onion:global(.copied) { color: var(--color-blue); border-color: var(--color-blue); }
+  .onion:global(.copied) :global(.icon--copy) { display: none; }
+  .onion:global(.copied) :global(.icon--check) { display: block; }
+
+  .footer__fine { margin-top: 1.25rem; font-size: 0.75rem; color: var(--color-text-3); }
+
+  /* Formal notice: set apart from the practical footer notes above it. */
+  .disclaimer {
+    margin-top: 1.25rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--color-line);
+    font-size: 0.75rem;
+    line-height: 1.6;
+    color: var(--color-text-3);
+    max-width: 52ch;
+  }
+</style>
+
+<script>
+  const btn = document.getElementById("onion-copy");
+  const addr = btn?.dataset.onion ?? "";
+  let resetTimer: ReturnType<typeof setTimeout>;
+
+  btn?.addEventListener("click", async () => {
+    const url = `http://${addr}/`;
+    try {
+      await navigator.clipboard.writeText(url);
+      btn.classList.add("copied");
+      clearTimeout(resetTimer);
+      resetTimer = setTimeout(() => btn.classList.remove("copied"), 1800);
+    } catch {
+      window.open(url, "_blank", "noopener");
+    }
+  });
+</script>

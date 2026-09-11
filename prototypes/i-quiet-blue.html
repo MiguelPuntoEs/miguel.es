@@ -1,0 +1,391 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Direction I — Quiet blue</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script>
+  // Runs before first paint so dark-mode visitors never see a white flash.
+  (function () {
+    var stored = null;
+    try { stored = localStorage.getItem("theme"); } catch (e) {}
+    var system = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    document.documentElement.dataset.theme = stored || system;
+  })();
+</script>
+<link rel="stylesheet" href="assets/quiet-blue.css">
+</head>
+<body>
+
+<svg style="display:none" aria-hidden="true">
+  <symbol id="i-arrow-out" viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></symbol>
+  <symbol id="i-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></symbol>
+  <symbol id="i-chart" viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="m7 14 3-4 3 3 5-7"/></symbol>
+  <symbol id="i-receipt" viewBox="0 0 24 24"><path d="M5 3v18l2-1.5L9 21l2-1.5L13 21l2-1.5L17 21l2-1.5V3l-2 1.5L15 3l-2 1.5L11 3 9 4.5 7 3Z"/><path d="M9 9h6M9 13h4"/></symbol>
+  <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18 14 14 0 0 1 0-18Z"/></symbol>
+  <symbol id="i-layers" viewBox="0 0 24 24"><path d="m12 3 9 5-9 5-9-5 9-5Z"/><path d="m3 13 9 5 9-5"/></symbol>
+  <symbol id="i-bank" viewBox="0 0 24 24"><path d="m3 9 9-6 9 6"/><path d="M5 9v10M19 9v10M9 9v10M15 9v10M3 21h18"/></symbol>
+  <symbol id="i-qr" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3h-3zM20 20h1M17 20v1"/></symbol>
+  <symbol id="i-terminal" viewBox="0 0 24 24"><path d="m5 8 4 4-4 4M13 16h6"/><rect x="2" y="3" width="20" height="18" rx="3"/></symbol>
+  <symbol id="i-signal" viewBox="0 0 24 24"><circle cx="12" cy="12" r="1.6"/><path d="M8.6 8.6a4.8 4.8 0 0 0 0 6.8M15.4 15.4a4.8 4.8 0 0 0 0-6.8"/><path d="M5.6 5.6a9 9 0 0 0 0 12.8M18.4 18.4a9 9 0 0 0 0-12.8"/></symbol>
+  <symbol id="i-train" viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="13" rx="3"/><path d="M5 10.5h14M9 13.5h.01M15 13.5h.01"/><path d="m7.5 21 2-4.5M16.5 21l-2-4.5"/></symbol>
+  <symbol id="i-box" viewBox="0 0 24 24"><path d="M21 8v8a2 2 0 0 1-1 1.73l-7 4a2 2 0 0 1-2 0l-7-4A2 2 0 0 1 3 16V8a2 2 0 0 1 1-1.73l7-4a2 2 0 0 1 2 0l7 4A2 2 0 0 1 21 8Z"/><path d="m3.3 7 8.7 5 8.7-5M12 22V12"/></symbol>
+  <symbol id="i-cap" viewBox="0 0 24 24"><path d="m12 4 10 5-10 5L2 9l10-5Z"/><path d="M6 11v5c0 1.5 2.7 3 6 3s6-1.5 6-3v-5"/></symbol>
+  <symbol id="i-doc" viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8l-5-5Z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></symbol>
+  <symbol id="i-briefcase" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2M2 12h20"/></symbol>
+  <symbol id="i-copy" viewBox="0 0 24 24"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 13 4 4L19 7"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24"><path d="M21 13A9 9 0 1 1 11 3a7 7 0 0 0 10 10Z"/></symbol>
+  <symbol id="i-linkedin" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 10v7M8 7v.01M12 17v-4a2 2 0 0 1 4 0v4"/></symbol>
+  <symbol id="i-github" viewBox="0 0 24 24"><path d="M9 19c-4 1.5-4-2.5-6-3m12 5v-3.9a3.4 3.4 0 0 0-.9-2.6c3-.3 6.1-1.5 6.1-6.7A5.2 5.2 0 0 0 18.8 4a4.9 4.9 0 0 0-.1-3.6S17.5 0 15 1.8a13 13 0 0 0-7 0C5.5 0 4.3.4 4.3.4A4.9 4.9 0 0 0 4.2 4 5.2 5.2 0 0 0 2.8 7.7c0 5.2 3.1 6.4 6.1 6.7a3.4 3.4 0 0 0-.9 2.6V21" transform="translate(0 2)"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="4"/><path d="m10 9 5 3-5 3V9Z"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></symbol>
+</svg>
+
+<nav class="nav" aria-label="Main">
+  <div class="nav__inner">
+    <div class="nav__links">
+      <a href="#" aria-current="page">Home</a>
+      <a href="#projects">Projects</a>
+      <a href="#writing">Writing</a>
+      <a href="#">Resources</a>
+    </div>
+    <button class="nav__toggle" id="theme" type="button" aria-label="Switch to dark theme">
+      <svg class="icon icon--sun"><use href="#i-sun"/></svg>
+      <svg class="icon icon--moon"><use href="#i-moon"/></svg>
+    </button>
+  </div>
+</nav>
+
+<main class="page">
+
+  <!-- Hero -->
+  <header class="section hero reveal" style="--i:0">
+    <div class="hero__top">
+      <img class="hero__avatar" src="../src/assets/pictures/profile.jpg" alt="Miguel González Calvo">
+      <div>
+        <h1 class="hero__name">Miguel González Calvo</h1>
+        <p class="hero__where"><svg class="icon"><use href="#i-pin"/></svg> Madrid, Spain</p>
+      </div>
+    </div>
+    <p>
+      I'm a data scientist and AI engineer. I work at
+      <a class="link link--ext" href="#">Banco de España<svg class="icon"><use href="#i-arrow-out"/></svg></a>,
+      Spain's central bank, as an Expert in Data Science.
+    </p>
+    <p>
+      Before that I led AI engineering at A5 Labs, building systems around language models,
+      after eight years across aerospace, geodesy and retail data — Airbus, Leica, toom,
+      Pascual. I also teach <a class="link" href="#">economics</a>,
+      <a class="link" href="#">Python</a> and <a class="link" href="#">blockchain</a> at
+      three universities, and keep building things on the side — a GNSS calculator, a
+      Renfe train app, and small tools on live OECD data.
+    </p>
+  </header>
+
+  <!-- Projects -->
+  <section class="section reveal" id="projects" style="--i:1">
+    <h2 class="section__title"><svg class="icon"><use href="#i-box"/></svg> Projects</h2>
+    <div class="tools">
+      <a class="tool" href="projects-gnsscalc.html">
+        <span class="tool__icon"><svg class="icon"><use href="#i-signal"/></svg></span>
+        <span class="tool__text">
+          <span class="tool__name">GNSS Calculator <span class="tag">Web</span></span>
+          <span class="tool__desc">Time and coordinate conversion across GPS, Galileo and BeiDou, plus RINEX and NMEA inspection</span>
+        </span>
+        <svg class="icon tool__go"><use href="#i-arrow-right"/></svg>
+      </a>
+      <a class="tool" href="projects-proxima-parada.html">
+        <span class="tool__icon"><svg class="icon"><use href="#i-train"/></svg></span>
+        <span class="tool__text">
+          <span class="tool__name">Próxima Parada <span class="tag">iOS</span></span>
+          <span class="tool__desc">Live Renfe departures, platforms and delays on iPhone, Watch and Mac — an unofficial companion app</span>
+        </span>
+        <svg class="icon tool__go"><use href="#i-arrow-right"/></svg>
+      </a>
+    </div>
+  </section>
+
+  <!-- Tools -->
+  <section class="section reveal" id="tools" style="--i:2">
+    <h2 class="section__title"><svg class="icon"><use href="#i-terminal"/></svg> Tools</h2>
+    <div class="tools">
+      <a class="tool" href="#">
+        <span class="tool__icon"><svg class="icon"><use href="#i-chart"/></svg></span>
+        <span class="tool__text">
+          <span class="tool__name">Average Salary Explorer</span>
+          <span class="tool__desc">Real vs nominal wages, compared across countries at PPP</span>
+        </span>
+        <svg class="icon tool__go"><use href="#i-arrow-right"/></svg>
+      </a>
+      <a class="tool" href="#">
+        <span class="tool__icon"><svg class="icon"><use href="#i-receipt"/></svg></span>
+        <span class="tool__text">
+          <span class="tool__name">Inflation Calculator</span>
+          <span class="tool__desc">What an amount is worth over time, on actual CPI series</span>
+        </span>
+        <svg class="icon tool__go"><use href="#i-arrow-right"/></svg>
+      </a>
+      <a class="tool" href="#">
+        <span class="tool__icon"><svg class="icon"><use href="#i-globe"/></svg></span>
+        <span class="tool__text">
+          <span class="tool__name">PPP Calculator</span>
+          <span class="tool__desc">Convert a salary between countries by purchasing power</span>
+        </span>
+        <svg class="icon tool__go"><use href="#i-arrow-right"/></svg>
+      </a>
+      <a class="tool" href="#">
+        <span class="tool__icon"><svg class="icon"><use href="#i-layers"/></svg></span>
+        <span class="tool__text">
+          <span class="tool__name">Compound Interest</span>
+          <span class="tool__desc">Growth with periodic contributions, charted</span>
+        </span>
+        <svg class="icon tool__go"><use href="#i-arrow-right"/></svg>
+      </a>
+      <a class="tool" href="#">
+        <span class="tool__icon"><svg class="icon"><use href="#i-bank"/></svg></span>
+        <span class="tool__text">
+          <span class="tool__name">Loan Amortization</span>
+          <span class="tool__desc">French, Italian and American methods side by side</span>
+        </span>
+        <svg class="icon tool__go"><use href="#i-arrow-right"/></svg>
+      </a>
+      <a class="tool" href="#">
+        <span class="tool__icon"><svg class="icon"><use href="#i-qr"/></svg></span>
+        <span class="tool__text">
+          <span class="tool__name">QR Generator</span>
+          <span class="tool__desc">URLs, WiFi, vCards and crypto — generated in your browser</span>
+        </span>
+        <svg class="icon tool__go"><use href="#i-arrow-right"/></svg>
+      </a>
+    </div>
+  </section>
+
+  <!-- Experience -->
+  <section class="section reveal" style="--i:3">
+    <h2 class="section__title"><svg class="icon"><use href="#i-briefcase"/></svg> Experience</h2>
+    <div class="tl">
+      <div class="tl__row tl__row--current">
+        <div class="tl__rail"><span class="tl__dot"></span><span class="tl__line"></span></div>
+        <div class="tl__body">
+          <p><span class="tl__role">Expert in Data Science</span> <span class="tl__org">· Banco de España</span></p>
+          <p class="tl__meta">
+            <span class="badge-now">Now</span>
+            <span>Sep 2026</span><span class="sep"></span><span>Madrid</span>
+          </p>
+        </div>
+      </div>
+      <div class="tl__row">
+        <div class="tl__rail"><span class="tl__dot"></span><span class="tl__line"></span></div>
+        <div class="tl__body">
+          <p><span class="tl__role">AI Engineering Lead</span> <span class="tl__org">· A5 Labs</span></p>
+          <p class="tl__meta"><span>Oct 2025 — Aug 2026</span><span class="sep"></span><span>California, remote</span></p>
+          <p class="tl__prev">
+            <span>Previously <b>Senior LLM Engineer</b></span><span class="sep"></span><span>Jan — Sep 2025</span>
+          </p>
+        </div>
+      </div>
+      <div class="tl__row">
+        <div class="tl__rail"><span class="tl__dot"></span><span class="tl__line"></span></div>
+        <div class="tl__body">
+          <p><span class="tl__role">Lead Data Scientist</span> <span class="tl__org">· Pascual</span></p>
+          <p class="tl__meta"><span>2024 — 2025</span><span class="sep"></span><span>Madrid</span></p>
+        </div>
+      </div>
+      <div class="tl__row">
+        <div class="tl__rail"><span class="tl__dot"></span><span class="tl__line"></span></div>
+        <div class="tl__body">
+          <p><span class="tl__role">Data Scientist</span> <span class="tl__org">· toom Baumarkt</span></p>
+          <p class="tl__meta"><span>2023 — 2024</span><span class="sep"></span><span>Cologne</span></p>
+        </div>
+      </div>
+      <div class="tl__row">
+        <div class="tl__rail"><span class="tl__dot"></span><span class="tl__line"></span></div>
+        <div class="tl__body">
+          <p><span class="tl__role">Product Engineer</span> <span class="tl__org">· Leica Geosystems</span></p>
+          <p class="tl__meta"><span>2019 — 2023</span><span class="sep"></span><span>Heerbrugg</span></p>
+        </div>
+      </div>
+      <div class="tl__row">
+        <div class="tl__rail"><span class="tl__dot"></span><span class="tl__line"></span></div>
+        <div class="tl__body">
+          <p><span class="tl__role">Software Engineer</span> <span class="tl__org">· Airbus Defence &amp; Space</span></p>
+          <p class="tl__meta"><span>2018 — 2019</span><span class="sep"></span><span>Munich</span></p>
+        </div>
+      </div>
+      <div class="tl__row">
+        <div class="tl__rail"><span class="tl__dot"></span><span class="tl__line"></span></div>
+        <div class="tl__body">
+          <p><span class="tl__role">Software Engineer</span> <span class="tl__org">· GMV</span></p>
+          <p class="tl__meta"><span>2017</span><span class="sep"></span><span>Tres Cantos</span></p>
+        </div>
+      </div>
+      <div class="tl__row">
+        <div class="tl__rail"><span class="tl__dot"></span></div>
+        <div class="tl__body">
+          <p><span class="tl__role">Developer, intern</span> <span class="tl__org">· AEMet</span></p>
+          <p class="tl__meta"><span>2016</span><span class="sep"></span><span>Madrid</span></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Teaching -->
+  <section class="section reveal" style="--i:4">
+    <h2 class="section__title"><svg class="icon"><use href="#i-cap"/></svg> Teaching</h2>
+    <div class="rows">
+      <a class="row" href="#">
+        <span class="row__main">
+          <span class="row__title">Python for Finance</span>
+          <span class="row__sub">U. Francisco Marroquín</span>
+        </span>
+        <span class="row__meta">2025 —</span>
+      </a>
+      <a class="row" href="#">
+        <span class="row__main">
+          <span class="row__title">International Economics and Globalization</span>
+          <span class="row__sub">U. de las Hespérides</span>
+        </span>
+        <span class="row__meta">2025 —</span>
+      </a>
+      <a class="row" href="#">
+        <span class="row__main">
+          <span class="row__title">Blockchain</span>
+          <span class="row__sub">U. Alfonso X el Sabio</span>
+        </span>
+        <span class="row__meta">2025 —</span>
+      </a>
+      <a class="row" href="#">
+        <span class="row__main">
+          <span class="row__title">Technology</span>
+          <span class="row__sub">U. Francisco Marroquín</span>
+        </span>
+        <span class="row__meta">2025 —</span>
+      </a>
+      <a class="row" href="#">
+        <span class="row__main">
+          <span class="row__title">IA: Tu Copiloto Académico</span>
+          <span class="row__sub">U. Francisco Marroquín</span>
+        </span>
+        <span class="row__meta">2026</span>
+      </a>
+      <a class="row" href="#">
+        <span class="row__main">
+          <span class="row__title">Economics I</span>
+          <span class="row__sub">U. Francisco Marroquín</span>
+        </span>
+        <span class="row__meta">2025</span>
+      </a>
+      <div class="row">
+        <span class="row__main">
+          <span class="row__title">Python Seminar</span>
+          <span class="row__sub">U. Francisco Marroquín</span>
+        </span>
+        <span class="row__meta">2025</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Writing -->
+  <section class="section reveal" id="writing" style="--i:5">
+    <h2 class="section__title"><svg class="icon"><use href="#i-doc"/></svg> Writing</h2>
+    <div class="rows">
+      <a class="row" href="#">
+        <span class="row__main">
+          <span class="row__title">Revisiting Inflation in the American Civil War</span>
+          <span class="row__sub">APEE 50th Meeting, Las Vegas</span>
+        </span>
+        <span class="row__meta">2026</span>
+      </a>
+      <a class="row" href="#">
+        <span class="row__main">
+          <span class="row__title">Sistemas de pensiones comparados</span>
+          <span class="row__sub">Centro Ruth Richardson, Hespérides</span>
+        </span>
+        <span class="row__meta">Nov 2025</span>
+      </a>
+      <a class="row" href="#">
+        <span class="row__main">
+          <span class="row__title">Big Data: el arte de domar las mareas</span>
+          <span class="row__sub">Revista Emprendedores</span>
+        </span>
+        <span class="row__meta">Sep 2025</span>
+      </a>
+      <a class="row" href="#">
+        <span class="row__main">
+          <span class="row__title">Quantity Theory of Money Around the Globe</span>
+          <span class="row__sub">MA thesis · Universidad de las Hespérides</span>
+        </span>
+        <span class="row__meta">2024</span>
+      </a>
+    </div>
+    <p style="margin-top:0.75rem">
+      <a class="link" href="#">All publications and talks →</a>
+    </p>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer reveal" style="--i:6">
+    <div class="footer__links">
+      <a href="https://linkedin.com/in/mgcalvo/"><svg class="icon"><use href="#i-linkedin"/></svg> LinkedIn</a>
+      <a href="https://github.com/MiguelPuntoEs"><svg class="icon"><use href="#i-github"/></svg> GitHub</a>
+      <a href="#"><svg class="icon"><use href="#i-play"/></svg> YouTube</a>
+    </div>
+    <div class="copyrow">
+      <span class="copyrow__label">Also on Tor</span>
+      <button class="onion" id="onion" type="button" aria-label="Copy onion address">
+        <span class="onion__addr">miguel3wuxsv5wb63n7522pvk7tpwc3lvsvbdzai32bvvca2ac5olbqd.onion</span>
+        <svg class="icon icon--copy"><use href="#i-copy"/></svg>
+        <svg class="icon icon--check"><use href="#i-check"/></svg>
+      </button>
+    </div>
+    <p class="footer__fine">
+      Messages sent through this site aren't monitored — LinkedIn is the reliable inbox.
+    </p>
+  </footer>
+
+</main>
+
+<script>
+  // Theme is already set by the head script; this only wires the toggle.
+  const root = document.documentElement;
+  const btn = document.getElementById("theme");
+  const syncLabel = () => {
+    btn.setAttribute("aria-label",
+      root.dataset.theme === "dark" ? "Switch to light theme" : "Switch to dark theme");
+  };
+  syncLabel();
+  btn.addEventListener("click", () => {
+    root.dataset.theme = root.dataset.theme === "dark" ? "light" : "dark";
+    localStorage.setItem("theme", root.dataset.theme);
+    syncLabel();
+  });
+
+  // Nav hairline appears once the page scrolls.
+  const nav = document.querySelector(".nav");
+  const onScroll = () => nav.classList.toggle("scrolled", scrollY > 8);
+  onScroll();
+  addEventListener("scroll", onScroll, { passive: true });
+
+  // Copy the onion address.
+  const onion = document.getElementById("onion");
+  const addr = onion.querySelector(".onion__addr").textContent.trim();
+  let resetTimer;
+  onion.addEventListener("click", async () => {
+    try {
+      await navigator.clipboard.writeText("http://" + addr + "/");
+      onion.classList.add("copied");
+      clearTimeout(resetTimer);
+      resetTimer = setTimeout(() => onion.classList.remove("copied"), 1800);
+    } catch {
+      window.open("http://" + addr + "/", "_blank", "noopener");
+    }
+  });
+</script>
+</body>
+</html>

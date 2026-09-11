@@ -1,20 +1,24 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
+/* Dark mode is driven by an explicit attribute so the head script can set it
+   before first paint; `prefers-color-scheme` only seeds the initial value. */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
 @font-face {
-  font-family: "Inter";
-  src: url("/fonts/inter-latin.woff2") format("woff2");
-  font-display: optional;
-  font-weight: 100 900;
+  font-family: "Geist";
+  src: url("/fonts/geist-latin.woff2") format("woff2");
+  font-display: swap;
+  font-weight: 400 700;
   font-style: normal;
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
 @font-face {
-  font-family: "Inter";
-  src: url("/fonts/inter-latin-ext.woff2") format("woff2");
-  font-display: optional;
-  font-weight: 100 900;
+  font-family: "Geist";
+  src: url("/fonts/geist-latin-ext.woff2") format("woff2");
+  font-display: swap;
+  font-weight: 400 700;
   font-style: normal;
   unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
 }
@@ -30,8 +34,283 @@
 }
 
 @theme {
-  --font-sans: "Inter", sans-serif;
-  --color-pets: rgba(55, 95, 144, 0.1);
-  --color-primary: #de6300;
-  --color-dark: #171717;
+  --font-sans: "Geist", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+  --color-text-1: #0a0a0a;
+  --color-text-2: #3c3c3c;
+  /* #707070, not the lighter grey it looks like, because text-3 carries real
+     content (dates, captions, the footer disclaimer) and has to clear 4.5:1
+     against both backgrounds — it reaches 4.91 on bg-1 and 4.54 on bg-2. */
+  --color-text-3: #707070;
+  --color-bg-1: #fefefe;
+  --color-bg-2: #f5f5f5;
+  --color-line: #e4e4e4;
+  --color-line-strong: #cecece;
+  --color-blue: #0551d8;
+  --color-blue-hover: #0441b8;
+}
+
+/* Dark values re-point the same tokens, so every utility built on them flips
+   together. Kept as plain custom properties: @theme values are static. */
+[data-theme="dark"] {
+  --color-text-1: #fefefe;
+  --color-text-2: #cecece;
+  --color-text-3: #838383;
+  --color-bg-1: #111111;
+  --color-bg-2: #1a1a1a;
+  --color-line: #2a2a2a;
+  --color-line-strong: #3c3c3c;
+  --color-blue: #4a8eff;
+  --color-blue-hover: #6aa3ff;
+}
+
+@layer base {
+  :root { color-scheme: light; }
+  [data-theme="dark"] { color-scheme: dark; }
+
+  html {
+    background-color: var(--color-bg-1);
+  }
+
+  body {
+    background-color: var(--color-bg-1);
+    color: var(--color-text-2);
+    font-size: 1rem;
+    line-height: 1.5;
+    letter-spacing: -0.005em;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    min-height: 100dvh;
+  }
+
+  ::selection {
+    background-color: var(--color-blue);
+    color: #fff;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-blue);
+    outline-offset: 3px;
+    border-radius: 3px;
+  }
+
+  img, svg { display: block; max-width: 100%; }
+}
+
+@layer components {
+  /* Line icons: sized by font-size on the parent, coloured by currentColor. */
+  .icon {
+    width: 1em;
+    height: 1em;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 1.75;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    flex-shrink: 0;
+  }
+
+  .page {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 3.5rem 1.5rem 1.5rem;
+  }
+  @media (width >= 768px) {
+    .page { padding-top: 5rem; }
+  }
+
+  .section { margin-bottom: 3.5rem; }
+  @media (width >= 768px) {
+    .section { margin-bottom: 4rem; }
+  }
+
+  /* Page-level title and standfirst, shared by every top-level page. */
+  .page-title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--color-text-1);
+    letter-spacing: -0.015em;
+    line-height: 1.25;
+  }
+  .page-lede {
+    margin-top: 0.5rem;
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--color-text-2);
+    line-height: 1.5;
+  }
+
+  .section__title {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--color-text-1);
+    letter-spacing: -0.01em;
+    margin-bottom: 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .section__title .icon { font-size: 15px; color: var(--color-text-3); }
+
+  .link {
+    color: var(--color-blue);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    text-decoration-thickness: 1px;
+    transition: color 0.2s;
+  }
+  .link:hover { color: var(--color-blue-hover); }
+  .link--ext { display: inline-flex; align-items: baseline; gap: 0.15em; }
+  .link--ext .icon { font-size: 0.72em; align-self: center; transition: transform 0.2s ease-out; }
+  .link--ext:hover .icon { transform: translate(1.5px, -1.5px); }
+
+  /* Icon + title + description rows, used for projects and tools. */
+  .rowlist { display: flex; flex-direction: column; }
+  .rowlink {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 0.875rem;
+    padding: 0.75rem 0.5rem;
+    margin: 0 -0.5rem;
+    border-radius: 10px;
+    transition: background-color 0.25s;
+  }
+  .rowlink + .rowlink::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0.5rem;
+    right: 0.5rem;
+    height: 1px;
+    background: var(--color-line);
+    transition: opacity 0.25s;
+  }
+  .rowlink:hover { background: var(--color-bg-2); }
+  .rowlink:hover::before,
+  .rowlink:hover + .rowlink::before { opacity: 0; }
+  .rowlink__icon {
+    display: grid;
+    place-items: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 9px;
+    border: 1px solid var(--color-line);
+    color: var(--color-text-3);
+    font-size: 17px;
+    flex-shrink: 0;
+    transition: color 0.2s, border-color 0.2s, background-color 0.25s;
+  }
+  .rowlink:hover .rowlink__icon {
+    color: var(--color-blue);
+    border-color: var(--color-blue);
+    background: color-mix(in srgb, var(--color-blue) 8%, transparent);
+  }
+  .rowlink__text { min-width: 0; flex: 1; }
+  .rowlink__name {
+    display: block;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: var(--color-text-1);
+    letter-spacing: -0.01em;
+  }
+  .rowlink__desc {
+    display: block;
+    font-size: 0.8125rem;
+    color: var(--color-text-3);
+    line-height: 1.45;
+  }
+  .rowlink__go {
+    font-size: 15px;
+    color: var(--color-text-3);
+    opacity: 0;
+    transform: translateX(-4px);
+    transition: opacity 0.2s, transform 0.2s ease-out, color 0.2s;
+  }
+  .rowlink:hover .rowlink__go { opacity: 1; transform: translateX(0); color: var(--color-blue); }
+
+  /* Compact two-column rows: title/subtitle left, date right. */
+  .row {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.6rem 0.5rem;
+    margin: 0 -0.5rem;
+    border-radius: 8px;
+    transition: background-color 0.25s;
+  }
+  a.row:hover { background: var(--color-bg-2); }
+  .row__title {
+    display: block;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    color: var(--color-text-1);
+    letter-spacing: -0.01em;
+    transition: color 0.2s;
+  }
+  a.row:hover .row__title { color: var(--color-blue); }
+  .row__sub { display: block; font-size: 0.8125rem; color: var(--color-text-3); }
+  .row__meta { font-size: 0.8125rem; color: var(--color-text-3); white-space: nowrap; flex-shrink: 0; }
+
+  .tag {
+    font-size: 0.6875rem;
+    font-weight: 500;
+    color: var(--color-text-3);
+    border: 1px solid var(--color-line-strong);
+    border-radius: 100px;
+    padding: 0.05rem 0.45rem;
+    margin-left: 0.25rem;
+    vertical-align: 1px;
+  }
+
+  .badge {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--color-text-3);
+    border: 1px solid var(--color-line-strong);
+    border-radius: 100px;
+    padding: 0.2rem 0.65rem;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    border-radius: 100px;
+    padding: 0.45rem 0.9rem;
+    border: 1px solid var(--color-line-strong);
+    color: var(--color-text-1);
+    transition: border-color 0.2s, color 0.2s, background-color 0.25s;
+  }
+  .btn .icon { font-size: 14px; transition: transform 0.2s ease-out; }
+  .btn:hover {
+    border-color: var(--color-blue);
+    color: var(--color-blue);
+    background: color-mix(in srgb, var(--color-blue) 8%, transparent);
+  }
+  .btn:hover .icon { transform: translate(1.5px, -1.5px); }
+  .btn--primary { background: var(--color-blue); border-color: var(--color-blue); color: #fff; }
+  .btn--primary:hover {
+    background: var(--color-blue-hover);
+    border-color: var(--color-blue-hover);
+    color: #fff;
+  }
+
+  /* Page-load reveal, staggered by --i. Skipped entirely for reduced motion,
+     so the content is visible immediately rather than animating to nothing. */
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal {
+      opacity: 0;
+      transform: translateY(8px);
+      animation: reveal-rise 0.45s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+      animation-delay: calc(var(--i, 0) * 60ms);
+    }
+    @keyframes reveal-rise {
+      to { opacity: 1; transform: none; }
+    }
+  }
 }

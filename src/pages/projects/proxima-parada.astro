@@ -1,0 +1,131 @@
+---
+import Image from "astro/components/Image.astro";
+import ProjectLayout from "../../layouts/ProjectLayout.astro";
+import shotItinerary from "../../assets/projects/pp-1.png";
+import shotStations from "../../assets/projects/pp-2.png";
+import shotAlerts from "../../assets/projects/pp-3.png";
+
+const shots = [
+  {
+    src: shotItinerary,
+    alt: "Full itinerary for a C10 service, listing every stop with scheduled times and a six-minute delay against each",
+  },
+  {
+    src: shotStations,
+    alt: "Station picker with favourite stations pinned above the full list",
+  },
+  {
+    src: shotAlerts,
+    alt: "Active service alerts for the user's lines, colour-coded by line number",
+  },
+];
+---
+
+<ProjectLayout
+  title="Próxima Parada"
+  description="An unofficial companion app for Renfe trains: live departures, the train's position on the map, exact platforms and minute-accurate delays, on iPhone, Apple Watch and Mac."
+  subtitle="When your train arrives, where it is on the map, and which platform it leaves from — without opening five apps. An unofficial companion for Renfe trains, on iPhone, Apple Watch and Mac."
+  badges={["iOS 18+", "iPhone · Watch · Mac", "Free, no account", "Spanish"]}
+  actions={[
+    {
+      label: "View on the App Store",
+      href: "https://apps.apple.com/es/app/id6766212839",
+      primary: true,
+    },
+  ]}
+>
+  <figure slot="hero" class="fig">
+    <div class="phones">
+      {
+        shots.map((s) => (
+          <Image src={s.src} alt={s.alt} widths={[200, 400]} sizes="190px" loading="eager" />
+        ))
+      }
+    </div>
+    <figcaption>
+      Left to right: the full itinerary with live delay against every stop; the station picker
+      with favourites; and active incidents on your own lines, so you don't have to go hunting
+      for Renfe's notice.
+    </figcaption>
+  </figure>
+
+  <section class="section">
+    <h2 class="section__title">Why it exists</h2>
+    <div class="case-prose">
+      <p>
+        Renfe publishes the data — departures, platform assignments, live vehicle positions and
+        service alerts all flow through public GTFS-RT feeds. What's missing is a way to see the
+        four things a commuter actually needs at once. The official channels spread them across
+        separate screens and notices, so answering "which platform, and how late" turns into
+        several apps and a bit of guesswork.
+      </p>
+      <p>
+        Próxima Parada answers that in one screen, with no ads and nothing else competing for
+        attention.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2 class="section__title">What it does</h2>
+    <div class="case-prose">
+      <ul>
+        <li><b>Live departures</b> from your station, in real time.</li>
+        <li><b>The train on a map</b>, actually positioned — not just labelled "en route".</li>
+        <li><b>The exact platform</b>, as soon as Renfe assigns it.</li>
+        <li><b>Delays to the minute</b>, straight from the official GTFS-RT feed.</li>
+        <li><b>The full itinerary</b>, every stop with its estimated time.</li>
+        <li><b>Active incidents</b> on your lines, surfaced rather than buried.</li>
+      </ul>
+      <p>Three things it does that the official apps don't:</p>
+      <ul>
+        <li><b>An "on platform" alert</b> the moment your train is sitting there waiting.</li>
+        <li>
+          <b>A compensation warning</b> when your delay crosses Renfe's official refund threshold,
+          for Avant, AVE, Larga Distancia and Media Distancia — money most passengers never claim
+          because nobody tells them they qualify.
+        </li>
+        <li><b>A plain-language planner</b>: "trains tomorrow at 15:00, Atocha to Toledo".</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2 class="section__title">Privacy</h2>
+    <div class="case-prose">
+      <p>
+        No account, no registration, and no analytics or telemetry of any kind. Location is read
+        only in the moment you ask for the nearest station. A commuting app knows where you are
+        every morning and evening; the only way not to be trusted with that is not to collect it.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2 class="section__title">Details</h2>
+    <dl class="facts">
+      <div class="fact">
+        <dt>Platform</dt>
+        <dd>
+          iOS 18 or later — iPhone, Apple Watch, and Mac menu bar, with home and lock screen
+          widgets
+        </dd>
+      </div>
+      <div class="fact">
+        <dt>Coverage</dt>
+        <dd>
+          All Renfe Cercanías networks (Madrid, Barcelona, Bilbao, Valencia, Asturias, Cantabria,
+          San Sebastián, Sevilla, Cádiz, Málaga, Murcia, Zaragoza), Cercanías Avant, AVE, and
+          Larga Distancia (Alvia, Intercity)
+        </dd>
+      </div>
+      <div class="fact"><dt>Data</dt><dd>Renfe Operadora's public GTFS-RT feeds</dd></div>
+      <div class="fact"><dt>Price</dt><dd>Free</dd></div>
+      <div class="fact"><dt>Released</dt><dd>May 2026</dd></div>
+      <div class="fact"><dt>Language</dt><dd>Spanish</dd></div>
+    </dl>
+    <p class="project-note">
+      Próxima Parada is not affiliated with or endorsed by Renfe Operadora, S.A.
+    </p>
+  </section>
+</ProjectLayout>

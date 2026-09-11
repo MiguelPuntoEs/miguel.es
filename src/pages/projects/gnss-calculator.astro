@@ -1,0 +1,134 @@
+---
+import Image from "astro/components/Image.astro";
+import ProjectLayout from "../../layouts/ProjectLayout.astro";
+import timeConverter from "../../assets/projects/gnss-time.png";
+import visibilityPlanner from "../../assets/projects/gnss-vis.png";
+---
+
+<ProjectLayout
+  title="GNSS Calculator"
+  description="A browser toolkit for satellite-navigation work: convert between GNSS time scales and coordinate frames, plan observations, and inspect RINEX, NMEA and ANTEX files."
+  subtitle="A browser toolkit for satellite-navigation work: convert between time scales and coordinate frames, plan observations, and inspect the files a receiver actually produces."
+  badges={["Web app", "Open source engine", "Free, no account"]}
+  actions={[
+    { label: "Open gnsscalc.com", href: "https://gnsscalc.com", primary: true },
+    { label: "gnss-js on GitHub", href: "https://github.com/MiguelPuntoEs/gnss-js" },
+  ]}
+>
+  <figure slot="hero" class="fig">
+    <Image
+      src={timeConverter}
+      alt="The GNSS Calculator time converter, showing GPS, Galileo, BeiDou, UNIX, GLONASS, Julian and TAI representations of the same instant"
+      widths={[600, 1200]}
+      sizes="(min-width: 640px) 600px, 100vw"
+      loading="eager"
+    />
+    <figcaption>
+      The time converter. One instant, expressed at once in GPS, Galileo, BeiDou, UNIX,
+      GLONASS, Julian and TAI — with the current leap-second offsets shown inline
+      (GPS − UTC = 18 s, TAI − UTC = 37 s).
+    </figcaption>
+  </figure>
+
+  <section class="section">
+    <h2 class="section__title">Why it exists</h2>
+    <div class="case-prose">
+      <p>
+        Satellite navigation has no single clock. GPS counts seconds from 6 January 1980 and
+        ignores leap seconds; Galileo and BeiDou each start from their own epoch; receivers log
+        UNIX timestamps; astronomers and orbit models want Julian dates; and the offsets between
+        all of them drift as leap seconds are added. Getting one of these conversions wrong by
+        18 seconds is an easy mistake to make and an expensive one to debug.
+      </p>
+      <p>
+        The usual answer is a spreadsheet someone made years ago, or a handful of separate
+        single-purpose pages. GNSS Calculator puts the conversions, the observation-file viewers
+        and the planning tools in one place, and runs them in the browser so nothing has to be
+        uploaded anywhere.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2 class="section__title">What's in it</h2>
+    <div class="case-prose">
+      <p>Twelve tools, in four groups:</p>
+      <ul>
+        <li>
+          <b>Time</b> — conversion across GPS, Galileo, BeiDou, GLONASS, UNIX, Julian Date, MJD,
+          UTC, TAI and TT; GPS week and time-of-week; differences between two epochs.
+        </li>
+        <li>
+          <b>Position</b> — a positioning calculator, coordinate transforms between ECEF and
+          geodetic frames, and a satellite visibility planner.
+        </li>
+        <li>
+          <b>Analyze</b> — quality control and solution inspection for observation files, plus
+          RINEX, NMEA, ANTEX and spectrum viewers, and a format converter.
+        </li>
+        <li>
+          <b>Monitor</b> — live NTRIP stream connection and current broadcast-ephemeris health.
+        </li>
+      </ul>
+    </div>
+
+    <figure class="fig">
+      <Image
+        src={visibilityPlanner}
+        alt="The satellite visibility planner, with inputs for latitude, longitude, height, date, duration and elevation mask"
+        widths={[600, 1200]}
+        sizes="(min-width: 640px) 600px, 100vw"
+        loading="lazy"
+      />
+      <figcaption>
+        The visibility planner predicts which satellites clear your elevation mask over a chosen
+        window, along with the visible-satellite count and PDOP, by downloading IGS broadcast
+        ephemeris for that day and propagating each orbit.
+      </figcaption>
+    </figure>
+  </section>
+
+  <section class="section">
+    <h2 class="section__title">How it works</h2>
+    <div class="case-prose">
+      <p>
+        Everything runs client-side. Observation files you open — RINEX, NMEA, ANTEX — are parsed
+        in the browser and never leave the machine, which matters when the data is a survey you
+        don't own. Orbit work uses IGS broadcast ephemeris for the requested day, falling back to
+        public almanacs for dates beyond its coverage.
+      </p>
+      <p>
+        The calculation engine is published separately as <a
+          class="link link--ext"
+          href="https://github.com/MiguelPuntoEs/gnss-js"
+          target="_blank"
+          rel="noopener noreferrer">gnss-js<svg class="icon" aria-hidden="true"><use href="#i-arrow-out" /></svg></a
+        >, so the conversions can be used without the interface.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2 class="section__title">Details</h2>
+    <dl class="facts">
+      <div class="fact">
+        <dt>Type</dt><dd>Web application, runs entirely in the browser</dd>
+      </div>
+      <div class="fact">
+        <dt>Audience</dt><dd>Surveyors, geodesists, GNSS engineers and researchers</dd>
+      </div>
+      <div class="fact">
+        <dt>Data sources</dt><dd>IGS broadcast ephemeris, public almanacs, NTRIP casters</dd>
+      </div>
+      <div class="fact">
+        <dt>Source</dt>
+        <dd>
+          <a class="link" href="https://github.com/MiguelPuntoEs/gnss-js" target="_blank" rel="noopener noreferrer">
+            MiguelPuntoEs/gnss-js
+          </a>
+        </dd>
+      </div>
+      <div class="fact"><dt>Cost</dt><dd>Free, no account required</dd></div>
+    </dl>
+  </section>
+</ProjectLayout>
