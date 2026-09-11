@@ -71,7 +71,7 @@ const teaching = [
   { title: "Technology", sub: "U. Francisco Marroquín", meta: "2025 —", url: "/courses/technology" },
   { title: "IA: Tu Copiloto Académico", sub: "U. Francisco Marroquín", meta: "2026", url: "/courses/academic-copilot" },
   { title: "Economics I", sub: "U. Francisco Marroquín", meta: "2025", url: "/courses/economics-i" },
-  { title: "Taller de Python", sub: "U. Francisco Marroquín", meta: "2025", url: "/courses/python-seminar" },
+  { title: "Python Seminar", sub: "U. Francisco Marroquín", meta: "2025", url: "/courses/python-seminar" },
 ];
 
 const education = [
@@ -142,7 +142,7 @@ const writing = [
         />
         <div>
           <h1 class="hero__name">Miguel González Calvo</h1>
-          <p class="hero__where"><svg class="icon"><use href="#i-pin" /></svg> Madrid, Spain</p>
+          <p class="hero__where"><svg class="icon" aria-hidden="true"><use href="#i-pin" /></svg> Madrid, Spain</p>
         </div>
       </div>
       <p class="hero__bio">
@@ -150,7 +150,7 @@ const writing = [
           class="link link--ext"
           href="https://www.bde.es/"
           target="_blank"
-          rel="noopener noreferrer">Banco de España<svg class="icon"><use href="#i-arrow-out" /></svg></a
+          rel="noopener noreferrer">Banco de España<svg class="icon" aria-hidden="true"><use href="#i-arrow-out" /></svg></a
         >, Spain's central bank, as an Expert in Data Science.
       </p>
       <p class="hero__bio">
@@ -165,13 +165,13 @@ const writing = [
     </header>
 
     <section class="section reveal" id="projects" style="--i:1">
-      <h2 class="section__title"><svg class="icon"><use href="#i-box" /></svg> Projects</h2>
+      <h2 class="section__title"><svg class="icon" aria-hidden="true"><use href="#i-box" /></svg> Projects</h2>
       <div class="rowlist">
         {
           PROJECTS.map((p) => (
             <a class="rowlink" href={p.url}>
               <span class="rowlink__icon">
-                <svg class="icon"><use href={`#${p.icon}`} /></svg>
+                <svg class="icon" aria-hidden="true"><use href={`#${p.icon}`} /></svg>
               </span>
               <span class="rowlink__text">
                 <span class="rowlink__name">
@@ -179,7 +179,7 @@ const writing = [
                 </span>
                 <span class="rowlink__desc">{p.summary}</span>
               </span>
-              <svg class="icon rowlink__go"><use href="#i-arrow-right" /></svg>
+              <svg class="icon rowlink__go" aria-hidden="true"><use href="#i-arrow-right" /></svg>
             </a>
           ))
         }
@@ -187,19 +187,19 @@ const writing = [
     </section>
 
     <section class="section reveal" id="tools" style="--i:2">
-      <h2 class="section__title"><svg class="icon"><use href="#i-terminal" /></svg> Tools</h2>
+      <h2 class="section__title"><svg class="icon" aria-hidden="true"><use href="#i-terminal" /></svg> Tools</h2>
       <div class="rowlist">
         {
           tools.map((t) => (
             <a class="rowlink" href={t.url}>
               <span class="rowlink__icon">
-                <svg class="icon"><use href={`#${t.icon}`} /></svg>
+                <svg class="icon" aria-hidden="true"><use href={`#${t.icon}`} /></svg>
               </span>
               <span class="rowlink__text">
                 <span class="rowlink__name">{t.name}</span>
                 <span class="rowlink__desc">{t.desc}</span>
               </span>
-              <svg class="icon rowlink__go"><use href="#i-arrow-right" /></svg>
+              <svg class="icon rowlink__go" aria-hidden="true"><use href="#i-arrow-right" /></svg>
             </a>
           ))
         }
@@ -207,7 +207,7 @@ const writing = [
     </section>
 
     <section class="section reveal" style="--i:3">
-      <h2 class="section__title"><svg class="icon"><use href="#i-briefcase" /></svg> Experience</h2>
+      <h2 class="section__title"><svg class="icon" aria-hidden="true"><use href="#i-briefcase" /></svg> Experience</h2>
       <div class="tl">
         {
           experience.map((e, i) => (
@@ -246,7 +246,7 @@ const writing = [
     </section>
 
     <section class="section reveal" style="--i:4">
-      <h2 class="section__title"><svg class="icon"><use href="#i-cap" /></svg> Teaching</h2>
+      <h2 class="section__title"><svg class="icon" aria-hidden="true"><use href="#i-cap" /></svg> Teaching</h2>
       <div class="rowlist">
         {
           teaching.map((t) =>
@@ -273,7 +273,7 @@ const writing = [
     </section>
 
     <section class="section reveal" style="--i:5">
-      <h2 class="section__title"><svg class="icon"><use href="#i-book" /></svg> Education</h2>
+      <h2 class="section__title"><svg class="icon" aria-hidden="true"><use href="#i-book" /></svg> Education</h2>
       <div class="tl">
         {
           education.map((e, i) => (
@@ -300,7 +300,7 @@ const writing = [
     </section>
 
     <section class="section reveal" id="writing" style="--i:6">
-      <h2 class="section__title"><svg class="icon"><use href="#i-doc" /></svg> Writing</h2>
+      <h2 class="section__title"><svg class="icon" aria-hidden="true"><use href="#i-doc" /></svg> Writing</h2>
       <div class="rowlist">
         {
           writing.map((w) => (

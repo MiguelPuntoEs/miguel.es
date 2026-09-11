@@ -1,5 +1,5 @@
 ---
-title: "Taller de Python"
+title: "Python Seminar"
 description: "Taller práctico de Python aplicado a datos económicos. Universidad Francisco Marroquín, Madrid"
 layout: "../../layouts/MarkdownLayout.astro"
 lang: "es"

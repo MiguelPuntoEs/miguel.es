@@ -22,7 +22,7 @@ import { PROJECTS } from "../../data/projects.js";
           PROJECTS.map((p) => (
             <a class="rowlink" href={p.url}>
               <span class="rowlink__icon">
-                <svg class="icon"><use href={`#${p.icon}`} /></svg>
+                <svg class="icon" aria-hidden="true"><use href={`#${p.icon}`} /></svg>
               </span>
               <span class="rowlink__text">
                 <span class="rowlink__name">
@@ -30,7 +30,7 @@ import { PROJECTS } from "../../data/projects.js";
                 </span>
                 <span class="rowlink__desc">{p.summary}</span>
               </span>
-              <svg class="icon rowlink__go"><use href="#i-arrow-right" /></svg>
+              <svg class="icon rowlink__go" aria-hidden="true"><use href="#i-arrow-right" /></svg>
             </a>
           ))
         }
