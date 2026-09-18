@@ -8,7 +8,8 @@
     "preview": "astro preview",
     "astro": "astro",
     "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "build:data": "node scripts/data/build-datasets.mjs && node scripts/data/export-chart-theme.mjs"
   },
   "dependencies": {
     "@astrojs/mdx": "^4.3.13",
@@ -28,6 +29,7 @@
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.16",
+    "playwright": "^1.63.0",
     "prettier": "3.6.2",
     "prettier-plugin-astro": "0.14.1",
     "remark-math": "^6.0.0",

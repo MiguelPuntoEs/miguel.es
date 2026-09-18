@@ -17,7 +17,8 @@ layout: "../layouts/MarkdownLayout.astro"
 
 ## Academic
 
-- **Revisiting Inflation in the American Civil War: Alternative Explanations Beyond Money Supply Growth**. 2026. _APEE 50th Meeting. The History of Private Enterprise Education_. Caesars Palace Las Vegas. Las Vegas, Nevada. Miguel González-Calvo. [Data and code](https://github.com/MiguelPuntoEs/greenbacks) publicly available. [Presentation](/docs/apee-2026-presentation.pdf)
+- **Not Worth a Continental? Paper Money, Credibility, and the Institutional Foundations of Liberty in 1776**. 2026. _Mont Pelerin Society Biennial Congress and General Meeting, "1776: Liberty in Conversation"_. Young Scholars Program. Indianapolis, Indiana. Miguel González-Calvo. [Data and code](https://github.com/MiguelPuntoEs/historical-monetary-data) publicly available.
+- **Revisiting Inflation in the American Civil War: Alternative Explanations Beyond Money Supply Growth**. 2026. _APEE 50th Meeting. The History of Private Enterprise Education_. Caesars Palace Las Vegas. Las Vegas, Nevada. Miguel González-Calvo. [Data and code](https://github.com/MiguelPuntoEs/historical-monetary-data) publicly available. [Presentation](/docs/apee-2026-presentation.pdf)
 - **Inflation in the American Civil War**. 2025. _Economics Affairs Applied Research Workshop 2025_. Universidad de las Hespérides, Las Palmas de Gran Canaria. Miguel González-Calvo.
 - **[Quantity Theory of Money Around the Globe: Money Growth, Money Velocity and Inflation Subject to Different Monetary Policies](/docs/ea-2024.pdf)**. 2024. _Economics Affairs Applied Research Workshop 2024_. Universidad Francisco Marroquín, Madrid. Miguel González-Calvo. [Presentation](/docs/ea-2024-presentation.pdf)
 - **[Quantity Theory of Money Around the Globe: Money Supply and Inflation](/docs/meco-tfm.pdf)**. 2024. _Universidad de las Hespérides_. Master’s Thesis. Focus on quantitative methods applied to inflation.

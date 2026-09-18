@@ -1,0 +1,94 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import TimeSeries from "../../charts/TimeSeries.jsx";
+---
+
+<Layout
+  title="The greenbacks, 1859–1866 | Data"
+  description="Gold prices, wages, commodity prices and the money stock during the American Civil War, from Wesley C. Mitchell's History of the Greenbacks (1903)."
+  article
+>
+  <main class="page">
+    <h1 class="page-title">The greenbacks, 1859–1866</h1>
+    <p class="page-lede">
+      In 1862 the United States suspended specie payments and issued an
+      inconvertible paper currency. Wesley C. Mitchell's <em
+        >A History of the Greenbacks</em
+      > (1903) remains the standard quantitative account, and its appendices are
+      among the richest price and wage records of the nineteenth century. This dataset
+      makes them machine-readable.
+    </p>
+
+    <div class="doc">
+      <p>
+        <a href="https://github.com/MiguelPuntoEs/historical-monetary-data/tree/main/greenbacks"
+          >Repository and CSVs →</a
+        >
+      </p>
+
+      <h2>The gold price of paper</h2>
+      <p>
+        The clearest single measure of the greenback's depreciation is what $100
+        in paper currency fetched in gold on the New York market. The repository
+        also carries roughly 1,228 days of daily high and low quotations.
+      </p>
+    </div>
+
+    <TimeSeries client:visible src="/data/greenback-gold-monthly.json" />
+
+    <div class="doc">
+      <h2>The money stock</h2>
+      <p>
+        Alongside the price series, the Friedman–Schwartz–Mitchell estimates
+        from
+        <em>Historical Statistics of the United States</em>. Three series carry
+        the essential story: the money stock, the non-interest-bearing
+        government currency that was mostly greenbacks, and the total stock of
+        specie, which left circulation after payments were suspended at the end
+        of 1861.
+      </p>
+      <p>
+        One caveat carried from the source: from June 1861 to November 1864 the
+        figures cover the Northern states only.
+      </p>
+    </div>
+
+    <TimeSeries client:visible src="/data/greenback-money-stock.json" />
+
+    <div class="doc">
+      <h2>Also in the repository</h2>
+      <p>
+        Not every series is charted here. The repository additionally carries
+        about 120 wholesale commodity series, farm product prices by city,
+        government purchase prices, and retail prices by town — all verified
+        against the printed page. The Aldrich Report wage series by industry
+        and occupation is <strong>partly</strong> transcribed (establishments
+        covering pages 470–490 of 470–517); the Tenth Census wage series is
+        not yet transcribed at all. See the repository's
+        <code>FINDINGS_TRANSCRIPTION.md</code> for exactly what's verified.
+      </p>
+
+      <h2>Sources</h2>
+      <ul>
+        <li>
+          Wesley C. Mitchell, <em
+            >A History of the Greenbacks: With Special Reference to the Economic
+            Consequences of Their Issue, 1862–65</em
+          > (Chicago: University of Chicago Press, 1903), Appendices A–C and Table
+          V.
+        </li>
+        <li>
+          <em>Historical Statistics of the United States</em>, Millennial
+          Edition (Cambridge University Press, 2006), Table Cj26-41 — Friedman,
+          Schwartz and Mitchell, contributed by Hugh Rockoff.
+        </li>
+      </ul>
+      <p>
+        Underlies <em
+          >Revisiting Inflation in the American Civil War: Alternative
+          Explanations Beyond Money Supply Growth</em
+        > (APEE, 2026).
+      </p>
+    </div>
+  </main>
+</Layout>

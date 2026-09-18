@@ -1,0 +1,58 @@
+{
+  "SERIES": {
+    "light": [
+      "#2a78d6",
+      "#eb6834",
+      "#1baf7a",
+      "#eda100",
+      "#e87ba4",
+      "#008300",
+      "#4a3aa7"
+    ],
+    "dark": [
+      "#3987e5",
+      "#d95926",
+      "#199e70",
+      "#c98500",
+      "#d55181",
+      "#0ca30c",
+      "#9085e9"
+    ]
+  },
+  "INK": {
+    "light": {
+      "text": "#0a0a0a",
+      "muted": "#707070",
+      "grid": "#e4e4e4",
+      "axis": "#cecece",
+      "surface": "#fefefe",
+      "band": "#fdf8ee",
+      "flag": "#8a6100"
+    },
+    "dark": {
+      "text": "#fefefe",
+      "muted": "#838383",
+      "grid": "#2a2a2a",
+      "axis": "#3c3c3c",
+      "surface": "#111111",
+      "band": "#1f1a12",
+      "flag": "#c98500"
+    }
+  },
+  "EMPHASIS": {
+    "light": "#0a0a0a",
+    "dark": "#fefefe"
+  },
+  "TYPE": {
+    "axis": 12,
+    "legend": 13,
+    "annotation": 11,
+    "caption": 13
+  },
+  "STROKE": {
+    "series": 2,
+    "emphasis": 2.5,
+    "rule": 1,
+    "dot": 2.6
+  }
+}

@@ -1,0 +1,142 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import TimeSeries from "../../charts/TimeSeries.jsx";
+import SourceComparison from "../../charts/SourceComparison.jsx";
+---
+
+<Layout
+  title="The Continental dollar, 1777–1781 | Data"
+  description="State scales of depreciation and contemporary merchants' quotations for the Continental dollar, transcribed from primary sources."
+  article
+>
+  <main class="page">
+    <h1 class="page-title">The Continental dollar, 1777–1781</h1>
+    <p class="page-lede">
+      When the Continental dollar collapsed, someone had to decide what past
+      contracts denominated in it were worth. The states did this by statute,
+      each enacting a
+      <em>scale of depreciation</em> that assigned to every past month a legal ratio
+      between Continental dollars and specie. This dataset collects those scales,
+      and sets them against what the currency was actually fetching.
+    </p>
+
+    <div class="doc">
+      <p>
+        <a href="https://github.com/MiguelPuntoEs/historical-monetary-data/tree/main/continental-dollar"
+          >Repository and CSVs →</a
+        >
+      </p>
+
+      <h2>The legal value was not one number</h2>
+      <p>
+        Seven states' scales survive in machine-readable form here, transcribed
+        from the 1828 federal compilation and, for Pennsylvania, from the
+        enacted statute. They diverge sharply. In June 1781 the same currency
+        was legally worth 100 to one in Massachusetts and 350 to one in North
+        Carolina.
+      </p>
+    </div>
+
+    <TimeSeries
+      client:visible
+      src="/data/continental-state-scales.json"
+      defaultLog={true}
+    />
+
+    <div class="doc">
+      <h2>What the currency actually fetched</h2>
+      <p>
+        Two contemporary quotation series survive, for Philadelphia and for
+        Virginia, compiled by Pelatiah Webster and reprinted by Phillips. They
+        track each other closely for most of the currency's life and then
+        separate, reaching a ratio of 2.33 by May 1781 — the month Continental
+        money ceased to pass as currency.
+      </p>
+    </div>
+
+    <TimeSeries
+      client:visible
+      src="/data/continental-quotations.json"
+      defaultLog={true}
+    />
+
+    <div class="doc">
+      <h2>One schedule, three printed versions</h2>
+      <p>
+        This is the part worth dwelling on. Pennsylvania's scale was enacted on
+        3 April 1781. Two standard compilations reproduce it, and they disagree
+        with the statute and with each other — precisely in the months where the
+        argument about legislative behaviour would be made.
+      </p>
+      <p>
+        The act covers contracts made before 1 March 1781, and its scale ends at
+        February 1781. The federal compilation nonetheless prints values for
+        March, April and May; Webster carries the February figure forward
+        through May. Neither is in the act. They also differ for October 1780,
+        where the statute reads “seventy-three” and the federal printing has 72.
+      </p>
+      <p>
+        Anyone building a price series from these tables inherits whichever
+        version they happen to pick. Toggle the filter below to see only the
+        months where the sources part company.
+      </p>
+    </div>
+
+    <SourceComparison
+      client:visible
+      src="/data/pennsylvania-three-sources.json"
+    />
+
+    <div class="doc">
+      <h2>Sources</h2>
+      <ul>
+        <li>
+          <em
+            >Amount of Continental Money issued during the Revolutionary War,
+            and the Depreciation of the same</em
+          >, House Doc. No. 107, 20th Cong. 1st sess. (Washington: Gales &amp;
+          Seaton, 1828), pp. 30–33 — reissued as
+          <em>American State Papers</em>, Class III (Finance), vol. V.
+        </li>
+        <li>
+          <em>Statutes at Large of Pennsylvania</em> (1904), vol. 10, pp. 283–89
+          — the Act of 3 April 1781, ch. CMXXXV, whose Section IV carries the enacted
+          scale.
+        </li>
+        <li>
+          Pelatiah Webster, <em
+            >Political Essays on the Nature and Operation of Money, Public
+            Finances and Other Subjects</em
+          > (Philadelphia, 1791), p. 501.
+        </li>
+        <li>
+          Henry Phillips, Jr., <em>Continental Paper Money</em> (Roxbury, 1866),
+          Appendix D and pp. 217–18.
+        </li>
+        <li>
+          Charles J. Bullock, <em
+            >The Finances of the United States from 1775 to 1789</em
+          >
+          (Madison, 1895), p. 133.
+        </li>
+        <li>
+          Anne Bezanson, <em
+            >Prices and Inflation during the American Revolution</em
+          >
+          (Philadelphia, 1951), Table 3, p. 65.
+        </li>
+      </ul>
+      <p>
+        Connecticut, New York and South Carolina appear in the same 1828 source
+        and are not yet transcribed.
+      </p>
+      <p>
+        The repository also carries the Treasury's own 1828 statement of
+        Continental currency emissions authorized by Congress, and an
+        independent contemporary accounting (attributed to Jefferson) that
+        applies depreciation multiples to give each emission's worth in
+        silver dollars — both reprinted in Phillips's Appendix.
+      </p>
+    </div>
+  </main>
+</Layout>

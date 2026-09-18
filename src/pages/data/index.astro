@@ -1,0 +1,64 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import ResourceEntry from "../../components/ResourceEntry.astro";
+---
+
+<Layout
+  title="Data | Miguel González Calvo"
+  description="Primary-source economic datasets on the two great American paper-money episodes: the Continental dollar (1777–1781) and the Civil War greenbacks (1859–1866)."
+>
+  <main class="page">
+    <h1 class="page-title">Data</h1>
+    <p class="page-lede">
+      Primary-source economic data, transcribed from the original printed tables
+      into machine-readable form and released openly. Both datasets underlie
+      papers of mine, but they are published separately because the
+      transcription is useful independently of the argument it was built for.
+    </p>
+
+    <h2 class="section__title">Datasets</h2>
+    <div class="rowlist section">
+      <ResourceEntry
+        title="The Continental dollar, 1777–1781"
+        description="Scales of depreciation enacted by seven states to settle debts in Continental currency, with contemporary merchants' quotations for Philadelphia and Virginia."
+        url="/data/continental-dollar"
+      />
+      <ResourceEntry
+        title="The greenbacks, 1859–1866"
+        description="Gold prices, commodity prices, wages and the money stock during the American Civil War, from Wesley C. Mitchell's History of the Greenbacks."
+        url="/data/greenbacks"
+      />
+    </div>
+
+    <h2 class="section__title">Method</h2>
+    <div class="doc">
+      <p>
+        Everything here is transcribed <strong
+          >from page images rather than OCR</strong
+        >. For eighteenth- and nineteenth-century tables this matters more than
+        it sounds: optical character recognition corrupts the fractions that
+        pervade the originals and confuses digits in ways that change values
+        materially. In one case the difference between an OCR reading and the
+        page was 800 against 300.
+      </p>
+      <p>
+        Where a second source reproduces the same series, the two are
+        cross-checked and the agreement rate is reported. Where sources
+        conflict, both are published rather than one being silently preferred —
+        and where the enacted statute survives, it is used in preference to any
+        later compilation.
+      </p>
+      <p>
+        Every CSV carries a comment header giving the source, table and page
+        numbers, so any figure can be traced back to the printed original
+        without consulting the README. Transcriptions are released under CC0;
+        please cite the underlying sources as well, which are listed in each
+        repository.
+      </p>
+      <p>
+        If you find an error in a transcription, please open an issue. I would
+        rather be corrected than cited wrongly.
+      </p>
+    </div>
+  </main>
+</Layout>
