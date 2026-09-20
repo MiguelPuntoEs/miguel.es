@@ -8,6 +8,8 @@ import mdx from "@astrojs/mdx";
 import react from "@astrojs/react";
 import sitemap from "@astrojs/sitemap";
 
+import rehypeWrapTables from "./src/lib/rehype-wrap-tables.mjs";
+
 // https://astro.build/config
 export default defineConfig({
   site: 'https://www.miguel.es',
@@ -20,7 +22,7 @@ export default defineConfig({
   markdown: {
     syntaxHighlight: "prism",
     remarkPlugins: [remarkMath],
-    rehypePlugins: [rehypeKatex],
+    rehypePlugins: [rehypeKatex, rehypeWrapTables],
   },
 
   integrations: [mdx(), react(), sitemap()],

@@ -10,6 +10,8 @@ university: "Universidad Francisco Marroquín"
 **Profesor:** Miguel González Calvo  
 **Programa académico:** Licenciatura en Entrepreneurship, Licenciatura en Administración de Empresas
 
+El syllabus completo del curso 2026, con el cronograma de sesiones, está disponible en [PDF](/docs/financial-mathematics-syllabus-2026.pdf).
+
 ## Contenidos
 
 1. Capitalización simple
@@ -20,6 +22,7 @@ university: "Universidad Francisco Marroquín"
    - Tantos equivalentes
    - Descuento racional
    - Descuento comercial
+   - Tipos de interés nominal y real (ecuación de Fisher)
 3. Rentas
    - Clasificación
    - Rentas constantes
@@ -38,6 +41,7 @@ university: "Universidad Francisco Marroquín"
    - Método francés
    - Método alemán
    - Método italiano
+   - Leasing
 5. Gestión de riesgos de interés
    - Clasificación de tipos de interés:
       - Tipos *spot*
@@ -51,16 +55,34 @@ university: "Universidad Francisco Marroquín"
 
 ## Materiales necesarios
 
-Calculadora financiera. Una lista no exhaustiva de calculadoras que se podrán utilizar es la siguiente:
+Calculadora financiera. Se recomienda la Texas Instruments BA II Plus Professional. También se podrán utilizar otras calculadoras financieras, como por ejemplo:
 
 - Casio FC-100V
 - Casio FC-200V
 - HP 12C
 - HP 10bII+
 
+## Evaluación
+
+- Examen final: 40%
+- Examen parcial: 30%
+- Tests de evaluación continua: 30%
+
+## Ejercicios
+
+Hojas de ejercicios del curso, con soluciones:
+
+- [Prueba de nivel](/docs/financial-mathematics-level-test.pdf) ([soluciones](/docs/financial-mathematics-level-test-solutions.pdf))
+- [Capitalización simple](/docs/financial-mathematics-exercises-simple.pdf)
+- [Capitalización compuesta](/docs/financial-mathematics-exercises-compound.pdf)
+- [Rentas](/docs/financial-mathematics-exercises-annuities.pdf)
+- [Préstamos](/docs/financial-mathematics-exercises-loans.pdf)
+- [Gestión de riesgos de interés](/docs/financial-mathematics-exercises-interest-risk.pdf)
+- [Soluciones completas](/docs/financial-mathematics-exercises-solutions.pdf)
+
 ## Bibliografía
 
-El formulario del curso se puede encontrar en el apartado de [matemáticas financieras](/resources/financial-mathematics) o en [PDF](/docs/financial-mathematics.pdf)
+El formulario del curso está disponible en [PDF](/docs/financial-mathematics.pdf).
 
 ### Bibliografía básica
 
