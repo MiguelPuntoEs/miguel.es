@@ -1,12 +1,60 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import Calculator from "../../components/CompoundCalculator.jsx";
+import FaqAccordion from "../../components/FaqAccordion.astro";
+
+const faqs = [
+  {
+    question: "What's the difference between compound and simple interest?",
+    answer:
+      "With simple interest, you only ever earn interest on the amount you've contributed — the interest itself never earns more interest. With compound interest, interest is periodically added to your balance and starts earning interest too. Over long horizons this compounding effect is the main driver of growth, which is why this calculator lets you toggle between the two and see the gap directly.",
+  },
+  {
+    question: "What's the difference between an ordinary annuity and an annuity due?",
+    answer:
+      "It's about when each contribution lands relative to its period. In an ordinary annuity, a contribution is added at the end of the period, so it doesn't start earning interest until the next one. In an annuity due, the contribution is added at the start of the period and begins earning interest immediately. Annuity due always produces a slightly higher balance for the same contributions and rate.",
+  },
+  {
+    question: "What does capitalization frequency mean?",
+    answer:
+      "It's how often the interest earned is added into the principal so it starts compounding on itself — for example monthly, quarterly, semi-annually, or annually. A nominal rate compounded more often produces a higher effective annual rate (APY), which this calculator shows next to the Annual rate field.",
+  },
+  {
+    question: "What are arithmetic and geometric growing contributions?",
+    answer:
+      "These are annuities where each contribution grows instead of staying flat. With arithmetic growth, each contribution increases by a fixed amount over the last one. With geometric growth, each contribution increases by a fixed percentage instead — closer to how contributions might grow alongside a salary. Both are available as a growth mode in this calculator's Advanced options.",
+  },
+  {
+    question: "What is the effective annual rate (APY) and how does it differ from the nominal rate?",
+    answer:
+      "The nominal annual rate is the rate before accounting for how often it compounds. The effective annual rate (APY) is what you actually earn over a year once compounding is factored in — it's always equal to or higher than the nominal rate, and grows with capitalization frequency. This calculator computes it live from your Annual rate and Capitalization settings.",
+  },
+];
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map(({ question, answer }) => ({
+    "@type": "Question",
+    name: question,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: answer,
+    },
+  })),
+};
 ---
 
 <Layout
   title="Compound Interest Calculator"
-  description="Explore how your savings grow over time with interest and regular contributions."
+  description="Free compound interest calculator: ordinary and due annuities, capitalization frequency, growing contributions, and a live simple-interest comparison chart."
 >
+  <script
+    is:inline
+    slot="head"
+    type="application/ld+json"
+    set:html={JSON.stringify(faqSchema)}
+  />
   <main class="min-h-screen px-3 py-10 sm:px-6">
     <section class="mx-auto max-w-6xl space-y-6">
       <header class="space-y-2 text-center">
@@ -23,6 +71,49 @@ import Calculator from "../../components/CompoundCalculator.jsx";
       </header>
 
       <Calculator client:only="react" />
+
+      <section class="mx-auto max-w-3xl pt-6">
+        <h2 class="mb-3 text-xl font-semibold tracking-tight text-text-1">
+          Related resources
+        </h2>
+        <ul class="list-disc space-y-2 pl-5 text-sm text-text-2">
+          <li>
+            <a
+              href="/courses/financial-mathematics"
+              class="text-blue-600 hover:text-blue-500"
+            >
+              Financial Mathematics course
+            </a>{" "}
+            — syllabus, notes, and teaching materials for the course taught at
+            Universidad Francisco Marroquín.
+          </li>
+          <li>
+            <a
+              href="/docs/financial-mathematics-exercises-compound.pdf"
+              class="text-blue-600 hover:text-blue-500"
+            >
+              Compound interest exercises
+            </a>{" "}
+            — practice problems on compound interest, with solutions.
+          </li>
+          <li>
+            <a
+              href="/docs/financial-mathematics-exercises-annuities.pdf"
+              class="text-blue-600 hover:text-blue-500"
+            >
+              Annuities exercises
+            </a>{" "}
+            — practice problems on annuities, including growing contributions.
+          </li>
+        </ul>
+      </section>
+
+      <section class="mx-auto max-w-3xl pt-6">
+        <h2 class="mb-4 text-xl font-semibold tracking-tight text-text-1">
+          Frequently asked questions
+        </h2>
+        <FaqAccordion faqs={faqs} />
+      </section>
     </section>
   </main>
 </Layout>

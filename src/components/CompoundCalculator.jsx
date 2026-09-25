@@ -10,18 +10,20 @@ import {
   Legend,
 } from "recharts";
 
-const COMPOUNDING_OPTIONS = [
-  { value: 1, label: "Annually" },
-  { value: 2, label: "Semi-annually" },
+// Shared by both Contribution frequency and Capitalization — same four
+// choices. One-word forms keep these pills the same visual style as the
+// other segmented controls on the page (Flat/Arithmetic/Geometric,
+// Ordinary/Due) instead of standing out as a different, symbol-heavy style.
+const FREQUENCY_OPTIONS = [
+  { value: 1, label: "Annual" },
+  { value: 2, label: "Semiannual" },
   { value: 4, label: "Quarterly" },
   { value: 12, label: "Monthly" },
 ];
 
-const CONTRIBUTION_FREQUENCY_OPTIONS = [
-  { value: 1, label: "Annually" },
-  { value: 2, label: "Semi-annually" },
-  { value: 4, label: "Quarterly" },
-  { value: 12, label: "Monthly" },
+const PAYMENT_TIMING_OPTIONS = [
+  { value: "ordinary", label: "Ordinary" },
+  { value: "due", label: "Due" },
 ];
 
 const GROWTH_MODES = [
@@ -30,7 +32,7 @@ const GROWTH_MODES = [
   { value: "geometric", label: "Geometric" },
 ];
 
-const FREQUENCY_VALUES = COMPOUNDING_OPTIONS.map((o) => o.value);
+const FREQUENCY_VALUES = FREQUENCY_OPTIONS.map((o) => o.value);
 const GROWTH_MODE_VALUES = GROWTH_MODES.map((o) => o.value);
 
 // Read shareable state from the URL, e.g.
@@ -105,9 +107,8 @@ function calculateSchedule({
   // Interest always accrues monthly at the nominal rate, but it's only
   // capitalized (folded into principal, so it starts compounding itself)
   // every 12/m months. Contributions land every 12/cf months, and each
-  // one can grow over the previous one in an arithmetic (renta en
-  // progresión aritmética, +d each time) or geometric progression
-  // (renta en progresión geométrica, ×(1+g) each time).
+  // one can grow over the previous one arithmetically (+d each time) or
+  // geometrically (×(1+g) each time).
   const monthlyNominalRate = r / 100 / 12;
   const monthsPerCompoundPeriod = 12 / m;
   const monthsPerContribution = 12 / cf;
@@ -242,7 +243,7 @@ function SegmentedControl({ options, value, onChange, className = "", label }) {
           type="button"
           aria-pressed={value === option.value}
           onClick={() => onChange(option.value)}
-          className={`relative z-10 rounded-md px-3 py-1 text-xs font-medium capitalize transition-colors duration-200 ${
+          className={`relative z-10 rounded-md px-3 py-1 text-xs font-medium transition-colors duration-200 ${
             value === option.value ? "text-white" : "text-text-2 hover:text-text-1"
           }`}
         >
@@ -263,6 +264,21 @@ function Reveal({ show, children, className = "" }) {
       style={{ maxWidth: show ? 320 : 0, opacity: show ? 1 : 0 }}
     >
       <div className="flex items-center gap-1.5 pl-0.5">{children}</div>
+    </div>
+  );
+}
+
+// Same idea as Reveal, but for a block-level row that should collapse
+// vertically — a control that only matters for one of two modes (e.g.
+// Capitalization, which does nothing under Simple interest) rather than
+// staying visible and inert.
+function Collapse({ show, children }) {
+  return (
+    <div
+      className="grid transition-[grid-template-rows,opacity] duration-200 ease-out"
+      style={{ gridTemplateRows: show ? "1fr" : "0fr", opacity: show ? 1 : 0 }}
+    >
+      <div className="overflow-hidden">{children}</div>
     </div>
   );
 }
@@ -564,7 +580,7 @@ export default function CompoundCalculator() {
           <div className="overflow-hidden">
             <div className="mt-4">
               <div className="flex flex-wrap items-center gap-3">
-                <span className="w-24 shrink-0 text-xs font-semibold uppercase tracking-wide text-text-3">
+                <span className="w-28 shrink-0 text-xs font-semibold uppercase tracking-wide text-text-3">
                   Contributions
                 </span>
                 <SegmentedControl
@@ -609,8 +625,8 @@ export default function CompoundCalculator() {
               ) : (
                 <p className="mt-2 text-xs text-text-3">
                   {contributionGrowth === "arithmetic"
-                    ? "Renta en progresión aritmética: "
-                    : "Renta en progresión geométrica: "}
+                    ? "Arithmetic growth: "
+                    : "Geometric growth: "}
                   each contribution grows over the last one.
                   {contributionPreview &&
                     ` First ${formatCurrency(contributionPreview.first)}, last ${formatCurrency(
@@ -620,57 +636,61 @@ export default function CompoundCalculator() {
               )}
             </div>
 
-            <div className="mt-4 grid gap-4 border-t border-line pt-4 sm:grid-cols-2 lg:grid-cols-3">
-              <div className="flex flex-col gap-1.5">
-                <label htmlFor="cc-contrib-freq" className="text-xs font-semibold uppercase tracking-wide text-text-3">
-                  Contribution frequency
-                </label>
-                <select
-                  id="cc-contrib-freq"
-                  value={contributionsPerYear}
-                  onChange={(e) => setContributionsPerYear(Number(e.target.value))}
-                  className="h-9 rounded-lg border border-line-strong bg-bg-1 px-2 text-sm text-text-1 shadow-inner focus:border-blue focus:outline-none focus:ring-1 focus:ring-blue"
-                >
-                  {CONTRIBUTION_FREQUENCY_OPTIONS.map((option) => (
-                    <option key={option.value} value={option.value}>
-                      {option.label}
-                    </option>
-                  ))}
-                </select>
+            <div className="mt-4 space-y-4 border-t border-line pt-4">
+              <div>
+                <div className="flex flex-wrap items-center gap-3">
+                  <span className="w-28 shrink-0 text-xs font-semibold uppercase tracking-wide text-text-3">
+                    Timing
+                  </span>
+                  <SegmentedControl
+                    label="Payment timing"
+                    options={PAYMENT_TIMING_OPTIONS}
+                    value={paymentTiming}
+                    onChange={setPaymentTiming}
+                  />
+                </div>
+                <p className="mt-2 text-xs text-text-3">
+                  {paymentTiming === "due"
+                    ? "Due: each contribution lands at the start of its period, so it starts earning interest immediately."
+                    : "Ordinary: each contribution lands at the end of its period, so it only starts earning interest the next one."}
+                </p>
               </div>
 
-              <div className="flex flex-col gap-1.5">
-                <label htmlFor="cc-timing" className="text-xs font-semibold uppercase tracking-wide text-text-3">
-                  Payment timing
-                </label>
-                <select
-                  id="cc-timing"
-                  value={paymentTiming}
-                  onChange={(e) => setPaymentTiming(e.target.value)}
-                  className="h-9 rounded-lg border border-line-strong bg-bg-1 px-2 text-sm text-text-1 shadow-inner focus:border-blue focus:outline-none focus:ring-1 focus:ring-blue"
-                >
-                  <option value="ordinary">Ordinary annuity</option>
-                  <option value="due">Annuity due</option>
-                </select>
+              <div>
+                <div className="flex flex-wrap items-center gap-3">
+                  <span className="w-28 shrink-0 text-xs font-semibold uppercase tracking-wide text-text-3">
+                    Frequency
+                  </span>
+                  <SegmentedControl
+                    label="Contribution frequency"
+                    options={FREQUENCY_OPTIONS}
+                    value={contributionsPerYear}
+                    onChange={setContributionsPerYear}
+                  />
+                </div>
+                <p className="mt-2 text-xs text-text-3">
+                  How often you make a contribution.
+                </p>
               </div>
 
-              <div className="flex flex-col gap-1.5">
-                <label htmlFor="cc-capitalization" className="text-xs font-semibold uppercase tracking-wide text-text-3">
-                  Capitalization
-                </label>
-                <select
-                  id="cc-capitalization"
-                  value={compoundsPerYear}
-                  onChange={(e) => setCompoundsPerYear(Number(e.target.value))}
-                  className="h-9 rounded-lg border border-line-strong bg-bg-1 px-2 text-sm text-text-1 shadow-inner focus:border-blue focus:outline-none focus:ring-1 focus:ring-blue"
-                >
-                  {COMPOUNDING_OPTIONS.map((option) => (
-                    <option key={option.value} value={option.value}>
-                      {option.label}
-                    </option>
-                  ))}
-                </select>
-              </div>
+              <Collapse show={interestMode === "compound"}>
+                <div className="pt-0.5">
+                  <div className="flex flex-wrap items-center gap-3">
+                    <span className="w-28 shrink-0 text-xs font-semibold uppercase tracking-wide text-text-3">
+                      Capitalization
+                    </span>
+                    <SegmentedControl
+                      label="Capitalization"
+                      options={FREQUENCY_OPTIONS}
+                      value={compoundsPerYear}
+                      onChange={setCompoundsPerYear}
+                    />
+                  </div>
+                  <p className="mt-2 text-xs text-text-3">
+                    How often interest compounds — more frequent capitalization compounds faster.
+                  </p>
+                </div>
+              </Collapse>
             </div>
           </div>
         </div>

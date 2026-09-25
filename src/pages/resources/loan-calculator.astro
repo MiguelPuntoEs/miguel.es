@@ -1,6 +1,7 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import Calculator from "../../components/LoanCalculator.jsx";
+import FaqAccordion from "../../components/FaqAccordion.astro";
 
 const faqs = [
   {
@@ -113,23 +114,7 @@ const faqSchema = {
         <h2 class="mb-4 text-xl font-semibold tracking-tight text-text-1">
           Preguntas frecuentes
         </h2>
-        <div class="space-y-3">
-          {
-            faqs.map(({ question, answer }) => (
-              <details class="group rounded-xl border border-line bg-bg-1 p-4 shadow-sm">
-                <summary class="flex cursor-pointer items-center justify-between text-sm font-semibold text-text-1">
-                  <span>{question}</span>
-                  <span class="ml-4 text-text-3 transition-transform group-open:rotate-180">
-                    ▾
-                  </span>
-                </summary>
-                <p class="mt-3 text-sm leading-relaxed text-text-2">
-                  {answer}
-                </p>
-              </details>
-            ))
-          }
-        </div>
+        <FaqAccordion faqs={faqs} />
       </section>
     </section>
   </main>

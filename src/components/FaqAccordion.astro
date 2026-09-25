@@ -1,0 +1,54 @@
+---
+export interface Props {
+  faqs: { question: string; answer: string }[];
+}
+
+const { faqs } = Astro.props;
+---
+
+<div class="space-y-3">
+  {
+    faqs.map(({ question, answer }) => (
+      <details class="faq-item group rounded-xl border border-line bg-bg-1 p-4 shadow-sm">
+        <summary class="flex cursor-pointer items-center justify-between text-sm font-semibold text-text-1">
+          <span>{question}</span>
+          <span class="ml-4 text-text-3 transition-transform duration-200 group-open:rotate-180">
+            ▾
+          </span>
+        </summary>
+        <p class="faq-answer text-sm leading-relaxed text-text-2">{answer}</p>
+      </details>
+    ))
+  }
+</div>
+
+<style>
+  /* A closed <details>'s content is suppressed by the browser at a level
+     that overriding `display` on a manually-added child doesn't reach
+     (verified: the override was applied in computed style, but the box
+     still wasn't rendered — it snapped shut with no transition). The
+     `::details-content` pseudo-element is the one Chrome built exactly
+     for this, together with `content-visibility` + `allow-discrete` to
+     transition across the render/no-render boundary. No JS, and it
+     degrades gracefully to an instant toggle in browsers without support.
+   */
+  .faq-item {
+    interpolate-size: allow-keywords;
+  }
+  .faq-item::details-content {
+    height: 0;
+    overflow: hidden;
+    opacity: 0;
+    padding-top: 0;
+    transition:
+      height 220ms ease-out,
+      opacity 180ms ease-out,
+      padding-top 220ms ease-out,
+      content-visibility 220ms allow-discrete;
+  }
+  .faq-item[open]::details-content {
+    height: auto;
+    opacity: 1;
+    padding-top: 0.75rem;
+  }
+</style>

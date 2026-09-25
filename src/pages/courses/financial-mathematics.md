@@ -68,6 +68,13 @@ Calculadora financiera. Se recomienda la Texas Instruments BA II Plus Profession
 - Examen parcial: 30%
 - Tests de evaluación continua: 30%
 
+## Calculadoras
+
+Calculadoras interactivas en línea para practicar los conceptos del curso:
+
+- [Calculadora de interés compuesto](/resources/compound-calculator) — capitalización simple y compuesta, rentas pospagables y prepagables, y rentas variables en progresión aritmética y geométrica.
+- [Calculadora de préstamos](/resources/loan-calculator) — sistemas de amortización francés, italiano y americano, con cuadro de amortización y gráficas.
+
 ## Ejercicios
 
 Hojas de ejercicios del curso, con soluciones:
