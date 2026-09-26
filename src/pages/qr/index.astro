@@ -1,6 +1,7 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import QRGenerator from "../../components/QRGenerator.jsx";
+import { QR_SUBPAGES } from "../../data/qr-subpages.js";
 
 const canonicalURL = new URL("/qr", Astro.site);
 
@@ -129,6 +130,23 @@ const faqLd = {
 
       <!-- Static content for SEO — Googlebot doesn't run the React app -->
       <section class="mx-auto max-w-3xl pt-12 border-t border-line space-y-10">
+
+        <div>
+          <h2 class="text-xl font-semibold text-text-1 mb-4">A guide for each type</h2>
+          <p class="mb-4 text-sm text-text-2">
+            Every QR type has its own page with the format it encodes, what
+            scanning it does, and the questions that come up most.
+          </p>
+          <div class="grid grid-cols-2 gap-x-4 gap-y-2 text-sm sm:grid-cols-3">
+            {
+              QR_SUBPAGES.map((p) => (
+                <a href={`/qr/${p.slug}`} class="text-blue-600 hover:text-blue-500">
+                  {p.heading.replace(" QR Code Generator", "")}
+                </a>
+              ))
+            }
+          </div>
+        </div>
 
         <div>
           <h2 class="text-xl font-semibold text-text-1 mb-4">What can you generate?</h2>

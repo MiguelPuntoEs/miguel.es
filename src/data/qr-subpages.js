@@ -91,7 +91,7 @@ export const QR_SUBPAGES = [
       { q: "Is it safe to share my Bitcoin address as a QR code?", a: "Yes. A Bitcoin address is public information — it's safe to share. Anyone can send to it, but only the holder of the private key can spend from it." },
       { q: "Which wallets can scan a Bitcoin QR code?", a: "All major wallets including Coinbase, Trust Wallet, Electrum, Blue Wallet, Exodus, Ledger Live, and hardware wallet companion apps." },
     ],
-    related: ["lightning", "ethereum", "solana"],
+    related: ["lightning", "ethereum", "trust-wallet"],
   },
   {
     slug: "lightning", type: "lightning",
@@ -121,7 +121,7 @@ export const QR_SUBPAGES = [
       { q: "Which wallets can scan an Ethereum QR code?", a: "MetaMask (mobile), Trust Wallet, Coinbase Wallet, Rainbow, Argent, and most other Ethereum-compatible mobile wallets." },
       { q: "Is an Ethereum address case-sensitive?", a: "Ethereum addresses are not case-sensitive, but EIP-55 defines a checksummed mixed-case format. Either format is valid — the generator accepts both." },
     ],
-    related: ["bitcoin", "solana", "lightning"],
+    related: ["bitcoin", "solana", "trust-wallet"],
   },
   {
     slug: "solana", type: "solana",
@@ -182,6 +182,22 @@ export const QR_SUBPAGES = [
       { q: "Can I receive BCH at a Bitcoin address?", a: "No. Bitcoin and Bitcoin Cash are separate blockchains. Always use a BCH-specific address when receiving Bitcoin Cash." },
     ],
     related: ["bitcoin", "litecoin", "monero"],
+  },
+  {
+    slug: "trust-wallet", type: "bitcoin",
+    title: "Trust Wallet QR Code Generator — Receive Address QR",
+    description: "Turn a Trust Wallet receive address into a scannable QR code — Bitcoin, Ethereum, Litecoin, Solana and more. Add an amount or label. Free, runs in your browser.",
+    heading: "Trust Wallet QR Code Generator",
+    sub: "Turn a Trust Wallet receive address into a QR code anyone can scan.",
+    about: "Trust Wallet is a multi-chain wallet rather than a chain of its own, so a Trust Wallet QR code is really a standard address QR for whichever coin you are receiving. Copy the receive address out of the app, pick the matching coin here, and the generator encodes it with that coin's payment URI scheme — BIP-21 for Bitcoin and Litecoin, EIP-681 for Ethereum and its tokens. Any wallet that reads those standards, Trust Wallet included, will scan it.",
+    uses: ["Invoicing a client in crypto with the amount already filled in", "Accepting donations on a website or stream overlay", "Printing a payment QR for a market stall or event", "Sharing a receive address without dictating a long string", "Putting a tip address on a business card"],
+    faqs: [
+      { q: "How do I find my receive address in Trust Wallet?", a: "Open the coin in the app and tap Receive. Trust Wallet shows the address along with its own plain QR code. Copy that address and paste it here when you want to attach an amount, a label, or download the code as a file." },
+      { q: "Trust Wallet already shows a QR code — why generate one?", a: "The in-app code is just the bare address. Generating one here lets you attach an amount, label and message so the sender does not have to type the figure, and lets you download a PNG or SVG to put on an invoice, poster or web page." },
+      { q: "Which coins does this work with?", a: "Any coin you hold in Trust Wallet that this generator supports: Bitcoin, Lightning, Ethereum and ERC-20 tokens, Litecoin, Bitcoin Cash, Solana and Monero. Pick the matching coin so the correct URI scheme is used — an Ethereum address encoded as a Bitcoin URI will not scan properly." },
+      { q: "Is my wallet address sent to a server?", a: "No. The QR code is generated entirely in your browser; the address never leaves your device." },
+    ],
+    related: ["bitcoin", "ethereum", "litecoin"],
   },
   {
     slug: "paypal", type: "paypal",
