@@ -1,9 +1,23 @@
 ---
-import { EMPLOYER } from "../data/site.js";
+import { EMPLOYER, NOINDEX_PATHS } from "../data/site.js";
 
 const { title, description, lang = "en", article = false, university } = Astro.props;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const socialImage = new URL('/og-image.jpg', Astro.site).href;
+
+// Brand suffix, but only when it survives SERP truncation (~60 chars). On a
+// page whose own title is already long and keyword-led — the QR generators,
+// say — appending it just pushes the useful half out of the snippet and risks
+// Google rewriting the title altogether, so those keep their own title.
+const siteName = "Miguel González Calvo";
+const SUFFIX = ` · ${siteName}`;
+const TITLE_BUDGET = 60;
+const fullTitle =
+  title.includes(siteName) || title.length + SUFFIX.length > TITLE_BUDGET
+    ? title
+    : title + SUFFIX;
+
+const noindex = NOINDEX_PATHS.includes(canonicalURL.pathname.replace(/\/$/, ""));
 
 const articleLd = article ? (university ? {
   "@context": "https://schema.org",
@@ -84,20 +98,21 @@ const jsonLd = {
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 <link rel="canonical" href={canonicalURL} />
 <meta http-equiv="onion-location" content="http://miguel3wuxsv5wb63n7522pvk7tpwc3lvsvbdzai32bvvca2ac5olbqd.onion/" />
+{noindex && <meta name="robots" content="noindex, follow" />}
 
-<title>{title}</title>
+<title>{fullTitle}</title>
 <meta name="description" content={description} />
 <meta name="author" content="Miguel González Calvo" />
 
 <!-- Open Graph / Facebook / WhatsApp -->
 <meta property="og:type" content={article ? "article" : "website"} />
 <meta property="og:url" content={canonicalURL} />
-<meta property="og:title" content={title} />
+<meta property="og:title" content={fullTitle} />
 <meta property="og:description" content={description} />
 <meta property="og:image" content={socialImage} />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
-<meta property="og:image:alt" content={title} />
+<meta property="og:image:alt" content={fullTitle} />
 <meta property="og:image:type" content="image/jpeg" />
 <meta property="og:locale" content={lang === "es" ? "es_ES" : "en_US"} />
 <meta property="og:site_name" content="Miguel González Calvo" />
@@ -105,7 +120,7 @@ const jsonLd = {
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:url" content={canonicalURL} />
-<meta name="twitter:title" content={title} />
+<meta name="twitter:title" content={fullTitle} />
 <meta name="twitter:description" content={description} />
 <meta name="twitter:image" content={socialImage} />
 

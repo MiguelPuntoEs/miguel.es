@@ -9,6 +9,7 @@ import react from "@astrojs/react";
 import sitemap from "@astrojs/sitemap";
 
 import rehypeWrapTables from "./src/lib/rehype-wrap-tables.mjs";
+import { NOINDEX_PATHS } from "./src/data/site.js";
 
 // https://astro.build/config
 export default defineConfig({
@@ -25,5 +26,12 @@ export default defineConfig({
     rehypePlugins: [rehypeKatex, rehypeWrapTables],
   },
 
-  integrations: [mdx(), react(), sitemap()],
+  integrations: [
+    mdx(),
+    react(),
+    sitemap({
+      filter: (page) =>
+        !NOINDEX_PATHS.includes(new URL(page).pathname.replace(/\/$/, "")),
+    }),
+  ],
 });
