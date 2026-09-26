@@ -53,3 +53,9 @@ Gita Gopinath, and Arnaud Mehl (2025). "[Patterns of Invoicing Currency in Globa
 - Rodrik, Dani. 2011. The Globalization Paradox: Democracy and the Future of the World Economy. New York: W. W. Norton & Company. No está disponible
 - Ricardo, David. 1817. On the Principles of Political Economy and Taxation. London: John Murray, 1817. Capítulo 7: “On Foreign Trade”. Disponible online: Econlib.
 - Mises, Ludwig von. Human Action: A Treatise on Economics. Scholar’s Edition. Auburn, AL: Ludwig von Mises Institute, 1998. Capítulo VIII, secciones 4 y 5.
+
+## Recursos relacionados
+
+- [Explorador de salarios medios](/resources/salary-explorer) — salarios medios anuales de la OCDE en términos nominales, reales y convertidos a PPA, para comparar niveles de vida entre países.
+- [Calculadora de PPA](/resources/ppp-calculator) — convierte un importe entre países según su poder adquisitivo, en lugar del tipo de cambio de mercado.
+- [Calculadora de inflación](/resources/inflation-calculator) — ajusta importes por inflación con series de IPC reales por país.

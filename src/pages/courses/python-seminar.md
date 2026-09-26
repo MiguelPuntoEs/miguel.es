@@ -57,3 +57,4 @@ Todo el material —notebooks y dependencias— está disponible en el repositor
 
 - Repositorio del taller: [MiguelPuntoEs/python-ufm](https://github.com/MiguelPuntoEs/python-ufm) — notebooks y `requirements.txt`.
 - Para un recorrido más largo sobre los mismos temas, ver [Python for Finance](/courses/python-for-finance).
+- Bibliotecas y herramientas de referencia: [recursos de Python](/resources/python).

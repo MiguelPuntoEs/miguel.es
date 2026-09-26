@@ -1,6 +1,6 @@
 ---
 title: "Economics I"
-description: "Introduction to Economics. Universidad Francisco Marroquín"
+description: "Asignatura de introducción a la economía en la Universidad Francisco Marroquín: contenidos, bibliografía y lecturas recomendadas del curso."
 layout: "../../layouts/MarkdownLayout.astro"
 lang: "es"
 university: "Universidad Francisco Marroquín"
@@ -25,3 +25,8 @@ university: "Universidad Francisco Marroquín"
 - Eduardo Blasco. [Sobre el sesgo por lo físico](https://micajondesastre.substack.com/p/sobre-el-sesgo-por-lo-fisico).
 - Eduardo Blasco. [Topes salariales](https://micajondesastre.substack.com/p/topes-salariales).
 - Eduardo Blasco. [Trabajo o producción: ¿Qué nos hace más prósperos?](https://micajondesastre.substack.com/p/trabajo-o-produccion-que-nos-hace).
+
+## Recursos relacionados
+
+- [Calculadora de inflación](/resources/inflation-calculator) — qué vale un importe a lo largo del tiempo, con series de IPC reales.
+- [Explorador de salarios medios](/resources/salary-explorer) — evolución de los salarios nominales frente a los reales en los países de la OCDE.

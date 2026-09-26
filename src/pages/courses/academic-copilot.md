@@ -139,3 +139,8 @@ Aplicaciones y casos de estudio:
 - Gupta, Akshat. «Are ChatGPT and GPT-4 Good Poker Players? — A Pre-Flop Analysis». arXiv:2308.12466. Preprint, arXiv, 21 de diciembre de 2023. <https://doi.org/10.48550/arXiv.2308.12466>.
 - Zhuang, Richard, Akshat Gupta, Richard Yang, Aniket Rahane, Zhengyu Li, y Gopala Anumanchipalli. «PokerBench: Training Large Language Models to Become Professional Poker Players». arXiv:2501.08328. Preprint, arXiv, 24 de enero de 2025. <https://doi.org/10.48550/arXiv.2501.08328>.
 - White, Halbert. «Economic Prediction Using Neural Networks: The Case of IBM Daily Stock Returns». *IEEE International Conference on Neural Networks*, 1988, 451-58 vol. 2. <https://doi.org/10.1109/ICNN.1988.23959>.
+
+## Recursos relacionados
+
+- [Rúbricas de corrección](/resources/rubrics) — rúbricas y prompts para corrección asistida por LLM, con las consideraciones de privacidad y verificación que plantea su uso.
+- [Recursos sobre LLM](/resources/llm) — bibliotecas, herramientas y guías sobre modelos de lenguaje.

@@ -307,3 +307,8 @@ Tokens:
 - [USDC](https://sepolia.etherscan.io/token/0x1c7d4b196cb0c7b01d743fbc6116a902379c7238): `0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238`
 - [EURC](https://sepolia.etherscan.io/token/0x08210f9170f89ab7658f0b5e3ff39b0e03c594d4): `0x08210f9170f89ab7658f0b5e3ff39b0e03c594d4`
 - [USDT](https://sepolia.etherscan.io/token/0x7169d38820dfd117c3fa1f22a697dba58d90ba06): `0x7169D38820dfd117C3FA1f22a697dBA58d90BA06`
+
+## Related resources
+
+- [Crypto payment QR codes](/qr/bitcoin) — generate BIP-21 Bitcoin, Lightning, Ethereum and stablecoin payment QR codes in the browser.
+- [Technology](/courses/technology) — the broader emerging-technologies course this material connects to.

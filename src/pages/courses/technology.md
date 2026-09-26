@@ -36,3 +36,8 @@ university: "Universidad Francisco Marroquín"
 - Everett M. Rogers. Diffusion of Innovations (1962)
 - Saifedean Ammous. El patrón Bitcoin: La alternativa descentralizada a los bancos centrales
 - Andreas M. Antonopoulos. Mastering Bitcoin
+
+## Recursos relacionados
+
+- [Recursos sobre LLM](/resources/llm) — bibliotecas, herramientas y guías sobre modelos de lenguaje.
+- [Blockchain](/courses/blockchain) — la asignatura que desarrolla en profundidad la parte de blockchain de este temario.
