@@ -126,15 +126,20 @@ function buildSchedule({ principal, annualRate, years, paymentsPerYear, method }
   return schedule;
 }
 
+// Pinned locale: the schedule is server-rendered and then hydrated, so the
+// runtime default would format differently on a non-Spanish browser and trip
+// a hydration mismatch. This page is Spanish throughout, so es-ES it is.
+const LOCALE = "es-ES";
+
 function formatCurrency(value) {
   if (!Number.isFinite(value)) return "-";
-  return value.toLocaleString(undefined, {
+  return value.toLocaleString(LOCALE, {
     minimumFractionDigits: 2,
     maximumFractionDigits: 2,
   });
 }
 
-const compactFormatter = new Intl.NumberFormat(undefined, {
+const compactFormatter = new Intl.NumberFormat(LOCALE, {
   notation: "compact",
   maximumFractionDigits: 1,
 });

@@ -1,12 +1,60 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import Explorer from "../../components/SalaryExplorer.jsx";
+import FaqAccordion from "../../components/FaqAccordion.astro";
+
+const faqs = [
+  {
+    question: "What's the difference between nominal and real wages?",
+    answer:
+      "Nominal wages are measured in the currency of the day, with no adjustment for price changes. Real wages strip out inflation using CPI, so they show whether pay has actually grown in terms of what it can buy — a country can show rising nominal wages while real wages are flat or falling if inflation outpaces the raise.",
+  },
+  {
+    question: "What does \"PPP-converted\" mean for a wage comparison?",
+    answer:
+      "It converts each country's wage using Purchasing Power Parity rates instead of the market exchange rate, so the comparison reflects local buying power rather than currency-market swings. This is the fairest way to compare average wages across countries with very different price levels and currencies.",
+  },
+  {
+    question: "Why might real wages fall even when nominal wages rise?",
+    answer:
+      "If prices (CPI) rise faster than nominal pay, the real, inflation-adjusted value of that pay falls even though the number on the payslip went up. This has happened in several OECD countries during high-inflation periods — nominal wages kept climbing, but real wages fell for a stretch before catching back up.",
+  },
+  {
+    question: "Where does the wage data come from?",
+    answer:
+      "OECD's Average Annual Wages series, which covers full-time equivalent earnings across member and partner countries in nominal, real (constant prices, national currency), and PPP-converted (constant-price USD) terms — the same three modes this explorer lets you switch between.",
+  },
+  {
+    question: "Is average wage the same as median wage?",
+    answer:
+      "No. Average wage divides total earnings by the number of workers, so it can be pulled upward by high earners at the top of the distribution. Median wage — the midpoint — is often a better gauge of what a typical worker earns, but it isn't what this dataset reports; treat the average as a measure of aggregate labor income per worker, not a typical paycheck.",
+  },
+];
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map(({ question, answer }) => ({
+    "@type": "Question",
+    name: question,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: answer,
+    },
+  })),
+};
 ---
 
 <Layout
   title="Average Salary Explorer"
-  description="Explore average annual wages across OECD countries: nominal vs real evolution and PPP-adjusted cross-country comparison."
+  description="Explore OECD average annual wages across countries: nominal vs. real (inflation-adjusted) evolution and PPP-converted comparisons, with sourced data."
 >
+  <script
+    is:inline
+    slot="head"
+    type="application/ld+json"
+    set:html={JSON.stringify(faqSchema)}
+  />
   <main class="min-h-screen px-3 py-10 sm:px-6">
     <section class="mx-auto max-w-6xl space-y-6">
       <header class="space-y-2 text-center">
@@ -23,6 +71,33 @@ import Explorer from "../../components/SalaryExplorer.jsx";
       </header>
 
       <Explorer client:only="react" />
+
+      <section class="mx-auto max-w-3xl pt-6">
+        <h2 class="mb-3 text-xl font-semibold tracking-tight text-text-1">
+          Related resources
+        </h2>
+        <ul class="list-disc space-y-2 pl-5 text-sm text-text-2">
+          <li>
+            <a href="/resources/ppp-calculator" class="text-blue-600 hover:text-blue-500">
+              PPP Calculator
+            </a>{" "}
+            — convert any amount, not just wages, across countries by purchasing power.
+          </li>
+          <li>
+            <a href="/resources/inflation-calculator" class="text-blue-600 hover:text-blue-500">
+              Inflation Calculator
+            </a>{" "}
+            — adjust an amount for inflation using actual CPI series.
+          </li>
+        </ul>
+      </section>
+
+      <section class="mx-auto max-w-3xl pt-6">
+        <h2 class="mb-4 text-xl font-semibold tracking-tight text-text-1">
+          Frequently asked questions
+        </h2>
+        <FaqAccordion faqs={faqs} />
+      </section>
     </section>
   </main>
 </Layout>

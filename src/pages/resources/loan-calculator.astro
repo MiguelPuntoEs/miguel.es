@@ -52,7 +52,7 @@ const faqSchema = {
 ---
 
 <Layout
-  title="Calculadora de préstamos y cuadro de amortización | Miguel González Calvo"
+  title="Calculadora de préstamos y cuadro de amortización"
   description="Calculadora de préstamos interactiva en línea. Compara los sistemas de amortización francés, italiano y americano con el cuadro de amortización completo y gráficas del capital vivo y capital amortizado."
   lang="es"
 >
@@ -81,7 +81,7 @@ const faqSchema = {
         </p>
       </header>
 
-      <Calculator client:only="react" />
+      <Calculator client:load />
 
       <section class="mx-auto max-w-3xl pt-6">
         <h2 class="mb-3 text-xl font-semibold tracking-tight text-text-1">
@@ -106,6 +106,17 @@ const faqSchema = {
             </a>{" "}
             — temario, apuntes y material docente de la asignatura impartida
             en la Universidad Francisco Marroquín.
+          </li>
+          <li>
+            <a
+              href="/resources/compound-calculator"
+              class="text-blue-600 hover:text-blue-500"
+            >
+              Calculadora de interés compuesto
+            </a>{" "}
+            — capitalización simple y compuesta, rentas pospagables y
+            prepagables, y rentas variables en progresión aritmética y
+            geométrica.
           </li>
         </ul>
       </section>

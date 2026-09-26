@@ -46,7 +46,7 @@ const faqSchema = {
 ---
 
 <Layout
-  title="Compound Interest Calculator"
+  title="Compound Interest & Annuity Calculator"
   description="Free compound interest calculator: ordinary and due annuities, capitalization frequency, growing contributions, and a live simple-interest comparison chart."
 >
   <script
@@ -70,7 +70,57 @@ const faqSchema = {
         </p>
       </header>
 
-      <Calculator client:only="react" />
+      <Calculator client:load />
+
+      <section class="mx-auto max-w-3xl pt-6">
+        <h2 class="mb-3 text-xl font-semibold tracking-tight text-text-1">
+          The formulas behind it
+        </h2>
+        <div class="space-y-3 text-sm leading-relaxed text-text-2">
+          <p>
+            With <code>i</code> the rate per period and <code>n</code> the
+            number of periods, a lump sum <code>P</code> left to compound grows
+            to:
+          </p>
+          <p class="rounded-xl border border-line bg-bg-2 px-4 py-3 font-mono text-[13px] text-text-1">
+            FV = P × (1 + i)<sup>n</sup>
+          </p>
+          <p>
+            A level contribution <code>C</code> made every period is an
+            annuity. Paid at the end of each period it is an
+            <strong>ordinary annuity</strong>; paid at the start it is an
+            <strong>annuity due</strong>, which earns one extra period of
+            interest on every payment:
+          </p>
+          <p class="rounded-xl border border-line bg-bg-2 px-4 py-3 font-mono text-[13px] text-text-1">
+            FV<sub>ordinary</sub> = C × [((1 + i)<sup>n</sup> − 1) ÷ i]<br />
+            FV<sub>due</sub> = FV<sub>ordinary</sub> × (1 + i)
+          </p>
+          <p>
+            When the contribution itself grows by a fixed percentage
+            <code>g</code> each period — a <strong>geometric</strong> or growing
+            annuity, the closest match to contributions that rise with a salary
+            — the closed form is:
+          </p>
+          <p class="rounded-xl border border-line bg-bg-2 px-4 py-3 font-mono text-[13px] text-text-1">
+            FV = C × [((1 + i)<sup>n</sup> − (1 + g)<sup>n</sup>) ÷ (i − g)],
+            for i ≠ g
+          </p>
+          <p>
+            Finally, a nominal annual rate <code>j</code> compounded
+            <code>m</code> times a year is not what you actually earn. The
+            effective annual rate, shown live next to the rate field, is:
+          </p>
+          <p class="rounded-xl border border-line bg-bg-2 px-4 py-3 font-mono text-[13px] text-text-1">
+            EAR = (1 + j ÷ m)<sup>m</sup> − 1
+          </p>
+          <p>
+            So 12% nominal compounded monthly is an effective 12.68% a year,
+            which is why the capitalization setting changes the result even
+            when the quoted rate does not.
+          </p>
+        </div>
+      </section>
 
       <section class="mx-auto max-w-3xl pt-6">
         <h2 class="mb-3 text-xl font-semibold tracking-tight text-text-1">
@@ -104,6 +154,19 @@ const faqSchema = {
               Annuities exercises
             </a>{" "}
             — practice problems on annuities, including growing contributions.
+          </li>
+          <li>
+            <a href="/resources/loan-calculator" class="text-blue-600 hover:text-blue-500">
+              Loan amortization calculator
+            </a>{" "}
+            — the same mathematics from the borrower's side: French, Italian and
+            American amortization methods with a full schedule.
+          </li>
+          <li>
+            <a href="/resources/inflation-calculator" class="text-blue-600 hover:text-blue-500">
+              Inflation calculator
+            </a>{" "}
+            — check what a projected balance is actually worth in today's money.
           </li>
         </ul>
       </section>

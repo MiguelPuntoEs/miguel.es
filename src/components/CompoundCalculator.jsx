@@ -75,7 +75,23 @@ function readParamsFromURL() {
   return out;
 }
 
-const INITIAL = readParamsFromURL();
+// Number formatting is pinned: this component is server-rendered and then
+// hydrated, so a locale-dependent format would differ between the two and
+// break hydration on a non-English browser.
+const LOCALE = "en-US";
+
+const DEFAULTS = {
+  principal: 1000,
+  contributionAmount: 200,
+  contributionsPerYear: 12,
+  contributionGrowth: "flat",
+  growthAmount: 5,
+  growthRate: 0.2,
+  annualRate: 7,
+  years: 20,
+  paymentTiming: "ordinary",
+  compoundsPerYear: 12,
+};
 
 function effectiveAnnualRate(annualRate, compoundsPerYear) {
   const r = Number(annualRate) || 0;
@@ -195,13 +211,13 @@ function calculateSchedule({
 
 function formatCurrency(value) {
   if (!Number.isFinite(value)) return "-";
-  return value.toLocaleString(undefined, {
+  return value.toLocaleString(LOCALE, {
     minimumFractionDigits: 2,
     maximumFractionDigits: 2,
   });
 }
 
-const compactFormatter = new Intl.NumberFormat(undefined, {
+const compactFormatter = new Intl.NumberFormat(LOCALE, {
   notation: "compact",
   maximumFractionDigits: 1,
 });
@@ -284,30 +300,53 @@ function Collapse({ show, children }) {
 }
 
 export default function CompoundCalculator() {
-  const [principal, setPrincipal] = useState(INITIAL.principal ?? 1000);
-  const [contributionAmount, setContributionAmount] = useState(INITIAL.contributionAmount ?? 200);
-  const [contributionsPerYear, setContributionsPerYear] = useState(INITIAL.contributionsPerYear ?? 12);
-  const [contributionGrowth, setContributionGrowth] = useState(INITIAL.contributionGrowth ?? "flat");
-  const [growthAmount, setGrowthAmount] = useState(INITIAL.growthAmount ?? 5);
-  const [growthRate, setGrowthRate] = useState(INITIAL.growthRate ?? 0.2);
-  const [annualRate, setAnnualRate] = useState(INITIAL.annualRate ?? 7);
-  const [years, setYears] = useState(INITIAL.years ?? 20);
-  const [paymentTiming, setPaymentTiming] = useState(INITIAL.paymentTiming ?? "ordinary");
-  const [compoundsPerYear, setCompoundsPerYear] = useState(INITIAL.compoundsPerYear ?? 12);
+  const [principal, setPrincipal] = useState(DEFAULTS.principal);
+  const [contributionAmount, setContributionAmount] = useState(DEFAULTS.contributionAmount);
+  const [contributionsPerYear, setContributionsPerYear] = useState(DEFAULTS.contributionsPerYear);
+  const [contributionGrowth, setContributionGrowth] = useState(DEFAULTS.contributionGrowth);
+  const [growthAmount, setGrowthAmount] = useState(DEFAULTS.growthAmount);
+  const [growthRate, setGrowthRate] = useState(DEFAULTS.growthRate);
+  const [annualRate, setAnnualRate] = useState(DEFAULTS.annualRate);
+  const [years, setYears] = useState(DEFAULTS.years);
+  const [paymentTiming, setPaymentTiming] = useState(DEFAULTS.paymentTiming);
+  const [compoundsPerYear, setCompoundsPerYear] = useState(DEFAULTS.compoundsPerYear);
   const [copied, setCopied] = useState(false);
   const [yScale, setYScale] = useState("linear");
   const [interestMode, setInterestMode] = useState("compound");
-  const [advancedOpen, setAdvancedOpen] = useState(
-    () =>
-      INITIAL.contributionsPerYear !== undefined ||
-      INITIAL.contributionGrowth !== undefined ||
-      INITIAL.paymentTiming !== undefined ||
-      INITIAL.compoundsPerYear !== undefined
-  );
+  const [advancedOpen, setAdvancedOpen] = useState(false);
+  const [urlApplied, setUrlApplied] = useState(false);
 
-  // Keep the URL in sync so any configuration can be shared as a link
+  // Shareable URL state is applied after mount rather than during render:
+  // reading window while rendering would diverge from the server-rendered
+  // markup and break hydration.
   useEffect(() => {
-    if (typeof window === "undefined") return;
+    const p = readParamsFromURL();
+    if (p.principal !== undefined) setPrincipal(p.principal);
+    if (p.contributionAmount !== undefined) setContributionAmount(p.contributionAmount);
+    if (p.contributionsPerYear !== undefined) setContributionsPerYear(p.contributionsPerYear);
+    if (p.contributionGrowth !== undefined) setContributionGrowth(p.contributionGrowth);
+    if (p.growthAmount !== undefined) setGrowthAmount(p.growthAmount);
+    if (p.growthRate !== undefined) setGrowthRate(p.growthRate);
+    if (p.annualRate !== undefined) setAnnualRate(p.annualRate);
+    if (p.years !== undefined) setYears(p.years);
+    if (p.paymentTiming !== undefined) setPaymentTiming(p.paymentTiming);
+    if (p.compoundsPerYear !== undefined) setCompoundsPerYear(p.compoundsPerYear);
+    if (
+      p.contributionsPerYear !== undefined ||
+      p.contributionGrowth !== undefined ||
+      p.paymentTiming !== undefined ||
+      p.compoundsPerYear !== undefined
+    ) {
+      setAdvancedOpen(true);
+    }
+    setUrlApplied(true);
+  }, []);
+
+  // Keep the URL in sync so any configuration can be shared as a link. Held
+  // back until the incoming params have been read, or this effect's first run
+  // would overwrite them with the defaults.
+  useEffect(() => {
+    if (!urlApplied) return;
     const params = new URLSearchParams();
     params.set("p", String(principal));
     params.set("c", String(contributionAmount));
@@ -331,6 +370,7 @@ export default function CompoundCalculator() {
     years,
     paymentTiming,
     compoundsPerYear,
+    urlApplied,
   ]);
 
   const copyLink = () => {

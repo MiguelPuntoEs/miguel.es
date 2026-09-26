@@ -1,4 +1,5 @@
 import { useState, useMemo, useEffect } from "react";
+import { COUNTRY_MAP } from "../data/cpi-countries.js";
 import {
   ResponsiveContainer,
   LineChart,
@@ -17,48 +18,6 @@ const MAX_COMPARE = 3;
 // `legacy` holds the pre-euro national currency with its fixed, irrevocable
 // euro conversion rate (1 EUR = `rate` legacy units) and the last year the
 // legacy currency was in everyday use (cash changeover year minus one).
-const COUNTRY_MAP = {
-  "NOR": { name: "Norway", code: "NOK", symbol: "kr" },
-  "USA": { name: "United States", code: "USD", symbol: "$" },
-  "GBR": { name: "United Kingdom", code: "GBP", symbol: "£" },
-  "DEU": { name: "Germany", code: "EUR", symbol: "€", legacy: { name: "Deutsche Mark", symbol: "DM", rate: 1.95583, lastYear: 2001 } },
-  "FRA": { name: "France", code: "EUR", symbol: "€", legacy: { name: "French franc", symbol: "F", rate: 6.55957, lastYear: 2001 } },
-  "ESP": { name: "Spain", code: "EUR", symbol: "€", legacy: { name: "peseta", symbol: "Pta", rate: 166.386, lastYear: 2001 } },
-  "ITA": { name: "Italy", code: "EUR", symbol: "€", legacy: { name: "Italian lira", symbol: "Lit.", rate: 1936.27, lastYear: 2001 } },
-  "JPN": { name: "Japan", code: "JPY", symbol: "¥" },
-  "CAN": { name: "Canada", code: "CAD", symbol: "$" },
-  "AUS": { name: "Australia", code: "AUD", symbol: "$" },
-  "CHE": { name: "Switzerland", code: "CHF", symbol: "CHF" },
-  "SWE": { name: "Sweden", code: "SEK", symbol: "kr" },
-  "DNK": { name: "Denmark", code: "DKK", symbol: "kr" },
-  "NLD": { name: "Netherlands", code: "EUR", symbol: "€", legacy: { name: "Dutch guilder", symbol: "ƒ", rate: 2.20371, lastYear: 2001 } },
-  "BEL": { name: "Belgium", code: "EUR", symbol: "€", legacy: { name: "Belgian franc", symbol: "fr.", rate: 40.3399, lastYear: 2001 } },
-  "AUT": { name: "Austria", code: "EUR", symbol: "€", legacy: { name: "Austrian schilling", symbol: "öS", rate: 13.7603, lastYear: 2001 } },
-  "FIN": { name: "Finland", code: "EUR", symbol: "€", legacy: { name: "Finnish markka", symbol: "mk", rate: 5.94573, lastYear: 2001 } },
-  "IRL": { name: "Ireland", code: "EUR", symbol: "€", legacy: { name: "Irish pound", symbol: "IR£", rate: 0.787564, lastYear: 2001 } },
-  "PRT": { name: "Portugal", code: "EUR", symbol: "€", legacy: { name: "Portuguese escudo", symbol: "Esc", rate: 200.482, lastYear: 2001 } },
-  "GRC": { name: "Greece", code: "EUR", symbol: "€", legacy: { name: "Greek drachma", symbol: "Dr", rate: 340.750, lastYear: 2001 } },
-  "POL": { name: "Poland", code: "PLN", symbol: "zł" },
-  "CZE": { name: "Czechia", code: "CZK", symbol: "Kč" },
-  "HUN": { name: "Hungary", code: "HUF", symbol: "Ft" },
-  "SVK": { name: "Slovak Republic", code: "EUR", symbol: "€", legacy: { name: "Slovak koruna", symbol: "Sk", rate: 30.1260, lastYear: 2008 } },
-  "SVN": { name: "Slovenia", code: "EUR", symbol: "€", legacy: { name: "Slovenian tolar", symbol: "SIT", rate: 239.640, lastYear: 2006 } },
-  "EST": { name: "Estonia", code: "EUR", symbol: "€", legacy: { name: "Estonian kroon", symbol: "kr", rate: 15.6466, lastYear: 2010 } },
-  "LVA": { name: "Latvia", code: "EUR", symbol: "€", legacy: { name: "Latvian lats", symbol: "Ls", rate: 0.702804, lastYear: 2013 } },
-  "LTU": { name: "Lithuania", code: "EUR", symbol: "€", legacy: { name: "Lithuanian litas", symbol: "Lt", rate: 3.45280, lastYear: 2014 } },
-  "BGR": { name: "Bulgaria", code: "BGN", symbol: "лв" },
-  "HRV": { name: "Croatia", code: "EUR", symbol: "€", legacy: { name: "Croatian kuna", symbol: "kn", rate: 7.53450, lastYear: 2022 } },
-  "ISL": { name: "Iceland", code: "ISK", symbol: "kr" },
-  "MEX": { name: "Mexico", code: "MXN", symbol: "$" },
-  "CHL": { name: "Chile", code: "CLP", symbol: "$" },
-  "COL": { name: "Colombia", code: "COP", symbol: "$" },
-  "CRI": { name: "Costa Rica", code: "CRC", symbol: "₡" },
-  "TUR": { name: "Türkiye", code: "TRY", symbol: "₺" },
-  "KOR": { name: "Korea", code: "KRW", symbol: "₩" },
-  "NZL": { name: "New Zealand", code: "NZD", symbol: "$" },
-  "ISR": { name: "Israel", code: "ILS", symbol: "₪" },
-  "LUX": { name: "Luxembourg", code: "EUR", symbol: "€" },
-};
 
 // Process CPI data from JSON
 function processCPIData(cpiDataRaw) {

@@ -1,12 +1,73 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import Calculator from "../../components/PPPCalculator.jsx";
+import FaqAccordion from "../../components/FaqAccordion.astro";
+import { PPP_RATES, PPP_VINTAGE } from "../../data/ppp-rates.js";
+import { PPP_PAIRS } from "../../data/ppp-pairs.js";
+
+const countryCount = Object.keys(PPP_RATES).length;
+
+// Worked example, computed from the same table the calculator uses so the
+// prose can't drift from the data.
+const example = {
+  from: "Spain",
+  amount: 1000,
+  usd: 1000 / PPP_RATES["Spain"].rate,
+};
+example.jpy = example.usd * PPP_RATES["Japan"].rate;
+
+const faqs = [
+  {
+    question: "What is Purchasing Power Parity (PPP)?",
+    answer:
+      "PPP is an exchange rate that equalizes the purchasing power of different currencies by comparing the cost of the same basket of goods and services in each country. It answers a different question than a market exchange rate: not \"how much foreign currency does my money buy today\" but \"how much can my money actually buy here, compared to somewhere else.\"",
+  },
+  {
+    question: "How is a PPP conversion different from a market exchange rate conversion?",
+    answer:
+      "Market exchange rates float with trade flows, interest rates, and speculation, and can diverge sharply from what money actually buys locally. PPP rates instead compare local prices directly, so they strip out that noise. A salary that looks modest at the market exchange rate can be worth much more — or less — once converted at PPP, because prices for the same goods vary a lot between countries.",
+  },
+  {
+    question: "Why do PPP-converted amounts differ so much from a simple currency conversion?",
+    answer:
+      "Because goods and services — especially non-tradable ones like housing, haircuts, or restaurant meals — cost different amounts in different countries relative to income. A country with a lower cost of living will show a PPP-converted amount higher than its market-exchange-rate equivalent, since the same money stretches further there.",
+  },
+  {
+    question: "Where does the PPP data in this calculator come from?",
+    answer:
+      "The conversion rates are OECD household final consumption expenditure PPP rates. They're a broad, country-level average, so actual purchasing power can still vary by region, city, and the specific basket of goods you care about — treat the result as a solid approximation, not a precise personal budget.",
+  },
+  {
+    question: "Can I use PPP to compare salaries between countries?",
+    answer:
+      "Yes — that's one of the most common uses. Converting a salary at PPP instead of the market exchange rate gives a much better sense of relative living standards, since it reflects what the salary can actually buy locally rather than what it converts to abroad. For a deeper wage comparison across OECD countries, see the Average Salary Explorer.",
+  },
+];
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map(({ question, answer }) => ({
+    "@type": "Question",
+    name: question,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: answer,
+    },
+  })),
+};
 ---
 
 <Layout
-  title="PPP Calculator"
-  description="Convert amounts based on Purchasing Power Parity to see equivalent buying power across countries."
+  title="PPP Calculator — Purchasing Power by Country"
+  description={`Free purchasing power parity calculator on OECD ${PPP_VINTAGE} data. Convert an amount across ${countryCount} countries to compare real buying power, not the market exchange rate.`}
 >
+  <script
+    is:inline
+    slot="head"
+    type="application/ld+json"
+    set:html={JSON.stringify(faqSchema)}
+  />
   <main class="min-h-screen px-3 py-10 sm:px-6">
     <section class="mx-auto max-w-6xl space-y-6">
       <header class="space-y-2 text-center">
@@ -17,12 +78,95 @@ import Calculator from "../../components/PPPCalculator.jsx";
           PPP Calculator
         </h1>
         <p class="mx-auto max-w-2xl text-sm text-text-2">
-          Convert amounts based on Purchasing Power Parity to see equivalent
-          buying power across countries. Compare what money can buy in different economies.
+          Convert an amount across {countryCount} countries at purchasing power
+          parity, on OECD {PPP_VINTAGE} household consumption rates, to see what
+          money actually buys in each economy rather than what it converts to at
+          the market exchange rate.
         </p>
       </header>
 
-      <Calculator client:only="react" />
+      <Calculator client:load />
+
+      <section class="mx-auto max-w-3xl pt-6">
+        <h2 class="mb-3 text-xl font-semibold tracking-tight text-text-1">
+          How purchasing power parity is calculated
+        </h2>
+        <div class="space-y-3 text-sm leading-relaxed text-text-2">
+          <p>
+            A PPP rate is the number of units of a country's currency needed to
+            buy the same basket of goods and services that one US dollar buys in
+            the United States. Converting an amount between two countries
+            therefore takes two steps — express it in PPP dollars, then apply
+            the destination country's rate:
+          </p>
+          <p class="rounded-xl border border-line bg-bg-2 px-4 py-3 font-mono text-[13px] text-text-1">
+            amount in B = (amount in A ÷ PPP rate of A) × PPP rate of B
+          </p>
+          <p>
+            Worked through with real figures from the table above: Spain's PPP
+            rate is {PPP_RATES["Spain"].rate} and Japan's is {PPP_RATES["Japan"].rate}.
+            So €{example.amount.toLocaleString("en-US")} in Spain is
+            €{example.amount.toLocaleString("en-US")} ÷ {PPP_RATES["Spain"].rate}
+            = ${example.usd.toLocaleString("en-US", { maximumFractionDigits: 0 })}
+            in PPP dollars, and that in turn is
+            ${example.usd.toLocaleString("en-US", { maximumFractionDigits: 0 })}
+            × {PPP_RATES["Japan"].rate} = ¥{example.jpy.toLocaleString("en-US", { maximumFractionDigits: 0 })}
+            of Japanese purchasing power.
+          </p>
+          <p>
+            The rates here are OECD household final consumption expenditure PPPs
+            for {PPP_VINTAGE}, national currency per US dollar. They are a
+            country-level average across a broad consumption basket, so real
+            purchasing power still varies by city, region and the particular
+            goods you spend on.
+          </p>
+        </div>
+      </section>
+
+      <section class="mx-auto max-w-3xl pt-6">
+        <h2 class="mb-3 text-xl font-semibold tracking-tight text-text-1">
+          Common currency pairs
+        </h2>
+        <ul class="list-disc space-y-2 pl-5 text-sm text-text-2">
+          {
+            PPP_PAIRS.map((p) => (
+              <li>
+                <a href={`/resources/ppp-calculator/${p.slug}`} class="text-blue-600 hover:text-blue-500">
+                  {p.title}
+                </a>{" "}
+                — {p.teaser}
+              </li>
+            ))
+          }
+        </ul>
+      </section>
+
+      <section class="mx-auto max-w-3xl pt-6">
+        <h2 class="mb-3 text-xl font-semibold tracking-tight text-text-1">
+          Related resources
+        </h2>
+        <ul class="list-disc space-y-2 pl-5 text-sm text-text-2">
+          <li>
+            <a href="/resources/salary-explorer" class="text-blue-600 hover:text-blue-500">
+              Average Salary Explorer
+            </a>{" "}
+            — nominal, real, and PPP-converted wages across OECD countries.
+          </li>
+          <li>
+            <a href="/resources/inflation-calculator" class="text-blue-600 hover:text-blue-500">
+              Inflation Calculator
+            </a>{" "}
+            — adjust an amount for inflation using actual CPI series.
+          </li>
+        </ul>
+      </section>
+
+      <section class="mx-auto max-w-3xl pt-6">
+        <h2 class="mb-4 text-xl font-semibold tracking-tight text-text-1">
+          Frequently asked questions
+        </h2>
+        <FaqAccordion faqs={faqs} />
+      </section>
     </section>
   </main>
 </Layout>

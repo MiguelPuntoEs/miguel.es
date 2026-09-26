@@ -1,12 +1,89 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import Calculator from "../../components/InflationCalculator.jsx";
+import FaqAccordion from "../../components/FaqAccordion.astro";
+import { COUNTRY_MAP } from "../../data/cpi-countries.js";
+import cpi from "../../../public/cpi.json";
+
+// The calculator fetches cpi.json at runtime, so its output can't be
+// server-rendered. The coverage table below is built from the same file at
+// build time instead: it is the part worth crawling, and it answers the
+// "inflation calculator for <country>" queries the widget alone cannot.
+const coverage = Object.entries(cpi)
+  .map(([code, series]) => {
+    const meta = COUNTRY_MAP[code];
+    if (!meta || !series?.length) return null;
+    const years = series.map((e) => e.year);
+    const first = series[0];
+    const last = series[series.length - 1];
+    return {
+      name: meta.name,
+      symbol: meta.symbol,
+      legacy: meta.legacy?.name,
+      from: Math.min(...years),
+      to: Math.max(...years),
+      // What one unit at the start of the series is worth at the end.
+      multiple: last.value / first.value,
+    };
+  })
+  .filter(Boolean)
+  .sort((a, b) => a.name.localeCompare(b.name));
+
+const earliest = Math.min(...coverage.map((c) => c.from));
+const latest = Math.max(...coverage.map((c) => c.to));
+
+const faqs = [
+  {
+    question: "How does this calculator adjust an amount for inflation?",
+    answer:
+      "It uses the Consumer Price Index (CPI) for the selected country: the ratio between the CPI at the target year and the CPI at the starting year tells you how much a given amount is worth at the other point in time. The calculator works in both directions — projecting a past amount forward, or discounting a future or present amount back to see what it would have been worth earlier.",
+  },
+  {
+    question: "What is CPI and why is it used to measure inflation?",
+    answer:
+      "The Consumer Price Index tracks the average price of a representative basket of goods and services bought by households over time. Its year-over-year change is the most common way to measure inflation, because it reflects what everyday cost of living actually looks like, rather than a single price like energy or housing alone.",
+  },
+  {
+    question: "Why do different countries show different inflation rates for the same period?",
+    answer:
+      "Each country's CPI basket, weighting, and monetary policy differ, so the same global shock — an energy price spike, for example — passes through to consumer prices differently depending on local energy mix, taxes, wage dynamics, and currency movements. That's why this calculator lets you pick a country rather than applying one rate everywhere.",
+  },
+  {
+    question: "How far back does the data go?",
+    answer:
+      "Coverage varies by country, but for most of them the underlying OECD CPI series goes back several decades, in some cases to the 1950s or 1960s. Earlier years are shown where available; if a year isn't in the dropdown, the series doesn't cover it for that country.",
+  },
+  {
+    question: "Is CPI-based inflation the same as what I feel in my own spending?",
+    answer:
+      "Not exactly. CPI is a national average across a fixed basket, so it won't match your personal experience if your spending mix differs from that basket — for example if housing, healthcare, or a specific good you buy a lot of has moved faster or slower than the overall index.",
+  },
+];
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map(({ question, answer }) => ({
+    "@type": "Question",
+    name: question,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: answer,
+    },
+  })),
+};
 ---
 
 <Layout
-  title="Inflation Calculator"
-  description="Adjust amounts for inflation based on country-specific rates. Calculate past purchasing power or future values."
+  title="Inflation Calculator by Country"
+  description={`Free inflation calculator on real CPI data for ${coverage.length} countries, ${earliest}–${latest}. See what an amount was worth then or now, in either direction.`}
 >
+  <script
+    is:inline
+    slot="head"
+    type="application/ld+json"
+    set:html={JSON.stringify(faqSchema)}
+  />
   <main class="min-h-screen px-3 py-10 sm:px-6">
     <section class="mx-auto max-w-6xl space-y-6">
       <header class="space-y-2 text-center">
@@ -17,12 +94,105 @@ import Calculator from "../../components/InflationCalculator.jsx";
           Inflation Calculator
         </h1>
         <p class="mx-auto max-w-2xl text-sm text-text-2">
-          Adjust monetary amounts for inflation using country-specific rates.
-          See how purchasing power changes over time or project future values.
+          Adjust an amount for inflation on real consumer price index data for
+          {coverage.length} countries, covering {earliest} to {latest}. Works in
+          both directions: what a past sum is worth today, or what today's sum
+          was worth then.
         </p>
       </header>
 
       <Calculator client:only="react" />
+
+      <section class="mx-auto max-w-3xl pt-6">
+        <h2 class="mb-3 text-xl font-semibold tracking-tight text-text-1">
+          How inflation adjustment is calculated
+        </h2>
+        <div class="space-y-3 text-sm leading-relaxed text-text-2">
+          <p>
+            Every figure here comes from the consumer price index for the
+            country you pick. Adjusting an amount between two years is the ratio
+            of the index in those years:
+          </p>
+          <p class="rounded-xl border border-line bg-bg-2 px-4 py-3 font-mono text-[13px] text-text-1">
+            value in year B = amount × (CPI in year B ÷ CPI in year A)
+          </p>
+          <p>
+            Because it is a ratio, the same formula runs in both directions —
+            bringing a historical sum forward to today's money, or discounting a
+            present sum back to what it would have been worth in the past.
+          </p>
+          <p>
+            CPI is a national average across a fixed basket of household goods
+            and services, so it will not match your own spending if your mix
+            differs from that basket. It also says nothing about asset prices:
+            housing and equities are not in the index.
+          </p>
+        </div>
+      </section>
+
+      <section class="mx-auto max-w-3xl pt-6">
+        <h2 class="mb-1 text-xl font-semibold tracking-tight text-text-1">
+          Countries and years covered
+        </h2>
+        <p class="mb-3 text-[13px] text-text-3">
+          The rightmost column is what one unit of currency at the start of each
+          series buys by the end of it — the cumulative effect of inflation over
+          the whole period.
+        </p>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="border-b border-line text-left text-[13px] text-text-3">
+                <th class="py-2 pr-3 font-medium">Country</th>
+                <th class="py-2 pr-3 font-medium">Series</th>
+                <th class="py-2 pr-3 font-medium">Earlier currency</th>
+                <th class="py-2 text-right font-medium">Prices multiplied by</th>
+              </tr>
+            </thead>
+            <tbody>
+              {
+                coverage.map((c) => (
+                  <tr class="border-b border-line/60">
+                    <td class="py-1.5 pr-3 text-text-1">{c.name}</td>
+                    <td class="py-1.5 pr-3 font-mono text-text-2">{c.from}–{c.to}</td>
+                    <td class="py-1.5 pr-3 text-text-3">{c.legacy ?? "—"}</td>
+                    <td class="py-1.5 text-right font-mono text-text-2">
+                      {c.multiple.toLocaleString("en-US", { maximumFractionDigits: 1 })}×
+                    </td>
+                  </tr>
+                ))
+              }
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="mx-auto max-w-3xl pt-6">
+        <h2 class="mb-3 text-xl font-semibold tracking-tight text-text-1">
+          Related resources
+        </h2>
+        <ul class="list-disc space-y-2 pl-5 text-sm text-text-2">
+          <li>
+            <a href="/resources/salary-explorer" class="text-blue-600 hover:text-blue-500">
+              Average Salary Explorer
+            </a>{" "}
+            — nominal vs. real wage evolution across OECD countries.
+          </li>
+          <li>
+            <a href="/resources/ppp-calculator" class="text-blue-600 hover:text-blue-500">
+              PPP Calculator
+            </a>{" "}
+            — compare purchasing power across countries, not just over time.
+          </li>
+        </ul>
+      </section>
+
+      <section class="mx-auto max-w-3xl pt-6">
+        <h2 class="mb-4 text-xl font-semibold tracking-tight text-text-1">
+          Frequently asked questions
+        </h2>
+        <FaqAccordion faqs={faqs} />
+      </section>
     </section>
   </main>
 </Layout>
