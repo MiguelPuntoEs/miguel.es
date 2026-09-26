@@ -212,26 +212,6 @@ const writing = [
     </section>
 
     <section class="section reveal" style="--i:4">
-      <h2 class="section__title"><svg class="icon" aria-hidden="true"><use href="#i-cap" /></svg> Teaching</h2>
-      <div class="rowlist">
-        {
-          teachingTeaser.map((t) => (
-            <a class="row" href={t.url}>
-              <span class="row__main">
-                <span class="row__title">{t.title}</span>
-                <span class="row__sub">{t.university}</span>
-              </span>
-              <span class="row__meta">{t.meta}</span>
-            </a>
-          ))
-        }
-      </div>
-      <p style="margin-top:0.75rem">
-        <a class="link" href="/courses">All courses →</a>
-      </p>
-    </section>
-
-    <section class="section reveal" style="--i:5">
       <h2 class="section__title"><svg class="icon" aria-hidden="true"><use href="#i-book" /></svg> Education</h2>
       <div class="tl">
         {
@@ -256,6 +236,26 @@ const writing = [
           ))
         }
       </div>
+    </section>
+
+    <section class="section reveal" style="--i:5">
+      <h2 class="section__title"><svg class="icon" aria-hidden="true"><use href="#i-cap" /></svg> Teaching</h2>
+      <div class="rowlist">
+        {
+          teachingTeaser.map((t) => (
+            <a class="row" href={t.url}>
+              <span class="row__main">
+                <span class="row__title">{t.title}</span>
+                <span class="row__sub">{t.university}</span>
+              </span>
+              <span class="row__meta">{t.meta}</span>
+            </a>
+          ))
+        }
+      </div>
+      <p style="margin-top:0.75rem">
+        <a class="link" href="/courses">All courses →</a>
+      </p>
     </section>
 
     <section class="section reveal" id="writing" style="--i:6">
