@@ -1,12 +1,47 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import ResourceEntry from "../../components/ResourceEntry.astro";
+
+const abs = (path) => new URL(path, Astro.site).href;
+
+const catalogLd = {
+  "@context": "https://schema.org",
+  "@type": "DataCatalog",
+  name: "Historical monetary data",
+  description:
+    "Primary-source economic datasets transcribed from page images into machine-readable form and released under CC0.",
+  url: abs("/data"),
+  license: "https://creativecommons.org/publicdomain/zero/1.0/",
+  creator: {
+    "@type": "Person",
+    name: "Miguel González Calvo",
+    url: abs("/"),
+  },
+  dataset: [
+    {
+      "@type": "Dataset",
+      name: "The Continental dollar, 1777–1781",
+      url: abs("/data/continental-dollar"),
+    },
+    {
+      "@type": "Dataset",
+      name: "The greenbacks, 1859–1866",
+      url: abs("/data/greenbacks"),
+    },
+  ],
+};
 ---
 
 <Layout
-  title="Data | Miguel González Calvo"
+  title="Data"
   description="Primary-source economic datasets on the two great American paper-money episodes: the Continental dollar (1777–1781) and the Civil War greenbacks (1859–1866)."
 >
+  <script
+    is:inline
+    slot="head"
+    type="application/ld+json"
+    set:html={JSON.stringify(catalogLd)}
+  />
   <main class="page">
     <h1 class="page-title">Data</h1>
     <p class="page-lede">

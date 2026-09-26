@@ -2,13 +2,97 @@
 import Layout from "../../layouts/Layout.astro";
 import TimeSeries from "../../charts/TimeSeries.jsx";
 import SourceComparison from "../../charts/SourceComparison.jsx";
+
+const REPO =
+  "https://github.com/MiguelPuntoEs/historical-monetary-data/tree/main/continental-dollar";
+const abs = (path) => new URL(path, Astro.site).href;
+
+// Dataset markup makes these eligible for Google Dataset Search, where a
+// transcription like this competes far better than in general web search.
+const datasetLd = {
+  "@context": "https://schema.org",
+  "@type": "Dataset",
+  name: "The Continental dollar, 1777–1781",
+  alternateName: "State scales of depreciation and contemporary quotations for Continental currency",
+  description:
+    "Scales of depreciation enacted by seven states to settle debts in Continental currency, with contemporary merchants' quotations for Philadelphia and Virginia, transcribed from page images of the 1828 federal compilation, the Pennsylvania statute, Webster and Phillips.",
+  url: abs("/data/continental-dollar"),
+  license: "https://creativecommons.org/publicdomain/zero/1.0/",
+  isAccessibleForFree: true,
+  creator: {
+    "@type": "Person",
+    name: "Miguel González Calvo",
+    url: abs("/"),
+  },
+  temporalCoverage: "1777/1781",
+  spatialCoverage: { "@type": "Place", name: "United States" },
+  measurementTechnique:
+    "Manual transcription from page images; where compilations conflict with the enacted statute, all versions are published rather than one silently preferred",
+  keywords: [
+    "Continental dollar",
+    "Continental currency",
+    "scale of depreciation",
+    "American Revolution",
+    "monetary history",
+    "colonial America",
+    "United States",
+  ],
+  variableMeasured: [
+    "Legal ratio of Continental dollars to specie, by state and month",
+    "Contemporary merchants' quotations, Philadelphia and Virginia",
+    "Pennsylvania scale as printed in three sources",
+  ],
+  citation: [
+    "Amount of Continental Money issued during the Revolutionary War, and the Depreciation of the same, House Doc. No. 107, 20th Cong. 1st sess. (Washington: Gales & Seaton, 1828), pp. 30–33.",
+    "Statutes at Large of Pennsylvania (1904), vol. 10, pp. 283–89 — the Act of 3 April 1781, ch. CMXXXV.",
+    "Pelatiah Webster, Political Essays on the Nature and Operation of Money, Public Finances and Other Subjects (Philadelphia, 1791), p. 501.",
+    "Henry Phillips, Jr., Continental Paper Money (Roxbury, 1866), Appendix D and pp. 217–18.",
+  ],
+  includedInDataCatalog: {
+    "@type": "DataCatalog",
+    name: "Historical monetary data",
+    url: abs("/data"),
+  },
+  distribution: [
+    {
+      "@type": "DataDownload",
+      name: "State scales of depreciation",
+      encodingFormat: "application/json",
+      contentUrl: abs("/data/continental-state-scales.json"),
+    },
+    {
+      "@type": "DataDownload",
+      name: "Contemporary quotations, Philadelphia and Virginia",
+      encodingFormat: "application/json",
+      contentUrl: abs("/data/continental-quotations.json"),
+    },
+    {
+      "@type": "DataDownload",
+      name: "Pennsylvania scale in three printed sources",
+      encodingFormat: "application/json",
+      contentUrl: abs("/data/pennsylvania-three-sources.json"),
+    },
+    {
+      "@type": "DataDownload",
+      name: "Full transcription, CSV",
+      encodingFormat: "text/csv",
+      contentUrl: REPO,
+    },
+  ],
+};
 ---
 
 <Layout
-  title="The Continental dollar, 1777–1781 | Data"
-  description="State scales of depreciation and contemporary merchants' quotations for the Continental dollar, transcribed from primary sources."
+  title="The Continental dollar, 1777–1781"
+  description="State scales of depreciation and contemporary merchants' quotations for the Continental dollar, transcribed from primary sources. Open CC0 transcription."
   article
 >
+  <script
+    is:inline
+    slot="head"
+    type="application/ld+json"
+    set:html={JSON.stringify(datasetLd)}
+  />
   <main class="page">
     <h1 class="page-title">The Continental dollar, 1777–1781</h1>
     <p class="page-lede">
@@ -22,9 +106,13 @@ import SourceComparison from "../../charts/SourceComparison.jsx";
 
     <div class="doc">
       <p>
-        <a href="https://github.com/MiguelPuntoEs/historical-monetary-data/tree/main/continental-dollar"
-          >Repository and CSVs →</a
-        >
+        <a href={REPO}>Repository and CSVs →</a>
+      </p>
+      <p>
+        Released under CC0. The charted series are also served directly as JSON:
+        <a href="/data/continental-state-scales.json">state scales</a>,
+        <a href="/data/continental-quotations.json">contemporary quotations</a>
+        and <a href="/data/pennsylvania-three-sources.json">the Pennsylvania comparison</a>.
       </p>
 
       <h2>The legal value was not one number</h2>

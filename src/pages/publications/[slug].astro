@@ -1,0 +1,149 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { PUBLICATIONS } from "../../data/publications.js";
+
+export function getStaticPaths() {
+  return PUBLICATIONS.map((p) => ({ params: { slug: p.slug }, props: p }));
+}
+
+const pub = Astro.props;
+const {
+  slug, title, shortTitle, description, year, type, schemaType, venue, place,
+  authors, supervisor, grade, keywords, summary, files, related, lang = "en",
+} = pub;
+
+const abs = (path) => new URL(path, Astro.site).href;
+const canonical = abs(`/publications/${slug}`);
+
+const workLd = {
+  "@context": "https://schema.org",
+  "@type": schemaType,
+  name: title,
+  headline: title,
+  url: canonical,
+  datePublished: year,
+  inLanguage: lang,
+  abstract: summary.join(" "),
+  keywords: keywords.join(", "),
+  author: authors.map((name) => ({ "@type": "Person", name })),
+  publisher: { "@type": "Organization", name: venue },
+  ...(files.length
+    ? {
+        associatedMedia: files.map((f) => ({
+          "@type": "MediaObject",
+          name: f.label,
+          contentUrl: abs(f.href),
+          encodingFormat: "application/pdf",
+        })),
+      }
+    : {}),
+};
+
+const breadcrumbLd = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Publications", item: abs("/publications") },
+    { "@type": "ListItem", position: 2, name: shortTitle, item: canonical },
+  ],
+};
+
+const isEs = lang === "es";
+---
+
+<Layout
+  title={shortTitle}
+  description={description}
+  lang={lang}
+  article
+>
+  <script is:inline slot="head" type="application/ld+json" set:html={JSON.stringify(workLd)} />
+  <script is:inline slot="head" type="application/ld+json" set:html={JSON.stringify(breadcrumbLd)} />
+
+  <main class="page">
+    <article class="doc reveal" style="--i:0">
+      <nav class="crumb">
+        <a href="/publications">{isEs ? "Publicaciones" : "Publications"}</a>
+        <span> / </span>
+        <span>{year}</span>
+      </nav>
+
+      <h1>{title}</h1>
+
+      <dl class="meta">
+        <div><dt>{isEs ? "Tipo" : "Type"}</dt><dd>{type}</dd></div>
+        <div><dt>{isEs ? "Publicado" : "Published"}</dt><dd>{year}</dd></div>
+        <div><dt>{isEs ? "Autores" : "Authors"}</dt><dd>{authors.join(", ")}</dd></div>
+        <div><dt>{isEs ? "Publicado en" : "Venue"}</dt><dd>{venue}{place && <>, {place}</>}</dd></div>
+        {supervisor && <div><dt>{isEs ? "Tutor" : "Supervisor"}</dt><dd>{supervisor}</dd></div>}
+        {grade && <div><dt>{isEs ? "Calificación" : "Grade"}</dt><dd>{grade}</dd></div>}
+      </dl>
+
+      <h2>{isEs ? "Resumen" : "Abstract"}</h2>
+      {summary.map((p) => <p>{p}</p>)}
+
+      {
+        files.length > 0 && (
+          <>
+            <h2>{isEs ? "Descargas" : "Download"}</h2>
+            <ul>
+              {files.map((f) => (
+                <li><a href={f.href}>{f.label}</a></li>
+              ))}
+            </ul>
+          </>
+        )
+      }
+
+      {
+        related.length > 0 && (
+          <>
+            <h2>{isEs ? "Relacionado" : "Related"}</h2>
+            <ul>
+              {related.map((r) => (
+                <li><a href={r.href}>{r.label}</a> — {r.note}</li>
+              ))}
+            </ul>
+          </>
+        )
+      }
+
+      <p class="backlink">
+        <a href="/publications">
+          {isEs ? "← Todas las publicaciones y conferencias" : "← All publications and talks"}
+        </a>
+      </p>
+    </article>
+  </main>
+</Layout>
+
+<style>
+  .crumb {
+    font-size: 0.8125rem;
+    color: var(--color-text-3);
+    margin-bottom: 0.75rem;
+  }
+  .meta {
+    display: grid;
+    gap: 0.4rem;
+    margin: 1.25rem 0 2rem;
+    padding: 1rem 1.1rem;
+    border: 1px solid var(--color-line);
+    border-radius: 12px;
+    background: var(--color-bg-2);
+    font-size: 0.875rem;
+  }
+  .meta > div {
+    display: grid;
+    grid-template-columns: 7.5rem 1fr;
+    gap: 0.75rem;
+  }
+  .meta dt { color: var(--color-text-3); }
+  .meta dd { color: var(--color-text-1); margin: 0; }
+  .backlink { margin-top: 2.5rem; font-size: 0.875rem; }
+
+  @media (max-width: 480px) {
+    .meta > div { grid-template-columns: 1fr; gap: 0.1rem; }
+    .meta { gap: 0.7rem; }
+  }
+</style>

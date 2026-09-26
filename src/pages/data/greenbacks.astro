@@ -1,13 +1,88 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import TimeSeries from "../../charts/TimeSeries.jsx";
+
+const REPO = "https://github.com/MiguelPuntoEs/historical-monetary-data/tree/main/greenbacks";
+const abs = (path) => new URL(path, Astro.site).href;
+
+// Dataset markup makes these eligible for Google Dataset Search, where a
+// transcription like this competes far better than in general web search.
+const datasetLd = {
+  "@context": "https://schema.org",
+  "@type": "Dataset",
+  name: "The greenbacks, 1859–1866",
+  alternateName: "Gold premium, prices, wages and money stock during the American Civil War",
+  description:
+    "Gold prices, commodity prices, wages and the money stock during the American Civil War, transcribed from page images of Wesley C. Mitchell's A History of the Greenbacks (1903) and the Friedman–Schwartz–Mitchell estimates in Historical Statistics of the United States.",
+  url: abs("/data/greenbacks"),
+  license: "https://creativecommons.org/publicdomain/zero/1.0/",
+  isAccessibleForFree: true,
+  creator: {
+    "@type": "Person",
+    name: "Miguel González Calvo",
+    url: abs("/"),
+  },
+  temporalCoverage: "1859/1866",
+  spatialCoverage: { "@type": "Place", name: "United States" },
+  measurementTechnique: "Manual transcription from page images, cross-checked against a second source where one exists",
+  keywords: [
+    "greenbacks",
+    "American Civil War",
+    "gold premium",
+    "money stock",
+    "monetary history",
+    "nineteenth-century prices",
+    "United States",
+  ],
+  variableMeasured: [
+    "Gold price of $100 in paper currency",
+    "Money stock",
+    "Non-interest-bearing government currency",
+    "Specie stock",
+  ],
+  citation: [
+    "Wesley C. Mitchell, A History of the Greenbacks: With Special Reference to the Economic Consequences of Their Issue, 1862–65 (Chicago: University of Chicago Press, 1903), Appendices A–C and Table V.",
+    "Historical Statistics of the United States, Millennial Edition (Cambridge University Press, 2006), Table Cj26-41 — Friedman, Schwartz and Mitchell, contributed by Hugh Rockoff.",
+  ],
+  includedInDataCatalog: {
+    "@type": "DataCatalog",
+    name: "Historical monetary data",
+    url: abs("/data"),
+  },
+  distribution: [
+    {
+      "@type": "DataDownload",
+      name: "Gold price of paper, monthly",
+      encodingFormat: "application/json",
+      contentUrl: abs("/data/greenback-gold-monthly.json"),
+    },
+    {
+      "@type": "DataDownload",
+      name: "Money stock, specie and government currency",
+      encodingFormat: "application/json",
+      contentUrl: abs("/data/greenback-money-stock.json"),
+    },
+    {
+      "@type": "DataDownload",
+      name: "Full transcription, CSV",
+      encodingFormat: "text/csv",
+      contentUrl: REPO,
+    },
+  ],
+};
 ---
 
 <Layout
-  title="The greenbacks, 1859–1866 | Data"
-  description="Gold prices, wages, commodity prices and the money stock during the American Civil War, from Wesley C. Mitchell's History of the Greenbacks (1903)."
+  title="The greenbacks, 1859–1866"
+  description="Gold prices, wages, commodity prices and the money stock during the American Civil War, from Wesley C. Mitchell's History of the Greenbacks (1903). Open CC0 data."
   article
 >
+  <script
+    is:inline
+    slot="head"
+    type="application/ld+json"
+    set:html={JSON.stringify(datasetLd)}
+  />
   <main class="page">
     <h1 class="page-title">The greenbacks, 1859–1866</h1>
     <p class="page-lede">
@@ -21,9 +96,12 @@ import TimeSeries from "../../charts/TimeSeries.jsx";
 
     <div class="doc">
       <p>
-        <a href="https://github.com/MiguelPuntoEs/historical-monetary-data/tree/main/greenbacks"
-          >Repository and CSVs →</a
-        >
+        <a href={REPO}>Repository and CSVs →</a>
+      </p>
+      <p>
+        Released under CC0. The two charted series are also served directly as
+        JSON: <a href="/data/greenback-gold-monthly.json">gold price of paper</a>
+        and <a href="/data/greenback-money-stock.json">money stock</a>.
       </p>
 
       <h2>The gold price of paper</h2>
