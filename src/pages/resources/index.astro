@@ -1,32 +1,20 @@
 ---
 import ResourceEntry from "../../components/ResourceEntry.astro";
 import Layout from "../../layouts/Layout.astro";
-
-const courseModules = import.meta.glob('../courses/*.md', { eager: true });
-const courses = Object.entries(courseModules).map(([path, mod]) => ({
-  frontmatter: mod.frontmatter,
-  url: path.replace('..', '/courses').replace('/courses/courses', '/courses').replace('.md', ''),
-}));
-const courseEntries = courses.map(course => ({
-  title: course.frontmatter.title,
-  description: course.frontmatter.description,
-  url: course.url
-}));
+import { TOOLS } from "../../data/tools.js";
 ---
 
-<Layout title="Miguel González Calvo | Resources" description="Teaching materials, calculators, and curated reference resources on AI, economics, Python, and data science">
+<Layout title="Resources" description="Teaching materials, calculators, and curated reference resources on AI, economics, Python, and data science">
   <main class="page">
     <h1 class="page-title" style="margin-bottom:1.5rem">Resources</h1>
-    
-    <h2 class="section__title">Teaching</h2>
+
+    <h2 class="section__title">Teaching materials</h2>
     <div class="rowlist section">
-      {courseEntries.map(course => (
-        <ResourceEntry
-          title={course.title}
-          description={course.description}
-          url={course.url}
-        />
-      ))}
+      <ResourceEntry
+        title="Courses"
+        description="Syllabi, notes and materials for every course I teach."
+        url="/courses"
+      />
       <ResourceEntry
         title="Correcting rubrics"
         description="Rubrics to correct assignments and exams (Spanish)."
@@ -41,36 +29,20 @@ const courseEntries = courses.map(course => ({
 
     <h2 class="section__title">Tools & Calculators</h2>
     <div class="rowlist section">
-      <ResourceEntry
-        title="QR Code Generator"
-        description="Generate QR codes for URLs, contacts, WiFi, events, and more."
-        url="/qr"
-      />
-      <ResourceEntry
-        title="Compound Interest Calculator"
-        description="Interactive calculator for compound interest with periodic contributions."
-        url="/resources/compound-calculator"
-      />
-      <ResourceEntry
-        title="PPP Calculator"
-        description="Convert amounts based on Purchasing Power Parity across countries."
-        url="/resources/ppp-calculator"
-      />
-      <ResourceEntry
-        title="Inflation Calculator"
-        description="Adjust amounts for inflation using actual OECD CPI data."
-        url="/resources/inflation-calculator"
-      />
-      <ResourceEntry
-        title="Average Salary Explorer"
-        description="Nominal vs real wage evolution and PPP cross-country comparison with OECD data."
-        url="/resources/salary-explorer"
-      />
-      <ResourceEntry
-        title="Loan Amortization Calculator"
-        description="Compare French, Italian and American loan amortization methods with schedule and charts (Spanish)."
-        url="/resources/loan-calculator"
-      />
+      {
+        TOOLS.map((t) => (
+          <a class="rowlink" href={t.url}>
+            <span class="rowlink__icon">
+              <svg class="icon" aria-hidden="true"><use href={`#${t.icon}`} /></svg>
+            </span>
+            <span class="rowlink__text">
+              <span class="rowlink__name">{t.name}</span>
+              <span class="rowlink__desc">{t.desc}</span>
+            </span>
+            <svg class="icon rowlink__go" aria-hidden="true"><use href="#i-arrow-right" /></svg>
+          </a>
+        ))
+      }
     </div>
 
     <h2 class="section__title">Data</h2>

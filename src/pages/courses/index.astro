@@ -1,0 +1,51 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { COURSES } from "../../data/courses.js";
+
+const courseModules = import.meta.glob("./*.md", { eager: true });
+const bySlug = Object.fromEntries(
+  Object.entries(courseModules).map(([path, mod]) => [
+    path.replace("./", "").replace(".md", ""),
+    mod.frontmatter,
+  ]),
+);
+
+const courses = COURSES.map(({ slug, meta }) => ({
+  url: `/courses/${slug}`,
+  meta,
+  ...bySlug[slug],
+}));
+---
+
+<Layout
+  title="Courses"
+  description="Syllabi, notes and materials for the economics, Python, financial mathematics, blockchain and technology courses I teach at three universities."
+>
+  <main class="page">
+    <header class="section reveal" style="--i:0">
+      <h1 class="page-title">Courses</h1>
+      <p class="page-lede">
+        Courses I teach at Universidad Francisco Marroquín, Universidad de las
+        Hespérides and Universidad Alfonso X el Sabio, covering economics,
+        Python, financial mathematics, blockchain and technology. Each page
+        has the syllabus, notes and materials for that course.
+      </p>
+    </header>
+
+    <section class="section reveal" style="--i:1">
+      <div class="rowlist">
+        {
+          courses.map((c) => (
+            <a class="row" href={c.url}>
+              <span class="row__main">
+                <span class="row__title">{c.title}</span>
+                <span class="row__sub">{c.description}</span>
+              </span>
+              <span class="row__meta">{c.meta}</span>
+            </a>
+          ))
+        }
+      </div>
+    </section>
+  </main>
+</Layout>

@@ -3,45 +3,21 @@ import Image from "astro/components/Image.astro";
 import profile from "../assets/pictures/profile.jpg";
 import Layout from "../layouts/Layout.astro";
 import { PROJECTS } from "../data/projects.js";
+import { TOOLS } from "../data/tools.js";
+import { COURSES } from "../data/courses.js";
 
-const tools = [
-  {
-    url: "/resources/salary-explorer",
-    icon: "i-chart",
-    name: "Average Salary Explorer",
-    desc: "Real vs nominal wages, compared across countries at PPP",
-  },
-  {
-    url: "/resources/inflation-calculator",
-    icon: "i-receipt",
-    name: "Inflation Calculator",
-    desc: "What an amount is worth over time, on actual CPI series",
-  },
-  {
-    url: "/resources/ppp-calculator",
-    icon: "i-globe",
-    name: "PPP Calculator",
-    desc: "Convert a salary between countries by purchasing power",
-  },
-  {
-    url: "/resources/compound-calculator",
-    icon: "i-layers",
-    name: "Compound Interest",
-    desc: "Growth with periodic contributions, charted",
-  },
-  {
-    url: "/resources/loan-calculator",
-    icon: "i-bank",
-    name: "Loan Amortization",
-    desc: "French, Italian and American methods side by side",
-  },
-  {
-    url: "/qr",
-    icon: "i-qr",
-    name: "QR Generator",
-    desc: "URLs, WiFi, vCards and crypto — generated in your browser",
-  },
-];
+const courseModules = import.meta.glob("./courses/*.md", { eager: true });
+const courseFrontmatter = Object.fromEntries(
+  Object.entries(courseModules).map(([path, mod]) => [
+    path.replace("./courses/", "").replace(".md", ""),
+    mod.frontmatter,
+  ]),
+);
+const teachingTeaser = COURSES.slice(0, 3).map(({ slug, meta }) => ({
+  url: `/courses/${slug}`,
+  meta,
+  ...courseFrontmatter[slug],
+}));
 
 const experience = [
   {
@@ -62,17 +38,6 @@ const experience = [
   { role: "Software Engineer", org: "Airbus Defence & Space", meta: ["2018 — 2019", "Munich"] },
   { role: "Software Engineer", org: "GMV", meta: ["2017", "Tres Cantos"] },
   { role: "Developer, intern", org: "AEMet", meta: ["2016", "Madrid"] },
-];
-
-const teaching = [
-  { title: "Financial Mathematics", sub: "U. Francisco Marroquín", meta: "2025 —", url: "/courses/financial-mathematics" },
-  { title: "Python for Finance", sub: "U. Francisco Marroquín", meta: "2025 —", url: "/courses/python-for-finance" },
-  { title: "International Economics and Globalization", sub: "U. de las Hespérides", meta: "2025 —", url: "/courses/international-economics" },
-  { title: "Blockchain", sub: "U. Alfonso X el Sabio", meta: "2025 —", url: "/courses/blockchain" },
-  { title: "Technology", sub: "U. Francisco Marroquín", meta: "2025 —", url: "/courses/technology" },
-  { title: "IA: Tu Copiloto Académico", sub: "U. Francisco Marroquín", meta: "2026", url: "/courses/academic-copilot" },
-  { title: "Economics I", sub: "U. Francisco Marroquín", meta: "2025", url: "/courses/economics-i" },
-  { title: "Python Seminar", sub: "U. Francisco Marroquín", meta: "2025", url: "/courses/python-seminar" },
 ];
 
 const education = [
@@ -191,7 +156,7 @@ const writing = [
       <h2 class="section__title"><svg class="icon" aria-hidden="true"><use href="#i-terminal" /></svg> Tools</h2>
       <div class="rowlist">
         {
-          tools.map((t) => (
+          TOOLS.map((t) => (
             <a class="rowlink" href={t.url}>
               <span class="rowlink__icon">
                 <svg class="icon" aria-hidden="true"><use href={`#${t.icon}`} /></svg>
@@ -250,27 +215,20 @@ const writing = [
       <h2 class="section__title"><svg class="icon" aria-hidden="true"><use href="#i-cap" /></svg> Teaching</h2>
       <div class="rowlist">
         {
-          teaching.map((t) =>
-            t.url ? (
-              <a class="row" href={t.url}>
-                <span class="row__main">
-                  <span class="row__title">{t.title}</span>
-                  <span class="row__sub">{t.sub}</span>
-                </span>
-                <span class="row__meta">{t.meta}</span>
-              </a>
-            ) : (
-              <div class="row">
-                <span class="row__main">
-                  <span class="row__title">{t.title}</span>
-                  <span class="row__sub">{t.sub}</span>
-                </span>
-                <span class="row__meta">{t.meta}</span>
-              </div>
-            ),
-          )
+          teachingTeaser.map((t) => (
+            <a class="row" href={t.url}>
+              <span class="row__main">
+                <span class="row__title">{t.title}</span>
+                <span class="row__sub">{t.university}</span>
+              </span>
+              <span class="row__meta">{t.meta}</span>
+            </a>
+          ))
         }
       </div>
+      <p style="margin-top:0.75rem">
+        <a class="link" href="/courses">All courses →</a>
+      </p>
     </section>
 
     <section class="section reveal" style="--i:5">

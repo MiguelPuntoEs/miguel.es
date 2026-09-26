@@ -6,3 +6,5 @@
 /resources/errors.html /resources/errors 301
 /courses/python-ufm-25.html /courses/python-for-finance 301
 /resources/historical-monetary-data /data 301
+/resources/rubrics/exam /resources/rubrics 301
+/resources/rubrics/assignment /resources/rubrics 301

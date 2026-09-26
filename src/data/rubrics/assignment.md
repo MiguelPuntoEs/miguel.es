@@ -1,5 +1,4 @@
 ---
-layout: "../../../layouts/MarkdownLayout.astro"
 title: "Rúbrica: corrección de trabajos"
 description: "Prompt de rúbrica para corrección asistida por LLM"
 lang: "es"
