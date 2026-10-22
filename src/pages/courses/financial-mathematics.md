@@ -87,6 +87,10 @@ Hojas de ejercicios del curso, con soluciones:
 - [Gestión de riesgos de interés](/docs/financial-mathematics-exercises-interest-risk.pdf)
 - [Soluciones completas](/docs/financial-mathematics-exercises-solutions.pdf)
 
+## Tests de evaluación continua
+
+- [Test del 22 de octubre de 2026](/docs/financial-mathematics-test-2026-10-22.pdf) ([soluciones](/docs/financial-mathematics-test-2026-10-22-solutions.pdf))
+
 ## Bibliografía
 
 El formulario del curso está disponible en [PDF](/docs/financial-mathematics.pdf).
