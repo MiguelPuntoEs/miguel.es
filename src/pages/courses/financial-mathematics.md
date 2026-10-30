@@ -90,6 +90,8 @@ Hojas de ejercicios del curso, con soluciones:
 ## Tests de evaluación continua
 
 - [Test del 22 de octubre de 2026](/docs/financial-mathematics-test-2026-10-22.pdf) ([soluciones](/docs/financial-mathematics-test-2026-10-22-solutions.pdf))
+- [Test del 27 de octubre de 2026](/docs/financial-mathematics-test-2026-10-27.pdf) ([soluciones](/docs/financial-mathematics-test-2026-10-27-solutions.pdf))
+- [Test del 29 de octubre de 2026](/docs/financial-mathematics-test-2026-10-29.pdf) ([soluciones](/docs/financial-mathematics-test-2026-10-29-solutions.pdf))
 
 ## Bibliografía
 
