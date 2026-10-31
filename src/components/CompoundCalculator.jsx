@@ -1,8 +1,9 @@
 import React, { useState, useMemo, useEffect, useLayoutEffect, useRef } from "react";
 import {
   ResponsiveContainer,
-  AreaChart,
+  ComposedChart,
   Area,
+  Line,
   XAxis,
   YAxis,
   Tooltip,
@@ -42,26 +43,26 @@ function readParamsFromURL() {
   const params = new URLSearchParams(window.location.search);
   const out = {};
 
-  const num = (key) => {
+  const num = (key, { allowNegative = false } = {}) => {
     const value = Number.parseFloat(params.get(key));
-    return Number.isFinite(value) && value >= 0 ? value : undefined;
+    return Number.isFinite(value) && (allowNegative || value >= 0) ? value : undefined;
   };
   const freq = (key) => {
     const value = Number.parseInt(params.get(key), 10);
     return FREQUENCY_VALUES.includes(value) ? value : undefined;
   };
 
-  const p = num("p");
+  const p = num("p", { allowNegative: true });
   if (p !== undefined) out.principal = p;
-  const c = num("c");
+  const c = num("c", { allowNegative: true });
   if (c !== undefined) out.contributionAmount = c;
   const cf = freq("cf");
   if (cf !== undefined) out.contributionsPerYear = cf;
   const g = params.get("g");
   if (GROWTH_MODE_VALUES.includes(g)) out.contributionGrowth = g;
-  const gamt = num("gamt");
+  const gamt = num("gamt", { allowNegative: true });
   if (gamt !== undefined) out.growthAmount = gamt;
-  const grate = num("grate");
+  const grate = num("grate", { allowNegative: true });
   if (grate !== undefined) out.growthRate = grate;
   const rate = num("rate");
   if (rate !== undefined) out.annualRate = rate;
@@ -258,9 +259,15 @@ function SegmentedControl({ options, value, onChange, className = "", label }) {
           data-value={option.value}
           type="button"
           aria-pressed={value === option.value}
+          disabled={option.disabled}
+          title={option.title}
           onClick={() => onChange(option.value)}
           className={`relative z-10 rounded-md px-3 py-1 text-xs font-medium transition-colors duration-200 ${
-            value === option.value ? "text-white" : "text-text-2 hover:text-text-1"
+            value === option.value
+              ? "text-white"
+              : option.disabled
+                ? "cursor-not-allowed text-text-3 opacity-50"
+                : "text-text-2 hover:text-text-1"
           }`}
         >
           {option.label}
@@ -408,31 +415,62 @@ export default function CompoundCalculator() {
     ]
   );
 
+  // A negative initial amount (debt) or negative contributions
+  // (withdrawals) can push values below zero, which a log axis can't show.
+  const hasNegative = useMemo(
+    () =>
+      schedule.some(
+        (row) =>
+          row.totalContributed < 0 ||
+          row.balance < 0 ||
+          row.simpleBalance < 0 ||
+          row.totalInterest < 0 ||
+          row.simpleBalance < row.totalContributed
+      ),
+    [schedule]
+  );
+  const effectiveYScale = hasNegative ? "linear" : yScale;
+
   // Schedule rows annotated with the "display" balance/interest for the
   // currently selected mode, so the chart and table always agree with
-  // the summary cards. Also carries explicit [min, max] bands for the
+  // the summary cards. Also carries explicit [base, top] bands for the
   // chart: passing a two-value range per Area (rather than relying on
   // Recharts' stackId, which stacks in pixel space and breaks on a log
   // axis) keeps the two layers correctly stacked on any scale, since
   // each band's own edges are what get passed through the y-scale.
+  // Bands stack like a diverging bar chart: when contributed and interest
+  // share a sign, interest sits on top of contributed; when they don't
+  // (e.g. withdrawals while interest is still positive), each grows from
+  // zero on its own side and the Balance line shows the net.
   const displaySchedule = useMemo(() => {
     // log(0) is undefined, so floor both band edges above zero in log mode.
-    const floor = yScale === "log" ? 1 : 0;
+    const floor = effectiveYScale === "log" ? 1 : 0;
     return schedule.map((row) => {
       const displayBalance = interestMode === "simple" ? row.simpleBalance : row.balance;
       const displayInterest =
         interestMode === "simple" ? row.simpleBalance - row.totalContributed : row.totalInterest;
-      const contributedTop = Math.max(row.totalContributed, floor);
-      const balanceTop = Math.max(displayBalance, floor);
+      if (effectiveYScale === "log") {
+        const contributedTop = Math.max(row.totalContributed, floor);
+        const balanceTop = Math.max(displayBalance, floor);
+        return {
+          ...row,
+          displayBalance,
+          displayInterest,
+          contributedRange: [floor, contributedTop],
+          interestRange: [contributedTop, balanceTop],
+        };
+      }
+      const sameSign = row.totalContributed * displayInterest >= 0;
+      const interestBase = sameSign ? row.totalContributed : 0;
       return {
         ...row,
         displayBalance,
         displayInterest,
-        contributedRange: [floor, contributedTop],
-        interestRange: [contributedTop, balanceTop],
+        contributedRange: [0, row.totalContributed],
+        interestRange: [interestBase, interestBase + displayInterest],
       };
     });
-  }, [schedule, interestMode, yScale]);
+  }, [schedule, interestMode, effectiveYScale]);
 
   const finalRow =
     displaySchedule.length > 0
@@ -508,7 +546,6 @@ export default function CompoundCalculator() {
             id="cc-principal"
             type="number"
             inputMode="decimal"
-            min="0"
             value={principal}
             onChange={(e) => setPrincipal(e.target.value)}
             className="h-9 rounded-lg border border-line-strong bg-bg-2 px-2 text-sm text-text-1 placeholder:text-text-3 shadow-inner focus:border-blue focus:outline-none focus:ring-1 focus:ring-blue"
@@ -523,7 +560,6 @@ export default function CompoundCalculator() {
             id="cc-contribution"
             type="number"
             inputMode="decimal"
-            min="0"
             value={contributionAmount}
             onChange={(e) => setContributionAmount(e.target.value)}
             className="h-9 rounded-lg border border-line-strong bg-bg-2 px-2 text-sm text-text-1 placeholder:text-text-3 shadow-inner focus:border-blue focus:outline-none focus:ring-1 focus:ring-blue"
@@ -781,23 +817,32 @@ export default function CompoundCalculator() {
             label="Chart scale"
             options={[
               { value: "linear", label: "Linear" },
-              { value: "log", label: "Log" },
+              {
+                value: "log",
+                label: "Log",
+                disabled: hasNegative,
+                title: hasNegative ? "A log scale can't show negative values" : undefined,
+              },
             ]}
-            value={yScale}
+            value={effectiveYScale}
             onChange={setYScale}
           />
         </div>
         <div style={{ width: '100%', height: '320px' }} className="rounded-xl border border-line bg-bg-2">
           <ResponsiveContainer width="100%" height="100%">
-            <AreaChart
+            <ComposedChart
               data={displaySchedule}
               margin={{ top: 12, right: 20, left: 0, bottom: 12 }}
             >
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis dataKey="label" tick={{ fontSize: 10 }} />
               <YAxis
-                scale={yScale}
-                domain={yScale === "log" ? [1, "auto"] : [0, "auto"]}
+                scale={effectiveYScale}
+                domain={
+                  effectiveYScale === "log"
+                    ? [1, "auto"]
+                    : [(dataMin) => Math.min(0, dataMin), (dataMax) => Math.max(0, dataMax)]
+                }
                 allowDataOverflow
                 tick={{ fontSize: 10 }}
                 tickFormatter={(value) => compactFormatter.format(value)}
@@ -827,7 +872,18 @@ export default function CompoundCalculator() {
                 fill="#0551d8"
                 fillOpacity={0.55}
               />
-            </AreaChart>
+              {hasNegative && (
+                <Line
+                  type="monotone"
+                  dataKey="displayBalance"
+                  name="Balance"
+                  stroke="var(--color-text-1)"
+                  strokeWidth={1.5}
+                  strokeDasharray="4 3"
+                  dot={false}
+                />
+              )}
+            </ComposedChart>
           </ResponsiveContainer>
         </div>
       </section>
