@@ -93,6 +93,10 @@ Hojas de ejercicios del curso, con soluciones:
 - [Test del 27 de octubre de 2026](/docs/financial-mathematics-test-2026-10-27.pdf) ([soluciones](/docs/financial-mathematics-test-2026-10-27-solutions.pdf))
 - [Test del 29 de octubre de 2026](/docs/financial-mathematics-test-2026-10-29.pdf) ([soluciones](/docs/financial-mathematics-test-2026-10-29-solutions.pdf))
 
+## Exámenes
+
+- [Examen parcial del 5 de noviembre de 2026](/docs/financial-mathematics-midterm-2026-11-05.pdf) ([soluciones](/docs/financial-mathematics-midterm-2026-11-05-solutions.pdf))
+
 ## Bibliografía
 
 El formulario del curso está disponible en [PDF](/docs/financial-mathematics.pdf).
