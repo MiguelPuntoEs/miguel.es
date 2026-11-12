@@ -86,6 +86,7 @@ Hojas de ejercicios del curso, con soluciones:
 - [Préstamos](/docs/financial-mathematics-exercises-loans.pdf)
 - [Gestión de riesgos de interés](/docs/financial-mathematics-exercises-interest-risk.pdf)
 - [Soluciones completas](/docs/financial-mathematics-exercises-solutions.pdf)
+- [Hoja de ejercicios del 12 de noviembre de 2026: combinaciones de rentas](/docs/financial-mathematics-worksheet-2026-11-12.pdf) ([soluciones](/docs/financial-mathematics-worksheet-2026-11-12-solutions.pdf))
 
 ## Tests de evaluación continua
 
