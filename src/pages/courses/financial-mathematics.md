@@ -16,12 +16,8 @@ El syllabus completo del curso 2026, con el cronograma de sesiones, está dispon
 
 1. Capitalización simple
    - Tantos equivalentes
-   - Descuento racional
-   - Descuento comercial
 2. Capitalización compuesta
    - Tantos equivalentes
-   - Descuento racional
-   - Descuento comercial
    - Tipos de interés nominal y real (ecuación de Fisher)
 3. Rentas
    - Clasificación
@@ -29,29 +25,12 @@ El syllabus completo del curso 2026, con el cronograma de sesiones, está dispon
       - Pospagable
       - Prepagable
       - Renta perpetua
-   - Rentas variables en progresión geométrica
-      - Pospagable
-      - Prepagable
-   - Rentas variables en progresión aritmética
-      - Pospagable
-      - Prepagable
 4. Préstamos
    - Concepto y sistemas de amortización
    - Préstamo americano
    - Método francés
    - Método alemán
    - Método italiano
-   - Leasing
-5. Gestión de riesgos de interés
-   - Clasificación de tipos de interés:
-      - Tipos *spot*
-      - Tipos *forward*
-      - TIR
-   - Estructura temporal de los tipos de interés (ETTI)
-   - Inversión en renta fija: precio, sensibilidad del precio
-   - Análisis de riesgo en renta fija:
-      - Duración de McAulay
-      - Duración modificada
 
 ## Materiales necesarios
 
@@ -84,8 +63,8 @@ Hojas de ejercicios del curso, con soluciones:
 - [Capitalización compuesta](/docs/financial-mathematics-exercises-compound.pdf)
 - [Rentas](/docs/financial-mathematics-exercises-annuities.pdf)
 - [Préstamos](/docs/financial-mathematics-exercises-loans.pdf)
-- [Gestión de riesgos de interés](/docs/financial-mathematics-exercises-interest-risk.pdf)
 - [Soluciones completas](/docs/financial-mathematics-exercises-solutions.pdf)
+- [Problemas avanzados (material de tutoría)](/docs/financial-mathematics-advanced-problems.pdf) ([soluciones](/docs/financial-mathematics-advanced-problems-solutions.pdf))
 
 ## Tests de evaluación continua
 
@@ -109,4 +88,3 @@ El formulario del curso está disponible en [PDF](/docs/financial-mathematics.pd
 ### Bibliografía complementaria
 
 - José Luis Villalobos. Matemáticas Financieras
-- John C. Hull, Sankarshan Basu. Options, Futures, and Other Derivatives
