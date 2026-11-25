@@ -77,6 +77,15 @@ Hojas de ejercicios del curso, con soluciones:
 
 - [Examen parcial del 5 de noviembre de 2026](/docs/financial-mathematics-midterm-2026-11-05.pdf) ([soluciones](/docs/financial-mathematics-midterm-2026-11-05-solutions.pdf))
 
+### Modelos de examen final
+
+Modelos para preparar el examen final del 10 de diciembre de 2026:
+
+- [Modelo 1](/docs/financial-mathematics-final-model-1.pdf) ([soluciones](/docs/financial-mathematics-final-model-1-solutions.pdf))
+- [Modelo 2](/docs/financial-mathematics-final-model-2.pdf) ([soluciones](/docs/financial-mathematics-final-model-2-solutions.pdf))
+- [Modelo 3](/docs/financial-mathematics-final-model-3.pdf) ([soluciones](/docs/financial-mathematics-final-model-3-solutions.pdf))
+- [Modelo 4](/docs/financial-mathematics-final-model-4.pdf) ([soluciones](/docs/financial-mathematics-final-model-4-solutions.pdf))
+
 ## Bibliografía
 
 El formulario del curso está disponible en [PDF](/docs/financial-mathematics.pdf).
